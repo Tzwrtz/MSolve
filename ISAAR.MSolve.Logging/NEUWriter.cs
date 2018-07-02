@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ISAAR.MSolve.PreProcessor;
 using System.IO;
 using System.Globalization;
-using ISAAR.MSolve.PreProcessor.Interfaces;
+using ISAAR.MSolve.Discretization.Interfaces;
 using ISAAR.MSolve.Solvers.Interfaces;
+using ISAAR.MSolve.FEM.Entities;
+using IEmbeddedElement = ISAAR.MSolve.FEM.Interfaces.IEmbeddedElement;
 
 namespace ISAAR.MSolve.Logging
 {
@@ -55,10 +56,10 @@ namespace ISAAR.MSolve.Logging
             { NEUOutputVector.RotationZ, new NEUOutputVectorProperties(8, "Z Rotation", "0,0,8", DOFType.RotZ) }
         };
 
-        private readonly ISolverSubdomain subdomain;
+        private readonly ILinearSystem subdomain;
         private readonly Model model;
 
-        public NEUWriter(Model model, ISolverSubdomain subdomain)
+        public NEUWriter(Model model, ILinearSystem subdomain)
         {
             this.model = model;
             this.subdomain = subdomain;
