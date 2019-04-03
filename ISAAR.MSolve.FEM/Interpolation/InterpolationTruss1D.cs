@@ -9,6 +9,7 @@ using ISAAR.MSolve.Geometry.Shapes;
 using ISAAR.MSolve.Numerical.LinearAlgebra;
 using ISAAR.MSolve.Discretization.Integration.Points;
 using ISAAR.MSolve.FEM.Interpolation.Jacobians;
+using ISAAR.MSolve.LinearAlgebra.Matrices;
 
 // Truss nodes:
 // 0 -- 1
@@ -24,7 +25,8 @@ namespace ISAAR.MSolve.FEM.Interpolation
     {
         private static readonly InterpolationTruss1D uniqueInstance = new InterpolationTruss1D();
         private readonly Dictionary<IQuadrature1D, IReadOnlyList<Matrix2D>> cachedNaturalGradientsAtGPs;
-        private readonly Dictionary<IQuadrature1D, IReadOnlyList<Vector>> cachedFunctionsAtGPs;
+        private readonly Dictionary<IQuadrature1D, IReadOnlyList<double[]>> cachedFunctionsAtGPs;
+        private readonly Dictionary<IQuadrature1D, IReadOnlyList<Matrix>> cachedN3AtGPs;
 
         private InterpolationTruss1D()
         {
@@ -73,7 +75,7 @@ namespace ISAAR.MSolve.FEM.Interpolation
         public IReadOnlyList<EvalInterpolation1D> EvaluateAllAtGaussPoints(IReadOnlyList<Node> nodes, IQuadrature1D quadrature)
         {
             // The shape functions and natural derivatives at each Gauss point are probably cached from previous calls
-            IReadOnlyList<Vector> shapeFunctionsAtGPs = EvaluateFunctionsAtGaussPoints(quadrature);
+            IReadOnlyList<double[]> shapeFunctionsAtGPs = EvaluateFunctionsAtGaussPoints(quadrature);
             IReadOnlyList<Matrix2D> naturalShapeDerivativesAtGPs = EvaluateNaturalGradientsAtGaussPoints(quadrature);
 
             // Calculate the Jacobians and shape derivatives w.r.t. global cartesian coordinates at each Gauss point
@@ -107,23 +109,56 @@ namespace ISAAR.MSolve.FEM.Interpolation
             }
         }
 
-        public IReadOnlyList<Vector> EvaluateFunctionsAtGaussPoints(IQuadrature1D quadrature)
+        public IReadOnlyList<double[]> EvaluateFunctionsAtGaussPoints(IQuadrature1D quadrature)
         {
             bool isCached = cachedFunctionsAtGPs.TryGetValue(quadrature,
-                out IReadOnlyList<Vector> shapeFunctionsAtGPs);
+                out IReadOnlyList<double[]> shapeFunctionsAtGPs);
             if (isCached) return shapeFunctionsAtGPs;
             else
             {
                 int numGPs = quadrature.IntegrationPoints.Count;
-                var shapeFunctionsAtGPsArray = new Vector[numGPs];
+                var shapeFunctionsAtGPsArray = new double[numGPs][];
                 for (int gp = 0; gp < numGPs; ++gp)
                 {
                     GaussPoint1D gaussPoint = quadrature.IntegrationPoints[gp];
-                    shapeFunctionsAtGPsArray[gp] = new Vector(EvaluateAt(gaussPoint.Xi));
+                    shapeFunctionsAtGPsArray[gp] = EvaluateAt(gaussPoint.Xi);
                 }
                 cachedFunctionsAtGPs.Add(quadrature, shapeFunctionsAtGPsArray);
                 return shapeFunctionsAtGPsArray;
             }
+        }
+
+        public IReadOnlyList<Matrix> EvaluateN3ShapeFunctionsReorganized(IQuadrature1D quadrature)
+        {
+            bool isCached = cachedN3AtGPs.TryGetValue(quadrature,
+                out IReadOnlyList<Matrix> N3AtGPs);
+            if (isCached) return N3AtGPs;
+            else
+            {
+                IReadOnlyList<double[]> N1 = EvaluateFunctionsAtGaussPoints(quadrature);
+                N3AtGPs = GetN3ShapeFunctionsReorganized(quadrature, N1);
+                cachedN3AtGPs.Add(quadrature, N3AtGPs);
+                return N3AtGPs;
+            }
+        }
+
+        private IReadOnlyList<Matrix> GetN3ShapeFunctionsReorganized(IQuadrature1D quadrature, IReadOnlyList<double[]> N1)
+        {
+            //TODO reorganize cohesive shell  to use only N1 (not reorganised)
+
+            int nGaussPoints = quadrature.IntegrationPoints.Count;
+            var N3 = new Matrix[nGaussPoints]; // shapeFunctionsgpData
+            for (int npoint = 0; npoint < nGaussPoints; npoint++)
+            {
+                double ksi = quadrature.IntegrationPoints[npoint].Xi;
+                var N3gp = Matrix.CreateZero(3, 6); //8=nShapeFunctions;
+                for (int l = 0; l < 3; l++)
+                {
+                    for (int m = 0; m < 2; m++) N3gp[l, l + 3 * m] = N1[npoint][m];
+                }
+                N3[npoint] = N3gp;
+            }
+            return N3;
         }
 
         public class EvalInterpolation1D
