@@ -108,7 +108,7 @@ namespace ISAAR.MSolve.Tests
                 var hexa8NLelement = new Element_v2()
                 {
                     ID = 1,
-                    ElementType = new Hexa8NonLinear_v2(solidMaterial, GaussLegendre3D.GetQuadratureWithOrder(3, 3, 3))
+                    ElementType = new Hexa8NonLinear_v2(solidMaterial, GaussLegendre3D.GetQuadrature(3, 3, 3))
                 };
 
                 // Add nodes to the created element

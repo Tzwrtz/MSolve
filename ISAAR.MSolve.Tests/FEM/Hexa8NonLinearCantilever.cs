@@ -242,7 +242,7 @@ namespace ISAAR.MSolve.Tests.FEM
                 e1 = new Element()
                 {
                     ID = nElement + 1,
-                    ElementType = new Hexa8NonLinear(material1, GaussLegendre3D.GetQuadratureWithOrder(3,3,3)) // dixws to e. exoume sfalma enw sto beambuilding oxi//edw kaleitai me ena orisma to Hexa8                    
+                    ElementType = new Hexa8NonLinear(material1, GaussLegendre3D.GetQuadrature(3,3,3)) // dixws to e. exoume sfalma enw sto beambuilding oxi//edw kaleitai me ena orisma to Hexa8                    
                 };
                 for (int j = 0; j < 8; j++)
                 {
@@ -330,7 +330,7 @@ namespace ISAAR.MSolve.Tests.FEM
                 e1 = new Element_v2()
                 {
                     ID = nElement + 1,
-                    ElementType = new Hexa8NonLinear_v2(material1, GaussLegendre3D.GetQuadratureWithOrder(3, 3, 3)) // dixws to e. exoume sfalma enw sto beambuilding oxi//edw kaleitai me ena orisma to Hexa8                    
+                    ElementType = new Hexa8NonLinear_v2(material1, GaussLegendre3D.GetQuadrature(3, 3, 3)) // dixws to e. exoume sfalma enw sto beambuilding oxi//edw kaleitai me ena orisma to Hexa8                    
                 };
                 for (int j = 0; j < 8; j++)
                 {

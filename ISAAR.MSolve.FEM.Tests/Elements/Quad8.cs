@@ -53,7 +53,7 @@ namespace ISAAR.MSolve.FEM.Tests.Elements
         [Fact]
         private static void TestConsistentMass0()
         {
-            IQuadrature2D quadratureForMass = GaussLegendre2D.GetQuadratureWithOrder(3, 3);
+            IQuadrature2D quadratureForMass = GaussLegendre2D.GetQuadrature(3, 3);
 
             var materialsAtGaussPoints = new List<ElasticMaterial2D_v2>();
             foreach (GaussPoint2D gaussPoint in quadratureForMass.IntegrationPoints)
@@ -61,7 +61,7 @@ namespace ISAAR.MSolve.FEM.Tests.Elements
                 materialsAtGaussPoints.Add(material0.Clone());
             }
             var quad8 = new ContinuumElement2D(thickness, nodeSet0, InterpolationQuad8.UniqueInstance,
-                GaussLegendre2D.GetQuadratureWithOrder(3, 3), quadratureForMass,
+                GaussLegendre2D.GetQuadrature(3, 3), quadratureForMass,
                 ExtrapolationGaussLegendre3x3.UniqueInstance,
                 materialsAtGaussPoints, dynamicMaterial);
 

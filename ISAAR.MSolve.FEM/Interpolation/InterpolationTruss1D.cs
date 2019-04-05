@@ -16,11 +16,6 @@ using ISAAR.MSolve.LinearAlgebra.Matrices;
 
 namespace ISAAR.MSolve.FEM.Interpolation
 {
-    /// <summary>
-    /// Isoparametric interpolation of a quadrilateral finite element with 4 nodes. Linear shape functions.
-    /// Implements Singleton pattern.
-    /// Authors: Serafeim Bakalakos
-    /// </summary>
     public class InterpolationTruss1D
     {
         private static readonly InterpolationTruss1D uniqueInstance = new InterpolationTruss1D();

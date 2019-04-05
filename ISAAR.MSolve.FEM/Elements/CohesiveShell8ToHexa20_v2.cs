@@ -149,7 +149,7 @@ namespace ISAAR.MSolve.FEM.Elements
             }
 
             x_local = new double[48];
-       }
+        }
 
         private double[][] UpdateCoordinateDataAndCalculateDisplacementVector(double[] localdisplacements)
         {

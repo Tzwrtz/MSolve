@@ -21,28 +21,28 @@ namespace ISAAR.MSolve.Discretization.Integration.Quadratures
             // In practice having an initial capacity of 10 is more than enough.
             quadratures = new Dictionary<int, GaussLegendre1D>(10);
 
-            // Order 1
+            // 1 Gauss point
             quadratures[1] = new GaussLegendre1D(new GaussPoint1D(0.0, 2.0));
 
-            // Order 2
+            // 2 Gauss points
             quadratures[2] = new GaussLegendre1D(
             new GaussPoint1D(-0.5773502691896257645091488, 1.0),
             new GaussPoint1D(+0.5773502691896257645091488, 1.0));
 
-            // Order 3
+            // 3 Gauss points
             quadratures[3] = new GaussLegendre1D(
             new GaussPoint1D(-0.7745966692414833770358531, 0.5555555555555555555555556),
             new GaussPoint1D(0.0, 0.8888888888888888888888889),
             new GaussPoint1D(+0.7745966692414833770358531, 0.5555555555555555555555556));
 
-            // Order 4
+            // 4 Gauss points
             quadratures[4] = new GaussLegendre1D(
             new GaussPoint1D(-0.8611363115940525752239465, 0.3478548451374538573730639),
             new GaussPoint1D(-0.3399810435848562648026658, 0.6521451548625461426269361),
             new GaussPoint1D(+0.3399810435848562648026658, 0.6521451548625461426269361),
             new GaussPoint1D(+0.8611363115940525752239465, 0.3478548451374538573730639));
 
-            // Order 5
+            // 5 Gauss points
             quadratures[5] = new GaussLegendre1D(
                 new GaussPoint1D(-0.9061798459386639927976269, 0.2369268850561890875142640),
                 new GaussPoint1D(-0.5384693101056830910363144, 0.4786286704993664680412915),
@@ -50,7 +50,7 @@ namespace ISAAR.MSolve.Discretization.Integration.Quadratures
                 new GaussPoint1D(+0.5384693101056830910363144, 0.4786286704993664680412915),
                 new GaussPoint1D(+0.9061798459386639927976269, 0.2369268850561890875142640));
 
-            // Order 6
+            // 6 Gauss points
             quadratures[6] = new GaussLegendre1D(
                 new GaussPoint1D(-0.9324695142031520278123016, 0.1713244923791703450402961),
                 new GaussPoint1D(-0.6612093864662645136613996, 0.3607615730481386075698335),
@@ -59,7 +59,7 @@ namespace ISAAR.MSolve.Discretization.Integration.Quadratures
                 new GaussPoint1D(+0.6612093864662645136613996, 0.3607615730481386075698335),
                 new GaussPoint1D(+0.9324695142031520278123016, 0.1713244923791703450402961));
 
-            // Order 7
+            // 7 Gauss points
             quadratures[7] = new GaussLegendre1D(
                 new GaussPoint1D(-0.9491079123427585245261897, 0.1294849661688696932706114),
                 new GaussPoint1D(-0.7415311855993944398638648, 0.2797053914892766679014678),
@@ -69,7 +69,7 @@ namespace ISAAR.MSolve.Discretization.Integration.Quadratures
                 new GaussPoint1D(+0.7415311855993944398638648, 0.2797053914892766679014678),
                 new GaussPoint1D(+0.9491079123427585245261897, 0.1294849661688696932706114));
 
-            // Order 8
+            // 8 Gauss points
             quadratures[8] = new GaussLegendre1D(
                 new GaussPoint1D(-0.9602898564975362316835609, 0.1012285362903762591525314),
                 new GaussPoint1D(-0.7966664774136267395915539, 0.2223810344533744705443560),
@@ -80,7 +80,7 @@ namespace ISAAR.MSolve.Discretization.Integration.Quadratures
                 new GaussPoint1D(+0.7966664774136267395915539, 0.2223810344533744705443560),
                 new GaussPoint1D(+0.9602898564975362316835609, 0.1012285362903762591525314));
 
-            // Order 9
+            // 9 Gauss points
             quadratures[9] = new GaussLegendre1D(
                 new GaussPoint1D(-0.9681602395076260898355762, 0.0812743883615744119718922),
                 new GaussPoint1D(-0.8360311073266357942994298, 0.1806481606948574040584720),
@@ -92,7 +92,7 @@ namespace ISAAR.MSolve.Discretization.Integration.Quadratures
                 new GaussPoint1D(+0.8360311073266357942994298, 0.1806481606948574040584720),
                 new GaussPoint1D(+0.9681602395076260898355762, 0.0812743883615744119718922));
 
-            // Order 10
+            // 10 Gauss points
             quadratures[10] = new GaussLegendre1D(
                 new GaussPoint1D(-0.9739065285171717200779640, 0.0666713443086881375935688),
                 new GaussPoint1D(-0.8650633666889845107320967, 0.1494513491505805931457763),
@@ -106,11 +106,11 @@ namespace ISAAR.MSolve.Discretization.Integration.Quadratures
                 new GaussPoint1D(+0.9739065285171717200779640, 0.0666713443086881375935688));
         }
 
-        public static GaussLegendre1D GetQuadratureWithOrder(int order)
+        public static GaussLegendre1D GetQuadrature(int numGaussPoints)
         {
-            if (order < 1) throw new ArgumentException($"The integration rule order must be >= 1, but was {order}.");
-            else if (order > 10) throw new NotImplementedException();
-            else return quadratures[order];
+            if (numGaussPoints < 1) throw new ArgumentException($"The number of Gauss points must be >= 1, but was {numGaussPoints}.");
+            else if (numGaussPoints > 10) throw new NotImplementedException();
+            else return quadratures[numGaussPoints];
         }
 
         private GaussLegendre1D(params GaussPoint1D[] points)

@@ -62,14 +62,14 @@ namespace ISAAR.MSolve.FEM.Tests.Elements
         private static void TestConsistentMass0()
         {
             // reduced integration rule - bad idea
-            IQuadrature2D quadratureForMass = GaussLegendre2D.GetQuadratureWithOrder(1, 1);
+            IQuadrature2D quadratureForMass = GaussLegendre2D.GetQuadrature(1, 1);
             var materialsAtGaussPoints = new List<ElasticMaterial2D_v2>();
             foreach (GaussPoint2D gaussPoint in quadratureForMass.IntegrationPoints)
             {
                 materialsAtGaussPoints.Add(material0.Clone());
             }
             var quad4 = new ContinuumElement2D(thickness, nodeSet1, InterpolationQuad4.UniqueInstance,
-                GaussLegendre2D.GetQuadratureWithOrder(2, 2), quadratureForMass,
+                GaussLegendre2D.GetQuadrature(2, 2), quadratureForMass,
                 ExtrapolationGaussLegendre2x2.UniqueInstance, materialsAtGaussPoints, dynamicMaterial);
             IMatrix M = quad4.BuildConsistentMassMatrix();
 
@@ -103,14 +103,14 @@ namespace ISAAR.MSolve.FEM.Tests.Elements
         private static void TestConsistentMass1()
         {
             // full integration rule
-            IQuadrature2D quadratureForMass = GaussLegendre2D.GetQuadratureWithOrder(2, 2);
+            IQuadrature2D quadratureForMass = GaussLegendre2D.GetQuadrature(2, 2);
             var materialsAtGaussPoints = new List<ElasticMaterial2D_v2>();
             foreach (GaussPoint2D gaussPoint in quadratureForMass.IntegrationPoints)
             {
                 materialsAtGaussPoints.Add(material0.Clone());
             }
             var quad4 = new ContinuumElement2D(thickness, nodeSet1, InterpolationQuad4.UniqueInstance,
-                GaussLegendre2D.GetQuadratureWithOrder(2, 2), quadratureForMass,
+                GaussLegendre2D.GetQuadrature(2, 2), quadratureForMass,
                 ExtrapolationGaussLegendre2x2.UniqueInstance, materialsAtGaussPoints, dynamicMaterial);
             IMatrix M = quad4.BuildConsistentMassMatrix();
 

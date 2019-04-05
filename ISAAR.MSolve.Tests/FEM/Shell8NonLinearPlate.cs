@@ -286,7 +286,7 @@ namespace ISAAR.MSolve.Tests.FEM
                 e1 = new Element()
                 {
                     ID = nElement + 1,
-                    ElementType = new Shell8NonLinear(material1, GaussLegendre3D.GetQuadratureWithOrder(3,3,2))//ElementType = new Shell8dispCopyGet(material2, 3, 3, 3)
+                    ElementType = new Shell8NonLinear(material1, GaussLegendre3D.GetQuadrature(3,3,2))//ElementType = new Shell8dispCopyGet(material2, 3, 3, 3)
                     {
                         //oVn_i= new double[][] { new double [] {ElementID, ElementID }, new double [] { ElementID, ElementID } },
                         oVn_i = new double[][] { new double[] { 0,0,1 },
@@ -442,7 +442,7 @@ namespace ISAAR.MSolve.Tests.FEM
                 e1 = new Element_v2()
                 {
                     ID = nElement + 1,
-                    ElementType = new Shell8NonLinear_v2(material1, GaussLegendre3D.GetQuadratureWithOrder(3, 3, 2))//ElementType = new Shell8dispCopyGet(material2, 3, 3, 3)
+                    ElementType = new Shell8NonLinear_v2(material1, GaussLegendre3D.GetQuadrature(3, 3, 2))//ElementType = new Shell8dispCopyGet(material2, 3, 3, 3)
                     {
                         //oVn_i= new double[][] { new double [] {ElementID, ElementID }, new double [] { ElementID, ElementID } },
                         oVn_i = new double[][] { new double[] { 0,0,1 },

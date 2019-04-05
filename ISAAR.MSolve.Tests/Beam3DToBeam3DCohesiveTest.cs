@@ -43,7 +43,7 @@ namespace ISAAR.MSolve.Tests
             m.ElementsDictionary.Add(2, new Element_v2()
             {
                 ID = 2,
-                ElementType = new CohesiveBeam3DToBeam3D(new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double [2] ,new double [2], 1e-10), GaussLegendre1D.GetQuadratureWithOrder(1),
+                ElementType = new CohesiveBeam3DToBeam3D(new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double [2] ,new double [2], 1e-10), GaussLegendre1D.GetQuadrature(2),
                  new List<Node_v2>(2) { m.NodesDictionary[3], m.NodesDictionary[4] }, new List<Node_v2>(2) { m.NodesDictionary[1], m.NodesDictionary[2] },
                  new ElasticMaterial3D_v2() { YoungModulus = 2.1e6, PoissonRatio = 0.2 }, 1,
                  new BeamSection3D(0.06, 0.0002, 0.00045, 0.000818, 0.05, 0.05))

@@ -267,7 +267,7 @@ namespace ISAAR.MSolve.SamplesConsole
                         var hexa8NLelement = new Element_v2()
                         {
                             ID = elementID,
-                            ElementType = new Hexa8NonLinear_v2(solidMaterial, GaussLegendre3D.GetQuadratureWithOrder(3, 3, 3))
+                            ElementType = new Hexa8NonLinear_v2(solidMaterial, GaussLegendre3D.GetQuadrature(3, 3, 3))
                         };
                         // Add nodes to the created element
                         hexa8NLelement.AddNode(model.NodesDictionary[node1]);

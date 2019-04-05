@@ -20,23 +20,23 @@ namespace ISAAR.MSolve.Discretization.Integration.Quadratures
         private static readonly Table3D<int, int, int, GaussLegendre3D> quadratures =
             new Table3D<int, int, int, GaussLegendre3D>(initialCapacity);
 
-        public static GaussLegendre3D GetQuadratureWithOrder(int orderXi, int orderEta, int orderZeta)
+        public static GaussLegendre3D GetQuadrature(int numGPsXi, int numGPsEta, int numGPsZeta)
         {
             //TODO: these should be thread safe and atomic.
-            bool exists = quadratures.TryGetValue(orderXi, orderEta, orderZeta, out GaussLegendre3D quadrature);
+            bool exists = quadratures.TryGetValue(numGPsXi, numGPsEta, numGPsZeta, out GaussLegendre3D quadrature);
             if (!exists)
             {
-                quadrature = new GaussLegendre3D(orderXi, orderEta, orderZeta);
-                quadratures[orderXi, orderEta, orderZeta] = quadrature;
+                quadrature = new GaussLegendre3D(numGPsXi, numGPsEta, numGPsZeta);
+                quadratures[numGPsXi, numGPsEta, numGPsZeta] = quadrature;
             }
             return quadrature;
         }
 
-        private GaussLegendre3D(int orderXi, int orderEta, int orderZeta)
+        private GaussLegendre3D(int numGPsXi, int numGPsEta, int numGPsZeta)
         {
-            GaussLegendre1D quadratureXi = GaussLegendre1D.GetQuadratureWithOrder(orderXi);
-            GaussLegendre1D quadratureEta = GaussLegendre1D.GetQuadratureWithOrder(orderEta);
-            GaussLegendre1D quadratureZeta = GaussLegendre1D.GetQuadratureWithOrder(orderZeta);
+            GaussLegendre1D quadratureXi = GaussLegendre1D.GetQuadrature(numGPsXi);
+            GaussLegendre1D quadratureEta = GaussLegendre1D.GetQuadrature(numGPsEta);
+            GaussLegendre1D quadratureZeta = GaussLegendre1D.GetQuadrature(numGPsZeta);
             var points3D = new List<GaussPoint3D>();
 
             // Combine the integration rules of each axis. The order is Xi minor - Eta middle - Zeta major
