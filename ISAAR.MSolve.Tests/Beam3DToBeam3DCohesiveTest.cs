@@ -53,7 +53,7 @@ namespace ISAAR.MSolve.Tests
             m.SubdomainsDictionary.Add(1, new Subdomain_v2(1));
             m.SubdomainsDictionary[1].Elements.Add(m.ElementsDictionary[1]);
             m.SubdomainsDictionary[1].Elements.Add(m.ElementsDictionary[2]);
-            m.Loads.Add(new Load_v2() { Node = m.NodesDictionary[4], Amount = 100, DOF = DOFType.Y });
+            m.Loads.Add(new Load_v2() { Node = m.NodesDictionary[4], Amount = 10, DOF = DOFType.Y });
 
             // Solver
             var solverBuilder = new SkylineSolver.Builder();

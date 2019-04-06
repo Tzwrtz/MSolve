@@ -28,7 +28,7 @@ namespace ISAAR.MSolve.FEM.Interpolation
         }
 
         /// <summary>
-        /// See <see cref="IIsoparametricInterpolation2D.CellType"/>.
+        /// See <see cref="IIsoparametricInterpolatC:\Users\George\Source\Repos\MSolve\ISAAR.MSolve.FEM\Interpolation\IsoparametricInterpolation2DBase.csion2D.CellType"/>.
         /// </summary>
         public CellType2D CellType { get; }
 

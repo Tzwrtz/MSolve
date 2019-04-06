@@ -8,8 +8,6 @@ using ISAAR.MSolve.FEM.Interfaces;
 using ISAAR.MSolve.FEM.Interpolation;
 using ISAAR.MSolve.LinearAlgebra.Matrices;
 using ISAAR.MSolve.Materials.Interfaces;
-//using ISAAR.MSolve.Numerical.LinearAlgebra;
-//using ISAAR.MSolve.Numerical.LinearAlgebra.Interfaces;
 using System;
 using System.Collections.Generic;
 using IEmbeddedElement = ISAAR.MSolve.FEM.Interfaces.IEmbeddedElement;
@@ -71,9 +69,9 @@ namespace ISAAR.MSolve.FEM.Elements
 
         private double[][] UpdateCoordinateDataAndCalculateDisplacementVector(double[] localdisplacements)
         {
-            double[,] shapeFunctionDerivatives = interpolation.EvaluateGradientsAt();
+            //Matrix shapeFunctionDerivatives = interpolation.EvaluateGradientsAt();
             IReadOnlyList<double[]> N1 = interpolation.EvaluateFunctionsAtGaussPoints(QuadratureForStiffness);
-            IReadOnlyList<Matrix> N3 = interpolation.EvaluateN3ShapeFunctionsReorganized(QuadratureForStiffness); //Shape functions matrix [N_beam]
+            //IReadOnlyList<Matrix> N3 = interpolation.EvaluateN3ShapeFunctionsReorganized(QuadratureForStiffness); //Shape functions matrix [N_beam]
 
             double[,] u_prok = new double[3, 2];// [3d-axes, nodes] - of the mid-surface(#i_m, #j_m) 
             double[,] x_bar = new double[3, 2];
@@ -88,6 +86,7 @@ namespace ISAAR.MSolve.FEM.Elements
             double[][,] R = new double[nGaussPoints][,]; //TODO: maybe cache R
             for (int j = 0; j < nGaussPoints; j++)
             {
+                R[j] = new double[3, 3];
                 R[j][0, 0] = 0.5 * (supportive_beam.currentRotationMatrix[0, 0] + supportive_clone.currentRotationMatrix[0, 0]);
                 R[j][0, 1] = 0.5 * (supportive_beam.currentRotationMatrix[0, 1] + supportive_clone.currentRotationMatrix[0, 1]);
                 R[j][0, 2] = 0.5 * (supportive_beam.currentRotationMatrix[0, 2] + supportive_clone.currentRotationMatrix[0, 2]);
@@ -143,9 +142,9 @@ namespace ISAAR.MSolve.FEM.Elements
 
         private Tuple<Matrix[], double[]> CalculateNecessaryMatricesForStiffnessMatrixAndForcesVectorCalculations()
         {            
-            IReadOnlyList<double[]> N1 = interpolation.EvaluateFunctionsAtGaussPoints(QuadratureForStiffness);
+            //IReadOnlyList<double[]> N1 = interpolation.EvaluateFunctionsAtGaussPoints(QuadratureForStiffness);
             IReadOnlyList<Matrix> N3 = interpolation.EvaluateN3ShapeFunctionsReorganized(QuadratureForStiffness); //Shape functions matrix [N_beam]
-            double[,] shapeFunctionDerivatives = interpolation.EvaluateGradientsAt();
+            //Matrix shapeFunctionDerivatives = interpolation.EvaluateGradientsAt();
             
             double[] integrationsCoeffs = new double[nGaussPoints];
             Matrix[] RtN3 = new Matrix[nGaussPoints];
@@ -156,8 +155,8 @@ namespace ISAAR.MSolve.FEM.Elements
             // Calculate Delta for all GPs
             for (int npoint1 = 0; npoint1 < nGaussPoints; npoint1++)
             {
-                double[,] u_prok = new double[3, 2];// [3d-axes, nodes] - of the mid-surface(#i_m, #j_m) 
-                double[] u = new double[3];
+                //double[,] u_prok = new double[3, 2];// [3d-axes, nodes] - of the mid-surface(#i_m, #j_m) 
+                //double[] u = new double[3];
 
                 double[][] Delta = new double[nGaussPoints][];
                 for (int j = 0; j < nGaussPoints; j++)
@@ -194,14 +193,12 @@ namespace ISAAR.MSolve.FEM.Elements
                 {
                     T_int_integration_coeffs[l] = materialsAtGaussPoints[npoint1].Tractions[l] * integrationCoeffs[npoint1];
                 }
-
                 double[] r_int_1 = new double[6];
                 for (int l = 0; l < 6; l++)
                 {
                     for (int m = 0; m < 3; m++)
                     { r_int_1[l] += RtN3[npoint1][m, l] * T_int_integration_coeffs[m]; }
                 }
-
                 for (int l = 0; l < 3; l++)
                 {
                     fxk1_coh[l] += r_int_1[l];
@@ -218,7 +215,8 @@ namespace ISAAR.MSolve.FEM.Elements
 
         private double[,] UpdateKmatrices(IElement_v2 element, Matrix[] RtN3, double[] integrationCoeffs)
         {
-            double[,] k_cohesive_element = new double[24, 24];
+            double[,] k_cohesive_element_total = new double[24, 24];
+            double[,] k_cohesive_element = new double[12, 12];
 
             for (int npoint1 = 0; npoint1 < nGaussPoints; npoint1++)
             {
@@ -230,51 +228,126 @@ namespace ISAAR.MSolve.FEM.Elements
                         D_tan_sunt_ol[l, m] = materialsAtGaussPoints[npoint1].ConstitutiveMatrix[l, m] * integrationCoeffs[npoint1];
                     }
                 }
-
                 Matrix D_RtN3_sunt_ol = D_tan_sunt_ol * RtN3[npoint1];
                 Matrix M = RtN3[npoint1].Transpose() * D_RtN3_sunt_ol;
 
+                //k_cohesive_element_total - Contrains rotations, that create zero-elements in the diagonal of the total stiffness matrix.
                 for (int l = 0; l < 3; l++)
                 {
                     for (int m = 0; m < 3; m++)
                     {
-                        k_cohesive_element[l, m] += M[l, m];
-                        k_cohesive_element[l, 12 + m] += -M[l, m];
-                        k_cohesive_element[12 + l, m] += -M[l, m];
-                        k_cohesive_element[12 + l, 12 + m] += M[l, m];
+                        k_cohesive_element_total[l, m] += M[l, m];
+                        k_cohesive_element_total[l, 12 + m] += -M[l, m];
+                        k_cohesive_element_total[12 + l, m] += -M[l, m];
+                        k_cohesive_element_total[12 + l, 12 + m] += M[l, m];
+                    }
+                }
+                for (int l = 0; l < 3; l++)
+                {
+                    for (int m = 0; m < 3; m++)
+                    {
+                        k_cohesive_element_total[l + 6, m] += M[l + 3, m];
+                        k_cohesive_element_total[l + 6, 12 + m] += -M[l + 3, m];
+                        k_cohesive_element_total[l + 18, m] += -M[l + 3, m];
+                        k_cohesive_element_total[l + 18, 12 + m] += M[l + 3, m];
+                    }
+                }
+                for (int l = 0; l < 3; l++)
+                {
+                    for (int m = 0; m < 3; m++)
+                    {
+                        k_cohesive_element_total[l, m + 6] += M[l, m + 3];
+                        k_cohesive_element_total[l, m + 18] += -M[l, m + 3];
+                        k_cohesive_element_total[l + 12, m + 6] += -M[l, m + 3];
+                        k_cohesive_element_total[l + 12, m + 18] += M[l, m + 3];
+                    }
+                }
+                for (int l = 0; l < 3; l++)
+                {
+                    for (int m = 0; m < 3; m++)
+                    {
+                        k_cohesive_element_total[l + 6, m + 6] += M[l + 3, m + 3];
+                        k_cohesive_element_total[l + 6, m + 18] += -M[l + 3, m + 3];
+                        k_cohesive_element_total[l + 18, m + 6] += -M[l + 3, m + 3];
+                        k_cohesive_element_total[l + 18, m + 18] += M[l + 3, m + 3];
                     }
                 }
 
-                for (int l = 0; l < 3; l++)
+                // k_cohesive_element - Does not contain the rotations => does not contain the zero-elements of [k_cohesive_element_total].
+                for (int i = 0; i < 3; i++)
                 {
-                    for (int m = 0; m < 3; m++)
+                    for (int j = 0; j < 3; j++)
                     {
-                        k_cohesive_element[l + 6, m] += M[l + 3, m];
-                        k_cohesive_element[l + 6, 12 + m] += -M[l + 3, m];
-                        k_cohesive_element[l + 18, m] += -M[l + 3, m];
-                        k_cohesive_element[l + 18, 12 + m] += M[l + 3, m];
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i, j];
+                    }
+                    for (int j = 3; j < 6; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i, j + 3];
+                    }
+                    for (int j = 6; j < 9; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i, j + 6];
+                    }
+                    for (int j = 9; j < 12; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i, j + 9];
                     }
                 }
-
-                for (int l = 0; l < 3; l++)
+                for (int i = 3; i < 6; i++)
                 {
-                    for (int m = 0; m < 3; m++)
+                    for (int j = 0; j < 3; j++)
                     {
-                        k_cohesive_element[l, m + 6] += M[l, m + 3];
-                        k_cohesive_element[l, m + 18] += -M[l, m + 3];
-                        k_cohesive_element[l + 12, m + 6] += -M[l, m + 3];
-                        k_cohesive_element[l + 12, m + 18] += M[l, m + 3];
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j];
+                    }
+                    for (int j = 3; j < 6; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j + 3];
+                    }
+                    for (int j = 6; j < 9; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j + 6];
+                    }
+                    for (int j = 9; j < 12; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j + 9];
                     }
                 }
-
-                for (int l = 0; l < 3; l++)
+                for (int i = 6; i < 9; i++)
                 {
-                    for (int m = 0; m < 3; m++)
+                    for (int j = 0; j < 3; j++)
                     {
-                        k_cohesive_element[l + 6, m + 6] += M[l + 3, m + 3];
-                        k_cohesive_element[l + 6, m + 18] += -M[l + 3, m + 3];
-                        k_cohesive_element[l + 18, m + 6] += -M[l + 3, m + 3];
-                        k_cohesive_element[l + 18, m + 18] += M[l + 3, m + 3];
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j];
+                    }
+                    for (int j = 3; j < 6; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j + 3];
+                    }
+                    for (int j = 6; j < 9; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j + 6];
+                    }
+                    for (int j = 9; j < 12; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j + 9];
+                    }
+                }
+                for (int i = 9; i < 12; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j];
+                    }
+                    for (int j = 3; j < 6; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j + 3];
+                    }
+                    for (int j = 6; j < 9; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j + 6];
+                    }
+                    for (int j = 9; j < 12; j++)
+                    {
+                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j + 9];
                     }
                 }
             }
@@ -286,9 +359,9 @@ namespace ISAAR.MSolve.FEM.Elements
             double[][] Delta = new double[nGaussPoints][];
             double[] localTotalDisplacements = dofEnumerator.GetTransformedDisplacementsVector(localTotalDisplacementsSuperElement);
             double[] localTotaldDisplacements = dofEnumerator.GetTransformedDisplacementsVector(localdDisplacementsSuperElement);
-
             double[] localTotaldDisplacements_beam = new double[12];
             double[] localTotaldDisplacements_clone = new double[12];
+
             for( int i1 = 0; i1 < 12; i1++ )
             {
                 localTotaldDisplacements_beam[i1] = localTotaldDisplacements[12 + i1];
@@ -297,8 +370,8 @@ namespace ISAAR.MSolve.FEM.Elements
             
             supportive_beam.CalculateStresses(localTotaldDisplacements_beam);
             supportive_clone.CalculateStresses(localTotaldDisplacements_clone);
-
             Delta = this.UpdateCoordinateDataAndCalculateDisplacementVector(localTotalDisplacements);
+
             for (int i = 0; i < materialsAtGaussPoints.Length; i++)
             {
                 materialsAtGaussPoints[i].UpdateMaterial(Delta[i]);
@@ -315,7 +388,6 @@ namespace ISAAR.MSolve.FEM.Elements
             RtN3 = RtN3AndIntegrationCoeffs.Item1;
             double[] integrationCoeffs;
             integrationCoeffs = RtN3AndIntegrationCoeffs.Item2;
-
             fxk2_coh = this.UpdateForces(element, RtN3, integrationCoeffs); // sxesh 18 k 19
             return dofEnumerator.GetTransformedForcesVector(fxk2_coh);// embedding
         }
@@ -341,10 +413,9 @@ namespace ISAAR.MSolve.FEM.Elements
             RtN3 = RtN3AndIntegrationCoeffs.Item1;
             double[] integrationCoeffs;
             integrationCoeffs = RtN3AndIntegrationCoeffs.Item2;
-
-            k_stoixeiou_coh2 = this.UpdateKmatrices(element, RtN3, integrationCoeffs); //sxesh 8
+            k_stoixeiou_coh2 = this.UpdateKmatrices(element, RtN3, integrationCoeffs);
             IMatrix element_stiffnessMatrix = Matrix.CreateFromArray(k_stoixeiou_coh2);
-            return dofEnumerator.GetTransformedMatrix(element_stiffnessMatrix); // embedding
+            return dofEnumerator.GetTransformedMatrix(element_stiffnessMatrix);
         }
 
         public bool MaterialModified

@@ -39,6 +39,7 @@ namespace ISAAR.MSolve.Solvers.Assemblers
                 rowIndex[i + 1] = rowIndex[i] + rowHeights[i] + 1;
             return rowIndex;
         }
+
         public static SkylineMatrix2D CalculateFreeFreeGlobalMatrix(ISubdomain subdomain, Dictionary<int, Dictionary<DOFType, int>> nodalDOFsDictionary, IElementMatrixProvider elementProvider) //TODOMaria this is where the free-free matrix is calculated 
         {
             // TODO: should encapsulate DOF logic into a separate entity that will manage things if embedded or not (should return element matrix and globaldofs correspondence list
