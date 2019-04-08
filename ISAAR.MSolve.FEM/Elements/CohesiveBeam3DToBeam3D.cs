@@ -16,7 +16,7 @@ namespace ISAAR.MSolve.FEM.Elements
 {
     public class CohesiveBeam3DToBeam3D : IFiniteElement_v2
     {
-        protected readonly static DOFType[] nodalDOFTypes = new DOFType[] { DOFType.X, DOFType.Y, DOFType.Z };
+        protected readonly static DOFType[] nodalDOFTypes = new DOFType[] { DOFType.X, DOFType.Y, DOFType.Z, DOFType.RotX, DOFType.RotY, DOFType.RotZ };
         protected readonly static DOFType[][] dofTypes = new DOFType[][] { nodalDOFTypes, nodalDOFTypes, nodalDOFTypes,
             nodalDOFTypes };
         protected readonly ICohesiveZoneMaterial3D_v2[] materialsAtGaussPoints;
@@ -103,7 +103,7 @@ namespace ISAAR.MSolve.FEM.Elements
             {
                 for (int k = 0; k < 3; k++)
                 {
-                    currentNodalCoordinates[3 * j + k] = initialNodalCoordinates[j][k] + localdisplacements[3 * j + k];
+                    currentNodalCoordinates[3 * j + k] = initialNodalCoordinates[j][k] + localdisplacements[6 * j + k];
                 }
             }
             for (int j = 0; j < 2; j++)
@@ -206,8 +206,8 @@ namespace ISAAR.MSolve.FEM.Elements
                 }
                 for (int l = 6; l < 9; l++)
                 {
-                    fxk1_coh[l] += r_int_1[l];
-                    fxk1_coh[12 + l] += (-r_int_1[l]);
+                    fxk1_coh[l] += r_int_1[l - 3];
+                    fxk1_coh[12 + l] += (-r_int_1[l - 3]);
                 }
             }
             return fxk1_coh;
@@ -271,87 +271,87 @@ namespace ISAAR.MSolve.FEM.Elements
                         k_cohesive_element_total[l + 18, m + 6] += -M[l + 3, m + 3];
                         k_cohesive_element_total[l + 18, m + 18] += M[l + 3, m + 3];
                     }
-                }
+                }                
+            }
 
-                // k_cohesive_element - Does not contain the rotations => does not contain the zero-elements of [k_cohesive_element_total].
-                for (int i = 0; i < 3; i++)
+            // k_cohesive_element - Does not contain the rotations => does not contain the zero-elements of [k_cohesive_element_total].
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
                 {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i, j];
-                    }
-                    for (int j = 3; j < 6; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i, j + 3];
-                    }
-                    for (int j = 6; j < 9; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i, j + 6];
-                    }
-                    for (int j = 9; j < 12; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i, j + 9];
-                    }
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i, j];
                 }
-                for (int i = 3; i < 6; i++)
+                for (int j = 3; j < 6; j++)
                 {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j];
-                    }
-                    for (int j = 3; j < 6; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j + 3];
-                    }
-                    for (int j = 6; j < 9; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j + 6];
-                    }
-                    for (int j = 9; j < 12; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j + 9];
-                    }
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i, j + 3];
                 }
-                for (int i = 6; i < 9; i++)
+                for (int j = 6; j < 9; j++)
                 {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j];
-                    }
-                    for (int j = 3; j < 6; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j + 3];
-                    }
-                    for (int j = 6; j < 9; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j + 6];
-                    }
-                    for (int j = 9; j < 12; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j + 9];
-                    }
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i, j + 6];
                 }
-                for (int i = 9; i < 12; i++)
+                for (int j = 9; j < 12; j++)
                 {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j];
-                    }
-                    for (int j = 3; j < 6; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j + 3];
-                    }
-                    for (int j = 6; j < 9; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j + 6];
-                    }
-                    for (int j = 9; j < 12; j++)
-                    {
-                        k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j + 9];
-                    }
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i, j + 9];
                 }
             }
-            return k_cohesive_element;
+            for (int i = 3; i < 6; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j];
+                }
+                for (int j = 3; j < 6; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j + 3];
+                }
+                for (int j = 6; j < 9; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j + 6];
+                }
+                for (int j = 9; j < 12; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 3, j + 9];
+                }
+            }
+            for (int i = 6; i < 9; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j];
+                }
+                for (int j = 3; j < 6; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j + 3];
+                }
+                for (int j = 6; j < 9; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j + 6];
+                }
+                for (int j = 9; j < 12; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 6, j + 9];
+                }
+            }
+            for (int i = 9; i < 12; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j];
+                }
+                for (int j = 3; j < 6; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j + 3];
+                }
+                for (int j = 6; j < 9; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j + 6];
+                }
+                for (int j = 9; j < 12; j++)
+                {
+                    k_cohesive_element[i, j] = k_cohesive_element_total[i + 9, j + 9];
+                }
+            }
+            return k_cohesive_element_total; // k_cohesive_element; // 
         }
 
         public Tuple<double[], double[]> CalculateStresses(Element_v2 element, double[] localTotalDisplacementsSuperElement, double[] localdDisplacementsSuperElement)
@@ -422,7 +422,7 @@ namespace ISAAR.MSolve.FEM.Elements
         {
             get
             {
-                foreach (ICohesiveZoneMaterial3D material in materialsAtGaussPoints)
+                foreach (ICohesiveZoneMaterial3D_v2 material in materialsAtGaussPoints)
                     if (material.Modified) return true;
                 return false;
             }
@@ -430,24 +430,24 @@ namespace ISAAR.MSolve.FEM.Elements
 
         public void ResetMaterialModified()
         {
-            foreach (ICohesiveZoneMaterial3D material in materialsAtGaussPoints) material.ResetModified();
+            foreach (ICohesiveZoneMaterial3D_v2 material in materialsAtGaussPoints) material.ResetModified();
         }
 
         public void ClearMaterialState()
         {
-            foreach (ICohesiveZoneMaterial3D m in materialsAtGaussPoints) m.ClearState();
+            foreach (ICohesiveZoneMaterial3D_v2 m in materialsAtGaussPoints) m.ClearState();
         }
 
         public void SaveMaterialState()
         {
-            foreach (ICohesiveZoneMaterial3D m in materialsAtGaussPoints) m.SaveState();
+            foreach (ICohesiveZoneMaterial3D_v2 m in materialsAtGaussPoints) m.SaveState();
             supportive_beam.SaveMaterialState();
             supportive_clone.SaveMaterialState();
         }
 
         public void ClearMaterialStresses()
         {
-            foreach (ICohesiveZoneMaterial3D m in materialsAtGaussPoints) m.ClearTractions();
+            foreach (ICohesiveZoneMaterial3D_v2 m in materialsAtGaussPoints) m.ClearTractions();
         }
 
         public int ID

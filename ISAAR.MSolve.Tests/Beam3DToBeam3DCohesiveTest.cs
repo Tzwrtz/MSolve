@@ -22,16 +22,34 @@ namespace ISAAR.MSolve.Tests
         public void Beam3DToBeam3DCohesiveTest_example()
         {
             var m = new Model_v2();
+
             m.NodesDictionary.Add(1, new Node_v2() { ID = 1, X = 0, Y = 0, Z = 0 });
             m.NodesDictionary.Add(2, new Node_v2() { ID = 2, X = 5, Y = 0, Z = 0 });
             m.NodesDictionary.Add(3, new Node_v2() { ID = 3, X = 0, Y = 0, Z = 0 });
             m.NodesDictionary.Add(4, new Node_v2() { ID = 4, X = 5, Y = 0, Z = 0 });
+
             m.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.X });
             m.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.Y });
             m.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.Z });
             m.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.RotX });
             m.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.RotY });
             m.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.RotZ });
+
+            m.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.X });
+            m.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Y });
+            m.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Z });
+            m.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.RotX });
+            m.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.RotY });
+            m.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.RotZ });
+
+            m.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.RotX });
+            m.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.RotY });
+            m.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.RotZ });
+
+            m.NodesDictionary[4].Constraints.Add(new Constraint { DOF = DOFType.RotX });
+            m.NodesDictionary[4].Constraints.Add(new Constraint { DOF = DOFType.RotY });
+            m.NodesDictionary[4].Constraints.Add(new Constraint { DOF = DOFType.RotZ });
+
             m.ElementsDictionary.Add(1, new Element_v2()
             {
                 ID = 1,
@@ -53,6 +71,7 @@ namespace ISAAR.MSolve.Tests
             m.SubdomainsDictionary.Add(1, new Subdomain_v2(1));
             m.SubdomainsDictionary[1].Elements.Add(m.ElementsDictionary[1]);
             m.SubdomainsDictionary[1].Elements.Add(m.ElementsDictionary[2]);
+            m.Loads.Add(new Load_v2() { Node = m.NodesDictionary[3], Amount = 10, DOF = DOFType.Y });
             m.Loads.Add(new Load_v2() { Node = m.NodesDictionary[4], Amount = 10, DOF = DOFType.Y });
 
             // Solver

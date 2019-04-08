@@ -34,7 +34,7 @@ namespace ISAAR.MSolve.Materials
         private double[] stress3D;
         
 
-        public BondSlipCohMat_v2(double k_elastic, double k_elastic2,double k_elastic_normal, double t_max, double[] s_0, double[] a_0, double tol)
+        public BondSlipCohMat_v2(double k_elastic, double k_elastic2, double k_elastic_normal, double t_max, double[] s_0, double[] a_0, double tol)
         {
             this.k_elastic = k_elastic;
             this.k_elastic2 = k_elastic2;
@@ -46,7 +46,7 @@ namespace ISAAR.MSolve.Materials
             this.InitializeMatrices();
         }
 
-        public BondSlipCohMat_v2(double T_o_1, double D_o_1, double k_elastic2_ratio,double T_o_3, double D_o_3, double[] s_0, double[] a_0, double tol)
+        public BondSlipCohMat_v2(double T_o_1, double D_o_1, double k_elastic2_ratio, double T_o_3, double D_o_3, double[] s_0, double[] a_0, double tol)
         {
             this.k_elastic = T_o_1/D_o_1;
             this.k_elastic2 = k_elastic2_ratio*k_elastic;
