@@ -26,7 +26,7 @@ using ISAAR.MSolve.Discretization;
 
 namespace ISAAR.MSolve.Tests
 {
-    public class EmbeddedElementTechniqueTest
+    public class EmbeddedElementTechniqueTests
     {
         [Fact]
         public void EmbeddedElementTechniqueExample()
@@ -37,6 +37,47 @@ namespace ISAAR.MSolve.Tests
 
             // Choose model
             EmbeddedExamplesBuilder.ExampleWithEmbedded(model);
+
+            // Choose linear equation system solver
+            SkylineSolver solver = (new SkylineSolver.Builder()).BuildSolver(model);
+
+            // Choose the provider of the problem -> here a structural problem
+            var provider = new ProblemStructural_v2(model, solver);
+
+            // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer
+            int increments = 10;
+            var loadControlBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments);
+            LoadControlAnalyzer_v2 childAnalyzer = loadControlBuilder.Build();
+
+            // Choose parent analyzer -> Parent: Static
+            var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+            // Request output
+            childAnalyzer.LogFactories[1] = new LinearAnalyzerLogFactory_v2(new int[] { 11 });
+            //childAnalyzer.LogFactories[1] = new LinearAnalyzerLogFactory_v2(new int[] {
+            //    model.GlobalDofOrdering.GlobalFreeDofs[model.NodesDictionary[5], DOFType.X],
+            //    model.GlobalDofOrdering.GlobalFreeDofs[model.NodesDictionary[5], DOFType.Y],
+            //    model.GlobalDofOrdering.GlobalFreeDofs[model.NodesDictionary[5], DOFType.Z]});
+
+            // Run
+            parentAnalyzer.Initialize();
+            parentAnalyzer.Solve();
+
+            // Check output
+            DOFSLog_v2 log = (DOFSLog_v2)childAnalyzer.Logs[1][0]; //There is a list of logs for each subdomain and we want the first one (index = 0) from subdomain id = 1
+            var computedValue = log.DOFValues[11];
+            Assert.Equal(11.584726466617692, computedValue, 3);
+        }
+
+        [Fact]
+        public void EmbeddedElementTechniqueWithCohesiveBeamExample()
+        {
+            VectorExtensions.AssignTotalAffinityCount();
+            var model = new Model_v2();
+            model.SubdomainsDictionary.Add(1, new Subdomain_v2(1));
+
+            // Choose model
+            EmbeddedExamplesBuilder.ExampleWithEmbeddedCohesive(model);
 
             // Choose linear equation system solver
             SkylineSolver solver = (new SkylineSolver.Builder()).BuildSolver(model);
@@ -172,10 +213,69 @@ namespace ISAAR.MSolve.Tests
                 model.SubdomainsDictionary[1].Elements.Add(beamElement);
             }
 
+            public static void CohesiveBeamElementBuilder(Model_v2 model)
+            {
+                // define mechanical properties
+                double youngModulus = 1.0;
+                double shearModulus = 1.0;
+                double poissonRatio = (youngModulus / (2 * shearModulus)) - 1;
+                double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                double inertiaY = 1058.55;
+                double inertiaZ = 1058.55;
+                double torsionalInertia = 496.38;
+                double effectiveAreaY = area;
+                double effectiveAreaZ = area;
+
+                // Geometry
+                model.NodesDictionary.Add(11, new Node_v2() { ID = 11, X = 0.00, Y = 0.00, Z = 0.00 });
+                model.NodesDictionary.Add(12, new Node_v2() { ID = 12, X = 10.00, Y = 0.00, Z = 0.00 });
+
+                // element nodes
+                var elementNodesClone = new List<Node_v2>();
+                elementNodesClone.Add(model.NodesDictionary[11]);
+                elementNodesClone.Add(model.NodesDictionary[12]);
+                var elementNodesBeam = new List<Node_v2>();
+                elementNodesBeam.Add(model.NodesDictionary[9]);
+                elementNodesBeam.Add(model.NodesDictionary[10]);
+
+                // Create Cohesive Material
+                var cohesiveMaterial = new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double[2], new double[2], 1e-10);
+
+                // Create Elastic 3D Material
+                var elasticMaterial = new ElasticMaterial3D_v2
+                {
+                    YoungModulus = youngModulus,
+                    PoissonRatio = poissonRatio,
+                };
+
+                // Create Beam3D Section
+                var beamSection = new BeamSection3D(area, inertiaY, inertiaZ, torsionalInertia, effectiveAreaY, effectiveAreaZ);
+
+                // Create Cohesive Beam Element
+                model.ElementsDictionary.Add(3, new Element_v2()
+                {
+                    ID = 3,
+                    ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam, 
+                        elementNodesClone, elasticMaterial, 1, beamSection)
+                });
+                model.ElementsDictionary[3].AddNodes(elementNodesClone);
+
+                //model.ElementsDictionary.Add(beamElement.ID, beamElement);
+                //model.SubdomainsDictionary[1].Elements.Add(beamElement);
+            }
+
             public static void ExampleWithEmbedded(Model_v2 model)
             {
                 HostElementsBuilder(model);
                 EmbeddedElementsBuilder(model);
+                var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key == 1).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key == 2).Select(kv => kv.Value), true);
+            }
+
+            public static void ExampleWithEmbeddedCohesive(Model_v2 model)
+            {
+                HostElementsBuilder(model);
+                EmbeddedElementsBuilder(model);
+                CohesiveBeamElementBuilder(model);
                 var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key == 1).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key == 2).Select(kv => kv.Value), true);
             }
         }
