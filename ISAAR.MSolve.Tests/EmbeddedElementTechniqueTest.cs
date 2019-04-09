@@ -260,7 +260,6 @@ namespace ISAAR.MSolve.Tests
                 };
 
                 model.ElementsDictionary.Add(3, cohesiveElement);
-                model.ElementsDictionary[3].AddNodes(elementNodesClone);
 
                 cohesiveElement.NodesDictionary.Add(9, model.NodesDictionary[11]);
                 cohesiveElement.NodesDictionary.Add(10, model.NodesDictionary[12]);

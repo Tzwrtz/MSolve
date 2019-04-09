@@ -487,16 +487,14 @@ namespace ISAAR.MSolve.FEM.Elements
         }
 
         #region EMBEDDED
-        private readonly List<EmbeddedNode> embeddedNodes = new List<EmbeddedNode>();
-        public IList<EmbeddedNode> EmbeddedNodes { get { return embeddedNodes; } }
+        private readonly List<EmbeddedNode_v2> embeddedNodes = new List<EmbeddedNode_v2>();
+        public IList<EmbeddedNode_v2> EmbeddedNodes { get { return embeddedNodes; } }
 
         public IElementDofEnumerator_v2 DofEnumerator
         {
             get { return dofEnumerator; }
             set { dofEnumerator = value; }
         }
-
-        IList<EmbeddedNode_v2> IEmbeddedElement_v2.EmbeddedNodes => throw new NotImplementedException();
 
         public Dictionary<DOFType, int> GetInternalNodalDOFs(Element element, Node node)//
         {
@@ -565,12 +563,12 @@ namespace ISAAR.MSolve.FEM.Elements
 
         public IList<IList<DOFType>> GetElementDOFTypes(IElement_v2 element) => dofTypes;
 
-        public Dictionary<DOFType, int> GetInternalNodalDOFs(Element_v2 element, Node_v2 node)
+        Dictionary<DOFType, int> IEmbeddedElement_v2.GetInternalNodalDOFs(Element_v2 element, Node_v2 node)
         {
             throw new NotImplementedException();
         }
 
-        public double[] GetLocalDOFValues(Element_v2 hostElement, double[] hostDOFValues)
+        double[] IEmbeddedElement_v2.GetLocalDOFValues(Element_v2 hostElement, double[] hostDOFValues)
         {
             throw new NotImplementedException();
         }
