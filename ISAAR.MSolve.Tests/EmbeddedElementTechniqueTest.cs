@@ -252,16 +252,19 @@ namespace ISAAR.MSolve.Tests
                 var beamSection = new BeamSection3D(area, inertiaY, inertiaZ, torsionalInertia, effectiveAreaY, effectiveAreaZ);
 
                 // Create Cohesive Beam Element
-                model.ElementsDictionary.Add(3, new Element_v2()
+                var cohesiveElement = new Element_v2()
                 {
                     ID = 3,
-                    ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam, 
+                    ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
                         elementNodesClone, elasticMaterial, 1, beamSection)
-                });
+                };
+
+                model.ElementsDictionary.Add(3, cohesiveElement);
                 model.ElementsDictionary[3].AddNodes(elementNodesClone);
 
-                //model.ElementsDictionary.Add(beamElement.ID, beamElement);
-                //model.SubdomainsDictionary[1].Elements.Add(beamElement);
+                cohesiveElement.NodesDictionary.Add(9, model.NodesDictionary[11]);
+                cohesiveElement.NodesDictionary.Add(10, model.NodesDictionary[12]);
+                model.SubdomainsDictionary[1].Elements.Add(cohesiveElement);
             }
 
             public static void ExampleWithEmbedded(Model_v2 model)
@@ -276,7 +279,7 @@ namespace ISAAR.MSolve.Tests
                 HostElementsBuilder(model);
                 EmbeddedElementsBuilder(model);
                 CohesiveBeamElementBuilder(model);
-                var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key == 1).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key == 2).Select(kv => kv.Value), true);
+                var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key == 1).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key == 3).Select(kv => kv.Value), true);
             }
         }
     }

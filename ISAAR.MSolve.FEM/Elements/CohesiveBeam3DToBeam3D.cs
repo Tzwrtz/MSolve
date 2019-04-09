@@ -14,7 +14,7 @@ using IEmbeddedElement = ISAAR.MSolve.FEM.Interfaces.IEmbeddedElement;
 
 namespace ISAAR.MSolve.FEM.Elements
 {
-    public class CohesiveBeam3DToBeam3D : IFiniteElement_v2
+    public class CohesiveBeam3DToBeam3D : IFiniteElement_v2, IEmbeddedElement_v2
     {
         protected readonly static DOFType[] nodalDOFTypes = new DOFType[] { DOFType.X, DOFType.Y, DOFType.Z, DOFType.RotX, DOFType.RotY, DOFType.RotZ };
         protected readonly static DOFType[][] dofTypes = new DOFType[][] { nodalDOFTypes, nodalDOFTypes, nodalDOFTypes,
@@ -496,6 +496,8 @@ namespace ISAAR.MSolve.FEM.Elements
             set { dofEnumerator = value; }
         }
 
+        IList<EmbeddedNode_v2> IEmbeddedElement_v2.EmbeddedNodes => throw new NotImplementedException();
+
         public Dictionary<DOFType, int> GetInternalNodalDOFs(Element element, Node node)//
         {
             int index = 0;
@@ -562,6 +564,16 @@ namespace ISAAR.MSolve.FEM.Elements
         }
 
         public IList<IList<DOFType>> GetElementDOFTypes(IElement_v2 element) => dofTypes;
+
+        public Dictionary<DOFType, int> GetInternalNodalDOFs(Element_v2 element, Node_v2 node)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double[] GetLocalDOFValues(Element_v2 hostElement, double[] hostDOFValues)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
     }
