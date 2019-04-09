@@ -259,10 +259,16 @@ namespace ISAAR.MSolve.Tests
                         elementNodesClone, elasticMaterial, 1, beamSection)
                 };
 
+                // Add Cohesive Beam Element in Model
                 model.ElementsDictionary.Add(3, cohesiveElement);
 
-                cohesiveElement.NodesDictionary.Add(9, model.NodesDictionary[11]);
-                cohesiveElement.NodesDictionary.Add(10, model.NodesDictionary[12]);
+                // Add Cohesive Element Nodes (!)
+                model.ElementsDictionary[3].AddNode(model.NodesDictionary[9]);
+                model.ElementsDictionary[3].AddNode(model.NodesDictionary[10]);
+                model.ElementsDictionary[3].AddNode(model.NodesDictionary[11]);
+                model.ElementsDictionary[3].AddNode(model.NodesDictionary[12]);
+
+                // Add Cohesive Element in Subdomain
                 model.SubdomainsDictionary[1].Elements.Add(cohesiveElement);
             }
 
@@ -278,7 +284,7 @@ namespace ISAAR.MSolve.Tests
                 HostElementsBuilder(model);
                 EmbeddedElementsBuilder(model);
                 CohesiveBeamElementBuilder(model);
-                var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key == 1).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key == 3).Select(kv => kv.Value), true);
+                var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key == 1).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key == 3).Select(kv => kv.Value), false);
             }
         }
     }
