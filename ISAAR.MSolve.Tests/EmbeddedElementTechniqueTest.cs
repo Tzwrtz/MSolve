@@ -284,7 +284,7 @@ namespace ISAAR.MSolve.Tests
                 HostElementsBuilder(model);
                 EmbeddedElementsBuilder(model);
                 CohesiveBeamElementBuilder(model);
-                var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key == 1).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key == 3).Select(kv => kv.Value), false);
+                var embeddedGrouping = new EmbeddedCohesiveBeam3DGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key == 1).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key == 3).Select(kv => kv.Value), true);
             }
         }
     }
