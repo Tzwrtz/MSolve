@@ -66,7 +66,7 @@ namespace ISAAR.MSolve.Tests
             // Check output
             DOFSLog_v2 log = (DOFSLog_v2)childAnalyzer.Logs[1][0]; //There is a list of logs for each subdomain and we want the first one (index = 0) from subdomain id = 1
             var computedValue = log.DOFValues[11];
-            Assert.Equal(11.584726466617692, computedValue, 3);
+            Assert.Equal(9.2128510065429143, computedValue, 3);
         }
 
         [Fact]
@@ -107,7 +107,7 @@ namespace ISAAR.MSolve.Tests
             // Check output
             DOFSLog_v2 log = (DOFSLog_v2)childAnalyzer.Logs[1][0]; //There is a list of logs for each subdomain and we want the first one (index = 0) from subdomain id = 1
             var computedValue = log.DOFValues[11];
-            Assert.Equal(11.584726466617692, computedValue, 3);
+            Assert.Equal(13.817100718826358, computedValue, 3);
         }
 
         public static class EmbeddedExamplesBuilder
@@ -167,10 +167,11 @@ namespace ISAAR.MSolve.Tests
                 model.SubdomainsDictionary[1].Elements.Add(hexa8NLelement);
 
                 // Add nodal load values at the top nodes of the model
-                model.Loads.Add(new Load_v2() { Amount = 25, Node = model.NodesDictionary[1], DOF = DOFType.Z });
-                model.Loads.Add(new Load_v2() { Amount = 25, Node = model.NodesDictionary[4], DOF = DOFType.Z });
-                model.Loads.Add(new Load_v2() { Amount = 25, Node = model.NodesDictionary[5], DOF = DOFType.Z });
-                model.Loads.Add(new Load_v2() { Amount = 25, Node = model.NodesDictionary[8], DOF = DOFType.Z });
+                double loading = 10.0;
+                model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[1], DOF = DOFType.Z });
+                model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[4], DOF = DOFType.Z });
+                model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[5], DOF = DOFType.Z });
+                model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[8], DOF = DOFType.Z });
             }
 
             public static void EmbeddedElementsBuilder(Model_v2 model)
@@ -239,8 +240,11 @@ namespace ISAAR.MSolve.Tests
                 elementNodesBeam.Add(model.NodesDictionary[10]);
 
                 // Create Cohesive Material
-                var cohesiveMaterial = new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double[2], new double[2], 1e-10);
+                //var cohesiveMaterial = new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double[2], new double[2], 1e-10);
 
+                //BondSlipCohMat_v2(double k_elastic, double k_elastic2, double k_elastic_normal, double t_max, double[] s_0, double[] a_0, double tol)
+                var cohesiveMaterial = new BondSlipCohMat_v2(5.0, 5.0, 5.0, 100.0, new double[2], new double[2], 1e-10);
+                
                 // Create Elastic 3D Material
                 var elasticMaterial = new ElasticMaterial3D_v2
                 {
