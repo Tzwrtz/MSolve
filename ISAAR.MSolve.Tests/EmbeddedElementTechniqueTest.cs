@@ -53,7 +53,7 @@ namespace ISAAR.MSolve.Tests
             var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
             // Request output
-            childAnalyzer.LogFactories[1] = new LinearAnalyzerLogFactory_v2(new int[] { 11 });
+            childAnalyzer.LogFactories[1] = new LinearAnalyzerLogFactory_v2(new int[] { 6 });
             //childAnalyzer.LogFactories[1] = new LinearAnalyzerLogFactory_v2(new int[] {
             //    model.GlobalDofOrdering.GlobalFreeDofs[model.NodesDictionary[5], DOFType.X],
             //    model.GlobalDofOrdering.GlobalFreeDofs[model.NodesDictionary[5], DOFType.Y],
@@ -65,7 +65,7 @@ namespace ISAAR.MSolve.Tests
 
             // Check output
             DOFSLog_v2 log = (DOFSLog_v2)childAnalyzer.Logs[1][0]; //There is a list of logs for each subdomain and we want the first one (index = 0) from subdomain id = 1
-            var computedValue = log.DOFValues[11];
+            var computedValue = log.DOFValues[6];
             Assert.Equal(9.2128510065429143, computedValue, 3);
         }
 
@@ -93,8 +93,38 @@ namespace ISAAR.MSolve.Tests
             // Choose parent analyzer -> Parent: Static
             var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
+            // Boundary Conditions - In Hexa8 - Host Element
+            model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.X });
+            model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Y });
+            model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Z });
+            model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.X });
+            model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Y });
+            model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Z });
+            model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.X });
+            model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Y });
+            model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Z });
+            model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.X });
+            model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.Y });
+            model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.Z });
+            model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.X });
+            model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.Y });
+            model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.Z });
+            model.NodesDictionary[4].Constraints.Add(new Constraint { DOF = DOFType.X });
+            model.NodesDictionary[4].Constraints.Add(new Constraint { DOF = DOFType.Y });
+            model.NodesDictionary[4].Constraints.Add(new Constraint { DOF = DOFType.Z });
+            model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.X });
+            model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.Y });
+            model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.Z });
+            model.NodesDictionary[8].Constraints.Add(new Constraint { DOF = DOFType.X });
+            model.NodesDictionary[8].Constraints.Add(new Constraint { DOF = DOFType.Y });
+            model.NodesDictionary[8].Constraints.Add(new Constraint { DOF = DOFType.Z });
+
+            // Loading Conditions - in Beam3DQuaternion Element - Embedded Element
+            double loading = 100.0;
+            model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[10], DOF = DOFType.X });
+
             // Request output
-            childAnalyzer.LogFactories[1] = new LinearAnalyzerLogFactory_v2(new int[] { 11 });
+            childAnalyzer.LogFactories[1] = new LinearAnalyzerLogFactory_v2(new int[] { 6 });
             //childAnalyzer.LogFactories[1] = new LinearAnalyzerLogFactory_v2(new int[] {
             //    model.GlobalDofOrdering.GlobalFreeDofs[model.NodesDictionary[5], DOFType.X],
             //    model.GlobalDofOrdering.GlobalFreeDofs[model.NodesDictionary[5], DOFType.Y],
@@ -106,8 +136,8 @@ namespace ISAAR.MSolve.Tests
 
             // Check output
             DOFSLog_v2 log = (DOFSLog_v2)childAnalyzer.Logs[1][0]; //There is a list of logs for each subdomain and we want the first one (index = 0) from subdomain id = 1
-            var computedValue = log.DOFValues[11];
-            Assert.Equal(13.817100718826358, computedValue, 3);
+            var computedValue = log.DOFValues[6];
+            Assert.Equal(1.1242856238069991, computedValue, 3);
         }
 
         public static class EmbeddedExamplesBuilder
@@ -124,19 +154,32 @@ namespace ISAAR.MSolve.Tests
                 model.NodesDictionary.Add(7, new Node_v2() { ID = 7, X = 0.00, Y = -2.50, Z = -2.50 });
                 model.NodesDictionary.Add(8, new Node_v2() { ID = 8, X = 10.00, Y = -2.50, Z = -2.50 });
 
-                // Boundary Conditions
-                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.X });
-                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.X });
-                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.X });
-                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.X });
-                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                //// Boundary Conditions
+                //model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.X });
+                //model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                //model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                //model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.X });
+                //model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                //model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                //model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.X });
+                //model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                //model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                //model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.X });
+                //model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                //model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.Z });
+
+                //model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.X });
+                //model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                //model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                //model.NodesDictionary[4].Constraints.Add(new Constraint { DOF = DOFType.X });
+                //model.NodesDictionary[4].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                //model.NodesDictionary[4].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                //model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.X });
+                //model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                //model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                //model.NodesDictionary[8].Constraints.Add(new Constraint { DOF = DOFType.X });
+                //model.NodesDictionary[8].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                //model.NodesDictionary[8].Constraints.Add(new Constraint { DOF = DOFType.Z });
 
                 // Create Material
                 var solidMaterial = new ElasticMaterial3D_v2()
@@ -167,11 +210,11 @@ namespace ISAAR.MSolve.Tests
                 model.SubdomainsDictionary[1].Elements.Add(hexa8NLelement);
 
                 // Add nodal load values at the top nodes of the model
-                double loading = 10.0;
-                model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[1], DOF = DOFType.Z });
-                model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[4], DOF = DOFType.Z });
-                model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[5], DOF = DOFType.Z });
-                model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[8], DOF = DOFType.Z });
+                //double loading = 10.0;
+                //model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[1], DOF = DOFType.Z });
+                //model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[4], DOF = DOFType.Z });
+                //model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[5], DOF = DOFType.Z });
+                //model.Loads.Add(new Load_v2() { Amount = loading, Node = model.NodesDictionary[8], DOF = DOFType.Z });
             }
 
             public static void EmbeddedElementsBuilder(Model_v2 model)
@@ -211,7 +254,7 @@ namespace ISAAR.MSolve.Tests
                 beamElement.NodesDictionary.Add(10, model.NodesDictionary[10]);
 
                 model.ElementsDictionary.Add(beamElement.ID, beamElement);
-                model.SubdomainsDictionary[1].Elements.Add(beamElement);
+                model.SubdomainsDictionary[1].Elements.Add(beamElement);                
             }
 
             public static void CohesiveBeamElementBuilder(Model_v2 model)
@@ -240,10 +283,8 @@ namespace ISAAR.MSolve.Tests
                 elementNodesBeam.Add(model.NodesDictionary[10]);
 
                 // Create Cohesive Material
-                //var cohesiveMaterial = new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double[2], new double[2], 1e-10);
-
-                //BondSlipCohMat_v2(double k_elastic, double k_elastic2, double k_elastic_normal, double t_max, double[] s_0, double[] a_0, double tol)
-                var cohesiveMaterial = new BondSlipCohMat_v2(5.0, 5.0, 5.0, 100.0, new double[2], new double[2], 1e-10);
+                var cohesiveMaterial = new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double[2], new double[2], 1e-10);                
+                //var cohesiveMaterial = new BondSlipCohMat_v2(5.0, 5.0, 5.0, 100.0, new double[2], new double[2], 1e-10);
                 
                 // Create Elastic 3D Material
                 var elasticMaterial = new ElasticMaterial3D_v2
