@@ -52,7 +52,8 @@ namespace ISAAR.MSolve.SamplesConsole
             //OneRveExample.Check_Graphene_rve_serial();
             //BondSlipTest.CheckStressStrainBonSlipMaterial();
             //OneRveExample.Check_Graphene_rve_parallel();
-            LinearRves.CheckShellScaleTransitionsAndMicrostructure();
+            //LinearRves.CheckShellScaleTransitionsAndMicrostructure();
+            CNTembeddedInMatrixExample.EmbeddedCNTinMatrixCohesive_NewtonRaphson();
         }
 
         private static void SolveBuildingInNoSoilSmall()

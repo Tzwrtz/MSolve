@@ -31,6 +31,10 @@ namespace ISAAR.MSolve.SamplesConsole
     {
         private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\MSolveResults";
         private const int subdomainID = 0;
+        private const int hostElements = 8100;
+        private const int hostNodes = 10100;
+        private const int embeddedElements = 19568;
+        private const int embeddedNodes = 13056;
 
         public static void EmbeddedCNTinMatrix_NewtonRaphson()
         {
@@ -105,6 +109,88 @@ namespace ISAAR.MSolve.SamplesConsole
 
             // Request output
             string outputFile = outputDirectory + "\\CNT-Embedded-3D_Results.txt";
+            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                model.NodesDictionary[monitorNode], monitorDof, outputFile);
+            childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+            // Run the analysis
+            parentAnalyzer.Initialize();
+            parentAnalyzer.Solve();
+        }
+
+        public static void EmbeddedCNTinMatrixCohesive_NewtonRaphson()
+        {
+            VectorExtensions.AssignTotalAffinityCount();
+
+            // No. of increments
+            int increments = 1000;
+
+            // Model creation
+            var model = new Model_v2();
+
+            // Subdomains
+            //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+            model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+            // Variables
+            int monitorNode = 10001;
+            DOFType monitorDof = DOFType.Z;
+
+            // Choose model
+            EmbeddedModelBuilder.EmbeddedExampleCohesive(model);
+
+            // Boundary Conditions - Left End [End-1]
+            for (int iNode = 1; iNode <= 100; iNode++)
+            {
+                model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+            }
+
+            // Boundary Conditions - Bottom End [End-3]
+            for (int iNode = 1; iNode <= 10001; iNode += 100)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                }
+            }
+
+            // Boundary Conditions - Right End [End-5]
+            for (int iNode = 1; iNode <= 10091; iNode += 10)
+            {
+                model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+            }
+
+            //// Boundary Conditions - Left End [End-6]
+            //for (int iNode = 10; iNode <= 10100; iNode += 10)
+            //{
+            //    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+            //}
+
+            //Compression Loading
+            double nodalLoad = -1.0; //0.40;
+            for (int iNode = 10001; iNode <= 10100; iNode++) //[End-4]
+            {
+                model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Z });
+            }
+
+            // Choose linear equation system solver
+            //var solverBuilder = new SkylineSolver.Builder();
+            //SkylineSolver solver = solverBuilder.BuildSolver(model);
+            var solverBuilder = new SuiteSparseSolver.Builder();
+            SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+            // Choose the provider of the problem -> here a structural problem
+            var provider = new ProblemStructural_v2(model, solver);
+
+            // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
+            var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments) { ResidualTolerance = 1E-03 };
+            LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+
+            // Choose parent analyzer -> Parent: Static
+            var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+            // Request output
+            string outputFile = outputDirectory + "\\CNT-Embedded_Cohesive-3D_Results.txt";
             var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
                 model.NodesDictionary[monitorNode], monitorDof, outputFile);
             childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
@@ -197,6 +283,20 @@ namespace ISAAR.MSolve.SamplesConsole
                 //var embeddedGrouping = new EmbeddedGrouping(model, model.ElementsDictionary.Where(x => x.Key <= 90).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > 90).Select(kv => kv.Value), true);
                 //var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= 90).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > 90).Select(kv => kv.Value), true);
                 var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= 8100).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > 8100).Select(kv => kv.Value), true);
+            }
+
+            public static void EmbeddedExampleCohesive(Model_v2 model)
+            {
+                HostElementsBuilder(model);
+                EmbeddedElementsBuilder(model);
+                CohesiveBeamElementsBuilder(model);
+                //var embeddedGrouping = new EmbeddedGrouping(model, model.ElementsDictionary.Where(x => x.Key <= 2500000).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > 2500000).Select(kv => kv.Value), true);
+                //var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= 2500).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > 2500).Select(kv => kv.Value), true);
+                //var embeddedGrouping = new EmbeddedGrouping(model, model.ElementsDictionary.Where(x => x.Key <= 312500).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > 312500).Select(kv => kv.Value), true);
+                //var embeddedGrouping = new EmbeddedGrouping(model, model.ElementsDictionary.Where(x => x.Key <= 1250).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > 1250).Select(kv => kv.Value), true);
+                //var embeddedGrouping = new EmbeddedGrouping(model, model.ElementsDictionary.Where(x => x.Key <= 90).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > 90).Select(kv => kv.Value), true);
+                //var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= 90).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > 90).Select(kv => kv.Value), true);
+                var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
             }
 
             public static void HostElementsBuilder(Model_v2 model)
@@ -346,9 +446,9 @@ namespace ISAAR.MSolve.SamplesConsole
                     {
                         string text = reader.ReadLine();
                         string[] bits = text.Split(',');
-                        int elementID = int.Parse(bits[0]) + 8100; // matrixElements
-                        int node1 = int.Parse(bits[1]) + 10100; // matrixNodes
-                        int node2 = int.Parse(bits[2]) + 10100; // matrixNodes
+                        int elementID = int.Parse(bits[0]) + hostElements; // 8100; // matrixElements
+                        int node1 = int.Parse(bits[1]) + hostNodes; // 10100; // matrixNodes
+                        int node2 = int.Parse(bits[2]) + hostNodes; // 10100; // matrixNodes
                         // element nodes
                         var elementNodes = new List<Node_v2>();
                         elementNodes.Add(model.NodesDictionary[node1]);
@@ -367,7 +467,100 @@ namespace ISAAR.MSolve.SamplesConsole
                         model.SubdomainsDictionary[0].Elements.Add(beamElement);
                     }                    
                 }
-            }            
+            }
+
+            public static void CohesiveBeamElementsBuilder(Model_v2 model)
+            {
+                // define mechanical properties
+                double youngModulus = 16710.0; // 5490; // 
+                double shearModulus = 8080.0; // 871; // 
+                double poissonRatio = 2.15; // 0.034; //(youngModulus / (2 * shearModulus)) - 1;
+                double area = 5.594673861218848d - 003;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                double inertiaY = 2.490804749753243D - 006; //1058.55;
+                double inertiaZ = 2.490804749753243D - 006; // 1058.55;
+                double torsionalInertia = 4.981609499506486D - 006; //496.38;
+                double effectiveAreaY = area;
+                double effectiveAreaZ = area;
+                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files"; //"..\..\..\Resources\Beam3DInputFiles";
+
+                string CNTgeometryFileName = "CNT-8-8-L=100-h=3-Geometry.inp";
+                //"CNT-8-8-L=100-Geometry-2.inp"; 
+                //"EmbeddedCNT-8-8-L=100-h=0-k=1-EBE-L=1-NumberOfCNTs=1-Geometry_beam.inp"; 
+                //"CNT-8-8-L=100-h=3-Geometry.inp";
+
+                string CNTconnectivityFileName = "CNT-8-8-L=100-h=3-ConnMatr.inp";
+                //"CNT-8-8-L=100-ConnMatr-2.inp"; 
+                //"EmbeddedCNT-8-8-L=100-h=0-k=1-EBE-L=1-NumberOfCNTs=1-ConnMatr_beam.inp"; 
+                //"CNT-8-8-L=100-h=3-ConnMatr.inp";
+
+                int CNTNodes = File.ReadLines(workingDirectory + '\\' + CNTgeometryFileName).Count();
+                int CNTElems = File.ReadLines(workingDirectory + '\\' + CNTconnectivityFileName).Count();
+
+                // Geometry
+                using (TextReader reader = File.OpenText(workingDirectory + '\\' + CNTgeometryFileName))
+                {
+                    for (int i = 0; i < CNTNodes; i++)
+                    {
+                        string text = reader.ReadLine();
+                        string[] bits = text.Split(',');
+                        int nodeID = int.Parse(bits[0]) + (hostNodes + embeddedNodes); // 10100; // matrixNodes
+                        double nodeX = double.Parse(bits[1]);
+                        double nodeY = double.Parse(bits[2]);
+                        double nodeZ = double.Parse(bits[3]);
+                        model.NodesDictionary.Add(nodeID, new Node_v2 { ID = nodeID, X = nodeX, Y = nodeY, Z = nodeZ });
+                    }
+                }
+
+                // Create Cohesive Material
+                var cohesiveMaterial = new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double[2], new double[2], 1e-10);
+
+                // Create Elastic 3D Material
+                var elasticMaterial = new ElasticMaterial3D_v2
+                {
+                    YoungModulus = youngModulus,
+                    PoissonRatio = poissonRatio,
+                };
+
+                // Create Beam3D Section
+                var beamSection = new BeamSection3D(area, inertiaY, inertiaZ, torsionalInertia, effectiveAreaY, effectiveAreaZ);
+                
+                // element nodes
+                using (TextReader reader = File.OpenText(workingDirectory + '\\' + CNTconnectivityFileName))
+                {
+                    for (int i = 0; i < CNTElems; i++)
+                    {
+                        string text = reader.ReadLine();
+                        string[] bits = text.Split(',');
+                        int elementID = int.Parse(bits[0]) + (hostElements + embeddedElements); // matrixElements + CNTelements
+                        int node1 = int.Parse(bits[1]) + (hostNodes + embeddedNodes); // matrixNodes + CNTnodes
+                        int node2 = int.Parse(bits[2]) + (hostNodes + embeddedNodes); // matrixNodes + CNTnodes
+                        // element nodes clone
+                        var elementNodesClone = new List<Node_v2>();
+                        elementNodesClone.Add(model.NodesDictionary[node1]);
+                        elementNodesClone.Add(model.NodesDictionary[node2]);
+                        // element nodes beam
+                        var elementNodesBeam = new List<Node_v2>();
+                        elementNodesBeam.Add(model.NodesDictionary[node1 - embeddedNodes]);
+                        elementNodesBeam.Add(model.NodesDictionary[node2 - embeddedNodes]);
+                        // Create Cohesive Beam Element
+                        var cohesiveElement = new Element_v2()
+                        {
+                            ID = elementID,
+                            ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
+                                elementNodesClone, elasticMaterial, 1, beamSection)
+                        };
+                        // Add beam element to the element and subdomains dictionary of the model
+                        model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
+                        // Add Cohesive Element Nodes (!)
+                        model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node1]);
+                        model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node2]);
+                        model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node1 - embeddedNodes]);
+                        model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node2 - embeddedNodes]);
+                        // Add Cohesive Element in Subdomain
+                        model.SubdomainsDictionary[0].Elements.Add(cohesiveElement);
+                    }
+                }
+            }
         }
     }
 }
