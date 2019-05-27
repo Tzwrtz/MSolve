@@ -24,7 +24,7 @@ using System.IO;
 using ISAAR.MSolve.Solvers.Direct;
 using ISAAR.MSolve.Discretization;
 using ISAAR.MSolve.Analyzers.NonLinear;
-
+    
 namespace ISAAR.MSolve.SamplesConsole
 {
     public class EBE_CNT_embeddedInElastic_Matrix

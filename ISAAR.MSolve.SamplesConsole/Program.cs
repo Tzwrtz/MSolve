@@ -58,7 +58,7 @@ namespace ISAAR.MSolve.SamplesConsole
             //EBE_CNT_embeddedInElastic_Matrix.EBEembeddedInMatrix_NewtonRaphson();
             //EBE_CNT_embeddedInElastic_Matrix.EBEembeddedInMatrixCohesive_NewtonRaphson();
 
-            EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrix_NewtonRaphson();
+            //EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrix_NewtonRaphson();
             EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrixCohesive_NewtonRaphson();
         }
 

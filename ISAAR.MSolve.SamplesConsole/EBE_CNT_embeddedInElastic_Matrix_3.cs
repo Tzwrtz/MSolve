@@ -36,6 +36,8 @@ namespace ISAAR.MSolve.SamplesConsole
         private const int embeddedElements = 30;
         private const int embeddedNodes = 33;
         private const double nodalLoad = -100.0;
+        private const int monitorNode = 81;
+        private const DOFType monitorDof = DOFType.Z;
 
         public static void EBEembeddedInMatrix_NewtonRaphson()
         {
@@ -50,10 +52,6 @@ namespace ISAAR.MSolve.SamplesConsole
             // Subdomains
             //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
             model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-            // Variables
-            int monitorNode = hostNodes;
-            DOFType monitorDof = DOFType.Z;
 
             // Choose model
             EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder(model);
@@ -123,10 +121,6 @@ namespace ISAAR.MSolve.SamplesConsole
             // Subdomains
             //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
             model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-            // Variables
-            int monitorNode = hostNodes;
-            DOFType monitorDof = DOFType.Z;
 
             // Choose model
             EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder(model);
