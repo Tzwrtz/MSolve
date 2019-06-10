@@ -174,7 +174,7 @@ namespace ISAAR.MSolve.LinearAlgebra.Factorizations
             }
             if (zemCols.Count > 0)
             {
-                throw new IndefiniteMatrixException("Cholesky factorization can only be applied to positive definite matrices.");
+                //throw new IndefiniteMatrixException("Cholesky factorization can only be applied to positive definite matrices.");
             }
             return new CholeskySkyline(order, skyValues, skyDiagOffsets);
         }

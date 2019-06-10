@@ -59,7 +59,14 @@ namespace ISAAR.MSolve.SamplesConsole
             //EBE_CNT_embeddedInElastic_Matrix.EBEembeddedInMatrixCohesive_NewtonRaphson();
 
             //EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrix_NewtonRaphson();
-            EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrixCohesive_NewtonRaphson();
+            //EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrixCohesive_NewtonRaphson();
+            
+            //Stochastic Analysis
+            for (int i = 1; i <= 52; i++)
+            {
+                //EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            }
         }
 
         private static void SolveBuildingInNoSoilSmall()
