@@ -60,12 +60,24 @@ namespace ISAAR.MSolve.SamplesConsole
 
             //EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrix_NewtonRaphson();
             //EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrixCohesive_NewtonRaphson();
-            
-            //Stochastic Analysis
-            for (int i = 1; i <= 52; i++)
+
+            //Stochastic Analysis - StochasticEmbeddedExample_1
+            //for (int i = 1; i <= 10000; i++)
+            //{
+            //    //StochasticEmbeddedExample_1.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_1.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+            //Stochastic Analysis - StochasticEmbeddedExample_2
+            for (int i = 12; i <= 50; i++)
             {
-                //EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-                EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_2.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_2.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            }
+
+            for (int i = 5; i <= 50; i++)
+            {
+                StochasticEmbeddedExample_2.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
             }
         }
 

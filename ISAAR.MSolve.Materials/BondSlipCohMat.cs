@@ -33,7 +33,6 @@ namespace ISAAR.MSolve.Materials
         private double[,] ConstitutiveMatrix3Dprevious;
         private double[] stress3D;
         
-
         public BondSlipCohMat_v2(double k_elastic, double k_elastic2, double k_elastic_normal, double t_max, double[] s_0, double[] a_0, double tol)
         {
             this.k_elastic = k_elastic;
