@@ -107,7 +107,7 @@ namespace ISAAR.MSolve.FEM.Elements
                     for (int n = 0; n < 3; n++)
                     {
                         BL11a_hexa[gpoint][m, 3 * m + n] = J_0inv_hexa[gpoint][m, n];
-                    }
+                    } 
                 }
                 for (int n = 0; n < 3; n++)
                 {

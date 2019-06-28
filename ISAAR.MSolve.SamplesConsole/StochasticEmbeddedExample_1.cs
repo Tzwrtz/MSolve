@@ -29,7 +29,7 @@ namespace ISAAR.MSolve.SamplesConsole
 {
     public static class StochasticEmbeddedExample_1
     {
-        private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\MSolveResults";
+        private const string outputDirectory = @"C:\Users\tzwrt\Desktop\MSolveResults"; //@"E:\GEORGE_DATA\DESKTOP\MSolveResults";
         private const int subdomainID = 0;
         private const int hostElements = 10;
         private const int hostNodes = 44;
@@ -225,10 +225,10 @@ namespace ISAAR.MSolve.SamplesConsole
             // Choose the provider of the problem -> here a structural problem
             var provider = new ProblemStructural_v2(model, solver);
 
-            // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
+            // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer 
             var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
             {
-                MaxIterationsPerIncrement = 20,
+                MaxIterationsPerIncrement = 1000,
                 ResidualTolerance = 5E-03
             };
 
@@ -302,7 +302,7 @@ namespace ISAAR.MSolve.SamplesConsole
             // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
             var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
             {
-                MaxIterationsPerIncrement = 20,
+                MaxIterationsPerIncrement = 1000,
                 ResidualTolerance = 5E-03
             };
 
@@ -372,13 +372,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
             private static void HostElements(Model_v2 model)
             {
-                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files"; //"..\..\..\Resources\Beam3DInputFiles";
+                string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
                 string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=100-1x1x10-Geometry_MSolve.inp";
                 string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=100-1x1x10-ConnMatr_MSolve.inp";
                 int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                 int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
-                // Nodes Geometry                
+                // Nodes Geometry
                 using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
                 {
                     for (int i = 0; i < matrixNodes; i++)
@@ -451,10 +451,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 double torsionalInertia = 496.38;
                 double effectiveAreaY = area;
                 double effectiveAreaZ = area;
-                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files"; //"..\..\..\Resources\Beam3DInputFiles";
-                string CNTgeometryFileName = "EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-Geometry_beam.inp";                
-                string CNTconnectivityFileName = "EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-ConnMatr_beam.inp";
-                
+                string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
+                string CNTgeometryFileName = "CNT.txt";
+                string CNTconnectivityFileName = "Connectivity.txt";
+
                 int CNTNodes = File.ReadLines(workingDirectory + '\\' + CNTgeometryFileName).Count();
                 int CNTElems = File.ReadLines(workingDirectory + '\\' + CNTconnectivityFileName).Count();
 
@@ -525,9 +525,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 double torsionalInertia = 496.38;
                 double effectiveAreaY = area;
                 double effectiveAreaZ = area;
-                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files"; //"..\..\..\Resources\Beam3DInputFiles";
-                string CNTgeometryFileName = "EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-Geometry_beam.inp";
-                string CNTconnectivityFileName = "EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-ConnMatr_beam.inp";
+                string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
+                string CNTgeometryFileName = "CNT.txt";
+                string CNTconnectivityFileName = "Connectivity.txt";
                 int CNTNodes = File.ReadLines(workingDirectory + '\\' + CNTgeometryFileName).Count();
                 int CNTElems = File.ReadLines(workingDirectory + '\\' + CNTconnectivityFileName).Count();
 
@@ -547,8 +547,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Create Cohesive Material
-                var cohesiveMaterial = new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double[2], new double[2], 1e-10);
-                //var cohesiveMaterial = new BondSlipCohMat_v2(5.0, 5.0, 5.0, 100.0, new double[2], new double[2], 1e-10);
+                //var cohesiveMaterial = new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double[2], new double[2], 1e-10);
+                //var cohesiveMaterial = new BondSlipCohMat_v2(40.0, 4.0, 40.0, 0.113, new double[2], new double[2], 1e-10);
+                var cohesiveMaterial = new BondSlipCohMat_v2(1.0, 0.10, 2.76, 0.113, new double[2], new double[2], 1e-10);
 
                 // Create Elastic 3D Material
                 var elasticMaterial = new ElasticMaterial3D_v2
@@ -610,7 +611,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 double torsionalInertia = 496.38;
                 double effectiveAreaY = area;
                 double effectiveAreaZ = area;
-                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files"; //"..\..\..\Resources\Beam3DInputFiles";
+                string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
 
                 string CNTgeometryFileName = "CNT.txt"; //"EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-Geometry_beam.inp";
                 string CNTconnectivityFileName = "CNT_ConnMatr.txt"; //"EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-ConnMatr_beam.inp";
@@ -695,7 +696,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 double torsionalInertia = 496.38;
                 double effectiveAreaY = area;
                 double effectiveAreaZ = area;
-                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files"; //"..\..\..\Resources\Beam3DInputFiles";
+                string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
                 string CNTgeometryFileName = "CNT.txt"; //"EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-Geometry_beam.inp";
                 string CNTconnectivityFileName = "CNT_ConnMatr.txt"; //"EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-ConnMatr_beam.inp";
 
@@ -729,8 +730,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 // Create Cohesive Material
                 //var cohesiveMaterial = new BondSlipCohMat_v2(0.113, 1.0, 1.0, 0.200, 1.0, new double[2], new double[2], 1e-10);
-                var cohesiveMaterial = new BondSlipCohMat_v2(0.20, 0.05, 0.1, 0.20, 0.05, new double[2], new double[2], 1e-10);
+                //var cohesiveMaterial = new BondSlipCohMat_v2(0.20, 0.05, 0.1, 0.20, 0.05, new double[2], new double[2], 1e-10);
                 //var cohesiveMaterial = new BondSlipCohMat_v2(5.0, 5.0, 5.0, 100.0, new double[2], new double[2], 1e-10);
+
+                //var cohesiveMaterial = new BondSlipCohMat_v2(3.0, 0.30, 3.0, 0.113, new double[2], new double[2], 1e-10);
+                //var cohesiveMaterial = new BondSlipCohMat_v2(40.0, 4.0, 40.0, 0.113, new double[2], new double[2], 1e-10);
+                var cohesiveMaterial = new BondSlipCohMat_v2(400.0, 40.0, 400.0, 0.113, new double[2], new double[2], 1e-3);
 
                 // Create Elastic 3D Material
                 var elasticMaterial = new ElasticMaterial3D_v2

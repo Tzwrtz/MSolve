@@ -29,7 +29,7 @@ namespace ISAAR.MSolve.SamplesConsole
 {
     public static class StochasticEmbeddedExample_2
     {
-        private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\MSolveResults";
+        private const string outputDirectory = @"C:\Users\tzwrt\Desktop\MSolveResults"; //@"E:\GEORGE_DATA\DESKTOP\MSolveResults";
         private const int subdomainID = 0;
         private const int hostElements = 1000;
         private const int hostNodes = 1331;
@@ -235,7 +235,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
             private static void HostElements(Model_v2 model)
             {
-                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files";
+                string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
                 string MatrixGeometryFileName = "MATRIX_3D-L_x=200-L_y=200-L_z=200-10x10x10-Geometry_MSolve.inp";
                 string MatrixGonnectivityFileName = "MATRIX_3D-L_x=200-L_y=200-L_z=200-10x10x10-ConnMatr_MSolve.inp";
                 int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -314,7 +314,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 double torsionalInertia = 496.38;
                 double effectiveAreaY = area;
                 double effectiveAreaZ = area;
-                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files"; //"..\..\..\Resources\Beam3DInputFiles";
+                string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
                 string CNTgeometryFileName = "EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-Geometry_beam.inp";
                 string CNTconnectivityFileName = "EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-ConnMatr_beam.inp";
 
@@ -388,7 +388,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 double torsionalInertia = 496.38;
                 double effectiveAreaY = area;
                 double effectiveAreaZ = area;
-                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files"; //"..\..\..\Resources\Beam3DInputFiles";
+                string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
                 string CNTgeometryFileName = "EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-Geometry_beam.inp";
                 string CNTconnectivityFileName = "EmbeddedCNT-20-20-L=100-h=2-k=1-EBE-L=10-NumberOfCNTs=3-ConnMatr_beam.inp";
                 int CNTNodes = File.ReadLines(workingDirectory + '\\' + CNTgeometryFileName).Count();
@@ -473,7 +473,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 double torsionalInertia = 496.38;
                 double effectiveAreaY = area;
                 double effectiveAreaZ = area;
-                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files";
+                string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
 
                 string CNTgeometryFileName = "nodes.txt";
                 string CNTconnectivityFileName = "connectivity_1.txt";
@@ -558,7 +558,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 double torsionalInertia = 496.38;
                 double effectiveAreaY = area;
                 double effectiveAreaZ = area;
-                string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\input files";
+                string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
 
                 string CNTgeometryFileName = "nodes.txt";
                 string CNTconnectivityFileName = "connectivity_1.txt";
