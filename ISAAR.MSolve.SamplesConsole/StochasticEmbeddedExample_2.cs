@@ -78,10 +78,12 @@ namespace ISAAR.MSolve.SamplesConsole
             }
 
             // Choose linear equation system solver
-            var solverBuilder = new SkylineSolver.Builder();
-            SkylineSolver solver = solverBuilder.BuildSolver(model);
-            //var solverBuilder = new SuiteSparseSolver.Builder();
-            //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+            // -- SkyLine Solver
+            //var solverBuilder = new SkylineSolver.Builder();
+            //SkylineSolver solver = solverBuilder.BuildSolver(model);
+            // -- SuiteSparse Solver
+            var solverBuilder = new SuiteSparseSolver.Builder();
+            SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
 
             // Choose the provider of the problem -> here a structural problem
             var provider = new ProblemStructural_v2(model, solver);
@@ -89,8 +91,8 @@ namespace ISAAR.MSolve.SamplesConsole
             // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
             var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
             {
-                MaxIterationsPerIncrement = 20,
-                NumIterationsForMatrixRebuild = 21,
+                MaxIterationsPerIncrement = 10,
+                NumIterationsForMatrixRebuild = 1,
                 ResidualTolerance = 5E-03
             };
 
@@ -153,10 +155,12 @@ namespace ISAAR.MSolve.SamplesConsole
             }
 
             // Choose linear equation system solver
-            var solverBuilder = new SkylineSolver.Builder();
-            SkylineSolver solver = solverBuilder.BuildSolver(model);
-            //var solverBuilder = new SuiteSparseSolver.Builder();
-            //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+            // -- SkyLine Solver
+            //var solverBuilder = new SkylineSolver.Builder();
+            //SkylineSolver solver = solverBuilder.BuildSolver(model);
+            // -- SuiteSparse Solver
+            var solverBuilder = new SuiteSparseSolver.Builder();
+            SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
 
             // Choose the provider of the problem -> here a structural problem
             var provider = new ProblemStructural_v2(model, solver);
@@ -164,8 +168,8 @@ namespace ISAAR.MSolve.SamplesConsole
             // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
             var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
             {
-                MaxIterationsPerIncrement = 20,
-                NumIterationsForMatrixRebuild = 21,
+                MaxIterationsPerIncrement = 10,
+                NumIterationsForMatrixRebuild = 1,
                 ResidualTolerance = 5E-03
             };
 
@@ -476,7 +480,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
 
                 string CNTgeometryFileName = "nodes.txt";
-                string CNTconnectivityFileName = "connectivity_1.txt";
+                string CNTconnectivityFileName = "connectivity.txt";
 
                 string fileNameOnlyCNTgeometryFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTgeometryFileName));
                 string fileNameOnlyCNTconnectivityFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTconnectivityFileName));
@@ -561,7 +565,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //@"E:\GEORGE_DATA\DESKTOP\input files";
 
                 string CNTgeometryFileName = "nodes.txt";
-                string CNTconnectivityFileName = "connectivity_1.txt";
+                string CNTconnectivityFileName = "connectivity.txt";
 
                 string fileNameOnlyCNTgeometryFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTgeometryFileName));
                 string fileNameOnlyCNTconnectivityFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTconnectivityFileName));
@@ -593,7 +597,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 // Create Cohesive Material
                 //var cohesiveMaterial = new BondSlipCohMat_v2(100, 10, 100, 10, 1, new double[2], new double[2], 1e-10);
-                var cohesiveMaterial = new BondSlipCohMat_v2(1.0, 0.10, 2.76, 0.113, new double[2], new double[2], 1e-10);
+                var cohesiveMaterial = new BondSlipCohMat_v2(9.44, 0.944, 9.44, 0.113, new double[2], new double[2], 1e-3);
 
                 // Create Elastic 3D Material
                 var elasticMaterial = new ElasticMaterial3D_v2
