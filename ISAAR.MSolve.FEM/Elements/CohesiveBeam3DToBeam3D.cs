@@ -320,7 +320,7 @@ namespace ISAAR.MSolve.FEM.Elements
 
             for (int i = 0; i < materialsAtGaussPoints.Length; i++)
             {
-                materialsAtGaussPoints[i].UpdateMaterial(Delta[i]);
+                materialsAtGaussPoints[i].UpdateMaterial(Delta[i]);                
             }
             return new Tuple<double[], double[]>(Delta[materialsAtGaussPoints.Length - 1], materialsAtGaussPoints[materialsAtGaussPoints.Length - 1].Tractions);
         }
@@ -354,7 +354,7 @@ namespace ISAAR.MSolve.FEM.Elements
             }
 
             Tuple<Matrix[], double[]> RtN3AndIntegrationCoeffs;
-            RtN3AndIntegrationCoeffs = CalculateNecessaryMatricesForStiffnessMatrixAndForcesVectorCalculations();//Rt *Nbeam
+            RtN3AndIntegrationCoeffs = CalculateNecessaryMatricesForStiffnessMatrixAndForcesVectorCalculations(); //Rt*Nbeam
             Matrix[] RtN3;
             RtN3 = RtN3AndIntegrationCoeffs.Item1;
             double[] integrationCoeffs;

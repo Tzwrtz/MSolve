@@ -27,40 +27,6 @@ namespace ISAAR.MSolve.SamplesConsole
 
         static void Main(string[] args)
         {
-            //SolveBuildingInNoSoilSmall();
-            //TrussExample.Run();
-            //FEM.Cantilever2D.Run();
-            //FEM.Cantilever2DPreprocessor.Run();
-            //FEM.WallWithOpenings.Run();
-            //SeparateCodeCheckingClass.Check06();
-            //SolveBuildingInNoSoilSmall_v2();
-            //SolveBuildingInNoSoilSmallDynamic_v2();
-            //SolveStochasticMaterialBeam2DWithBruteForceMonteCarlo();
-            //CNTExamples.CNT_4_4_DisplacementControl_v2();
-            //CNTExamples.CNT_4_4_NewtonRaphson_v2();
-            //Tests.FEM.Shell8andCohesiveNonLinear.RunTest_v2();
-            //AppliedDisplacementExample.Run();
-
-            //Logging.PrintForceDisplacementCurve.CantileverBeam2DCorotationalLoadControl();
-
-            //SuiteSparseBenchmarks.MemoryConsumptionDebugging();
-            //SolverBenchmarks.SuiteSparseMemoryConsumptionDebugging();
-            //NRNLAnalyzerDevelopTest_v2.SolveDisplLoadsExample();
-            //SeparateCodeCheckingClass4.Check05bStressIntegrationObje_v2_Integration();
-            //SeparateCodeCheckingClass4.Check_Graphene_rve_Obje_v2_Integration();
-            //IntegrationElasticCantileverBenchmark.RunExample();
-            //OneRveExample.Check_Graphene_rve_serial();
-            //BondSlipTest.CheckStressStrainBonSlipMaterial();
-            //OneRveExample.Check_Graphene_rve_parallel();
-            //LinearRves.CheckShellScaleTransitionsAndMicrostructure();
-
-            //CNTembeddedInMatrixExample.EmbeddedCNTinMatrixCohesive_NewtonRaphson();
-            //EBE_CNT_embeddedInElastic_Matrix.EBEembeddedInMatrix_NewtonRaphson();
-            //EBE_CNT_embeddedInElastic_Matrix.EBEembeddedInMatrixCohesive_NewtonRaphson();
-
-            //EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrix_NewtonRaphson();
-            //EBE_CNT_embeddedInElastic_Matrix_3.EBEembeddedInMatrixCohesive_NewtonRaphson();
-
             //Stochastic Analysis - StochasticEmbeddedExample_1
             //for (int i = 1; i <= 10000; i++)
             //{
@@ -68,300 +34,385 @@ namespace ISAAR.MSolve.SamplesConsole
             //    StochasticEmbeddedExample_1.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
             //}
 
-            //Stochastic Analysis - StochasticEmbeddedExample_2
-            for (int i = 12; i <= 50; i++)
+            //Stochastic Analysis - StochasticEmbeddedExample_3_Run-2-Vf=0.72% - Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 1; i <= 100; i++)
+            //{
+            //    //-----------------ELASTIC MATRIX-----------------//
+            //    //StochasticEmbeddedExample_3.Run2_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_3.Run2_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------PLASTIC MATRIX-----------------//
+            //    //StochasticEmbeddedExample_3.Run2_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_3.Run2_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+            //Stochastic Analysis - StochasticEmbeddedExample_3_Run-3-Vf=4.76% - Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 1; i <= 100; i++)
+            //{
+            //    //-----------------ELASTIC MATRIX-----------------//
+            //    //StochasticEmbeddedExample_3.Run3_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_3.Run3_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------PLASTIC MATRIX-----------------//
+            //    StochasticEmbeddedExample_3.Run3_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_3.Run3_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+            //Stochastic Analysis - StochasticEmbeddedExample_3_Run-4-Vf=11.38% - Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 34; i <= 50; i++)
+            //{
+            //    //-----------------ELASTIC MATRIX-----------------//
+            //    StochasticEmbeddedExample_3.Run4_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_3.Run4_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------PLASTIC MATRIX-----------------//
+            //    StochasticEmbeddedExample_3.Run4_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_3.Run4_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+
+
+            //*******************//
+            // EmbeddedExample-4 //
+            //*******************//
+
+            // // Stochastic Analysis -StochasticEmbeddedExample_4_Run-2 - Vf = 0.72 % -Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 1; i <= 100; i++)
+            //{
+            //    //-----------------Run2a_Elastic-----------------//
+            //    StochasticEmbeddedExample_4.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_4.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2a_Plastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run2a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run2a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run2b_Elastic-----------------//
+            //    StochasticEmbeddedExample_4.Run2b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2b_Plastic-----------------//                
+            //    //StochasticEmbeddedExample_4.Run2b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run2c_Elastic-----------------//
+            //    StochasticEmbeddedExample_4.Run2c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2c_Plastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run2c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run2d_Elastic-----------------//
+            //    StochasticEmbeddedExample_4.Run2d_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2d_Plastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run2d_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+
+            //// // Stochastic Analysis -StochasticEmbeddedExample_4_Run-3 - Vf = 2.65 % -Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 1; i <= 100; i++)
+            //{
+            //    //-----------------Run3a_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run3a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run3a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run3a_Plastic-----------------//
+            //    StochasticEmbeddedExample_4.Run3a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run3a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run3b_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run3b_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run3b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run3b_Plastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run3b_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run3b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run3c_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run3c_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run3c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run3c_Plastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run3c_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run3c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run3d_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run3d_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run3d_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run3d_Plastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run3d_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run3d_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+
+            //// Stochastic Analysis -StochasticEmbeddedExample_4_Run-4 - Vf = 4.76 % -Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 44; i <= 100; i++)
+            //{
+            //    //-----------------Run4a_Elastic-----------------//
+            //    StochasticEmbeddedExample_4.Run4a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run4a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    ////-----------------Run4a_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run4a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_4.Run4a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    ////-----------------Run4b_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run4b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    ////-----------------Run4b_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run4b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    ////-----------------Run4c_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run4c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    ////-----------------Run4c_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run4c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    ////-----------------Run4d_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run4d_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    ////-----------------Run4d_Elastic-----------------//
+            //    //StochasticEmbeddedExample_4.Run4d_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+            // // Stochastic Analysis -StochasticEmbeddedExample_4_Run-5 - Vf = 11.38 % -Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 1; i <= 50; i++)
+            //{
+            //    //-----------------ELASTIC MATRIX-----------------//
+            //    StochasticEmbeddedExample_4.Run5a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_4.Run5a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------PLASTIC MATRIX-----------------//
+            //    StochasticEmbeddedExample_4.Run5a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_4.Run5a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+
+            //*******************//
+            // EmbeddedExample-5 //
+            //*******************//
+            // Stochastic Analysis -StochasticEmbeddedExample_5_Run-2 - Vf = 2.65 % -Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 1; i <= 1; i++)
+            //{
+            //    //-----------------Run4a_Elastic-----------------//
+            //    StochasticEmbeddedExample_5.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_5.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run4a_Elastic-----------------//
+            //    StochasticEmbeddedExample_5.Run2a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_5.Run2a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+
+            //*******************//
+            // EmbeddedExample-6 //
+            //*******************//
+            // Stochastic Analysis -StochasticEmbeddedExample_6_Run-2 - Vf = 0.72 % -Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 1; i <= 100; i++)
+            //{
+            //    //-----------------Run2a_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_6.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2a_Plastic-----------------//
+            //    StochasticEmbeddedExample_6.Run2a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_6.Run2a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run2b_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run2b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2b_Plastic-----------------//                
+            //    StochasticEmbeddedExample_6.Run2b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run2c_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run2c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2c_Plastic-----------------//
+            //    StochasticEmbeddedExample_6.Run2c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run2d_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run2d_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2d_Plastic-----------------//
+            //    StochasticEmbeddedExample_6.Run2d_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+            //// Stochastic Analysis -StochasticEmbeddedExample_6_Run-3 - Vf = 2.65 % -Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 1; i <= 10; i++)
+            //{
+            //    //-----------------Run3a_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run3a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_6.Run3a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run3a_Plastic-----------------//
+            //    StochasticEmbeddedExample_6.Run3a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_6.Run3a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run3b_Elastic-----------------//                
+            //    StochasticEmbeddedExample_6.Run3b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run3b_Plastic-----------------//                
+            //    StochasticEmbeddedExample_6.Run3b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run3c_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run3c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run3c_Plastic-----------------//                
+            //    StochasticEmbeddedExample_6.Run3c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run3d_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run3d_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run3d_Plastic-----------------//
+            //    StochasticEmbeddedExample_6.Run3d_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+            //// Stochastic Analysis -StochasticEmbeddedExample_6_Run-4 - Vf = 4.76 % -Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 1; i <= 100; i++)
+            //{
+            //    //-----------------Run4a_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run4a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_6.Run4a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run4a_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run4a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_6.Run4a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run4b_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run4b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run4b_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run4b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run4c_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run4c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run4c_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run4c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+            //    //-----------------Run4d_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run4d_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run4d_Elastic-----------------//
+            //    StochasticEmbeddedExample_6.Run4d_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+            //// Stochastic Analysis -StochasticEmbeddedExample_6_Run-5 - Vf = 11.38 % -Elastic matrix
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //for (int i = 1; i <= 50; i++)
+            //{
+            //    //-----------------ELASTIC MATRIX-----------------//
+            //    StochasticEmbeddedExample_6.Run5a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_6.Run5a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------PLASTIC MATRIX-----------------//
+            //    StochasticEmbeddedExample_6.Run5a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_6.Run5a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+
+
+            //*******************//
+            // EmbeddedExample-7 //
+            //*******************//
+
+            for (int i = 1; i <= 1; i++)
             {
-                StochasticEmbeddedExample_2.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-                //StochasticEmbeddedExample_2.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                //-----------------Run1-2a_Elastic-----------------//
+                StochasticEmbeddedExample_7.Run1_2a_Elastic.PEEKMatrix_NewtonRaphson(i);
+                //-----------------Run1-2a_Plastic-----------------//
+                StochasticEmbeddedExample_7.Run1_2a_Plastic.PEEKMatrix_NewtonRaphson(i);
+
+                //-----------------Run1-3a_Elastic-----------------//
+                StochasticEmbeddedExample_7.Run1_3a_Elastic.PEEKMatrix_NewtonRaphson(i);
+                //-----------------Run1-3a_Plastic-----------------//
+                StochasticEmbeddedExample_7.Run1_3a_Plastic.PEEKMatrix_NewtonRaphson(i);
+
+                //-----------------Run1-4a_Elastic-----------------//
+                StochasticEmbeddedExample_7.Run1_4a_Elastic.PEEKMatrix_NewtonRaphson(i);
+                //-----------------Run1-4a_Plastic-----------------//
+                StochasticEmbeddedExample_7.Run1_4a_Plastic.PEEKMatrix_NewtonRaphson(i);
+
+                //-----------------Run1-5a_Elastic-----------------//
+                StochasticEmbeddedExample_7.Run1_5a_Elastic.PEEKMatrix_NewtonRaphson(i);
+                //-----------------Run1-5a_Plastic-----------------//
+                StochasticEmbeddedExample_7.Run1_5a_Plastic.PEEKMatrix_NewtonRaphson(i);
             }
 
-            for (int i = 5; i <= 50; i++)
+            int numberOfSimulations = 10;
+
+            // Stochastic Analysis - StochasticEmbeddedExample_7_Run-2 - Vf = 2.83 % - HostElemets = 125
+            LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            for (int i = 1; i <= numberOfSimulations; i++)
             {
-                StochasticEmbeddedExample_2.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
-            }
-        }
+                //-----------------Run2a_Elastic-----------------//
+                StochasticEmbeddedExample_7.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_7.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                //-----------------Run2a_Plastic-----------------//
+                StochasticEmbeddedExample_7.Run2a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_7.Run2a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
 
-        private static void SolveBuildingInNoSoilSmall()
-        {
-            VectorExtensions.AssignTotalAffinityCount();
-            Model model = new Model();
-            model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = subdomainID });
-            BeamBuildingBuilder.MakeBeamBuilding(model, 20, 20, 20, 5, 4, model.NodesDictionary.Count + 1,
-                model.ElementsDictionary.Count + 1, subdomainID, 4, false, false);
-            model.Loads.Add(new Load() { Amount = -100, Node = model.Nodes[21], DOF = DOFType.X });
-            model.ConnectDataStructures();
+                ////-----------------Run2b_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run2b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                ////-----------------Run2b_Plastic-----------------//                
+                //StochasticEmbeddedExample_7.Run2b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
 
-            var linearSystems = new Dictionary<int, ILinearSystem>(); //I think this should be done automatically
-            linearSystems[subdomainID] = new SkylineLinearSystem(subdomainID, model.Subdomains[0].Forces);
-            SolverSkyline solver = new SolverSkyline(linearSystems[subdomainID]);
-            ProblemStructural provider = new ProblemStructural(model, linearSystems);
-            LinearAnalyzer analyzer = new LinearAnalyzer(solver, linearSystems);
-            StaticAnalyzer parentAnalyzer = new StaticAnalyzer(provider, analyzer, linearSystems);
+                ////-----------------Run2c_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run2c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                ////-----------------Run2c_Plastic-----------------//
+                //StochasticEmbeddedExample_7.Run2c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
 
-            analyzer.LogFactories[subdomainID] = new LinearAnalyzerLogFactory(new int[] { 420 });
-
-            parentAnalyzer.BuildMatrices();
-            parentAnalyzer.Initialize();
-            parentAnalyzer.Solve();
-
-            DOFSLog log = (DOFSLog)analyzer.Logs[subdomainID][0]; //There is a list of logs for each subdomain and we want the first one
-            Console.WriteLine($"dof = {420}, u = {log.DOFValues[420]}");
-        }
-
-        private static void SolveBuildingInNoSoilSmall_v2()
-        {
-            var model = new Model_v2();
-            model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-            BeamBuildingBuilder.MakeBeamBuilding_v2(model, 20, 20, 20, 5, 4, model.NodesDictionary.Count + 1,
-                model.ElementsDictionary.Count + 1, subdomainID, 4, false, false);
-            model.Loads.Add(new Load_v2() { Amount = -100, Node = model.Nodes[21], DOF = DOFType.X });
-
-            // Solver
-            var solverBuilder = new SkylineSolver.Builder();
-            ISolver_v2 solver = solverBuilder.BuildSolver(model);
-
-            // Structural problem provider
-            var provider = new ProblemStructural_v2(model, solver);
-
-            // Linear static analysis
-            var childAnalyzer = new LinearAnalyzer_v2(solver);
-            var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-            // Request output
-            int monitorDof = 420;
-            childAnalyzer.LogFactories[subdomainID] = new LinearAnalyzerLogFactory_v2(new int[] { monitorDof });
-
-            // Run the analysis
-            parentAnalyzer.Initialize();
-            parentAnalyzer.Solve();
-
-            // Write output
-            DOFSLog_v2 log = (DOFSLog_v2)childAnalyzer.Logs[subdomainID][0]; //There is a list of logs for each subdomain and we want the first one
-            Console.WriteLine($"dof = {monitorDof}, u = {log.DOFValues[monitorDof]}");
-        }
-
-        private static void SolveBuildingInNoSoilSmallDynamic()
-        {
-            VectorExtensions.AssignTotalAffinityCount();
-            Model model = new Model();
-            model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = subdomainID });
-            BeamBuildingBuilder.MakeBeamBuilding(model, 20, 20, 20, 5, 4, model.NodesDictionary.Count + 1,
-                model.ElementsDictionary.Count + 1, subdomainID, 4, false, false);
-            model.ConnectDataStructures();
-
-            var linearSystems = new Dictionary<int, ILinearSystem>(); //I think this should be done automatically
-            linearSystems[subdomainID] = new SkylineLinearSystem(subdomainID, model.Subdomains[0].Forces);
-            SolverSkyline solver = new SolverSkyline(linearSystems[subdomainID]);
-            ProblemStructural provider = new ProblemStructural(model, linearSystems);
-            LinearAnalyzer analyzer = new LinearAnalyzer(solver, linearSystems);
-            NewmarkDynamicAnalyzer parentAnalyzer = new NewmarkDynamicAnalyzer(provider, analyzer, linearSystems, 0.25, 0.5, 0.01, 0.1);
-
-            analyzer.LogFactories[subdomainID] = new LinearAnalyzerLogFactory(new int[] { 420 });
-
-            parentAnalyzer.BuildMatrices();
-            parentAnalyzer.Initialize();
-            parentAnalyzer.Solve();
-
-            DOFSLog log = (DOFSLog)analyzer.Logs[subdomainID][0]; //There is a list of logs for each subdomain and we want the first one
-            Console.WriteLine($"dof = {420}, u = {log.DOFValues[420]}");
-        }
-
-        private static void SolveBuildingInNoSoilSmallDynamic_v2()
-        {
-            var model = new Model_v2();
-            model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-            BeamBuildingBuilder.MakeBeamBuilding_v2(model, 20, 20, 20, 5, 4, model.NodesDictionary.Count + 1,
-                model.ElementsDictionary.Count + 1, subdomainID, 4, false, false);
-
-            // Solver
-            var solverBuilder = new SkylineSolver.Builder();
-            ISolver_v2 solver = solverBuilder.BuildSolver(model);
-
-            // Structural problem provider
-            var provider = new ProblemStructural_v2(model, solver);
-
-            // Linear static analysis
-            var childAnalyzer = new LinearAnalyzer_v2(solver);
-            var parentAnalyzerBuilder = new NewmarkDynamicAnalyzer_v2.Builder(model, solver, provider, childAnalyzer, 0.01, 0.1);
-            parentAnalyzerBuilder.SetNewmarkParametersForConstantAcceleration(); // Not necessary. This is the default
-            NewmarkDynamicAnalyzer_v2 parentAnalyzer = parentAnalyzerBuilder.Build();
-
-            // Request output
-            int monitorDof = 420;
-            childAnalyzer.LogFactories[subdomainID] = new LinearAnalyzerLogFactory_v2(new int[] { monitorDof });
-
-            // Run the analysis
-            parentAnalyzer.Initialize();
-            parentAnalyzer.Solve();
-
-            // Write output
-            DOFSLog_v2 log = (DOFSLog_v2)childAnalyzer.Logs[subdomainID][0]; //There is a list of logs for each subdomain and we want the first one
-            Console.WriteLine($"dof = {monitorDof}, u = {log.DOFValues[monitorDof]}");
-
-            //TODO: No loads have been defined so the result is bound to be 0.
-        }
-
-        private static void SolveStochasticMaterialBeam2DWithBruteForceMonteCarlo()
-        {
-            #region Beam2D Geometry Data
-            VectorExtensions.AssignTotalAffinityCount();
-            double youngModulus = 2.0e08;
-            double poissonRatio = 0.3;
-            double nodalLoad = 10.0;
-
-            IStochasticMaterialCoefficientsProvider coefficientProvider = new PowerSpectrumTargetEvaluatorCoefficientsProvider(10, 0.1, .05, 20, 200, DOFType.X, 0.1, 200, 1e-10);
-            StochasticElasticMaterial material = new StochasticElasticMaterial(coefficientProvider)
-            {
-                YoungModulus = youngModulus,
-                PoissonRatio = poissonRatio,
-            };
-
-            // Model creation
-            Model model = new Model();
-
-            // Add a single subdomain to the model
-            model.SubdomainsDictionary.Add(0, new Subdomain() { ID = 0 });
-
-            // Add nodes to the nodes dictonary of the model
-            for (int i = 0; i < 11; i++)
-            {
-                model.NodesDictionary.Add(i, new Node
-                {
-                    ID = i,
-                    X = i * 1,
-                    Y = 0,
-                    Z = 0
-                });
+                ////-----------------Run2d_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run2d_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                ////-----------------Run2d_Plastic-----------------//
+                //StochasticEmbeddedExample_7.Run2d_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
             }
 
-            // Fix cantilever left end node of the model
-            model.NodesDictionary[0].Constraints.Add(new Constraint { DOF = DOFType.X });
-            model.NodesDictionary[0].Constraints.Add(new Constraint { DOF = DOFType.Y });
-            model.NodesDictionary[0].Constraints.Add(new Constraint { DOF = DOFType.RotZ });
-
-            for (int i = 0; i < model.NodesDictionary.Count - 1; i++)
+            // Stochastic Analysis -StochasticEmbeddedExample_7_Run-3 - Vf = 2.83 % - HostElemets = 1,000
+            LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            for (int i = 1; i <= numberOfSimulations; i++)
             {
-                var element = new Element()
-                {
-                    ID = i,
-                    ElementType = new Beam2DWithStochasticMaterial(material)
-                    {
-                        SectionArea = 1,
-                        MomentOfInertia = 0.1
-                    }
-                };
-                element.AddNode(model.NodesDictionary[i]);
-                element.AddNode(model.NodesDictionary[i + 1]);
-                model.ElementsDictionary.Add(i, element);
-                model.SubdomainsDictionary[0].ElementsDictionary.Add(i, element);
+                //-----------------Run3a_Elastic-----------------//
+                StochasticEmbeddedExample_7.Run3a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_7.Run3a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                //-----------------Run3a_Plastic-----------------//
+                StochasticEmbeddedExample_7.Run3a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_7.Run3a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+                ////-----------------Run3b_Elastic-----------------//                
+                //StochasticEmbeddedExample_7.Run3b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                ////-----------------Run3b_Plastic-----------------//                
+                //StochasticEmbeddedExample_7.Run3b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+                ////-----------------Run3c_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run3c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                ////-----------------Run3c_Plastic-----------------//                
+                //StochasticEmbeddedExample_7.Run3c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+
+                ////-----------------Run3d_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run3d_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                ////-----------------Run3d_Plastic-----------------//
+                //StochasticEmbeddedExample_7.Run3d_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
             }
 
-
-            // Add nodal load values at the right end of the cantilever
-            model.Loads.Add(new Load() { Amount = -nodalLoad, Node = model.NodesDictionary[model.NodesDictionary.Count - 1], DOF = DOFType.Y });
-
-            // Needed in order to make all the required data structures
-            model.ConnectDataStructures();
-            #endregion
-
-            var linearSystems = new Dictionary<int, ILinearSystem>();
-            linearSystems[0] = new SkylineLinearSystem(0, model.Subdomains[0].Forces);
-            SolverSkyline solver = new SolverSkyline(linearSystems[0]);
-            ProblemStructural provider = new ProblemStructural(model, linearSystems);
-            LinearAnalyzer childAnalyzer = new LinearAnalyzer(solver, linearSystems);
-            StaticAnalyzer parentAnalyzer = new StaticAnalyzer(provider, childAnalyzer, linearSystems);
-            MonteCarloAnalyzerWithStochasticMaterial stohasticAnalyzer =
-            new MonteCarloAnalyzerWithStochasticMaterial(model, provider, parentAnalyzer, linearSystems,
-                    coefficientProvider, 1, 10000);
-            stohasticAnalyzer.Initialize();
-            stohasticAnalyzer.Solve();
-
-            //Assert.Equal(-2.08333333333333333e-5, stohasticAnalyzer.MonteCarloMeanValue, 8);
-        }
-
-        private static void SolveStochasticMaterialBeam2DWithBruteForceMonteCarlo_v2()
-        {
-            #region Beam2D Geometry Data
-            double youngModulus = 2.0e08;
-            double poissonRatio = 0.3;
-            double nodalLoad = 10.0;
-
-            IStochasticMaterialCoefficientsProvider coefficientProvider = 
-                new PowerSpectrumTargetEvaluatorCoefficientsProvider(10, 0.1, .05, 20, 200, DOFType.X, 0.1, 200, 1e-10);
-            var material = new StochasticElasticMaterial_v2(coefficientProvider)
+            // Stochastic Analysis -StochasticEmbeddedExample_7_Run-4 - Vf = 2.83 % - HostElemets = 3375
+            LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            for (int i = 1; i <= numberOfSimulations; i++)
             {
-                YoungModulus = youngModulus,
-                PoissonRatio = poissonRatio,
-            };
+                //-----------------Run4a_Elastic-----------------//
+                StochasticEmbeddedExample_7.Run4a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_7.Run4a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                //-----------------Run4a_Elastic-----------------//
+                StochasticEmbeddedExample_7.Run4a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_7.Run4a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
 
-            // Model creation
-            var model = new Model_v2();
+                ////-----------------Run4b_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run4b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                ////-----------------Run4b_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run4b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
 
-            // Add a single subdomain to the model
-            model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+                ////-----------------Run4c_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run4c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                ////-----------------Run4c_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run4c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
 
-            // Add nodes to the nodes dictonary of the model
-            for (int i = 0; i < 11; i++)
-            {
-                model.NodesDictionary.Add(i, new Node_v2
-                {
-                    ID = i,
-                    X = i * 1,
-                    Y = 0,
-                    Z = 0
-                });
+                ////-----------------Run4d_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run4d_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                ////-----------------Run4d_Elastic-----------------//
+                //StochasticEmbeddedExample_7.Run4d_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
             }
 
-            // Fix cantilever left end node of the model
-            model.NodesDictionary[0].Constraints.Add(new Constraint { DOF = DOFType.X });
-            model.NodesDictionary[0].Constraints.Add(new Constraint { DOF = DOFType.Y });
-            model.NodesDictionary[0].Constraints.Add(new Constraint { DOF = DOFType.RotZ });
-
-            for (int i = 0; i < model.NodesDictionary.Count - 1; i++)
+            // Stochastic Analysis -StochasticEmbeddedExample_7_Run-5 - Vf = 2.83 % - HostElemets = 8000
+            LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            for (int i = 1; i <= numberOfSimulations; i++)
             {
-                var element = new Element_v2()
-                {
-                    ID = i,
-                    ElementType = new Beam2DWithStochasticMaterial_v2(material)
-                    {
-                        SectionArea = 1,
-                        MomentOfInertia = 0.1
-                    }
-                };
-                element.AddNode(model.NodesDictionary[i]);
-                element.AddNode(model.NodesDictionary[i + 1]);
-                model.ElementsDictionary.Add(i, element);
-                model.SubdomainsDictionary[subdomainID].Elements.Add(element);
+                //-----------------ELASTIC MATRIX-----------------//
+                StochasticEmbeddedExample_7.Run5a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_7.Run5a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                //-----------------PLASTIC MATRIX-----------------//
+                StochasticEmbeddedExample_7.Run5a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_7.Run5a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
             }
-
-
-            // Add nodal load values at the right end of the cantilever
-            model.Loads.Add(new Load_v2() { Amount = -nodalLoad, Node = model.NodesDictionary[model.NodesDictionary.Count - 1], DOF = DOFType.Y });
-            #endregion
-
-            // Solver
-            var solverBuilder = new SkylineSolver.Builder();
-            ISolver_v2 solver = solverBuilder.BuildSolver(model);
-
-            // Structural problem provider
-            var provider = new ProblemStructural_v2(model, solver);
-
-            // Linear static analysis
-            var childAnalyzer = new LinearAnalyzer_v2(solver);
-            var parentAnalyzerBuilder = new NewmarkDynamicAnalyzer_v2.Builder(model, solver, provider, childAnalyzer, 0.01, 0.1);
-            parentAnalyzerBuilder.SetNewmarkParametersForConstantAcceleration(); // Not necessary. This is the default
-            NewmarkDynamicAnalyzer_v2 parentAnalyzer = parentAnalyzerBuilder.Build();
-
-            //TODO: StaticAnalyzer and NewmarkDynamicAnalyzer should also implement IChildAnalyzer for the next to work, but 
-            //      stochastic logic will no longer be implemented as analyzers.
-            var stohasticAnalyzer = new MonteCarloAnalyzerWithStochasticMaterial_v2(model, provider, null/*parentAnalyzer*/,
-                    solver, coefficientProvider, 1, 10000);
-           
-            // Run the analysis
-            stohasticAnalyzer.Initialize();
-            stohasticAnalyzer.Solve();
-
-            //Assert.Equal(-2.08333333333333333e-5, stohasticAnalyzer.MonteCarloMeanValue, 8);
         }
     }
 }
