@@ -72,9 +72,12 @@ namespace ISAAR.MSolve.Logging
             using (var writer = new StreamWriter(outputFile, false)) // do not append, since this is a new analysis
             {
                 // Header
-                writer.Write("Increment, Iteration, ResidualNorm");
-                writer.Write($", Total displacement (Node {monitorNode.ID} - dof {monitorDof})");
-                writer.WriteLine($", Total internal force (Node {monitorNode.ID} - dof {monitorDof})");
+                writer.Write("0, 0, 0");
+                writer.Write($", 0");
+                writer.WriteLine($", 0");
+                //writer.Write("Increment, Iteration, ResidualNorm");
+                //writer.Write($", Total displacement (Node {monitorNode.ID} - dof {monitorDof})");
+                //writer.WriteLine($", Total internal force (Node {monitorNode.ID} - dof {monitorDof})");
             }
 
             if (!subdomain.Nodes.Contains(monitorNode)) throw new ArgumentException(
