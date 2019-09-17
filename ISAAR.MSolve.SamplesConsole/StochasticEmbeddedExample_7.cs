@@ -34,12 +34,8 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-2a\output files\elastic";
             private const int subdomainID = 0;
-            private const int hostElements = 125;
-            private const int hostNodes = 216;
-            private const int embeddedElements = 300;
-            private const int embeddedNodes = 330;
             private const double nodalLoad = -50.0;
-            private const int monitorNode = 202;
+            private const int monitorNode = 181;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void PEEKMatrix_NewtonRaphson(int noStochasticSimulation)
@@ -126,7 +122,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-1a\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-2a\input files";
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=50-5x5x5-Geometry_MSolve.inp";
                     string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=50-5x5x5-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -199,12 +195,8 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-2a\output files\plastic";
             private const int subdomainID = 0;
-            private const int hostElements = 125;
-            private const int hostNodes = 216;
-            private const int embeddedElements = 300;
-            private const int embeddedNodes = 330;
             private const double nodalLoad = -50.0;
-            private const int monitorNode = 202;
+            private const int monitorNode = 181;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void PEEKMatrix_NewtonRaphson(int noStochasticSimulation)
@@ -291,7 +283,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-1a\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-2a\input files";
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=50-5x5x5-Geometry_MSolve.inp";
                     string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=50-5x5x5-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -360,12 +352,8 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-3a\output files\elastic";
             private const int subdomainID = 0;
-            private const int hostElements = 1000;
-            private const int hostNodes = 1331;
-            private const int embeddedElements = 300;
-            private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 1271;
+            private const double nodalLoad = -15.0;
+            private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void PEEKMatrix_NewtonRaphson(int noStochasticSimulation)
@@ -452,7 +440,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3a\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-3a\input files";
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=50-10x10x10-Geometry_MSolve.inp";
                     string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=50-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -525,12 +513,8 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-3a\output files\plastic";
             private const int subdomainID = 0;
-            private const int hostElements = 1000;
-            private const int hostNodes = 1331;
-            private const int embeddedElements = 300;
-            private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 1271;
+            private const double nodalLoad = -15.0;
+            private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void PEEKMatrix_NewtonRaphson(int noStochasticSimulation)
@@ -630,7 +614,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3a\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-3a\input files";
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=50-10x10x10-Geometry_MSolve.inp";
                     string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=50-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -699,12 +683,8 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-4a\output files\elastic";
             private const int subdomainID = 0;
-            private const int hostElements = 3375;
-            private const int hostNodes = 4096;
-            private const int embeddedElements = 300;
-            private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 3977;
+            private const double nodalLoad = -7.0;
+            private const int monitorNode = 3841;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void PEEKMatrix_NewtonRaphson(int noStochasticSimulation)
@@ -864,12 +844,8 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-4a\output files\plastic";
             private const int subdomainID = 0;
-            private const int hostElements = 3375;
-            private const int hostNodes = 4096;
-            private const int embeddedElements = 300;
-            private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 3977;
+            private const double nodalLoad = -7.0;
+            private const int monitorNode = 3841;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void PEEKMatrix_NewtonRaphson(int noStochasticSimulation)
@@ -1025,12 +1001,8 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-5a\output files\elastic";
             private const int subdomainID = 0;
-            private const int hostElements = 8000;
-            private const int hostNodes = 9261;
-            private const int embeddedElements = 300;
-            private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 9041;
+            private const double nodalLoad = -4.0;
+            private const int monitorNode = 8821;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void PEEKMatrix_NewtonRaphson(int noStochasticSimulation)
@@ -1190,12 +1162,8 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-5a\output files\plastic";
             private const int subdomainID = 0;
-            private const int hostElements = 8000;
-            private const int hostNodes = 9261;
-            private const int embeddedElements = 300;
-            private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 9041;
+            private const double nodalLoad = -4.0;
+            private const int monitorNode = 8821;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void PEEKMatrix_NewtonRaphson(int noStochasticSimulation)
@@ -1358,7 +1326,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
             private const double nodalLoad = -50.0;
-            private const int monitorNode = 202;
+            private const int monitorNode = 181;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -1615,10 +1583,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files";
@@ -1700,10 +1668,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files";
@@ -1801,7 +1769,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
             private const double nodalLoad = -50.0;
-            private const int monitorNode = 202;
+            private const int monitorNode = 181;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -2054,10 +2022,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files";
@@ -2139,10 +2107,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files";
@@ -2240,7 +2208,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
             private const double nodalLoad = -50.0;
-            private const int monitorNode = 202;
+            private const int monitorNode = 181;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -2497,10 +2465,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2b\input files";
@@ -2582,10 +2550,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2b\input files";
@@ -2683,7 +2651,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
             private const double nodalLoad = -50.0;
-            private const int monitorNode = 202;
+            private const int monitorNode = 181;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -2936,10 +2904,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2b\input files";
@@ -3021,10 +2989,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2b\input files";
@@ -3122,7 +3090,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
             private const double nodalLoad = -50.0;
-            private const int monitorNode = 202;
+            private const int monitorNode = 181;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -3379,10 +3347,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2c\input files";
@@ -3464,10 +3432,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2c\input files";
@@ -3565,7 +3533,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
             private const double nodalLoad = -50.0;
-            private const int monitorNode = 202;
+            private const int monitorNode = 181;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -3818,10 +3786,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2c\input files";
@@ -3903,10 +3871,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2c\input files";
@@ -4004,7 +3972,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
             private const double nodalLoad = -50.0;
-            private const int monitorNode = 202;
+            private const int monitorNode = 181;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -4261,10 +4229,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2d\input files";
@@ -4346,10 +4314,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2d\input files";
@@ -4447,7 +4415,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
             private const double nodalLoad = -50.0;
-            private const int monitorNode = 202;
+            private const int monitorNode = 181;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -4700,10 +4668,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2d\input files";
@@ -4785,10 +4753,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2d\input files";
@@ -4887,8 +4855,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 1271;
+            private const double nodalLoad = -15.0;
+            private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -5145,10 +5113,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3a\input files";
@@ -5230,10 +5198,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3a\input files";
@@ -5330,8 +5298,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 1271;
+            private const double nodalLoad = -15.0;
+            private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -5584,10 +5552,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3a\input files";
@@ -5669,10 +5637,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3a\input files";
@@ -5769,8 +5737,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 1271;
+            private const double nodalLoad = -15.0;
+            private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
 
@@ -5953,10 +5921,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3b\input files";
@@ -6038,10 +6006,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3b\input files";
@@ -6138,8 +6106,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 1271;
+            private const double nodalLoad = -15.0;
+            private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
 
@@ -6318,10 +6286,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3b\input files";
@@ -6403,10 +6371,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3b\input files";
@@ -6503,8 +6471,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 1271;
+            private const double nodalLoad = -15.0;
+            private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
 
@@ -6687,10 +6655,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3c\input files";
@@ -6772,10 +6740,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3c\input files";
@@ -6872,8 +6840,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 1271;
+            private const double nodalLoad = -15.0;
+            private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
 
@@ -7052,10 +7020,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3c\input files";
@@ -7137,10 +7105,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3c\input files";
@@ -7237,8 +7205,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 1271;
+            private const double nodalLoad = -15.0;
+            private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
 
@@ -7421,10 +7389,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3d\input files";
@@ -7506,10 +7474,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3d\input files";
@@ -7606,8 +7574,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 1271;
+            private const double nodalLoad = -15.0;
+            private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
 
@@ -7786,10 +7754,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3d\input files";
@@ -7871,10 +7839,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-3d\input files";
@@ -7973,8 +7941,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 4096;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 3977;
+            private const double nodalLoad = -7.0;
+            private const int monitorNode = 3841;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -8231,10 +8199,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4a\input files";
@@ -8316,10 +8284,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4a\input files";
@@ -8416,8 +8384,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 4096;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 3977;
+            private const double nodalLoad = -7.0;
+            private const int monitorNode = 3841;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -8670,10 +8638,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4a\input files";
@@ -8755,10 +8723,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4a\input files";
@@ -8855,8 +8823,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 4096;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 3977;
+            private const double nodalLoad = -7.0;
+            private const int monitorNode = 3841;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -9113,10 +9081,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4b\input files";
@@ -9198,10 +9166,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4b\input files";
@@ -9298,8 +9266,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 4096;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 3977;
+            private const double nodalLoad = -7.0;
+            private const int monitorNode = 3841;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -9552,10 +9520,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4b\input files";
@@ -9637,10 +9605,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4b\input files";
@@ -9737,8 +9705,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 4096;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 3977;
+            private const double nodalLoad = -7.0;
+            private const int monitorNode = 3841;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -9995,10 +9963,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4c\input files";
@@ -10080,10 +10048,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4c\input files";
@@ -10180,8 +10148,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 4096;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 3977;
+            private const double nodalLoad = -7.0;
+            private const int monitorNode = 3841;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -10434,10 +10402,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4c\input files";
@@ -10519,10 +10487,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4c\input files";
@@ -10619,8 +10587,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 4096;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 3977;
+            private const double nodalLoad = -7.0;
+            private const int monitorNode = 3841;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -10877,10 +10845,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4d\input files";
@@ -10962,10 +10930,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4d\input files";
@@ -11062,8 +11030,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 4096;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 3977;
+            private const double nodalLoad = -7.0;
+            private const int monitorNode = 3841;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -11316,10 +11284,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4d\input files";
@@ -11401,10 +11369,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-4d\input files";
@@ -11503,8 +11471,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 9261;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 9041;
+            private const double nodalLoad = -4.0;
+            private const int monitorNode = 8821;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -11761,10 +11729,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-5a\input files";
@@ -11846,13 +11814,13 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-5\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-5a\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -11946,8 +11914,8 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 9261;
             private const int embeddedElements = 300;
             private const int embeddedNodes = 330;
-            private const double nodalLoad = -50.0;
-            private const int monitorNode = 9041;
+            private const double nodalLoad = -4.0;
+            private const int monitorNode = 8821;
             private const DOFType monitorDof = DOFType.Z;
 
             public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
@@ -12200,10 +12168,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-5a\input files";
@@ -12285,10 +12253,10 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-5a\input files";
