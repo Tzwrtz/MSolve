@@ -437,45 +437,88 @@ namespace ISAAR.MSolve.SamplesConsole
             //**************************************************************************************************************************************************************************************//
 
 
-            //*******************//
+            //********************//
             // EmbeddedExample-8 //
+            //*******************//
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+
+            //for (int i = 1; i <= 1; i++)
+            //{
+            //    //-----------------Run2a_Elastic-----------------//
+            //    StochasticEmbeddedExample_8.Run2a_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_8.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_8.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2a_Elastic-----------------//
+            //    StochasticEmbeddedExample_8.Run2a_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_8.Run2a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_8.Run2a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+            //for (int i = 1; i <= 1; i++)
+            //{
+            //    //-----------------Run2b_Elastic-----------------//
+            //    StochasticEmbeddedExample_8.Run2b_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_8.Run2b_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_8.Run2b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2b_Elastic-----------------//
+            //    StochasticEmbeddedExample_8.Run2b_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_8.Run2b_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_8.Run2b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+            //for (int i = 1; i <= 1; i++)
+            //{
+            //    //-----------------Run2c_Elastic-----------------//
+            //    //StochasticEmbeddedExample_8.Run2c_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_8.Run2c_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_8.Run2c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2c_Elastic-----------------//
+            //    //StochasticEmbeddedExample_8.Run2c_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_8.Run2c_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    //StochasticEmbeddedExample_8.Run2c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+            //**************************************************************************************************************************************************************************************//
+            //**************************************************************************************************************************************************************************************//
+
+            //*******************//
+            // EmbeddedExample-9 //
             //*******************//
             LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
 
             for (int i = 1; i <= 1; i++)
             {
                 //-----------------Run2a_Elastic-----------------//
-                //StochasticEmbeddedExample_8.Run2a_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
-                StochasticEmbeddedExample_8.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-                StochasticEmbeddedExample_8.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_9.Run2a_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_9.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_9.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
                 //-----------------Run2a_Elastic-----------------//
-                //StochasticEmbeddedExample_8.Run2a_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
-                StochasticEmbeddedExample_8.Run2a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-                StochasticEmbeddedExample_8.Run2a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
-            }
-
-            for (int i = 1; i <= 1; i++)
-            {
-                //-----------------Run2b_Elastic-----------------//
-                //StochasticEmbeddedExample_8.Run2b_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
-                StochasticEmbeddedExample_8.Run2b_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-                StochasticEmbeddedExample_8.Run2b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
-                //-----------------Run2b_Elastic-----------------//
-                //StochasticEmbeddedExample_8.Run2b_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
-                //StochasticEmbeddedExample_8.Run2b_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-                //StochasticEmbeddedExample_8.Run2b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_9.Run2a_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_9.Run2a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_9.Run2a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
             }
 
             //for (int i = 1; i <= 1; i++)
             //{
+            //    //-----------------Run2b_Elastic-----------------//
+            //    StochasticEmbeddedExample_9.Run2b_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_9.Run2b_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_9.Run2b_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------Run2b_Elastic-----------------//
+            //    StochasticEmbeddedExample_9.Run2b_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_9.Run2b_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_9.Run2b_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
+
+            //for (int i = 1; i <= 1; i++)
+            //{
             //    //-----------------Run2c_Elastic-----------------//
-            //    //StochasticEmbeddedExample_8.Run2c_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
-            //    StochasticEmbeddedExample_8.Run2c_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-            //    StochasticEmbeddedExample_8.Run2c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_9.Run2c_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_9.Run2c_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_9.Run2c_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
             //    //-----------------Run2c_Elastic-----------------//
-            //    //StochasticEmbeddedExample_8.Run2c_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
-            //    StochasticEmbeddedExample_8.Run2c_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-            //    StochasticEmbeddedExample_8.Run2c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_9.Run2c_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_9.Run2c_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_9.Run2c_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
             //}
             //**************************************************************************************************************************************************************************************//
             //**************************************************************************************************************************************************************************************//

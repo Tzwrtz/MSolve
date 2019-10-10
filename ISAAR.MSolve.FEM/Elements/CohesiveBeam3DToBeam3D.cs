@@ -274,28 +274,29 @@ namespace ISAAR.MSolve.FEM.Elements
                 }                
             }
             
+            // comment out last two of each block if rotations impact not needed
             for (int ii = 3; ii < 24; ii += 6)
             {
                 k_cohesive_element_total[ii, ii] = 1.0;
-                //k_cohesive_element_total[ii + 1, ii + 1] = 1.0;
-                //k_cohesive_element_total[ii + 2, ii + 2] = 1.0;
+                //k_cohesive_element_total[ii + 1, ii + 1] = 1.0; //
+                //k_cohesive_element_total[ii + 2, ii + 2] = 1.0; //
             }
 
             k_cohesive_element_total[3, 15] = -1.0;
-            //k_cohesive_element_total[4, 16] = -1.0;
-            //k_cohesive_element_total[5, 17] = -1.0;
+            //k_cohesive_element_total[4, 16] = -1.0; //
+            //k_cohesive_element_total[5, 17] = -1.0; //
 
             k_cohesive_element_total[15, 3] = -1.0;
-            //k_cohesive_element_total[16, 4] = -1.0;
-            //k_cohesive_element_total[17, 5] = -1.0;
+            //k_cohesive_element_total[16, 4] = -1.0; //
+            //k_cohesive_element_total[17, 5] = -1.0; //
 
             k_cohesive_element_total[9, 21] = -1.0;
-            //k_cohesive_element_total[10, 22] = -1.0;
-            //k_cohesive_element_total[11, 23] = -1.0;
+            //k_cohesive_element_total[10, 22] = -1.0; //
+            //k_cohesive_element_total[11, 23] = -1.0; //
 
             k_cohesive_element_total[21, 9] = -1.0;
-            //k_cohesive_element_total[22, 10] = -1.0;
-            //k_cohesive_element_total[23, 11] = -1.0;
+            //k_cohesive_element_total[22, 10] = -1.0; //
+            //k_cohesive_element_total[23, 11] = -1.0; //
 
             return k_cohesive_element_total; //k_cohesive_element; //   
         }
