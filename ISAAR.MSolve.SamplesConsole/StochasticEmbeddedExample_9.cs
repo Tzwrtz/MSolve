@@ -268,7 +268,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
                 }
 
                 public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
@@ -276,7 +276,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
                     CohesiveBeamElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedCohesiveBeam3DGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
                 }
 
                 private static void HostElements(Model_v2 model)

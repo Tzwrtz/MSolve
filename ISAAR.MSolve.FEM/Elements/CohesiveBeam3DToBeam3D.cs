@@ -14,7 +14,7 @@ using IEmbeddedElement = ISAAR.MSolve.FEM.Interfaces.IEmbeddedElement;
 
 namespace ISAAR.MSolve.FEM.Elements
 {
-    public class CohesiveBeam3DToBeam3D : IFiniteElement_v2, IEmbeddedElement_v2
+    public class CohesiveBeam3DToBeam3D : IFiniteElement_v2, IEmbeddedBeamElement
     {
         protected readonly static DOFType[] nodalDOFTypes = new DOFType[] { DOFType.X, DOFType.Y, DOFType.Z, DOFType.RotX, DOFType.RotY, DOFType.RotZ };
         protected readonly static DOFType[][] dofTypes = new DOFType[][] { nodalDOFTypes, nodalDOFTypes, nodalDOFTypes,
@@ -83,20 +83,22 @@ namespace ISAAR.MSolve.FEM.Elements
                 Delta[j] = new double[3];
             }
 
-            double[][,] R = new double[nGaussPoints][,]; //TODO: maybe cache R
-            for (int j = 0; j < nGaussPoints; j++)
-            {
-                R[j] = new double[3, 3];
-                R[j][0, 0] = 0.5 * (supportive_beam.currentRotationMatrix[0, 0] + supportive_clone.currentRotationMatrix[0, 0]);
-                R[j][0, 1] = 0.5 * (supportive_beam.currentRotationMatrix[0, 1] + supportive_clone.currentRotationMatrix[0, 1]);
-                R[j][0, 2] = 0.5 * (supportive_beam.currentRotationMatrix[0, 2] + supportive_clone.currentRotationMatrix[0, 2]);
-                R[j][1, 0] = 0.5 * (supportive_beam.currentRotationMatrix[1, 0] + supportive_clone.currentRotationMatrix[1, 0]);
-                R[j][1, 1] = 0.5 * (supportive_beam.currentRotationMatrix[1, 1] + supportive_clone.currentRotationMatrix[1, 1]);
-                R[j][1, 2] = 0.5 * (supportive_beam.currentRotationMatrix[1, 2] + supportive_clone.currentRotationMatrix[1, 2]);
-                R[j][2, 0] = 0.5 * (supportive_beam.currentRotationMatrix[2, 0] + supportive_clone.currentRotationMatrix[2, 0]);
-                R[j][2, 1] = 0.5 * (supportive_beam.currentRotationMatrix[2, 1] + supportive_clone.currentRotationMatrix[2, 1]);
-                R[j][2, 2] = 0.5 * (supportive_beam.currentRotationMatrix[2, 2] + supportive_clone.currentRotationMatrix[2, 2]);
-            }
+            //double[][,] R = new double[nGaussPoints][,]; //TODO: maybe cache R
+            //for (int j = 0; j < nGaussPoints; j++)
+            //{
+            //    R[j] = new double[3, 3];
+            //    R[j][0, 0] = 0.5 * (supportive_beam.currentRotationMatrix[0, 0] + supportive_clone.currentRotationMatrix[0, 0]);
+            //    R[j][0, 1] = 0.5 * (supportive_beam.currentRotationMatrix[0, 1] + supportive_clone.currentRotationMatrix[0, 1]);
+            //    R[j][0, 2] = 0.5 * (supportive_beam.currentRotationMatrix[0, 2] + supportive_clone.currentRotationMatrix[0, 2]);
+            //    R[j][1, 0] = 0.5 * (supportive_beam.currentRotationMatrix[1, 0] + supportive_clone.currentRotationMatrix[1, 0]);
+            //    R[j][1, 1] = 0.5 * (supportive_beam.currentRotationMatrix[1, 1] + supportive_clone.currentRotationMatrix[1, 1]);
+            //    R[j][1, 2] = 0.5 * (supportive_beam.currentRotationMatrix[1, 2] + supportive_clone.currentRotationMatrix[1, 2]);
+            //    R[j][2, 0] = 0.5 * (supportive_beam.currentRotationMatrix[2, 0] + supportive_clone.currentRotationMatrix[2, 0]);
+            //    R[j][2, 1] = 0.5 * (supportive_beam.currentRotationMatrix[2, 1] + supportive_clone.currentRotationMatrix[2, 1]);
+            //    R[j][2, 2] = 0.5 * (supportive_beam.currentRotationMatrix[2, 2] + supportive_clone.currentRotationMatrix[2, 2]);
+            //}
+
+            Matrix R = CalculateRotationMatrix();
 
             // Update x_local
             for (int j = 0; j < 4; j++)
@@ -133,7 +135,7 @@ namespace ISAAR.MSolve.FEM.Elements
                 {
                     for (int m = 0; m < 3; m++)
                     {
-                        Delta[npoint1][l] += R[npoint1][m, l] * u[m];
+                        Delta[npoint1][l] += R[m, l] * u[m];
                     }
                 }
             }
@@ -148,11 +150,12 @@ namespace ISAAR.MSolve.FEM.Elements
             
             double[] integrationsCoeffs = new double[nGaussPoints];
             Matrix[] RtN3 = new Matrix[nGaussPoints];
-            Matrix[] R = new Matrix[nGaussPoints]; //TODO: perhaps cache matrices in InitializeMatrices() where RtN3 is calculated
-            for (int j = 0; j < nGaussPoints; j++)
-            { R[j] = Matrix.CreateZero(3, 3); }
-            
+            //Matrix[] R = new Matrix[nGaussPoints]; //TODO: perhaps cache matrices in InitializeMatrices() where RtN3 is calculated
+            //for (int j = 0; j < nGaussPoints; j++)
+            //{ R[j] = Matrix.CreateZero(3, 3); }
+
             // Calculate Delta for all GPs
+            Matrix R = CalculateRotationMatrix();
             for (int npoint1 = 0; npoint1 < nGaussPoints; npoint1++)
             {
                 //double[,] u_prok = new double[3, 2];// [3d-axes, nodes] - of the mid-surface(#i_m, #j_m) 
@@ -164,20 +167,20 @@ namespace ISAAR.MSolve.FEM.Elements
                     Delta[j] = new double[3];
                 }
 
-                R[npoint1][0, 0] = 0.5 * (supportive_beam.currentRotationMatrix[0, 0] + supportive_clone.currentRotationMatrix[0, 0]);
-                R[npoint1][0, 1] = 0.5 * (supportive_beam.currentRotationMatrix[0, 1] + supportive_clone.currentRotationMatrix[0, 1]);
-                R[npoint1][0, 2] = 0.5 * (supportive_beam.currentRotationMatrix[0, 2] + supportive_clone.currentRotationMatrix[0, 2]);
-                R[npoint1][1, 0] = 0.5 * (supportive_beam.currentRotationMatrix[1, 0] + supportive_clone.currentRotationMatrix[1, 0]);
-                R[npoint1][1, 1] = 0.5 * (supportive_beam.currentRotationMatrix[1, 1] + supportive_clone.currentRotationMatrix[1, 1]);
-                R[npoint1][1, 2] = 0.5 * (supportive_beam.currentRotationMatrix[1, 2] + supportive_clone.currentRotationMatrix[1, 2]);
-                R[npoint1][2, 0] = 0.5 * (supportive_beam.currentRotationMatrix[2, 0] + supportive_clone.currentRotationMatrix[2, 0]);
-                R[npoint1][2, 1] = 0.5 * (supportive_beam.currentRotationMatrix[2, 1] + supportive_clone.currentRotationMatrix[2, 1]);
-                R[npoint1][2, 2] = 0.5 * (supportive_beam.currentRotationMatrix[2, 2] + supportive_clone.currentRotationMatrix[2, 2]);
+                //R[npoint1][0, 0] = 0.5 * (supportive_beam.currentRotationMatrix[0, 0] + supportive_clone.currentRotationMatrix[0, 0]);
+                //R[npoint1][0, 1] = 0.5 * (supportive_beam.currentRotationMatrix[0, 1] + supportive_clone.currentRotationMatrix[0, 1]);
+                //R[npoint1][0, 2] = 0.5 * (supportive_beam.currentRotationMatrix[0, 2] + supportive_clone.currentRotationMatrix[0, 2]);
+                //R[npoint1][1, 0] = 0.5 * (supportive_beam.currentRotationMatrix[1, 0] + supportive_clone.currentRotationMatrix[1, 0]);
+                //R[npoint1][1, 1] = 0.5 * (supportive_beam.currentRotationMatrix[1, 1] + supportive_clone.currentRotationMatrix[1, 1]);
+                //R[npoint1][1, 2] = 0.5 * (supportive_beam.currentRotationMatrix[1, 2] + supportive_clone.currentRotationMatrix[1, 2]);
+                //R[npoint1][2, 0] = 0.5 * (supportive_beam.currentRotationMatrix[2, 0] + supportive_clone.currentRotationMatrix[2, 0]);
+                //R[npoint1][2, 1] = 0.5 * (supportive_beam.currentRotationMatrix[2, 1] + supportive_clone.currentRotationMatrix[2, 1]);
+                //R[npoint1][2, 2] = 0.5 * (supportive_beam.currentRotationMatrix[2, 2] + supportive_clone.currentRotationMatrix[2, 2]);
 
                 integrationsCoeffs[npoint1] = ((supportive_beam.currentLength + supportive_clone.currentLength)/4.0) * QuadratureForStiffness.IntegrationPoints[npoint1].Weight;
 
                 // Calculate RtN3 here instead of in InitializeRN3() and then in UpdateForces()
-                RtN3[npoint1] = R[npoint1].Transpose() * N3[npoint1];
+                RtN3[npoint1] = R.Transpose() * N3[npoint1];
             }
             return new Tuple<Matrix[], double[]>(RtN3, integrationsCoeffs);
         }
@@ -520,6 +523,22 @@ namespace ISAAR.MSolve.FEM.Elements
             throw new NotImplementedException();
         }
         #endregion
+
+        public Matrix CalculateRotationMatrix()
+        {
+            Matrix R = Matrix.CreateZero(3,3);
+            // R = 0.5*(supportive_beam.currentRotationMatrix + supportive_clone.currentRotationMatrix)
+            R[0, 1] = 0.5 * (supportive_beam.currentRotationMatrix[0, 1] + supportive_clone.currentRotationMatrix[0, 1]);
+            R[0, 2] = 0.5 * (supportive_beam.currentRotationMatrix[0, 2] + supportive_clone.currentRotationMatrix[0, 2]);
+            R[1, 0] = 0.5 * (supportive_beam.currentRotationMatrix[1, 0] + supportive_clone.currentRotationMatrix[1, 0]);
+            R[0, 0] = 0.5 * (supportive_beam.currentRotationMatrix[0, 0] + supportive_clone.currentRotationMatrix[0, 0]);
+            R[1, 1] = 0.5 * (supportive_beam.currentRotationMatrix[1, 1] + supportive_clone.currentRotationMatrix[1, 1]);
+            R[1, 2] = 0.5 * (supportive_beam.currentRotationMatrix[1, 2] + supportive_clone.currentRotationMatrix[1, 2]);
+            R[2, 0] = 0.5 * (supportive_beam.currentRotationMatrix[2, 0] + supportive_clone.currentRotationMatrix[2, 0]);
+            R[2, 1] = 0.5 * (supportive_beam.currentRotationMatrix[2, 1] + supportive_clone.currentRotationMatrix[2, 1]);
+            R[2, 2] = 0.5 * (supportive_beam.currentRotationMatrix[2, 2] + supportive_clone.currentRotationMatrix[2, 2]);
+            return R;
+        }
 
     }
 }
