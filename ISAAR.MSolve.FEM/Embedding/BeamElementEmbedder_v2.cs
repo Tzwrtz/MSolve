@@ -19,7 +19,7 @@ namespace ISAAR.MSolve.FEM.Embedding
         {
             var e = (IEmbeddedBeamElement)(embeddedElement.ElementType);
             base.CalculateTransformationMatrix();
-            transformationMatrix = e.CalculateRotationMatrix().MultiplyRight(transformationMatrix,true);
+            //transformationMatrix = e.CalculateRotationMatrix().MultiplyRight(transformationMatrix,true);
         }        
     }
 }

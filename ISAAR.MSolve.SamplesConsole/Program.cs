@@ -489,8 +489,20 @@ namespace ISAAR.MSolve.SamplesConsole
             {
                 //-----------------Run2a_Elastic-----------------//
                 //StochasticEmbeddedExample_9.Run2a_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
-                //StochasticEmbeddedExample_9.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-                StochasticEmbeddedExample_9.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_9.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_9.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                //-----------------Run2a_Elastic-----------------//
+                //StochasticEmbeddedExample_9.Run2a_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_9.Run2a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_9.Run2a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            }
+
+            for (int i = 1; i <= 1; i++)
+            {
+                //-----------------Run2a_Elastic-----------------//
+                //StochasticEmbeddedExample_9.Run2a_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_10.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_9.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
                 //-----------------Run2a_Elastic-----------------//
                 //StochasticEmbeddedExample_9.Run2a_Plastic.SingleMatrix_NewtonRaphson_Stochastic(i);
                 //StochasticEmbeddedExample_9.Run2a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
