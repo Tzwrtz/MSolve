@@ -31,7 +31,7 @@ namespace ISAAR.MSolve.SamplesConsole
     {
         public static class Run2a_Elastic
         {
-            private const string outputDirectory = @"C:\Users\tzwrt\Desktop\output files\EmbeddedExample_9"; //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2a\output files\elastic";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2a\output files\elastic"; //"C:\Users\tzwrt\Desktop\output files\EmbeddedExample_9"; //
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -209,18 +209,32 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 7; iNode = iNode + 2)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
+                //for (int iNode = 1; iNode <= 7; iNode = iNode + 2)
+                //{
+                //    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                //    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                //    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                //}
+                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.Z });
 
                 // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 2; iNode <= 6; iNode = iNode + 4)
-                {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
-                }
+                //for (int iNode = 2; iNode <= 6; iNode = iNode + 4)
+                //{
+                //    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                //}
+                model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[5], DOF = DOFType.Z });
+                model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[8], DOF = DOFType.Z });
 
                 // Choose linear equation system solver
                 //var solverBuilder = new SkylineSolver.Builder();
@@ -295,7 +309,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2a\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2a\input files"; //"C:\Users\tzwrt\Desktop\input files"; //
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-1x1x1-Geometry_MSolve.inp";
                     string MatrixConnectivityFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-1x1x1-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -374,7 +388,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double torsionalInertia = 496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"C:\Users\tzwrt\Desktop\input files"; //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2a\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2a\input files"; //"C:\Users\tzwrt\Desktop\input files"; //
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";

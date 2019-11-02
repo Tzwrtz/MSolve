@@ -577,7 +577,7 @@ namespace ISAAR.MSolve.FEM.Elements
 
         public Tuple<double[], double[]> CalculateStresses(Element_v2 element, double[] localDisplacements, double[] localdDisplacements)
         {
-            UpdateState(dofEnumerator.GetTransformedDisplacementsVector(localdDisplacements));
+            UpdateState(dofEnumerator.GetTransformedDisplacementsVector(localdDisplacements)); //returns Global displacements and rotations
             //TODO: Should calculate strains and update material as well
             //material.UpdateMaterial(strains);
             //TODO: Should calculate stresses as well
