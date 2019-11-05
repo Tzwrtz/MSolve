@@ -141,10 +141,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SkylineSolver.Builder();
+                SkylineSolver solver = solverBuilder.BuildSolver(model);
+                //var solverBuilder = new SuiteSparseSolver.Builder();
+                //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
 
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
@@ -209,10 +209,15 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Choose linear equation system solver
+                // SkylineSolver
                 //var solverBuilder = new SkylineSolver.Builder();
                 //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                // uite Sparse Solver
+                //var solverBuilder = new SuiteSparseSolver.Builder();
+                //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                // Dense Solver
+                var solverBuilder = new DenseMatrixSolver.Builder();
+                var solver = solverBuilder.BuildSolver(model);
 
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);

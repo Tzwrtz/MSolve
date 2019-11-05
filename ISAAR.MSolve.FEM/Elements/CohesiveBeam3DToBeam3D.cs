@@ -277,7 +277,7 @@ namespace ISAAR.MSolve.FEM.Elements
                 }                
             }
             
-            // comment out last two of each block if rotations impact not needed
+            // comment out last two of each block if rotations impact not needed            
             for (int ii = 3; ii < 24; ii += 6)
             {
                 k_cohesive_element_total[ii, ii] = 1.0;

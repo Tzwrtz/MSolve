@@ -56,6 +56,8 @@ namespace ISAAR.MSolve.Analyzers.NonLinear
                             log.LogTotalDataForIncrement(increment, iteration, errorNorm,
                                 uPlusdu[subdomainID], internalRhsVectors[subdomainID]);
                         }
+                        provider.Reset();
+                        BuildMatrices();
                         break;
                     }
 

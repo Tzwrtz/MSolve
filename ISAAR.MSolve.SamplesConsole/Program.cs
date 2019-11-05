@@ -492,7 +492,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
 
                 //StochasticEmbeddedExample_9.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-                StochasticEmbeddedExample_9.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                //StochasticEmbeddedExample_9.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
 
 
                 //-----------------Run2a_Elastic-----------------//
@@ -536,8 +536,8 @@ namespace ISAAR.MSolve.SamplesConsole
                 //StochasticEmbeddedExample_10.Run2a_Elastic.SingleMatrix_NewtonRaphson_Stochastic(i);
 
 
-                //StochasticEmbeddedExample_10.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i); // Works OK
-                StochasticEmbeddedExample_10.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+                StochasticEmbeddedExample_10.Run2a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i); // Works OK
+                //StochasticEmbeddedExample_10.Run2a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
 
 
                 //-----------------Run2a_Elastic-----------------//
