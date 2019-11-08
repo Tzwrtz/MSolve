@@ -59,18 +59,32 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.SingleMatrixBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 7; iNode = iNode + 2)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }                               
+                //for (int iNode = 1; iNode <= 7; iNode = iNode + 2)
+                //{
+                //    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                //    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                //    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                //}
+                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.Z });
 
                 // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 2; iNode <= 6; iNode = iNode + 4)
-                {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
-                }
+                //for (int iNode = 2; iNode <= 6; iNode = iNode + 4)
+                //{
+                //    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                //}
+                model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[5], DOF = DOFType.Z });
+                model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[8], DOF = DOFType.Z });
 
                 // Choose linear equation system solver
                 //var solverBuilder = new SkylineSolver.Builder();
@@ -1297,7 +1311,8 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                    //var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
                 }
 
                 public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
@@ -1305,7 +1320,8 @@ namespace ISAAR.MSolve.SamplesConsole
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
                     CohesiveBeamElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedCohesiveBeam3DGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                    //var embeddedGrouping = new EmbeddedCohesiveBeam3DGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
                 }
 
                 private static void HostElements(Model_v2 model)
