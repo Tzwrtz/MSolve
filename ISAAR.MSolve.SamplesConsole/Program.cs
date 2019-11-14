@@ -321,29 +321,29 @@ namespace ISAAR.MSolve.SamplesConsole
             //*******************//
             LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
             int startingNumofSimulations = 1;
-            int numberOfSimulations = 1;
-            for (int i = 1; i <= 1; i++)
-            {
-                //-----------------Run1-2a_Elastic-----------------//
-                StochasticEmbeddedExample_7.Run1_2a_Elastic.PEEKMatrix_NewtonRaphson(i);
-                //-----------------Run1-2a_Plastic-----------------//
-                StochasticEmbeddedExample_7.Run1_2a_Plastic.PEEKMatrix_NewtonRaphson(i);
+            int numberOfSimulations = 10;
+            //for (int i = 1; i <= 1; i++)
+            //{
+            //    //-----------------Run1-2a_Elastic-----------------//
+            //    StochasticEmbeddedExample_7.Run1_2a_Elastic.PEEKMatrix_NewtonRaphson(i);
+            //    //-----------------Run1-2a_Plastic-----------------//
+            //    StochasticEmbeddedExample_7.Run1_2a_Plastic.PEEKMatrix_NewtonRaphson(i);
 
-                //-----------------Run1-3a_Elastic-----------------//
-                StochasticEmbeddedExample_7.Run1_3a_Elastic.PEEKMatrix_NewtonRaphson(i);
-                //-----------------Run1-3a_Plastic-----------------//
-                StochasticEmbeddedExample_7.Run1_3a_Plastic.PEEKMatrix_NewtonRaphson(i);
+            //    //-----------------Run1-3a_Elastic-----------------//
+            //    StochasticEmbeddedExample_7.Run1_3a_Elastic.PEEKMatrix_NewtonRaphson(i);
+            //    //-----------------Run1-3a_Plastic-----------------//
+            //    StochasticEmbeddedExample_7.Run1_3a_Plastic.PEEKMatrix_NewtonRaphson(i);
 
-                //-----------------Run1-4a_Elastic-----------------//
-                StochasticEmbeddedExample_7.Run1_4a_Elastic.PEEKMatrix_NewtonRaphson(i);
-                //-----------------Run1-4a_Plastic-----------------//
-                StochasticEmbeddedExample_7.Run1_4a_Plastic.PEEKMatrix_NewtonRaphson(i);
+            //    //-----------------Run1-4a_Elastic-----------------//
+            //    StochasticEmbeddedExample_7.Run1_4a_Elastic.PEEKMatrix_NewtonRaphson(i);
+            //    //-----------------Run1-4a_Plastic-----------------//
+            //    StochasticEmbeddedExample_7.Run1_4a_Plastic.PEEKMatrix_NewtonRaphson(i);
 
-                //-----------------Run1-5a_Elastic-----------------//
-                StochasticEmbeddedExample_7.Run1_5a_Elastic.PEEKMatrix_NewtonRaphson(i);
-                //-----------------Run1 - 5a_Plastic---------------- -//
-                StochasticEmbeddedExample_7.Run1_5a_Plastic.PEEKMatrix_NewtonRaphson(i);
-            }
+            //    //-----------------Run1-5a_Elastic-----------------//
+            //    StochasticEmbeddedExample_7.Run1_5a_Elastic.PEEKMatrix_NewtonRaphson(i);
+            //    //-----------------Run1 - 5a_Plastic---------------- -//
+            //    StochasticEmbeddedExample_7.Run1_5a_Plastic.PEEKMatrix_NewtonRaphson(i);
+            //}
 
             // Stochastic Analysis - StochasticEmbeddedExample_7_Run-2 - Vf = 2.83 % - HostElemets = 125            
             for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
@@ -423,16 +423,16 @@ namespace ISAAR.MSolve.SamplesConsole
                 //StochasticEmbeddedExample_7.Run4d_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
             }
 
-            // Stochastic Analysis -StochasticEmbeddedExample_7_Run-5 - Vf = 2.83 % - HostElemets = 8,000
-            for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
-            {
-                //-----------------ELASTIC MATRIX-----------------//
-                StochasticEmbeddedExample_7.Run5a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-                StochasticEmbeddedExample_7.Run5a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
-                //-----------------PLASTIC MATRIX-----------------//
-                StochasticEmbeddedExample_7.Run5a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
-                StochasticEmbeddedExample_7.Run5a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
-            }
+            //// Stochastic Analysis -StochasticEmbeddedExample_7_Run-5 - Vf = 2.83 % - HostElemets = 8,000
+            //for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
+            //{
+            //    //-----------------ELASTIC MATRIX-----------------//
+            //    StochasticEmbeddedExample_7.Run5a_Elastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_7.Run5a_Elastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //    //-----------------PLASTIC MATRIX-----------------//
+            //    StochasticEmbeddedExample_7.Run5a_Plastic.EBEembeddedInMatrix_NewtonRaphson_Stochastic(i);
+            //    StochasticEmbeddedExample_7.Run5a_Plastic.EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(i);
+            //}
             //**************************************************************************************************************************************************************************************//
             //**************************************************************************************************************************************************************************************//
 
