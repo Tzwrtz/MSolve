@@ -50,7 +50,8 @@ namespace ISAAR.MSolve.Logging.Utilities
             IList<IList<DOFType>> elementDofs = element.ElementType.DofEnumerator.GetDOFTypes(element);
             int localDofIdx = elementDofs[localNodeIdx].IndexOf(dofType);
             int multNum = elementDofs[localNodeIdx].Count;
-            int dofIdx = multNum * (localNodeIdx + 1) - (localDofIdx + 1);
+            //int dofIdx = multNum * (localNodeIdx + 1) - (localDofIdx + 1);
+            int dofIdx = multNum * localNodeIdx + localDofIdx;
             return dofIdx;
         }
     }
