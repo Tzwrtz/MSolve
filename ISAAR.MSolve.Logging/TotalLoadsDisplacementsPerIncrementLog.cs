@@ -105,7 +105,7 @@ namespace ISAAR.MSolve.Logging
             }
             else
             {
-                currentTotalDisplacement += subdomain.Constraints[monitorNode, monitorDof];
+                currentTotalDisplacement = subdomain.Constraints[monitorNode, monitorDof];
                 displacement = currentTotalDisplacement;
                 force = forceCalculator.CalculateForceAt(monitorNode, monitorDof, totalDisplacements); //TODO: find out exactly what happens with the sign
             }

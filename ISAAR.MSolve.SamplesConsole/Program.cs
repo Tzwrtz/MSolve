@@ -324,13 +324,13 @@ namespace ISAAR.MSolve.SamplesConsole
             int numberOfSimulations = 10;
 
             //***RUN-0_NEWTON RAPHSON***//
-            for (int i = 1; i <= 1; i++)
-            {
-                //-----------------Run0_Elastic-----------------//
-                //StochasticEmbeddedExample_7.Run0_Elastic.PEEKMatrix_NewtonRaphson(i);
-                //-----------------Run0_Plastic-----------------//
-                //StochasticEmbeddedExample_7.Run0_Plastic.PEEKMatrix_NewtonRaphson(i);
-            }
+            //for (int i = 1; i <= 1; i++)
+            //{
+            //    //-----------------Run0_Elastic-----------------//
+            //    StochasticEmbeddedExample_7.Run0_Elastic.PEEKMatrix_NewtonRaphson(i);
+            //    //-----------------Run0_Plastic-----------------//
+            //    //StochasticEmbeddedExample_7.Run0_Plastic.PEEKMatrix_NewtonRaphson(i);
+            //}
 
             //***RUN-0_DISPLACEMENT CONTROL***//
             for (int i = 1; i <= 1; i++)

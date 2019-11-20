@@ -38,6 +38,8 @@ namespace ISAAR.MSolve.Analyzers.NonLinear
                 int iteration = 0;
                 for (iteration = 0; iteration < maxIterationsPerIncrement; iteration++)
                 {
+                    if (iteration == maxIterationsPerIncrement - 1) return;
+                    if (Double.IsNaN(errorNorm)) return;
                     AddEquivalentNodalLoadsToRHS(increment, iteration);
                     solver.Solve();
 
@@ -99,7 +101,7 @@ namespace ISAAR.MSolve.Analyzers.NonLinear
                 int id = linearSystem.Subdomain.ID;
                 //int idx = FindSubdomainIdx(linearSystems, linearSystem);
 
-                double scalingFactor = 1; //((double)currentIncrement + 2) / (currentIncrement + 1); //2; //
+                double scalingFactor = 1.0/(currentIncrement+1); //((double)currentIncrement + 2) / (currentIncrement + 1); //2; //
                 IVector equivalentNodalLoads = provider.DirichletLoadsAssembler.GetEquivalentNodalLoads(linearSystem.Subdomain, 
                     u[id], scalingFactor);
                 linearSystem.RhsVector.SubtractIntoThis(equivalentNodalLoads);
@@ -117,7 +119,8 @@ namespace ISAAR.MSolve.Analyzers.NonLinear
             foreach (ILinearSystem_v2 linearSystem in linearSystems.Values)
             {
                 //int idx = FindSubdomainIdx(linearSystems, linearSystem);
-                double scalingFactor = 1; // ((double)currentIncrement + 2) / (currentIncrement + 1);
+                double scalingFactor = ((double)(currentIncrement + 1)) / currentIncrement; // 1;
+                //1; // ((double)currentIncrement + 2) / (currentIncrement + 1);
                 subdomainUpdaters[linearSystem.Subdomain.ID].ScaleConstraints(scalingFactor);
             }
         }

@@ -65,6 +65,10 @@ namespace ISAAR.MSolve.FEM.Entities
         {
             var elementNodalDisplacements = new double[DofOrdering.CountElementDofs(element)];
             ApplyConstraintDisplacements(element, elementNodalDisplacements, Constraints);
+            for (int i = 0; i < elementNodalDisplacements.Length; i++)
+            {
+                elementNodalDisplacements[i] *= constraintScalingFactor;
+            }
             return elementNodalDisplacements;
         }
 
