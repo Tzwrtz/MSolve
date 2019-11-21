@@ -34,7 +34,7 @@ namespace ISAAR.MSolve.SamplesConsole
         {            
             private const int subdomainID = 0;
             private const double nodalLoad = -50.0;
-            private const double nodalDisplacement = -1.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 5;
             private const DOFType monitorDof = DOFType.Z;
             
