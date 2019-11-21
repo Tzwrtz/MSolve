@@ -235,6 +235,8 @@ namespace ISAAR.MSolve.SamplesConsole
                         YoungModulus = 4.00,
                         PoissonRatio = 0.40,
                     };
+                    //// Create Plastic Material
+                    //var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
