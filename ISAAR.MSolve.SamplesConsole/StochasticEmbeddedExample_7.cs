@@ -27,6 +27,7 @@ using ISAAR.MSolve.Analyzers.NonLinear;
 
 namespace ISAAR.MSolve.SamplesConsole
 {
+
     public static class StochasticEmbeddedExample_7
     {
         // Run-0
@@ -518,7 +519,6 @@ namespace ISAAR.MSolve.SamplesConsole
         // Run-1
         public static class Run1_2a_Elastic
         {
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-2a\output files\elastic";
             private const int subdomainID = 0;
             private const double nodalLoad = -50.0;
             private const int monitorNode = 181;
@@ -526,6 +526,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
             public static void PEEKMatrix_NewtonRaphson(int noStochasticSimulation)
             {
+                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-2a\output files\elastic\NewtonRaphson";
+
                 VectorExtensions.AssignTotalAffinityCount();
 
                 // No. of increments
@@ -585,7 +587,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run1a-Stochastic-CNT-Results.txt";
+                string currentOutputFileName = "Run1a-Stochastic-CNT-Results-NewtonRaphson.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -601,6 +603,8 @@ namespace ISAAR.MSolve.SamplesConsole
             
             public static void PEEKMatrix_DisplacementControl(int noStochasticSimulation)
             {
+                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-2a\output files\elastic\DisplacementControl";
+
                 VectorExtensions.AssignTotalAffinityCount();
 
                 // No. of increments
@@ -666,7 +670,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run1a-Stochastic-CNT-Results.txt";
+                string currentOutputFileName = "Run1a-Stochastic-CNT-Results-DisplacementControl.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -760,7 +764,6 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run1_2a_Plastic
         {
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-2a\output files\plastic";
             private const int subdomainID = 0;
             private const double nodalLoad = -50.0;
             private const int monitorNode = 181;
@@ -768,6 +771,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
             public static void PEEKMatrix_NewtonRaphson(int noStochasticSimulation)
             {
+                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-2a\output files\plastic\NewtonRaphson";
                 VectorExtensions.AssignTotalAffinityCount();
 
                 // No. of increments
@@ -827,7 +831,90 @@ namespace ISAAR.MSolve.SamplesConsole
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run1a-Stochastic-CNT-Results.txt";
+                string currentOutputFileName = "Run1a-Stochastic-CNT-Results-NewtonRaphson.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+            }
+
+            public static void PEEKMatrix_DisplacementControl(int noStochasticSimulation)
+            {
+                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run1-2a\output files\plastic\DisplacementControl";
+
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // No. of increments
+                int increments = 100;
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.ElasticPEEKMatrixBuilder(model);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 181; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}
+                double nodalDisplacement = -10.0;
+                for (int iNode = 181; iNode <= 216; iNode++)
+                {
+                    //model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Z });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
+                //var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                //{
+                //    MaxIterationsPerIncrement = 10,
+                //    NumIterationsForMatrixRebuild = 1,
+                //    ResidualTolerance = 5E-03
+                //};
+                //LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments);
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run1a-Stochastic-CNT-Results-DisplacementControl.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));

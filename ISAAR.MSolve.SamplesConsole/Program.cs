@@ -333,45 +333,45 @@ namespace ISAAR.MSolve.SamplesConsole
             //}
 
             // //***RUN - 0_DISPLACEMENT CONTROL***//
-            for (int i = 1; i <= 1; i++)
-            {
-                //-----------------Run0_Elastic-----------------//
-                StochasticEmbeddedExample_7.Run0_Elastic.PEEKMatrix_DisplacementControl(i);
-                //-----------------Run0_Plastic-----------------//
-                //StochasticEmbeddedExample_7.Run0_Plastic.PEEKMatrix_DisplacementControl(i);
-            }
+            //for (int i = 1; i <= 1; i++)
+            //{
+            //    //-----------------Run0_Elastic-----------------//
+            //    StochasticEmbeddedExample_7.Run0_Elastic.PEEKMatrix_DisplacementControl(i);
+            //    //-----------------Run0_Plastic-----------------//
+            //    StochasticEmbeddedExample_7.Run0_Plastic.PEEKMatrix_DisplacementControl(i);
+            //}
 
             //***RUN-1_NEWTON RAPHSON***//
             //for (int i = 1; i <= 1; i++)
             //{
-            ////    //-----------------Run1-2a_Elastic-----------------//
+            //    //    //-----------------Run1-2a_Elastic-----------------//
             //    StochasticEmbeddedExample_7.Run1_2a_Elastic.PEEKMatrix_NewtonRaphson(i);
-            ////    //-----------------Run1-2a_Plastic-----------------//
-            ////    StochasticEmbeddedExample_7.Run1_2a_Plastic.PEEKMatrix_NewtonRaphson(i);
+            //    //    //-----------------Run1-2a_Plastic-----------------//
+            //    StochasticEmbeddedExample_7.Run1_2a_Plastic.PEEKMatrix_NewtonRaphson(i);
 
-            ////    //-----------------Run1-3a_Elastic-----------------//
-            ////    StochasticEmbeddedExample_7.Run1_3a_Elastic.PEEKMatrix_NewtonRaphson(i);
-            ////    //-----------------Run1-3a_Plastic-----------------//
-            ////    StochasticEmbeddedExample_7.Run1_3a_Plastic.PEEKMatrix_NewtonRaphson(i);
+            //    //    //-----------------Run1-3a_Elastic-----------------//
+            //    //    StochasticEmbeddedExample_7.Run1_3a_Elastic.PEEKMatrix_NewtonRaphson(i);
+            //    //    //-----------------Run1-3a_Plastic-----------------//
+            //    //    StochasticEmbeddedExample_7.Run1_3a_Plastic.PEEKMatrix_NewtonRaphson(i);
 
-            ////    //-----------------Run1-4a_Elastic-----------------//
-            ////    StochasticEmbeddedExample_7.Run1_4a_Elastic.PEEKMatrix_NewtonRaphson(i);
-            ////    //-----------------Run1-4a_Plastic-----------------//
-            ////    StochasticEmbeddedExample_7.Run1_4a_Plastic.PEEKMatrix_NewtonRaphson(i);
+            //    //    //-----------------Run1-4a_Elastic-----------------//
+            //    //    StochasticEmbeddedExample_7.Run1_4a_Elastic.PEEKMatrix_NewtonRaphson(i);
+            //    //    //-----------------Run1-4a_Plastic-----------------//
+            //    //    StochasticEmbeddedExample_7.Run1_4a_Plastic.PEEKMatrix_NewtonRaphson(i);
 
-            ////    //-----------------Run1-5a_Elastic-----------------//
-            ////    StochasticEmbeddedExample_7.Run1_5a_Elastic.PEEKMatrix_NewtonRaphson(i);
-            ////    //-----------------Run1 - 5a_Plastic---------------- -//
-            ////    StochasticEmbeddedExample_7.Run1_5a_Plastic.PEEKMatrix_NewtonRaphson(i);
+            //    //    //-----------------Run1-5a_Elastic-----------------//
+            //    //    StochasticEmbeddedExample_7.Run1_5a_Elastic.PEEKMatrix_NewtonRaphson(i);
+            //    //    //-----------------Run1 - 5a_Plastic---------------- -//
+            //    //    StochasticEmbeddedExample_7.Run1_5a_Plastic.PEEKMatrix_NewtonRaphson(i);
             //}
 
             //***RUN-1_DISPLACEMENT CONTROL***//
             for (int i = 1; i <= 1; i++)
             {
                 //-----------------Run1-2a_Elastic-----------------//
-                //StochasticEmbeddedExample_7.Run1_2a_Elastic.PEEKMatrix_DisplacementControl(i);
+                StochasticEmbeddedExample_7.Run1_2a_Elastic.PEEKMatrix_DisplacementControl(i);
                 //-----------------Run1-2a_Plastic-----------------//
-                //StochasticEmbeddedExample_7.Run1_2a_Plastic.PEEKMatrix_DisplacementControl(i);
+                StochasticEmbeddedExample_7.Run1_2a_Plastic.PEEKMatrix_DisplacementControl(i);
 
                 ////-----------------Run1-3a_Elastic-----------------//
                 //StochasticEmbeddedExample_7.Run1_3a_Elastic.PEEKMatrix_DisplacementControl(i);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using ISAAR.MSolve.Analyzers;
 using ISAAR.MSolve.Analyzers.NonLinear;
 using ISAAR.MSolve.Discretization;
@@ -370,6 +371,9 @@ namespace ISAAR.MSolve.Tests
             int nNodes = 3;
             int nElems = 2;
             int monitorNode = 3;
+            DOFType monitorDof = DOFType.Y;
+            string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\Beam_DC_test";
+            int increments = 10;
 
             // Create new 2D material
             var material = new ElasticMaterial
@@ -406,7 +410,7 @@ namespace ISAAR.MSolve.Tests
             model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.RotZ });
 
             // Applied displacement
-            model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.Y, Amount = nodalDisplacement });
+            model.NodesDictionary[monitorNode].Constraints.Add(new Constraint { DOF = monitorDof, Amount = nodalDisplacement });
 
             // Generate elements of the structure
             int iNode = 1;
@@ -431,7 +435,7 @@ namespace ISAAR.MSolve.Tests
                 element.AddNode(model.NodesDictionary[iNode]);
                 element.AddNode(model.NodesDictionary[iNode + 1]);
 
-                var a = element.ElementType.StiffnessMatrix(element);
+                //var a = element.ElementType.StiffnessMatrix(element);
 
                 // Add beam element to the element and subdomains dictionary of the model
                 model.ElementsDictionary.Add(element.ID, element);
@@ -440,6 +444,8 @@ namespace ISAAR.MSolve.Tests
             }
 
             // Choose linear equation system solver
+            //var linearSystems = new Dictionary<int, ILinearSystem>();
+            //linearSystems[1] = new SkylineLinearSystem(1, model.Subdomains[0].Forces);
             var solverBuilder = new SkylineSolver.Builder();
             ISolver_v2 solver = solverBuilder.BuildSolver(model);
 
@@ -447,24 +453,37 @@ namespace ISAAR.MSolve.Tests
             var provider = new ProblemStructural_v2(model, solver);
 
             // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer
-            var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
-            int numIncrements = 10;
-            var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, numIncrements);
+            var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };            
+            var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments);
             var childAnalyzer = childAnalyzerBuilder.Build();
 
             // Choose parent analyzer -> Parent: Static
             var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
             // Request output
-            childAnalyzer.LogFactories[subdomainID] = new LinearAnalyzerLogFactory_v2(new int[] { 3 });
-
+            int monitorTotalDOF = 3;
+            childAnalyzer.LogFactories[subdomainID] = new LinearAnalyzerLogFactory_v2(new int[] { monitorTotalDOF });
+            
             // Run the analysis
             parentAnalyzer.Initialize();
             parentAnalyzer.Solve();
 
             // Check output
             DOFSLog_v2 log = (DOFSLog_v2)childAnalyzer.Logs[subdomainID][0]; //There is a list of logs for each subdomain and we want the first one
-            Assert.Equal(-72.090605787610343, log.DOFValues[3], 8);
+            double monitorDisplacement = log.DOFValues[monitorTotalDOF];
+            // Request output
+            string currentOutputFileName = "Beam_DC_results_v2.txt";
+            string extension = Path.GetExtension(currentOutputFileName);
+            string pathName = outputDirectory;
+            string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+            string outputFile = string.Format("{0}{1}", fileNameOnly, extension);
+            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                model.NodesDictionary[monitorNode], monitorDof, outputFile);
+            childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+            //double displacement = linearSystems[0].Solution[3];
+
+            Assert.Equal(-72.090605787610343, monitorDisplacement, 8);
         }
     }
 }
