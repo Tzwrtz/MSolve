@@ -155,8 +155,12 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Choose linear equation system solver
-                var solverBuilder = new SkylineSolver.Builder();
-                SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new DenseMatrixSolver.Builder();
+                DenseMatrixSolver solver = solverBuilder.BuildSolver(model);
+
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+
                 //var solverBuilder = new SuiteSparseSolver.Builder();
                 //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
 

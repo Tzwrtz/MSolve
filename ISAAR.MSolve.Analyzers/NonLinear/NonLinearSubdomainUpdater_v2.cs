@@ -31,6 +31,11 @@ namespace ISAAR.MSolve.Analyzers.NonLinear
         {
             this.subdomain.SaveMaterialState();
         }
+
+        public void SaveIncrementalContraints()
+        {
+            subdomain.SaveIncrementalContraints();
+        }
     }
 }
 

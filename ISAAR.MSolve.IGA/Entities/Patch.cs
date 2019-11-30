@@ -868,5 +868,10 @@ namespace ISAAR.MSolve.IGA.Entities
 			}
 
 		}
-	}
+
+        public void SaveIncrementalContraints()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

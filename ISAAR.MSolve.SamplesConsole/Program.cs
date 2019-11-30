@@ -371,7 +371,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 //-----------------Run1-2a_Elastic-----------------//
                 StochasticEmbeddedExample_7.Run1_2a_Elastic.PEEKMatrix_DisplacementControl(i);
                 //-----------------Run1-2a_Plastic-----------------//
-                StochasticEmbeddedExample_7.Run1_2a_Plastic.PEEKMatrix_DisplacementControl(i);
+                //StochasticEmbeddedExample_7.Run1_2a_Plastic.PEEKMatrix_DisplacementControl(i);
 
                 ////-----------------Run1-3a_Elastic-----------------//
                 //StochasticEmbeddedExample_7.Run1_3a_Elastic.PEEKMatrix_DisplacementControl(i);

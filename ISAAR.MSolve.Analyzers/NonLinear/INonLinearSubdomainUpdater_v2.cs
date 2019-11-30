@@ -8,5 +8,6 @@ namespace ISAAR.MSolve.Analyzers.NonLinear
         IVector GetRhsFromSolution(IVectorView solution, IVectorView dSolution);
         void UpdateState();
         void ResetState();
+        void SaveIncrementalContraints();
     }
 }

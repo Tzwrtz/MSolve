@@ -50,5 +50,10 @@ namespace ISAAR.MSolve.Analyzers
 			throw new NotSupportedException();
 			return this.subdomain.GetRhsFromSolution(solution, dSolution);
 		}
-	}
+
+        public void SaveIncrementalContraints()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

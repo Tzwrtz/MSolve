@@ -88,7 +88,9 @@ namespace ISAAR.MSolve.Analyzers.NonLinear
             {
                 //int idx = FindSubdomainIdx(linearSystems, linearSystem);
                 subdomainUpdaters[linearSystem.Subdomain.ID].ScaleConstraints(1 / (double)numIncrements);
+                subdomainUpdaters[linearSystem.Subdomain.ID].SaveIncrementalContraints();
             }
+
         }
 
         private void AddEquivalentNodalLoadsToRHS(int currentIncrement, int iteration)

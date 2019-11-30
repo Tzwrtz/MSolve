@@ -15,6 +15,7 @@ namespace ISAAR.MSolve.FEM.Entities
     public class Subdomain_v2 : ISubdomain_v2
     {
         private readonly List<Node_v2> nodes = new List<Node_v2>();
+        private double constraintScalingFactor;
 
         public Subdomain_v2(int id)
         {
@@ -178,7 +179,10 @@ namespace ISAAR.MSolve.FEM.Entities
 
                 //TODO: ElementType should operate with Vector instead of double[]. Then the ToRawArray() calls can be removed
                 double[] localSolution = CalculateElementDisplacements(element, solution);
-                double[] localdSolution = CalculateElementDisplacements(element, dSolution);
+
+                double[] localdSolution = CalculateIncrementalConstraintsElementDisplacements(element, dSolution);
+
+                
                 element.ElementType.CalculateStresses(element, localSolution, localdSolution);
                 if (element.ElementType.MaterialModified)
                     element.Subdomain.MaterialsModified = true;
@@ -186,6 +190,13 @@ namespace ISAAR.MSolve.FEM.Entities
                 DofOrdering.AddVectorElementToSubdomain(element, f, forces);
             }
             return forces;
+        }
+
+        private double[] CalculateIncrementalConstraintsElementDisplacements(Element_v2 element, IVectorView globalDisplacementVector)
+        {
+            double[] elementNodalDisplacements = DofOrdering.ExtractVectorElementFromSubdomain(element, globalDisplacementVector);
+            ApplyConstraintDisplacements(element, elementNodalDisplacements, IncrementalConstaints);
+            return elementNodalDisplacements;
         }
 
         public void ResetMaterialsModifiedProperty()
@@ -202,6 +213,15 @@ namespace ISAAR.MSolve.FEM.Entities
         //TODO: I am against modifying the constraints table of the subdomain. Instead the analyzer should keep a constraint
         //      displacements vector at global/subdomain scale and modify that.
         public void ScaleConstraints(double scalingFactor) => Constraints.ModifyValues((u) => scalingFactor * u);
+
+        Table<INode, DOFType, double> IncrementalConstaints = new Table<INode, DOFType, double>();
+        public void SaveIncrementalContraints()
+        {            
+            foreach (var item in Constraints)
+            {
+                IncrementalConstaints.TryAdd(item.row, item.col, item.val);
+            }
+        }
 
         //TODO: this should probably belong to a dedicated class, which is abstracted by an interface. That class can be reused
         //      by various analyzer classes and as such does not need rewriting for IGA, XFEM or other problem types. Also it 
