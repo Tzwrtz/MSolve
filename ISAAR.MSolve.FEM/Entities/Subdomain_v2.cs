@@ -179,9 +179,7 @@ namespace ISAAR.MSolve.FEM.Entities
 
                 //TODO: ElementType should operate with Vector instead of double[]. Then the ToRawArray() calls can be removed
                 double[] localSolution = CalculateElementDisplacements(element, solution);
-
                 double[] localdSolution = CalculateIncrementalConstraintsElementDisplacements(element, dSolution);
-
                 
                 element.ElementType.CalculateStresses(element, localSolution, localdSolution);
                 if (element.ElementType.MaterialModified)
