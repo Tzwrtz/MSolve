@@ -90,9 +90,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -167,22 +167,13 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                //var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                //{
-                //    MaxIterationsPerIncrement = 10,
-                //    NumIterationsForMatrixRebuild = 1,
-                //    ResidualTolerance = 5E-03
-                //};
-                //LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
                 // Choose child analyzer -> Child: DisplacementControlAnalyzer 
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -344,9 +335,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -422,9 +413,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -580,9 +571,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -656,18 +647,14 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                //var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                //{
-                //    MaxIterationsPerIncrement = 10,
-                //    NumIterationsForMatrixRebuild = 1,
-                //    ResidualTolerance = 5E-03
-                //};
-                //LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
                 // Choose child analyzer -> Child: DisplacementControlAnalyzer 
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
-                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments);
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
@@ -824,9 +811,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -900,18 +887,14 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                //var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                //{
-                //    MaxIterationsPerIncrement = 10,
-                //    NumIterationsForMatrixRebuild = 1,
-                //    ResidualTolerance = 5E-03
-                //};
-                //LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
                 // Choose child analyzer -> Child: DisplacementControlAnalyzer 
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
-                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments);
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
@@ -1064,9 +1047,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -1225,9 +1208,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -1395,9 +1378,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -1556,9 +1539,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -1713,9 +1696,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -1874,9 +1857,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -2037,9 +2020,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -2112,9 +2095,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -2185,22 +2168,13 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                //var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                //{
-                //    MaxIterationsPerIncrement = 10,
-                //    NumIterationsForMatrixRebuild = 1,
-                //    ResidualTolerance = 5E-03
-                //};
-                //LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
                 // Choose child analyzer -> Child: DisplacementControlAnalyzer 
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2270,22 +2244,13 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                //var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                //{
-                //    MaxIterationsPerIncrement = 10,
-                //    NumIterationsForMatrixRebuild = 1,
-                //    ResidualTolerance = 5E-03
-                //};
-                //LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
                 // Choose child analyzer -> Child: DisplacementControlAnalyzer 
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2640,9 +2605,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -2715,9 +2680,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -2788,22 +2753,13 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                //var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                //{
-                //    MaxIterationsPerIncrement = 10,
-                //    NumIterationsForMatrixRebuild = 1,
-                //    ResidualTolerance = 5E-03
-                //};
-                //LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
                 // Choose child analyzer -> Child: DisplacementControlAnalyzer 
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2873,22 +2829,13 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                //var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                //{
-                //    MaxIterationsPerIncrement = 10,
-                //    NumIterationsForMatrixRebuild = 1,
-                //    ResidualTolerance = 5E-03
-                //};
-                //LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
                 // Choose child analyzer -> Child: DisplacementControlAnalyzer 
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3239,9 +3186,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -3314,9 +3261,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -3339,16 +3286,80 @@ namespace ISAAR.MSolve.SamplesConsole
                 parentAnalyzer.Solve();
             }
 
-            public static void EBEembeddedInMatrix_DisplacementControl()
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
-                // Not implemented yet
-                throw new NotImplementedException();
-            }
+                VectorExtensions.AssignTotalAffinityCount();
 
-            public static void EBEembeddedInMatrixCohesive_DisplacementControl()
-            {
-                // Not implemented yet
-                throw new NotImplementedException();
+                // No. of increments
+                int increments = 100;
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 181; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Applied displacement
+                double nodalDisplacement = -10.0;
+                for (int iNode = 181; iNode <= 216; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2b-Stochastic-CNT-Cohesive-Results.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
             }
 
             public static class EBEEmbeddedModelBuilder
@@ -3682,9 +3693,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -3757,9 +3768,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -3788,10 +3799,80 @@ namespace ISAAR.MSolve.SamplesConsole
                 throw new NotImplementedException();
             }
 
-            public static void EBEembeddedInMatrixCohesive_DisplacementControl()
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
-                // Not implemented yet
-                throw new NotImplementedException();
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // No. of increments
+                int increments = 100;
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 181; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Applied displacement
+                double nodalDisplacement = -10.0;
+                for (int iNode = 181; iNode <= 216; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2b-Stochastic-CNT-Cohesive-Results.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
             }
 
             public static class EBEEmbeddedModelBuilder
@@ -4121,9 +4202,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -4196,9 +4277,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -4227,10 +4308,80 @@ namespace ISAAR.MSolve.SamplesConsole
                 throw new NotImplementedException();
             }
 
-            public static void EBEembeddedInMatrixCohesive_DisplacementControl()
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
-                // Not implemented yet
-                throw new NotImplementedException();
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // No. of increments
+                int increments = 100;
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 181; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Applied displacement
+                double nodalDisplacement = -10.0;
+                for (int iNode = 181; iNode <= 216; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2c-Stochastic-CNT-Cohesive-Results.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
             }
 
             public static class EBEEmbeddedModelBuilder
@@ -4564,9 +4715,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -4639,9 +4790,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -4670,10 +4821,80 @@ namespace ISAAR.MSolve.SamplesConsole
                 throw new NotImplementedException();
             }
 
-            public static void EBEembeddedInMatrixCohesive_DisplacementControl()
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
-                // Not implemented yet
-                throw new NotImplementedException();
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // No. of increments
+                int increments = 100;
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 181; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Applied displacement
+                double nodalDisplacement = -10.0;
+                for (int iNode = 181; iNode <= 216; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2c-Stochastic-CNT-Cohesive-Results.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
             }
 
             public static class EBEEmbeddedModelBuilder
@@ -5003,9 +5224,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -5078,9 +5299,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -5109,10 +5330,80 @@ namespace ISAAR.MSolve.SamplesConsole
                 throw new NotImplementedException();
             }
 
-            public static void EBEembeddedInMatrixCohesive_DisplacementControl()
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
-                // Not implemented yet
-                throw new NotImplementedException();
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // No. of increments
+                int increments = 100;
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 181; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Applied displacement
+                double nodalDisplacement = -10.0;
+                for (int iNode = 181; iNode <= 216; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2d-Stochastic-CNT-Cohesive-Results.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
             }
 
             public static class EBEEmbeddedModelBuilder
@@ -5446,9 +5737,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -5521,9 +5812,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -5552,10 +5843,80 @@ namespace ISAAR.MSolve.SamplesConsole
                 throw new NotImplementedException();
             }
 
-            public static void EBEembeddedInMatrixCohesive_DisplacementControl()
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
-                // Not implemented yet
-                throw new NotImplementedException();
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // No. of increments
+                int increments = 100;
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 181; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Applied displacement
+                double nodalDisplacement = -10.0;
+                for (int iNode = 181; iNode <= 216; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2d-Stochastic-CNT-Cohesive-Results.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
             }
 
             public static class EBEEmbeddedModelBuilder
@@ -5887,9 +6248,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -5962,9 +6323,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -6332,9 +6693,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -6407,9 +6768,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -6774,9 +7135,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -7143,9 +7504,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -7508,9 +7869,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -7877,9 +8238,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -8242,9 +8603,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -8611,9 +8972,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -8977,9 +9338,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -9052,9 +9413,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -9125,19 +9486,14 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                // var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                // {
-                //     MaxIterationsPerIncrement = 10,
-                //     NumIterationsForMatrixRebuild = 1,
-                //     ResidualTolerance = 5E-03
-                // };
-                //LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
                 // Choose child analyzer -> Child: DisplacementControlAnalyzer 
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
-                int numIncrements = 10;
-                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, numIncrements);
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
@@ -9206,19 +9562,14 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                // var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                // {
-                //     MaxIterationsPerIncrement = 10,
-                //     NumIterationsForMatrixRebuild = 1,
-                //     ResidualTolerance = 5E-03
-                // };
-                //LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
                 // Choose child analyzer -> Child: DisplacementControlAnalyzer 
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
-                int numIncrements = 10;
-                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, numIncrements);
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
@@ -9572,9 +9923,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -9647,9 +9998,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -10011,9 +10362,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -10086,9 +10437,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -10454,9 +10805,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -10529,9 +10880,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -10893,9 +11244,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -10968,9 +11319,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -11336,9 +11687,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -11411,9 +11762,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -11775,9 +12126,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -11850,9 +12201,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -12218,9 +12569,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -12293,9 +12644,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -12659,9 +13010,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -12734,9 +13085,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -13104,9 +13455,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
@@ -13179,9 +13530,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
                 var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 10,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
 
                 LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
