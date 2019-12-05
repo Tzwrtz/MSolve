@@ -1,23 +1,18 @@
 ﻿using ISAAR.MSolve.Analyzers;
-using ISAAR.MSolve.Analyzers.Interfaces;
 using ISAAR.MSolve.FEM.Elements;
 using ISAAR.MSolve.FEM.Elements.SupportiveClasses;
 using ISAAR.MSolve.FEM.Entities;
 using ISAAR.MSolve.FEM.Materials;
 using ISAAR.MSolve.Numerical.LinearAlgebra;
 using ISAAR.MSolve.Problems;
-using ISAAR.MSolve.Solvers.Interfaces;
-using ISAAR.MSolve.Solvers.Skyline;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using ISAAR.MSolve.Discretization.Interfaces;
 using Xunit;
 using ISAAR.MSolve.Materials;
-using ISAAR.MSolve.FEM;
-using ISAAR.MSolve.Discretization.Providers;
 using ISAAR.MSolve.Logging;
 using ISAAR.MSolve.FEM.Embedding;
+using ISAAR.MSolve.FEM.Postprocessing;
 using System.Linq;
 using ISAAR.MSolve.Discretization.Integration.Quadratures;
 using System.IO;
@@ -2125,7 +2120,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 VectorExtensions.AssignTotalAffinityCount();
 
                 // No. of increments
-                int increments = 100;
+                int increments = 10;
 
                 // Model creation
                 var model = new Model_v2();
@@ -2153,7 +2148,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Applied displacement
-                double nodalDisplacement = -10.0;
+                double nodalDisplacement = -5.0;
                 for (int iNode = 181; iNode <= 216; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -2194,6 +2189,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, "test");
+                paraview.CreateParaviewFile();
             }
 
             public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
@@ -2201,7 +2200,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 VectorExtensions.AssignTotalAffinityCount();
 
                 // No. of increments
-                int increments = 100;
+                int increments = 10;
 
                 // Model creation
                 var model = new Model_v2();
@@ -2229,7 +2228,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Applied displacement
-                double nodalDisplacement = -10.0;
+                double nodalDisplacement = -5.0;
                 for (int iNode = 181; iNode <= 216; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -2270,6 +2269,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
+                
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, "test");
+                paraview.CreateParaviewFile();
             }
 
             public static class EBEEmbeddedModelBuilder
