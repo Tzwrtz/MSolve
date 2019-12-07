@@ -53,7 +53,7 @@ namespace ISAAR.MSolve.FEM.Postprocessing
 
             paraviewCellCode = 12;
 
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(Directory.GetCurrentDirectory(), $"{_filename}Paraview_Host.vtu")))
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(Directory.GetCurrentDirectory(), $"{_filename}_Paraview_Host.vtu")))
             {
                 outputFile.WriteLine("<?xml version=\"1.0\"?>");
                 outputFile.WriteLine("<VTKFile type=\"UnstructuredGrid\" version=\"0.1\">");
@@ -160,7 +160,7 @@ namespace ISAAR.MSolve.FEM.Postprocessing
                 }
             }
 
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine(Directory.GetCurrentDirectory(), $"{_filename}Paraview_Embedded.vtu")))
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(Directory.GetCurrentDirectory(), $"{_filename}_Paraview_Embedded.vtu")))
             {
                 outputFile.WriteLine("<?xml version=\"1.0\"?>");
                 outputFile.WriteLine("<VTKFile type=\"UnstructuredGrid\" version=\"0.1\">");

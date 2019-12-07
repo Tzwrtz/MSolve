@@ -22,7 +22,6 @@ using ISAAR.MSolve.Analyzers.NonLinear;
 
 namespace ISAAR.MSolve.SamplesConsole
 {
-
     public static class StochasticEmbeddedExample_7
     {
         // Run-0

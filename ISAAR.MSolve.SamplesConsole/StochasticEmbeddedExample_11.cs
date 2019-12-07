@@ -28,111 +28,52 @@ using ISAAR.MSolve.FEM.Postprocessing;
 
 namespace ISAAR.MSolve.SamplesConsole
 {
-    public class StochasticEmbeddedExample_10
+    public static class StochasticEmbeddedExample_11
     {
-        public static class Run2a_Elastic
+        public static class Run1_2a_Elastic
         {
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 10\run-2a\output files\elastic"; //"C:\Users\tzwrt\Desktop\output files\EmbeddedExample_10"; //
             private const int subdomainID = 0;
-            private const int hostElements = 1;
-            private const int hostNodes = 8;
-            private const int embeddedElements = 1;
-            private const int embeddedNodes = 2;
-            private const double nodalLoad = +10.0; // +1000.0;//
-            private const double nodalDisplacement = +10.0;
-            private const int increments = 10;
-            private const int monitorNode = 3;
+            private const double nodalDisplacement = -30.0;
+            private const int monitorNode = 361;
             private const DOFType monitorDof = DOFType.Z;
 
-            public static void SingleMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void PEEKMatrix_DisplacementControl(int noStochasticSimulation)
             {
+                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run1-2a\output files\elastic\DisplacementControl";
+
                 VectorExtensions.AssignTotalAffinityCount();
+
+                // No. of increments
+                int increments = 100;
 
                 // Model creation
                 var model = new Model_v2();
 
                 // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
                 model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
 
                 // Choose model
-                EBEEmbeddedModelBuilder.SingleMatrixBuilder_Stochastic(model, noStochasticSimulation);
+                EBEEmbeddedModelBuilder.ElasticPEEKMatrixBuilder(model);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 5; iNode <= 8; iNode++)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }                               
-
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 4; iNode++)
-                {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
-                }
-
-                // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
-
-                // Choose the provider of the problem -> here a structural problem
-                var provider = new ProblemStructural_v2(model, solver);
-
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                {
-                    MaxIterationsPerIncrement = 100,
-                    NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
-                };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
-                // Choose parent analyzer -> Parent: Static
-                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-                // Request output
-                string currentOutputFileName = "Run2a-SingleMatrix-Elastic-Results.txt";
-                string extension = Path.GetExtension(currentOutputFileName);
-                string pathName = outputDirectory;
-                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
-                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
-                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
-
-                // Run the analysis
-                parentAnalyzer.Initialize();
-                parentAnalyzer.Solve();
-            }
-
-            public static void SingleMatrix_DisplacementControl_Stochastic(int noStochasticSimulation)
-            {
-                VectorExtensions.AssignTotalAffinityCount();
-
-                // Model creation
-                var model = new Model_v2();
-
-                // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
-                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-                // Choose model
-                EBEEmbeddedModelBuilder.SingleMatrixBuilder_Stochastic(model, noStochasticSimulation);
-
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 5; iNode <= 8; iNode++)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 1; iNode <= 4; iNode++)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -146,299 +87,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
-
-                DisplacementControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
-                // Choose parent analyzer -> Parent: Static
-                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-                // Request output
-                string currentOutputFileName = "Run2a-SingleMatrix-Elastic-Results_DC.txt";
-                string extension = Path.GetExtension(currentOutputFileName);
-                string pathName = outputDirectory;
-                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
-                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
-                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
-
-                // Run the analysis
-                parentAnalyzer.Initialize();
-                parentAnalyzer.Solve();
-
-                // Create Paraview File
-                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
-                paraview.CreateParaviewFile();
-            }
-
-            public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
-            {
-                VectorExtensions.AssignTotalAffinityCount();
-                
-                // Model creation
-                var model = new Model_v2();
-
-                // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
-                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-                // Choose model
-                EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
-
-                // Boundary Conditions - [Left - End]
-                for (int iNode = 5; iNode <= 8; iNode++)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
-
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 4; iNode++)
-                {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
-                }
-
-                // Choose linear equation system solver
-                var solverBuilder = new SkylineSolver.Builder();
-                SkylineSolver solver = solverBuilder.BuildSolver(model);
-                //var solverBuilder = new SuiteSparseSolver.Builder();
-                //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
-
-                // Choose the provider of the problem -> here a structural problem
-                var provider = new ProblemStructural_v2(model, solver);
-
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                {
-                    MaxIterationsPerIncrement = 100,
-                    NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
-                };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2a-Stochastic-CNT-Results.txt";
-                string extension = Path.GetExtension(currentOutputFileName);
-                string pathName = outputDirectory;
-                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
-                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
-                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
-
-                // Run the analysis
-                parentAnalyzer.Initialize();
-                parentAnalyzer.Solve();
-            }
-
-            public static void EBEembeddedInMatrix_DisplacementControl_Stochastic(int noStochasticSimulation)
-            {
-                VectorExtensions.AssignTotalAffinityCount();
-
-                // Model creation
-                var model = new Model_v2();
-
-                // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
-                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-                // Choose model
-                EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
-
-                // Boundary Conditions - [Left - End]
-                for (int iNode = 5; iNode <= 8; iNode++)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
-
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 1; iNode <= 4; iNode++)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
-                }
-
-                // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
-
-                // Choose the provider of the problem -> here a structural problem
-                var provider = new ProblemStructural_v2(model, solver);
-
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                {
-                    MaxIterationsPerIncrement = 100,
-                    NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
-                };
-
-                DisplacementControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
-                // Choose parent analyzer -> Parent: Static
-                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-                // Request output
-                string currentOutputFileName = "Run2a-Stochastic-CNT-Results_DC.txt";
-                string extension = Path.GetExtension(currentOutputFileName);
-                string pathName = outputDirectory;
-                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
-                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
-                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
-
-                // Run the analysis
-                parentAnalyzer.Initialize();
-                parentAnalyzer.Solve();
-
-                // Create Paraview File
-                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
-                paraview.CreateParaviewFile();
-            }
-
-            public static void EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(int noStochasticSimulation)
-            {
-                VectorExtensions.AssignTotalAffinityCount();
-
-                // Model creation
-                var model = new Model_v2();
-
-                // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
-                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-                // Choose model
-                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
-
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 5; iNode <= 8; iNode++)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
-
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 4; iNode++)
-                {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
-                }
-
-                // Choose linear equation system solver
-                // SkylineSolver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                // Suite Sparse Solver
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
-                // Dense Solver
-                //var solverBuilder = new DenseMatrixSolver.Builder();
-                //var solver = solverBuilder.BuildSolver(model);
-
-                // Choose the provider of the problem -> here a structural problem
-                var provider = new ProblemStructural_v2(model, solver);
-
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                {
-                    MaxIterationsPerIncrement = 100,
-                    NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
-                };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
-                // Choose parent analyzer -> Parent: Static
-                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-                // Request output
-                string currentOutputFileName = "Run2a-Stochastic-CNT-Cohesive-Results.txt";
-                string extension = Path.GetExtension(currentOutputFileName);
-                string pathName = outputDirectory;
-                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
-                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
-                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
-
-                // Run the analysis
-                parentAnalyzer.Initialize();
-                parentAnalyzer.Solve();
-            }
-
-            public static void EBEembeddedInMatrixCohesive_DisplacementControl_Stochastic(int noStochasticSimulation)
-            {
-                VectorExtensions.AssignTotalAffinityCount();
-
-                // Model creation
-                var model = new Model_v2();
-
-                // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
-                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-                // Choose model
-                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
-
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 5; iNode <= 8; iNode++)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
-
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 1; iNode <= 4; iNode++)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
-                }
-
-                // Choose linear equation system solver
-                // SkylineSolver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                // Suite Sparse Solver
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
-                // Dense Solver
-                //var solverBuilder = new DenseMatrixSolver.Builder();
-                //var solver = solverBuilder.BuildSolver(model);
-
-                // Choose the provider of the problem -> here a structural problem
-                var provider = new ProblemStructural_v2(model, solver);
-
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
-                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                {
-                    MaxIterationsPerIncrement = 100,
-                    NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
-                };
-
-                DisplacementControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
-                // Choose parent analyzer -> Parent: Static
-                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-                // Request output
-                string currentOutputFileName = "Run2a-Stochastic-CNT-Cohesive-Results_DC.txt";
+                string currentOutputFileName = "Run1_2a-Elastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -457,34 +120,19 @@ namespace ISAAR.MSolve.SamplesConsole
             }
 
             public static class EBEEmbeddedModelBuilder
-            {                
-                public static void SingleMatrixBuilder_Stochastic(Model_v2 model, int i)
+            {
+                public static void ElasticPEEKMatrixBuilder(Model_v2 model)
                 {
                     HostElements(model);
-                }
-                
-                public static void FullyBondedEmbeddedBuilder_Stochastic(Model_v2 model, int i)
-                {
-                    HostElements(model);
-                    EmbeddedElements_Stochastic(model, i);
-                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
-                }
-
-                public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
-                {
-                    HostElements(model);
-                    EmbeddedElements_Stochastic(model, i);
-                    CohesiveBeamElements_Stochastic(model, i);
-                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
                 }
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 10\run-2a\input files"; //"C:\Users\tzwrt\Desktop\input files"; //
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-Geometry_MSolve.inp";
-                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-ConnMatr_MSolve.inp";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run1-2a\input files";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -509,7 +157,428 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    {
+                        for (int i = 0; i < matrixElements; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int elementID = int.Parse(bits[0]);
+                            int node1 = int.Parse(bits[1]);
+                            int node2 = int.Parse(bits[2]);
+                            int node3 = int.Parse(bits[3]);
+                            int node4 = int.Parse(bits[4]);
+                            int node5 = int.Parse(bits[5]);
+                            int node6 = int.Parse(bits[6]);
+                            int node7 = int.Parse(bits[7]);
+                            int node8 = int.Parse(bits[8]);
+                            // Hexa8NL element definition
+                            var hexa8NLelement = new Element_v2()
+                            {
+                                ID = elementID,
+                                ElementType = new Hexa8NonLinear_v2(solidMaterial, GaussLegendre3D.GetQuadrature(3, 3, 3))
+                            };
+                            // Add nodes to the created element
+                            hexa8NLelement.AddNode(model.NodesDictionary[node1]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node2]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node3]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node4]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node5]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node6]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node7]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node8]);
+                            // Add Hexa element to the element and subdomains dictionary of the model
+                            model.ElementsDictionary.Add(hexa8NLelement.ID, hexa8NLelement);
+                            //model.SubdomainsDictionary[0].ElementsDictionary.Add(hexa8NLelement.ID, hexa8NLelement);
+                            model.SubdomainsDictionary[0].Elements.Add(hexa8NLelement);
+                        }
+                    }
+                }
+            }
+        }
+
+        public static class Run1_2a_Plastic
+        {
+            private const int subdomainID = 0;
+            private const double nodalDisplacement = -30.0;
+            private const int monitorNode = 361;
+            private const DOFType monitorDof = DOFType.Z;
+
+            public static void PEEKMatrix_DisplacementControl(int noStochasticSimulation)
+            {
+                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run1-2a\output files\plastic\DisplacementControl";
+
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // No. of increments
+                int increments = 100;
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.ElasticPEEKMatrixBuilder(model);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run1_2a-Plastic.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
+            }
+
+            public static class EBEEmbeddedModelBuilder
+            {
+                public static void ElasticPEEKMatrixBuilder(Model_v2 model)
+                {
+                    HostElements(model);
+                }
+
+                private static void HostElements(Model_v2 model)
+                {
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run1-2a\input files";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-ConnMatr_MSolve.inp";
+                    int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+
+                    // Nodes Geometry
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
+                    {
+                        for (int i = 0; i < matrixNodes; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int nodeID = int.Parse(bits[0]);
+                            double nodeX = double.Parse(bits[1]);
+                            double nodeY = double.Parse(bits[2]);
+                            double nodeZ = double.Parse(bits[3]);
+                            model.NodesDictionary.Add(nodeID, new Node_v2 { ID = nodeID, X = nodeX, Y = nodeY, Z = nodeZ });
+                        }
+                    }
+
+                    // Create Plastic Material
+                    var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
+
+                    // Generate elements
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    {
+                        for (int i = 0; i < matrixElements; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int elementID = int.Parse(bits[0]);
+                            int node1 = int.Parse(bits[1]);
+                            int node2 = int.Parse(bits[2]);
+                            int node3 = int.Parse(bits[3]);
+                            int node4 = int.Parse(bits[4]);
+                            int node5 = int.Parse(bits[5]);
+                            int node6 = int.Parse(bits[6]);
+                            int node7 = int.Parse(bits[7]);
+                            int node8 = int.Parse(bits[8]);
+                            // Hexa8NL element definition
+                            var hexa8NLelement = new Element_v2()
+                            {
+                                ID = elementID,
+                                ElementType = new Hexa8NonLinear_v2(solidMaterial, GaussLegendre3D.GetQuadrature(3, 3, 3))
+                            };
+                            // Add nodes to the created element
+                            hexa8NLelement.AddNode(model.NodesDictionary[node1]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node2]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node3]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node4]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node5]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node6]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node7]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node8]);
+                            // Add Hexa element to the element and subdomains dictionary of the model
+                            model.ElementsDictionary.Add(hexa8NLelement.ID, hexa8NLelement);
+                            //model.SubdomainsDictionary[0].ElementsDictionary.Add(hexa8NLelement.ID, hexa8NLelement);
+                            model.SubdomainsDictionary[0].Elements.Add(hexa8NLelement);
+                        }
+                    }
+                }
+            }
+        }
+
+        public static class Run2a_Elastic
+        {
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\output files\elastic";
+            private const int subdomainID = 0;
+            private const int hostElements = 250;
+            private const int hostNodes = 396;
+            private const int embeddedElements = 500;
+            private const int embeddedNodes = 550;
+            private const double nodalDisplacement = -30.0;
+            private const int monitorNode = 361;
+            private const DOFType monitorDof = DOFType.Z;
+            private const int increments = 100;            
+
+            public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
+            {
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2a-FullyBonded-Elastic.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
+            }
+
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
+            {
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2a-Cohesive-Elastic.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
+            }
+
+            public static class EBEEmbeddedModelBuilder
+            {
+                public static void FullyBondedEmbeddedBuilder_Stochastic(Model_v2 model, int i)
+                {
+                    HostElements(model);
+                    EmbeddedElements_Stochastic(model, i);                    
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                }
+
+                public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
+                {
+                    HostElements(model);
+                    EmbeddedElements_Stochastic(model, i);
+                    CohesiveBeamElements_Stochastic(model, i);                    
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                }
+
+                private static void HostElements(Model_v2 model)
+                {                    
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-ConnMatr_MSolve.inp";
+                    int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+
+                    // Nodes Geometry
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
+                    {
+                        for (int i = 0; i < matrixNodes; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int nodeID = int.Parse(bits[0]);
+                            double nodeX = double.Parse(bits[1]);
+                            double nodeY = double.Parse(bits[2]);
+                            double nodeZ = double.Parse(bits[3]);
+                            model.NodesDictionary.Add(nodeID, new Node_v2 { ID = nodeID, X = nodeX, Y = nodeY, Z = nodeZ });
+                        }
+                    }
+
+                    // Create Elastic Material
+                    var solidMaterial = new ElasticMaterial3D_v2()
+                    {
+                        YoungModulus = 4.00,
+                        PoissonRatio = 0.40,
+                    };
+
+                    // Generate elements
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -553,13 +622,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 10\run-2a\input files"; //"C:\Users\tzwrt\Desktop\input files"; //
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -638,13 +706,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 10\run-2a\input files"; //"C:\Users\tzwrt\Desktop\input files"; //
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -677,10 +744,8 @@ namespace ISAAR.MSolve.SamplesConsole
                         }
                     }
 
-                    // Create Cohesive Material                    
+                    // Create Cohesive Material
                     var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(100.0, 10.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(1000.0, 100.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -734,83 +799,19 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Plastic
         {
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2a\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\output files\plastic";
             private const int subdomainID = 0;
-            private const int hostElements = 1;
-            private const int hostNodes = 8;
-            private const int embeddedElements = 1;
-            private const int embeddedNodes = 2;
-            private const int increments = 10;
-            private const double nodalLoad = +10.0; // +1000.0;//
-            private const int monitorNode = 2;
-            private const DOFType monitorDof = DOFType.Y;
+            private const int hostElements = 250;
+            private const int hostNodes = 396;
+            private const int embeddedElements = 500;
+            private const int embeddedNodes = 550;
+            private const double nodalDisplacement = -30.0;
+            private const int monitorNode = 361;
+            private const DOFType monitorDof = DOFType.Z;
+            private const int increments = 100;
 
-            public static void SingleMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
-            {
-                VectorExtensions.AssignTotalAffinityCount();
-
-                // Model creation
-                var model = new Model_v2();
-
-                // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
-                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-                // Choose model
-                EBEEmbeddedModelBuilder.SingleMatrixBuilder_Stochastic(model, noStochasticSimulation);
-
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 7; iNode = iNode + 2)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
-
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 2; iNode <= 6; iNode = iNode + 4)
-                {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
-                }
-
-                // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
-
-                // Choose the provider of the problem -> here a structural problem
-                var provider = new ProblemStructural_v2(model, solver);
-
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                {
-                    MaxIterationsPerIncrement = 100,
-                    NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
-                };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
-                // Choose parent analyzer -> Parent: Static
-                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-                // Request output
-                string currentOutputFileName = "Run2a-SingleMatrix-Plastic-Results.txt";
-                string extension = Path.GetExtension(currentOutputFileName);
-                string pathName = outputDirectory;
-                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
-                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
-                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
-
-                // Run the analysis
-                parentAnalyzer.Initialize();
-                parentAnalyzer.Solve();
-            }
-
-            public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -825,17 +826,26 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 7; iNode = iNode + 2)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 2; iNode <= 6; iNode = iNode + 4)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
                 {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
 
                 // Choose linear equation system solver
@@ -847,21 +857,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2a-Stochastic-CNT-Results.txt";
+                string currentOutputFileName = "Run2a-FullyBonded-Plastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -873,9 +883,13 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
             }
 
-            public static void EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -890,17 +904,26 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 7; iNode = iNode + 2)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 2; iNode <= 6; iNode = iNode + 4)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
                 {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
 
                 // Choose linear equation system solver
@@ -912,21 +935,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2a-Stochastic-CNT-Cohesive-Results.txt";
+                string currentOutputFileName = "Run2a-Cohesive-Plastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -938,32 +961,19 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
-            }
 
-            public static void EBEembeddedInMatrix_DisplacementControl()
-            {
-                // Not implemented yet
-                throw new NotImplementedException();
-            }
-
-            public static void EBEembeddedInMatrixCohesive_DisplacementControl()
-            {
-                // Not implemented yet
-                throw new NotImplementedException();
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
             }
 
             public static class EBEEmbeddedModelBuilder
             {
-                public static void SingleMatrixBuilder_Stochastic(Model_v2 model, int i)
-                {
-                    HostElements(model);
-                }
-
                 public static void FullyBondedEmbeddedBuilder_Stochastic(Model_v2 model, int i)
                 {
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
                 }
 
                 public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
@@ -971,16 +981,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
                     CohesiveBeamElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedCohesiveBeam3DGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
                 }
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2a\input files";
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-1x1x1-Geometry_MSolve.inp";
-                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-1x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -1001,7 +1010,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -1045,13 +1054,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2a\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -1130,13 +1138,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2a\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -1224,83 +1231,19 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Elastic
         {
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2b\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2b\output files\elastic";
             private const int subdomainID = 0;
-            private const int hostElements = 2;
-            private const int hostNodes = 12;
-            private const int embeddedElements = 1;
-            private const int embeddedNodes = 2;
-            private const int increments = 10;
-            private const double nodalLoad = +10.0; // +1000.0;//
-            private const int monitorNode = 3;
-            private const DOFType monitorDof = DOFType.Y;
+            private const int hostElements = 250;
+            private const int hostNodes = 396;
+            private const int embeddedElements = 500;
+            private const int embeddedNodes = 550;
+            private const double nodalDisplacement = -30.0;
+            private const int monitorNode = 361;
+            private const DOFType monitorDof = DOFType.Z;
+            private const int increments = 100;
 
-            public static void SingleMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
-            {
-                VectorExtensions.AssignTotalAffinityCount();
-
-                // Model creation
-                var model = new Model_v2();
-
-                // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
-                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-                // Choose model
-                EBEEmbeddedModelBuilder.SingleMatrixBuilder_Stochastic(model, noStochasticSimulation);
-
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
-
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
-                {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
-                }
-
-                // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
-
-                // Choose the provider of the problem -> here a structural problem
-                var provider = new ProblemStructural_v2(model, solver);
-
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                {
-                    MaxIterationsPerIncrement = 100,
-                    NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
-                };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
-                // Choose parent analyzer -> Parent: Static
-                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-                // Request output
-                string currentOutputFileName = "Run2b-SingleMatrix-Elastic-Results.txt";
-                string extension = Path.GetExtension(currentOutputFileName);
-                string pathName = outputDirectory;
-                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
-                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
-                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
-
-                // Run the analysis
-                parentAnalyzer.Initialize();
-                parentAnalyzer.Solve();
-            }
-
-            public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -1315,17 +1258,26 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
                 {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
 
                 // Choose linear equation system solver
@@ -1337,21 +1289,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2b-Stochastic-CNT-Results.txt";
+                string currentOutputFileName = "Run2a-FullyBonded-Elastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -1363,9 +1315,13 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
             }
 
-            public static void EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -1380,17 +1336,26 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
                 {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
 
                 // Choose linear equation system solver
@@ -1402,21 +1367,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2b-Stochastic-CNT-Cohesive-Results.txt";
+                string currentOutputFileName = "Run2a-Cohesive-Elastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -1428,32 +1393,19 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
-            }
 
-            public static void EBEembeddedInMatrix_DisplacementControl()
-            {
-                // Not implemented yet
-                throw new NotImplementedException();
-            }
-
-            public static void EBEembeddedInMatrixCohesive_DisplacementControl()
-            {
-                // Not implemented yet
-                throw new NotImplementedException();
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
             }
 
             public static class EBEEmbeddedModelBuilder
             {
-                public static void SingleMatrixBuilder_Stochastic(Model_v2 model, int i)
-                {
-                    HostElements(model);
-                }
-
                 public static void FullyBondedEmbeddedBuilder_Stochastic(Model_v2 model, int i)
                 {
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
                 }
 
                 public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
@@ -1461,16 +1413,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
                     CohesiveBeamElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedCohesiveBeam3DGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
                 }
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2b\input files";
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-2x1x1-Geometry_MSolve.inp";
-                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-2x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -1495,7 +1446,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -1539,13 +1490,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2b\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -1624,13 +1574,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2b\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -1664,7 +1613,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -1718,83 +1667,19 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Plastic
         {
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2b\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2b\output files\plastic";
             private const int subdomainID = 0;
-            private const int hostElements = 2;
-            private const int hostNodes = 12;
-            private const int embeddedElements = 1;
-            private const int embeddedNodes = 2;
-            private const int increments = 10;
-            private const double nodalLoad = +10.0; // +1000.0;//
-            private const int monitorNode = 3;
-            private const DOFType monitorDof = DOFType.Y;
+            private const int hostElements = 250;
+            private const int hostNodes = 396;
+            private const int embeddedElements = 500;
+            private const int embeddedNodes = 550;
+            private const double nodalDisplacement = -30.0;
+            private const int monitorNode = 361;
+            private const DOFType monitorDof = DOFType.Z;
+            private const int increments = 100;
 
-            public static void SingleMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
-            {
-                VectorExtensions.AssignTotalAffinityCount();
-
-                // Model creation
-                var model = new Model_v2();
-
-                // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
-                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-                // Choose model
-                EBEEmbeddedModelBuilder.SingleMatrixBuilder_Stochastic(model, noStochasticSimulation);
-
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
-
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
-                {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
-                }
-
-                // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
-
-                // Choose the provider of the problem -> here a structural problem
-                var provider = new ProblemStructural_v2(model, solver);
-
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                {
-                    MaxIterationsPerIncrement = 100,
-                    NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
-                };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
-                // Choose parent analyzer -> Parent: Static
-                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-                // Request output
-                string currentOutputFileName = "Run2b-SingleMatrix-Plastic-Results.txt";
-                string extension = Path.GetExtension(currentOutputFileName);
-                string pathName = outputDirectory;
-                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
-                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
-                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
-
-                // Run the analysis
-                parentAnalyzer.Initialize();
-                parentAnalyzer.Solve();
-            }
-
-            public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -1809,17 +1694,26 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
                 {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
 
                 // Choose linear equation system solver
@@ -1831,21 +1725,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2b-Stochastic-CNT-Results.txt";
+                string currentOutputFileName = "Run2a-FullyBonded-Plastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -1857,9 +1751,13 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
             }
 
-            public static void EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -1874,17 +1772,26 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
                 {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
 
                 // Choose linear equation system solver
@@ -1896,21 +1803,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2b-Stochastic-CNT-Cohesive-Results.txt";
+                string currentOutputFileName = "Run2a-Cohesive-Plastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -1922,20 +1829,19 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
             }
 
             public static class EBEEmbeddedModelBuilder
             {
-                public static void SingleMatrixBuilder_Stochastic(Model_v2 model, int i)
-                {
-                    HostElements(model);
-                }
-
                 public static void FullyBondedEmbeddedBuilder_Stochastic(Model_v2 model, int i)
                 {
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
                 }
 
                 public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
@@ -1943,16 +1849,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
                     CohesiveBeamElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedCohesiveBeam3DGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
                 }
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2b\input files";
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-2x1x1-Geometry_MSolve.inp";
-                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-2x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -1973,7 +1878,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -2017,13 +1922,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2b\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -2102,13 +2006,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2b\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -2142,7 +2045,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2196,83 +2099,19 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Elastic
         {
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2c\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2c\output files\elastic";
             private const int subdomainID = 0;
-            private const int hostElements = 2;
-            private const int hostNodes = 12;
-            private const int embeddedElements = 2;
-            private const int embeddedNodes = 3;
-            private const int increments = 10;
-            private const double nodalLoad = +10.0; // +1000.0;//
-            private const int monitorNode = 3;
-            private const DOFType monitorDof = DOFType.Y;
+            private const int hostElements = 250;
+            private const int hostNodes = 396;
+            private const int embeddedElements = 500;
+            private const int embeddedNodes = 550;
+            private const double nodalDisplacement = -30.0;
+            private const int monitorNode = 361;
+            private const DOFType monitorDof = DOFType.Z;
+            private const int increments = 100;
 
-            public static void SingleMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
-            {
-                VectorExtensions.AssignTotalAffinityCount();
-
-                // Model creation
-                var model = new Model_v2();
-
-                // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
-                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-                // Choose model
-                EBEEmbeddedModelBuilder.SingleMatrixBuilder_Stochastic(model, noStochasticSimulation);
-
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
-
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
-                {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
-                }
-
-                // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
-
-                // Choose the provider of the problem -> here a structural problem
-                var provider = new ProblemStructural_v2(model, solver);
-
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                {
-                    MaxIterationsPerIncrement = 100,
-                    NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
-                };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
-                // Choose parent analyzer -> Parent: Static
-                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-                // Request output
-                string currentOutputFileName = "Run2c-SingleMatrix-Elastic-Results.txt";
-                string extension = Path.GetExtension(currentOutputFileName);
-                string pathName = outputDirectory;
-                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
-                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
-                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
-
-                // Run the analysis
-                parentAnalyzer.Initialize();
-                parentAnalyzer.Solve();
-            }
-
-            public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -2287,17 +2126,26 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
                 {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
 
                 // Choose linear equation system solver
@@ -2309,21 +2157,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2c-Stochastic-CNT-Results.txt";
+                string currentOutputFileName = "Run2a-FullyBonded-Elastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -2335,9 +2183,13 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
             }
 
-            public static void EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -2352,17 +2204,26 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
                 {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
 
                 // Choose linear equation system solver
@@ -2374,21 +2235,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2c-Stochastic-CNT-Cohesive-Results.txt";
+                string currentOutputFileName = "Run2a-Cohesive-Elastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -2400,20 +2261,19 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
-            }        
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
+            }
 
             public static class EBEEmbeddedModelBuilder
             {
-                public static void SingleMatrixBuilder_Stochastic(Model_v2 model, int i)
-                {
-                    HostElements(model);
-                }
-
                 public static void FullyBondedEmbeddedBuilder_Stochastic(Model_v2 model, int i)
                 {
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
                 }
 
                 public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
@@ -2421,16 +2281,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
                     CohesiveBeamElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedCohesiveBeam3DGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
                 }
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2c\input files";
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-2x1x1-Geometry_MSolve.inp";
-                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-2x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -2455,7 +2314,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -2499,13 +2358,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2c\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -2584,13 +2442,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2c\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -2624,7 +2481,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2678,83 +2535,19 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Plastic
         {
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2c\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2c\output files\plastic";
             private const int subdomainID = 0;
-            private const int hostElements = 2;
-            private const int hostNodes = 12;
-            private const int embeddedElements = 2;
-            private const int embeddedNodes = 3;
-            private const int increments = 10;
-            private const double nodalLoad = +10.0; // +1000.0;//
-            private const int monitorNode = 3;
-            private const DOFType monitorDof = DOFType.Y;
+            private const int hostElements = 250;
+            private const int hostNodes = 396;
+            private const int embeddedElements = 500;
+            private const int embeddedNodes = 550;
+            private const double nodalDisplacement = -30.0;
+            private const int monitorNode = 361;
+            private const DOFType monitorDof = DOFType.Z;
+            private const int increments = 100;
 
-            public static void SingleMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
-            {
-                VectorExtensions.AssignTotalAffinityCount();
-
-                // Model creation
-                var model = new Model_v2();
-
-                // Subdomains
-                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
-                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
-
-                // Choose model
-                EBEEmbeddedModelBuilder.SingleMatrixBuilder_Stochastic(model, noStochasticSimulation);
-
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
-
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
-                {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
-                }
-
-                // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
-
-                // Choose the provider of the problem -> here a structural problem
-                var provider = new ProblemStructural_v2(model, solver);
-
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
-                {
-                    MaxIterationsPerIncrement = 100,
-                    NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
-                };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
-
-                // Choose parent analyzer -> Parent: Static
-                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
-
-                // Request output
-                string currentOutputFileName = "Run2c-SingleMatrix-plastic-Results.txt";
-                string extension = Path.GetExtension(currentOutputFileName);
-                string pathName = outputDirectory;
-                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
-                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
-                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
-
-                // Run the analysis
-                parentAnalyzer.Initialize();
-                parentAnalyzer.Solve();
-            }
-
-            public static void EBEembeddedInMatrix_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -2769,17 +2562,26 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
                 {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
 
                 // Choose linear equation system solver
@@ -2791,21 +2593,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer     
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2c-Stochastic-CNT-Results.txt";
+                string currentOutputFileName = "Run2a-FullyBonded-Plastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -2817,9 +2619,13 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
             }
 
-            public static void EBEembeddedInMatrixCohesive_NewtonRaphson_Stochastic(int noStochasticSimulation)
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -2834,17 +2640,26 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 10; iNode = iNode + 3)
+                for (int iNode = 1; iNode <= 36; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Loading Conditions - [Right-End] - {2 nodes}
-                for (int iNode = 3; iNode <= 9; iNode = iNode + 6)
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
                 {
-                    model.Loads.Add(new Load_v2() { Amount = nodalLoad, Node = model.NodesDictionary[iNode], DOF = DOFType.Y });
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
 
                 // Choose linear equation system solver
@@ -2856,21 +2671,21 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
 
-                // Choose child analyzer -> Child: NewtonRaphsonNonLinearAnalyzer            
-                var childAnalyzerBuilder = new LoadControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 5E-03
+                    ResidualTolerance = 1E-03
                 };
-
-                LoadControlAnalyzer_v2 childAnalyzer = childAnalyzerBuilder.Build();
+                var childAnalyzer = childAnalyzerBuilder.Build();
 
                 // Choose parent analyzer -> Parent: Static
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2c-Stochastic-CNT-Cohesive-Results.txt";
+                string currentOutputFileName = "Run2a-Cohesive-Plastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -2882,20 +2697,19 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Run the analysis
                 parentAnalyzer.Initialize();
                 parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
             }
 
             public static class EBEEmbeddedModelBuilder
             {
-                public static void SingleMatrixBuilder_Stochastic(Model_v2 model, int i)
-                {
-                    HostElements(model);
-                }
-
                 public static void FullyBondedEmbeddedBuilder_Stochastic(Model_v2 model, int i)
                 {
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
                 }
 
                 public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
@@ -2903,16 +2717,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     HostElements(model);
                     EmbeddedElements_Stochastic(model, i);
                     CohesiveBeamElements_Stochastic(model, i);
-                    var embeddedGrouping = new EmbeddedCohesiveBeam3DGrouping_v2(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
                 }
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2c\input files";
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-2x1x1-Geometry_MSolve.inp";
-                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=20-L_y=10-L_z=10-2x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -2933,7 +2746,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -2977,13 +2790,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0; // 5490; // 
                     double shearModulus = 1.0; // 871; // 
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2c\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -3016,8 +2828,12 @@ namespace ISAAR.MSolve.SamplesConsole
                         }
                     }
 
-                    // Create Plastic Material
-                    var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
+                    // Create new 3D material
+                    var beamMaterial = new ElasticMaterial3D_v2
+                    {
+                        YoungModulus = youngModulus,
+                        PoissonRatio = poissonRatio,
+                    };
 
                     // Create new Beam3D section and element
                     var beamSection = new BeamSection3D(area, inertiaY, inertiaZ, torsionalInertia, effectiveAreaY, effectiveAreaZ);
@@ -3037,7 +2853,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             elementNodes.Add(model.NodesDictionary[node1]);
                             elementNodes.Add(model.NodesDictionary[node2]);
                             // create element
-                            var beam_1 = new Beam3DCorotationalQuaternion_v2(elementNodes, solidMaterial, 7.85, beamSection);
+                            var beam_1 = new Beam3DCorotationalQuaternion_v2(elementNodes, beamMaterial, 7.85, beamSection);
                             var beamElement = new Element_v2 { ID = elementID, ElementType = beam_1 };
                             // Add nodes to the created element
                             beamElement.AddNode(model.NodesDictionary[node1]);
@@ -3058,13 +2874,12 @@ namespace ISAAR.MSolve.SamplesConsole
                     double youngModulus = 1.0;
                     double shearModulus = 1.0;
                     double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
-                    double area = 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
-                    double inertiaY = 1058.55;
-                    double inertiaZ = 1058.55;
-                    double torsionalInertia = 496.38;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 9\run-2c\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -3098,10 +2913,14 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
 
-                    // Create Plastic Material
-                    var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
+                    // Create Elastic 3D Material
+                    var elasticMaterial = new ElasticMaterial3D_v2
+                    {
+                        YoungModulus = youngModulus,
+                        PoissonRatio = poissonRatio,
+                    };
 
                     // Create Beam3D Section
                     var beamSection = new BeamSection3D(area, inertiaY, inertiaZ, torsionalInertia, effectiveAreaY, effectiveAreaZ);
@@ -3129,7 +2948,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, solidMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -3145,5 +2964,874 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
             }
         }
+
+        public static class Run2d_Elastic
+        {
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2d\output files\elastic";
+            private const int subdomainID = 0;
+            private const int hostElements = 250;
+            private const int hostNodes = 396;
+            private const int embeddedElements = 500;
+            private const int embeddedNodes = 550;
+            private const double nodalDisplacement = -30.0;
+            private const int monitorNode = 361;
+            private const DOFType monitorDof = DOFType.Z;
+            private const int increments = 100;
+
+            public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
+            {
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2a-FullyBonded-Elastic.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
+            }
+
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
+            {
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2a-Cohesive-Elastic.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
+            }
+
+            public static class EBEEmbeddedModelBuilder
+            {
+                public static void FullyBondedEmbeddedBuilder_Stochastic(Model_v2 model, int i)
+                {
+                    HostElements(model);
+                    EmbeddedElements_Stochastic(model, i);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                }
+
+                public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
+                {
+                    HostElements(model);
+                    EmbeddedElements_Stochastic(model, i);
+                    CohesiveBeamElements_Stochastic(model, i);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                }
+
+                private static void HostElements(Model_v2 model)
+                {
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-ConnMatr_MSolve.inp";
+                    int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+
+                    // Nodes Geometry
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
+                    {
+                        for (int i = 0; i < matrixNodes; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int nodeID = int.Parse(bits[0]);
+                            double nodeX = double.Parse(bits[1]);
+                            double nodeY = double.Parse(bits[2]);
+                            double nodeZ = double.Parse(bits[3]);
+                            model.NodesDictionary.Add(nodeID, new Node_v2 { ID = nodeID, X = nodeX, Y = nodeY, Z = nodeZ });
+                        }
+                    }
+
+                    // Create Elastic Material
+                    var solidMaterial = new ElasticMaterial3D_v2()
+                    {
+                        YoungModulus = 4.00,
+                        PoissonRatio = 0.40,
+                    };
+
+                    // Generate elements
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    {
+                        for (int i = 0; i < matrixElements; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int elementID = int.Parse(bits[0]);
+                            int node1 = int.Parse(bits[1]);
+                            int node2 = int.Parse(bits[2]);
+                            int node3 = int.Parse(bits[3]);
+                            int node4 = int.Parse(bits[4]);
+                            int node5 = int.Parse(bits[5]);
+                            int node6 = int.Parse(bits[6]);
+                            int node7 = int.Parse(bits[7]);
+                            int node8 = int.Parse(bits[8]);
+                            // Hexa8NL element definition
+                            var hexa8NLelement = new Element_v2()
+                            {
+                                ID = elementID,
+                                ElementType = new Hexa8NonLinear_v2(solidMaterial, GaussLegendre3D.GetQuadrature(3, 3, 3))
+                            };
+                            // Add nodes to the created element
+                            hexa8NLelement.AddNode(model.NodesDictionary[node1]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node2]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node3]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node4]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node5]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node6]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node7]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node8]);
+                            // Add Hexa element to the element and subdomains dictionary of the model
+                            model.ElementsDictionary.Add(hexa8NLelement.ID, hexa8NLelement);
+                            //model.SubdomainsDictionary[0].ElementsDictionary.Add(hexa8NLelement.ID, hexa8NLelement);
+                            model.SubdomainsDictionary[0].Elements.Add(hexa8NLelement);
+                        }
+                    }
+                }
+
+                private static void EmbeddedElements_Stochastic(Model_v2 model, int noStochasticSimulation)
+                {
+                    // define mechanical properties
+                    double youngModulus = 1.0; // 5490; // 
+                    double shearModulus = 1.0; // 871; // 
+                    double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
+                    double effectiveAreaY = area;
+                    double effectiveAreaZ = area;
+
+                    string CNTgeometryFileName = "nodes.txt";
+                    string CNTconnectivityFileName = "connectivity.txt";
+
+                    string fileNameOnlyCNTgeometryFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTgeometryFileName));
+                    string fileNameOnlyCNTconnectivityFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTconnectivityFileName));
+                    string extension = Path.GetExtension(CNTgeometryFileName);
+                    string extension_2 = Path.GetExtension(CNTconnectivityFileName);
+
+                    string currentCNTgeometryFileName = string.Format("{0}_{1}{2}", fileNameOnlyCNTgeometryFileName, noStochasticSimulation, extension);
+
+                    //string currentCNTconnectivityFileName = string.Format("{0}_{1}{2}", fileNameOnlyCNTconnectivityFileName, noStochasticSimulation, extension_2);
+                    string currentCNTconnectivityFileName = string.Format("{0}{1}", fileNameOnlyCNTconnectivityFileName, extension_2);
+
+                    int CNTNodes = File.ReadLines(currentCNTgeometryFileName).Count();
+                    int CNTElems = File.ReadLines(currentCNTconnectivityFileName).Count();
+
+                    // Geometry
+                    using (TextReader reader = File.OpenText(currentCNTgeometryFileName))
+                    {
+                        for (int i = 0; i < CNTNodes; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int nodeID = int.Parse(bits[0]) + hostNodes; // matrixNodes
+                            double nodeX = double.Parse(bits[1]);
+                            double nodeY = double.Parse(bits[2]);
+                            double nodeZ = double.Parse(bits[3]);
+                            model.NodesDictionary.Add(nodeID, new Node_v2 { ID = nodeID, X = nodeX, Y = nodeY, Z = nodeZ });
+                        }
+                    }
+
+                    // Create new 3D material
+                    var beamMaterial = new ElasticMaterial3D_v2
+                    {
+                        YoungModulus = youngModulus,
+                        PoissonRatio = poissonRatio,
+                    };
+
+                    // Create new Beam3D section and element
+                    var beamSection = new BeamSection3D(area, inertiaY, inertiaZ, torsionalInertia, effectiveAreaY, effectiveAreaZ);
+                    // element nodes
+
+                    using (TextReader reader = File.OpenText(currentCNTconnectivityFileName))
+                    {
+                        for (int i = 0; i < CNTElems; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int elementID = int.Parse(bits[0]) + hostElements; // matrixElements
+                            int node1 = int.Parse(bits[1]) + hostNodes; // matrixNodes
+                            int node2 = int.Parse(bits[2]) + hostNodes; // matrixNodes
+                                                                        // element nodes
+                            var elementNodes = new List<Node_v2>();
+                            elementNodes.Add(model.NodesDictionary[node1]);
+                            elementNodes.Add(model.NodesDictionary[node2]);
+                            // create element
+                            var beam_1 = new Beam3DCorotationalQuaternion_v2(elementNodes, beamMaterial, 7.85, beamSection);
+                            var beamElement = new Element_v2 { ID = elementID, ElementType = beam_1 };
+                            // Add nodes to the created element
+                            beamElement.AddNode(model.NodesDictionary[node1]);
+                            beamElement.AddNode(model.NodesDictionary[node2]);
+                            // beam stiffness matrix
+                            // var a = beam_1.StiffnessMatrix(beamElement);
+                            // Add beam element to the element and subdomains dictionary of the model
+                            model.ElementsDictionary.Add(beamElement.ID, beamElement);
+                            //model.SubdomainsDictionary[0].ElementsDictionary.Add(beamElement.ID, beamElement);
+                            model.SubdomainsDictionary[0].Elements.Add(beamElement);
+                        }
+                    }
+                }
+
+                private static void CohesiveBeamElements_Stochastic(Model_v2 model, int noStochasticSimulation)
+                {
+                    // define mechanical properties
+                    double youngModulus = 1.0;
+                    double shearModulus = 1.0;
+                    double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
+                    double effectiveAreaY = area;
+                    double effectiveAreaZ = area;
+
+                    string CNTgeometryFileName = "nodes.txt";
+                    string CNTconnectivityFileName = "connectivity.txt";
+
+                    string fileNameOnlyCNTgeometryFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTgeometryFileName));
+                    string fileNameOnlyCNTconnectivityFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTconnectivityFileName));
+                    string extension = Path.GetExtension(CNTgeometryFileName);
+                    string extension_2 = Path.GetExtension(CNTconnectivityFileName);
+
+                    string currentCNTgeometryFileName = string.Format("{0}_{1}{2}", fileNameOnlyCNTgeometryFileName, noStochasticSimulation, extension);
+
+                    //string currentCNTconnectivityFileName = string.Format("{0}_{1}{2}", fileNameOnlyCNTconnectivityFileName, noStochasticSimulation, extension_2);
+                    string currentCNTconnectivityFileName = string.Format("{0}{1}", fileNameOnlyCNTconnectivityFileName, extension_2);
+
+                    int CNTNodes = File.ReadLines(currentCNTgeometryFileName).Count();
+                    int CNTElems = File.ReadLines(currentCNTconnectivityFileName).Count();
+
+                    // Geometry
+                    using (TextReader reader = File.OpenText(currentCNTgeometryFileName))
+                    {
+                        for (int i = 0; i < CNTNodes; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int nodeID = int.Parse(bits[0]) + (hostNodes + embeddedNodes); // matrixNodes
+                            double nodeX = double.Parse(bits[1]);
+                            double nodeY = double.Parse(bits[2]);
+                            double nodeZ = double.Parse(bits[3]);
+                            model.NodesDictionary.Add(nodeID, new Node_v2 { ID = nodeID, X = nodeX, Y = nodeY, Z = nodeZ });
+                        }
+                    }
+
+                    // Create Cohesive Material
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
+
+                    // Create Elastic 3D Material
+                    var elasticMaterial = new ElasticMaterial3D_v2
+                    {
+                        YoungModulus = youngModulus,
+                        PoissonRatio = poissonRatio,
+                    };
+
+                    // Create Beam3D Section
+                    var beamSection = new BeamSection3D(area, inertiaY, inertiaZ, torsionalInertia, effectiveAreaY, effectiveAreaZ);
+
+                    // element nodes
+                    using (TextReader reader = File.OpenText(currentCNTconnectivityFileName))
+                    {
+                        for (int i = 0; i < CNTElems; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int elementID = int.Parse(bits[0]) + (hostElements + embeddedElements); // matrixElements + CNTelements
+                            int node1 = int.Parse(bits[1]) + (hostNodes + embeddedNodes); // matrixNodes + CNTnodes
+                            int node2 = int.Parse(bits[2]) + (hostNodes + embeddedNodes); // matrixNodes + CNTnodes
+                                                                                          // element nodes clone
+                            var elementNodesClone = new List<Node_v2>();
+                            elementNodesClone.Add(model.NodesDictionary[node1]);
+                            elementNodesClone.Add(model.NodesDictionary[node2]);
+                            // element nodes beam
+                            var elementNodesBeam = new List<Node_v2>();
+                            elementNodesBeam.Add(model.NodesDictionary[node1 - embeddedNodes]);
+                            elementNodesBeam.Add(model.NodesDictionary[node2 - embeddedNodes]);
+                            // Create Cohesive Beam Element
+                            var cohesiveElement = new Element_v2()
+                            {
+                                ID = elementID,
+                                ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
+                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                            };
+                            // Add beam element to the element and subdomains dictionary of the model
+                            model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
+                            // Add Cohesive Element Nodes (!)
+                            model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node1 - embeddedNodes]);
+                            model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node2 - embeddedNodes]);
+                            model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node1]);
+                            model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node2]);
+                            // Add Cohesive Element in Subdomain
+                            model.SubdomainsDictionary[0].Elements.Add(cohesiveElement);
+                        }
+                    }
+                }
+            }
+        }
+
+        public static class Run2d_Plastic
+        {
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2d\output files\plastic";
+            private const int subdomainID = 0;
+            private const int hostElements = 250;
+            private const int hostNodes = 396;
+            private const int embeddedElements = 500;
+            private const int embeddedNodes = 550;
+            private const double nodalDisplacement = -30.0;
+            private const int monitorNode = 361;
+            private const DOFType monitorDof = DOFType.Z;
+            private const int increments = 100;
+
+            public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
+            {
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2a-FullyBonded-Plastic.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
+            }
+
+            public static void EBEembeddedInMatrixCohesive_DisplacementControl(int noStochasticSimulation)
+            {
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-03
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2a-Cohesive-Plastic.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                paraview.CreateParaviewFile();
+            }
+
+            public static class EBEEmbeddedModelBuilder
+            {
+                public static void FullyBondedEmbeddedBuilder_Stochastic(Model_v2 model, int i)
+                {
+                    HostElements(model);
+                    EmbeddedElements_Stochastic(model, i);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateFullyBonded(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > hostElements).Select(kv => kv.Value), true);
+                }
+
+                public static void CohesiveEmbeddedBuilder_Stochastic(Model_v2 model, int i)
+                {
+                    HostElements(model);
+                    EmbeddedElements_Stochastic(model, i);
+                    CohesiveBeamElements_Stochastic(model, i);
+                    var embeddedGrouping = EmbeddedBeam3DGrouping.CreateCohesive(model, model.ElementsDictionary.Where(x => x.Key <= hostElements).Select(kv => kv.Value), model.ElementsDictionary.Where(x => x.Key > (hostElements + embeddedElements)).Select(kv => kv.Value), true);
+                }
+
+                private static void HostElements(Model_v2 model)
+                {
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=100-5x5x10-ConnMatr_MSolve.inp";
+                    int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+
+                    // Nodes Geometry
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
+                    {
+                        for (int i = 0; i < matrixNodes; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int nodeID = int.Parse(bits[0]);
+                            double nodeX = double.Parse(bits[1]);
+                            double nodeY = double.Parse(bits[2]);
+                            double nodeZ = double.Parse(bits[3]);
+                            model.NodesDictionary.Add(nodeID, new Node_v2 { ID = nodeID, X = nodeX, Y = nodeY, Z = nodeZ });
+                        }
+                    }
+
+                    // Create Plastic Material
+                    var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
+
+                    // Generate elements
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    {
+                        for (int i = 0; i < matrixElements; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int elementID = int.Parse(bits[0]);
+                            int node1 = int.Parse(bits[1]);
+                            int node2 = int.Parse(bits[2]);
+                            int node3 = int.Parse(bits[3]);
+                            int node4 = int.Parse(bits[4]);
+                            int node5 = int.Parse(bits[5]);
+                            int node6 = int.Parse(bits[6]);
+                            int node7 = int.Parse(bits[7]);
+                            int node8 = int.Parse(bits[8]);
+                            // Hexa8NL element definition
+                            var hexa8NLelement = new Element_v2()
+                            {
+                                ID = elementID,
+                                ElementType = new Hexa8NonLinear_v2(solidMaterial, GaussLegendre3D.GetQuadrature(3, 3, 3))
+                            };
+                            // Add nodes to the created element
+                            hexa8NLelement.AddNode(model.NodesDictionary[node1]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node2]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node3]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node4]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node5]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node6]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node7]);
+                            hexa8NLelement.AddNode(model.NodesDictionary[node8]);
+                            // Add Hexa element to the element and subdomains dictionary of the model
+                            model.ElementsDictionary.Add(hexa8NLelement.ID, hexa8NLelement);
+                            //model.SubdomainsDictionary[0].ElementsDictionary.Add(hexa8NLelement.ID, hexa8NLelement);
+                            model.SubdomainsDictionary[0].Elements.Add(hexa8NLelement);
+                        }
+                    }
+                }
+
+                private static void EmbeddedElements_Stochastic(Model_v2 model, int noStochasticSimulation)
+                {
+                    // define mechanical properties
+                    double youngModulus = 1.0; // 5490; // 
+                    double shearModulus = 1.0; // 871; // 
+                    double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; //2.15; // 0.034;
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
+                    double effectiveAreaY = area;
+                    double effectiveAreaZ = area;
+
+                    string CNTgeometryFileName = "nodes.txt";
+                    string CNTconnectivityFileName = "connectivity.txt";
+
+                    string fileNameOnlyCNTgeometryFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTgeometryFileName));
+                    string fileNameOnlyCNTconnectivityFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTconnectivityFileName));
+                    string extension = Path.GetExtension(CNTgeometryFileName);
+                    string extension_2 = Path.GetExtension(CNTconnectivityFileName);
+
+                    string currentCNTgeometryFileName = string.Format("{0}_{1}{2}", fileNameOnlyCNTgeometryFileName, noStochasticSimulation, extension);
+
+                    //string currentCNTconnectivityFileName = string.Format("{0}_{1}{2}", fileNameOnlyCNTconnectivityFileName, noStochasticSimulation, extension_2);
+                    string currentCNTconnectivityFileName = string.Format("{0}{1}", fileNameOnlyCNTconnectivityFileName, extension_2);
+
+                    int CNTNodes = File.ReadLines(currentCNTgeometryFileName).Count();
+                    int CNTElems = File.ReadLines(currentCNTconnectivityFileName).Count();
+
+                    // Geometry
+                    using (TextReader reader = File.OpenText(currentCNTgeometryFileName))
+                    {
+                        for (int i = 0; i < CNTNodes; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int nodeID = int.Parse(bits[0]) + hostNodes; // matrixNodes
+                            double nodeX = double.Parse(bits[1]);
+                            double nodeY = double.Parse(bits[2]);
+                            double nodeZ = double.Parse(bits[3]);
+                            model.NodesDictionary.Add(nodeID, new Node_v2 { ID = nodeID, X = nodeX, Y = nodeY, Z = nodeZ });
+                        }
+                    }
+
+                    // Create new 3D material
+                    var beamMaterial = new ElasticMaterial3D_v2
+                    {
+                        YoungModulus = youngModulus,
+                        PoissonRatio = poissonRatio,
+                    };
+
+                    // Create new Beam3D section and element
+                    var beamSection = new BeamSection3D(area, inertiaY, inertiaZ, torsionalInertia, effectiveAreaY, effectiveAreaZ);
+                    // element nodes
+
+                    using (TextReader reader = File.OpenText(currentCNTconnectivityFileName))
+                    {
+                        for (int i = 0; i < CNTElems; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int elementID = int.Parse(bits[0]) + hostElements; // matrixElements
+                            int node1 = int.Parse(bits[1]) + hostNodes; // matrixNodes
+                            int node2 = int.Parse(bits[2]) + hostNodes; // matrixNodes
+                                                                        // element nodes
+                            var elementNodes = new List<Node_v2>();
+                            elementNodes.Add(model.NodesDictionary[node1]);
+                            elementNodes.Add(model.NodesDictionary[node2]);
+                            // create element
+                            var beam_1 = new Beam3DCorotationalQuaternion_v2(elementNodes, beamMaterial, 7.85, beamSection);
+                            var beamElement = new Element_v2 { ID = elementID, ElementType = beam_1 };
+                            // Add nodes to the created element
+                            beamElement.AddNode(model.NodesDictionary[node1]);
+                            beamElement.AddNode(model.NodesDictionary[node2]);
+                            // beam stiffness matrix
+                            // var a = beam_1.StiffnessMatrix(beamElement);
+                            // Add beam element to the element and subdomains dictionary of the model
+                            model.ElementsDictionary.Add(beamElement.ID, beamElement);
+                            //model.SubdomainsDictionary[0].ElementsDictionary.Add(beamElement.ID, beamElement);
+                            model.SubdomainsDictionary[0].Elements.Add(beamElement);
+                        }
+                    }
+                }
+
+                private static void CohesiveBeamElements_Stochastic(Model_v2 model, int noStochasticSimulation)
+                {
+                    // define mechanical properties
+                    double youngModulus = 1.0;
+                    double shearModulus = 1.0;
+                    double poissonRatio = (youngModulus / (2 * shearModulus)) - 1; // 2.15; // 0.034; //
+                    double area = 694.77; // 1776.65;  // CNT(20,20)-LinearEBE-TBT-L = 10nm
+                    double inertiaY = 100.18; //1058.55;
+                    double inertiaZ = 100.18; //1058.55;1058.55;
+                    double torsionalInertia = 68.77; //496.38;
+                    double effectiveAreaY = area;
+                    double effectiveAreaZ = area;
+
+                    string CNTgeometryFileName = "nodes.txt";
+                    string CNTconnectivityFileName = "connectivity.txt";
+
+                    string fileNameOnlyCNTgeometryFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTgeometryFileName));
+                    string fileNameOnlyCNTconnectivityFileName = Path.Combine(workingDirectory, Path.GetFileNameWithoutExtension(CNTconnectivityFileName));
+                    string extension = Path.GetExtension(CNTgeometryFileName);
+                    string extension_2 = Path.GetExtension(CNTconnectivityFileName);
+
+                    string currentCNTgeometryFileName = string.Format("{0}_{1}{2}", fileNameOnlyCNTgeometryFileName, noStochasticSimulation, extension);
+
+                    //string currentCNTconnectivityFileName = string.Format("{0}_{1}{2}", fileNameOnlyCNTconnectivityFileName, noStochasticSimulation, extension_2);
+                    string currentCNTconnectivityFileName = string.Format("{0}{1}", fileNameOnlyCNTconnectivityFileName, extension_2);
+
+                    int CNTNodes = File.ReadLines(currentCNTgeometryFileName).Count();
+                    int CNTElems = File.ReadLines(currentCNTconnectivityFileName).Count();
+
+                    // Geometry
+                    using (TextReader reader = File.OpenText(currentCNTgeometryFileName))
+                    {
+                        for (int i = 0; i < CNTNodes; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int nodeID = int.Parse(bits[0]) + (hostNodes + embeddedNodes); // matrixNodes
+                            double nodeX = double.Parse(bits[1]);
+                            double nodeY = double.Parse(bits[2]);
+                            double nodeZ = double.Parse(bits[3]);
+                            model.NodesDictionary.Add(nodeID, new Node_v2 { ID = nodeID, X = nodeX, Y = nodeY, Z = nodeZ });
+                        }
+                    }
+
+                    // Create Cohesive Material
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
+
+                    // Create Elastic 3D Material
+                    var elasticMaterial = new ElasticMaterial3D_v2
+                    {
+                        YoungModulus = youngModulus,
+                        PoissonRatio = poissonRatio,
+                    };
+
+                    // Create Beam3D Section
+                    var beamSection = new BeamSection3D(area, inertiaY, inertiaZ, torsionalInertia, effectiveAreaY, effectiveAreaZ);
+
+                    // element nodes
+                    using (TextReader reader = File.OpenText(currentCNTconnectivityFileName))
+                    {
+                        for (int i = 0; i < CNTElems; i++)
+                        {
+                            string text = reader.ReadLine();
+                            string[] bits = text.Split(',');
+                            int elementID = int.Parse(bits[0]) + (hostElements + embeddedElements); // matrixElements + CNTelements
+                            int node1 = int.Parse(bits[1]) + (hostNodes + embeddedNodes); // matrixNodes + CNTnodes
+                            int node2 = int.Parse(bits[2]) + (hostNodes + embeddedNodes); // matrixNodes + CNTnodes
+                                                                                          // element nodes clone
+                            var elementNodesClone = new List<Node_v2>();
+                            elementNodesClone.Add(model.NodesDictionary[node1]);
+                            elementNodesClone.Add(model.NodesDictionary[node2]);
+                            // element nodes beam
+                            var elementNodesBeam = new List<Node_v2>();
+                            elementNodesBeam.Add(model.NodesDictionary[node1 - embeddedNodes]);
+                            elementNodesBeam.Add(model.NodesDictionary[node2 - embeddedNodes]);
+                            // Create Cohesive Beam Element
+                            var cohesiveElement = new Element_v2()
+                            {
+                                ID = elementID,
+                                ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
+                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                            };
+                            // Add beam element to the element and subdomains dictionary of the model
+                            model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
+                            // Add Cohesive Element Nodes (!)
+                            model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node1 - embeddedNodes]);
+                            model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node2 - embeddedNodes]);
+                            model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node1]);
+                            model.ElementsDictionary[cohesiveElement.ID].AddNode(model.NodesDictionary[node2]);
+                            // Add Cohesive Element in Subdomain
+                            model.SubdomainsDictionary[0].Elements.Add(cohesiveElement);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
