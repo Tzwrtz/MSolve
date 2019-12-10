@@ -1949,12 +1949,14 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
             }
         }
-
-
+        
         // Run-2
         public static class Run2a_Elastic
         {
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\output files\elastic";
+            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files"; 
+            //E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files";
+            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\output files\elastic"; 
+            //E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 125;
             private const int hostNodes = 216;
@@ -2190,7 +2192,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 parentAnalyzer.Solve();
 
                 // Create Paraview File
-                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, "test");
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
                 paraview.CreateParaviewFile();
             }
 
@@ -2270,7 +2272,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 parentAnalyzer.Solve();
                 
                 // Create Paraview File
-                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, "test");
+                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
                 paraview.CreateParaviewFile();
             }
 
@@ -2294,8 +2296,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 private static void HostElements(Model_v2 model)
-                {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files";
+                {                    
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=50-5x5x5-Geometry_MSolve.inp";
                     string MatrixGonnectivityFileName = "MATRIX_3D-L_x=50-L_y=50-L_z=50-5x5x5-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -2374,7 +2375,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files";
+                    //string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -2459,7 +2460,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double torsionalInertia = 68.77; //496.38;
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files";
+                    //string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 7\run-2a\input files";
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";

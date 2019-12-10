@@ -149,14 +149,15 @@ namespace ISAAR.MSolve.FEM.Postprocessing
             Dictionary<INode, double[]> nodalDisplacements = new Dictionary<INode, double[]>();
             foreach (var element in elements)
             {
-                var displacements = _model.SubdomainsDictionary[0].CalculateElementDisplacements(element, _solution);
+                var embeddedBeamDisplacements = _model.SubdomainsDictionary[0].CalculateElementDisplacements(element, _solution);
+                var beamDisplacements = element.ElementType.DofEnumerator.GetTransformedDisplacementsVector(embeddedBeamDisplacements);
                 if (!nodalDisplacements.ContainsKey(element.Nodes[0]))
                 {
-                    nodalDisplacements.Add(element.Nodes[0], new double[] { displacements[0], displacements[1], displacements[2] });
+                    nodalDisplacements.Add(element.Nodes[0], new double[] { beamDisplacements[0], beamDisplacements[1], beamDisplacements[2] });
                 }
                 if (!nodalDisplacements.ContainsKey(element.Nodes[1]))
                 {
-                    nodalDisplacements.Add(element.Nodes[1], new double[] { displacements[6], displacements[7], displacements[8] });
+                    nodalDisplacements.Add(element.Nodes[1], new double[] { beamDisplacements[6], beamDisplacements[7], beamDisplacements[8] });
                 }
             }
 

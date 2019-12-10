@@ -363,8 +363,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\output files\elastic";
+            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\output files\elastic"; 
+            //E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 250;
             private const int hostNodes = 396;
@@ -373,7 +375,88 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -30.0;
             private const int monitorNode = 361;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 100;            
+            private const int increments = 10;
+
+            public static void SingleMatrix_DisplacementControl()
+            {
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.SingleMatrixdBuilder(model);
+
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 36; iNode++)
+                {
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
+                // Boundary Conditions - [Bottom-End]
+                for (int iNode = 1; iNode <= 361; iNode += 36)
+                {
+                    for (int j = 0; j <= 5; j++)
+                    {
+                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    }
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}                
+                for (int iNode = 361; iNode <= 396; iNode++)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                }
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-08
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2a-SingleMatrix-Elastic.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, "000", extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                    model.NodesDictionary[monitorNode], DOFType.Z, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var analyzer = (DisplacementControlAnalyzer_v2)childAnalyzer;
+                var solution = analyzer.uPlusdu[0];
+                var paraview = new ParaviewEmbedded3D(model,
+                    solution, fileNameOnly);
+                paraview.CreateParaviewFile();
+            }
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
@@ -427,7 +510,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-08
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -449,7 +532,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 parentAnalyzer.Solve();
 
                 // Create Paraview File
-                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                var analyzer = (DisplacementControlAnalyzer_v2)childAnalyzer;
+                var solution = analyzer.uPlusdu[0];
+                var paraview = new ParaviewEmbedded3D(model,
+                    solution, fileNameOnly);
                 paraview.CreateParaviewFile();
             }
 
@@ -527,12 +613,19 @@ namespace ISAAR.MSolve.SamplesConsole
                 parentAnalyzer.Solve();
 
                 // Create Paraview File
-                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                var analyzer = (DisplacementControlAnalyzer_v2)childAnalyzer;
+                var solution = analyzer.uPlusdu[0];
+                var paraview = new ParaviewEmbedded3D(model, solution, fileNameOnly);
                 paraview.CreateParaviewFile();
             }
 
             public static class EBEEmbeddedModelBuilder
             {
+                public static void SingleMatrixdBuilder(Model_v2 model)
+                {
+                    HostElements(model);
+                }
+
                 public static void FullyBondedEmbeddedBuilder_Stochastic(Model_v2 model, int i)
                 {
                     HostElements(model);
