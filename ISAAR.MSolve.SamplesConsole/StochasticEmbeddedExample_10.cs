@@ -164,6 +164,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string paraviewFileName = string.Format("{0}_{1}", fileNameOnly, noStochasticSimulation);
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
                 var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
@@ -174,7 +175,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 parentAnalyzer.Solve();
 
                 // Create Paraview File
-                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                var analyzer = (DisplacementControlAnalyzer_v2)childAnalyzer;
+                var solution = analyzer.uPlusdu[0];
+                var paraview = new ParaviewEmbedded3D(model,
+                    solution, paraviewFileName);
                 paraview.CreateParaviewFile();
             }
 
@@ -298,6 +302,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string paraviewFileName = string.Format("{0}_{1}", fileNameOnly, noStochasticSimulation);
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
                 var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
@@ -308,7 +313,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 parentAnalyzer.Solve();
 
                 // Create Paraview File
-                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                var analyzer = (DisplacementControlAnalyzer_v2)childAnalyzer;
+                var solution = analyzer.uPlusdu[0];
+                var paraview = new ParaviewEmbedded3D(model,
+                    solution, paraviewFileName);
                 paraview.CreateParaviewFile();
             }
 
@@ -442,9 +450,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string paraviewFileName = string.Format("{0}_{1}", fileNameOnly, noStochasticSimulation);
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
                 var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                    model.NodesDictionary[monitorNode], DOFType.Z, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
                 // Run the analysis
@@ -452,7 +461,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 parentAnalyzer.Solve();
 
                 // Create Paraview File
-                var paraview = new ParaviewEmbedded3D(model, solver.LinearSystems[0].Solution, fileNameOnly);
+                var analyzer = (DisplacementControlAnalyzer_v2)childAnalyzer;
+                var solution = analyzer.uPlusdu[0];
+                var paraview = new ParaviewEmbedded3D(model,
+                    solution, paraviewFileName);
                 paraview.CreateParaviewFile();
             }
 

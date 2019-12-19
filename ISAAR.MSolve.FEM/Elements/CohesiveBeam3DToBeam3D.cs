@@ -119,8 +119,7 @@ namespace ISAAR.MSolve.FEM.Elements
 
             //Calculate Delta for all GPs
             for (int npoint1 = 0; npoint1 < nGaussPoints; npoint1++)
-            {
-                
+            {                
                 for (int l = 0; l < 3; l++)
                 { u[l] = 0; }
                 for (int l = 0; l < 3; l++)
@@ -131,7 +130,6 @@ namespace ISAAR.MSolve.FEM.Elements
                     }
                 }
                 for (int l = 0; l < 3; l++)
-
                 {
                     for (int m = 0; m < 3; m++)
                     {
@@ -305,7 +303,9 @@ namespace ISAAR.MSolve.FEM.Elements
             // ***NEW***
             Matrix R = CalculateRotationMatrix();
             Matrix ConstaintsRotations = Matrix.CreateZero(3, 3);
-            ConstaintsRotations[0, 0] = 1.0;
+            ConstaintsRotations[0, 0] = 1.0; // 10.0; //
+            //ConstaintsRotations[1, 1] = 10.0; //1.0; //
+            //ConstaintsRotations[2, 2] = 10.0; //1.0; //
             Matrix Constr_R = ConstaintsRotations * R;
             Matrix M2 = R.Transpose() * Constr_R;
 
@@ -313,17 +313,16 @@ namespace ISAAR.MSolve.FEM.Elements
             {
                 for (int jj = 0; jj < 3; jj++)
                 {
-                    k_cohesive_element_total[ii + 3, jj + 3] = M2[ii, jj];
+                    k_cohesive_element_total[ii + 3, jj + 3] = M2[ii, jj]; //
                     k_cohesive_element_total[ii + 3, jj + 15] = -M2[ii, jj];
-                    k_cohesive_element_total[ii + 9, jj + 9] = M2[ii, jj];
+                    k_cohesive_element_total[ii + 9, jj + 9] = M2[ii, jj]; //
                     k_cohesive_element_total[ii + 9, jj + 21] = -M2[ii, jj];
                     k_cohesive_element_total[ii + 15, jj + 3] = -M2[ii, jj];
-                    k_cohesive_element_total[ii + 15, jj + 15] = M2[ii, jj];
+                    k_cohesive_element_total[ii + 15, jj + 15] = M2[ii, jj]; //
                     k_cohesive_element_total[ii + 21, jj + 9] = -M2[ii, jj];
-                    k_cohesive_element_total[ii + 21, jj + 21] = M2[ii, jj];
+                    k_cohesive_element_total[ii + 21, jj + 21] = M2[ii, jj]; //
                 }
             }
-
             return k_cohesive_element_total; //k_cohesive_element; //   
         }
 
