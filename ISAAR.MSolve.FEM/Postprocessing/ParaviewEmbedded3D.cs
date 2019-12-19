@@ -235,11 +235,22 @@ namespace ISAAR.MSolve.FEM.Postprocessing
         {
             int[] conn = new int[] { 2, 3 };  // new int[] { 0, 1 };
             var elements = _model.Elements.Where(e => e.ElementType is CohesiveBeam3DToBeam3D).ToList();
-            var nodes = new List<INode>();
-            elements.ForEach(e => nodes.AddRange(e.Nodes)); //
-            nodes = nodes.ToList(); //nodes = nodes.Distinct().ToList();
+            
+            var hostElements = _model.Elements.Where(e => e.ElementType is Hexa8NonLinear_v2).ToList();
+            var hostNodes = new List<INode>();
+            hostElements.ForEach(e => hostNodes.AddRange(e.Nodes));
+            var numberOfHostNodes = hostNodes.Distinct().ToList().Count;
 
-            var numberOfPoints = nodes.Count / 2;
+            var beamElements = _model.Elements.Where(e => e.ElementType is Beam3DCorotationalQuaternion_v2).ToList();
+            var beamNodes = new List<INode>();
+            beamElements.ForEach(e => beamNodes.AddRange(e.Nodes));
+            var numberOfBeamNodes = beamNodes.Distinct().ToList().Count;
+
+            var nodes = new List<INode>();
+            elements.ForEach(e => nodes.AddRange(e.Nodes));
+            nodes = nodes.Where(n => n.ID > (numberOfHostNodes + numberOfBeamNodes)).Distinct().ToList();
+
+            var numberOfPoints = nodes.Count;
             var numberOfCells = elements.Count;
 
             int numberOfVerticesPerCell = 0;
@@ -274,18 +285,29 @@ namespace ISAAR.MSolve.FEM.Postprocessing
                 outputFile.WriteLine($"<PointData Vectors=\"U\">");
                 outputFile.WriteLine($"<DataArray type=\"Float32\" Name=\"U\" format=\"ascii\" NumberOfComponents=\"3\">");
 
-                for (int i = 2; i < (2 * numberOfPoints); i = i + 4)
+                for (int i = 0; i < numberOfPoints; i++)
                 {
-                    for (int j = 0; j <= 1; j++)
-                    {
-                        var node = nodes[i + j];
-                        var dx = nodalDisplacements[node][0];
-                        var dy = nodalDisplacements[node][1];
-                        var dz = nodalDisplacements[node][2];
+                    var node = nodes[i];
+                    var dx = nodalDisplacements[node][0];
+                    var dy = nodalDisplacements[node][1];
+                    var dz = nodalDisplacements[node][2];
 
-                        outputFile.WriteLine($"{dx} {dy} {dz}");
-                    }                    
+                    outputFile.WriteLine($"{dx} {dy} {dz}");
                 }
+
+
+                //for (int i = 2; i < (2 * numberOfPoints); i = i + 4)
+                //{
+                //    for (int j = 0; j <= 1; j++)
+                //    {
+                //        var node = nodes[i + j];
+                //        var dx = nodalDisplacements[node][0];
+                //        var dy = nodalDisplacements[node][1];
+                //        var dz = nodalDisplacements[node][2];
+
+                //        outputFile.WriteLine($"{dx} {dy} {dz}");
+                //    }                    
+                //}
 
                 outputFile.WriteLine("</DataArray>");
 
@@ -293,29 +315,34 @@ namespace ISAAR.MSolve.FEM.Postprocessing
                 outputFile.WriteLine("<Points>");
                 outputFile.WriteLine("<DataArray type=\"Float32\" NumberOfComponents=\"3\">");
 
-                //for (int i = 0; i < numberOfPoints; i++)
-                //    outputFile.WriteLine($"{nodes[i].X} {nodes[i].Y} {nodes[i].Z}");
-                for (int i = 2; i < (2 * numberOfPoints); i = i + 4)
-                {
-                    for (int j = 0; j <= 1; j++)
-                    {
-                        outputFile.WriteLine($"{nodes[i + j].X} {nodes[i + j].Y} {nodes[i + j].Z}");
-                    }
-                }
+                for (int i = 0; i < numberOfPoints; i++)
+                    outputFile.WriteLine($"{nodes[i].X} {nodes[i].Y} {nodes[i].Z}");
 
                 outputFile.WriteLine("</DataArray>");
                 outputFile.WriteLine("</Points>");
                 outputFile.WriteLine("<Cells>");
                 outputFile.WriteLine("<DataArray type=\"Int32\" Name=\"connectivity\">");
 
+                //for (int i = 0; i < numberOfCells; i++)
+                //{
+                //    for (int j = 0; j < 2; j++)
+                //    {
+                //        var elementNode = elements[i].Nodes[conn[j]];
+                //        var indexOfElementNode = nodes.IndexOf(elementNode);
+                //        outputFile.Write($"{indexOfElementNode} ");
+                //    }
+                //    outputFile.WriteLine("");
+                //}
+
                 for (int i = 0; i < numberOfCells; i++)
                 {
-                    for (int j = 0; j < 2; j++)
+                    foreach (var node in elements[i].Nodes.Where(x => x.ID > (numberOfHostNodes + numberOfBeamNodes)))
                     {
-                        var elementNode = elements[i].Nodes[conn[j]];
-                        var indexOfElementNode = nodes.IndexOf(elementNode);
+                        var indexOfElementNode = nodes.IndexOf(node);
                         outputFile.Write($"{indexOfElementNode} ");
+                        outputFile.WriteLine("");
                     }
+                    
                     outputFile.WriteLine("");
                 }
 
