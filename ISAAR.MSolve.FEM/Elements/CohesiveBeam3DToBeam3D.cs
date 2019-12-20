@@ -7,6 +7,7 @@ using ISAAR.MSolve.FEM.Entities;
 using ISAAR.MSolve.FEM.Interfaces;
 using ISAAR.MSolve.FEM.Interpolation;
 using ISAAR.MSolve.LinearAlgebra.Matrices;
+using ISAAR.MSolve.LinearAlgebra.Vectors;
 using ISAAR.MSolve.Materials.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -183,7 +184,7 @@ namespace ISAAR.MSolve.FEM.Elements
             return new Tuple<Matrix[], double[]>(RtN3, integrationsCoeffs);
         }
 
-        private double[] UpdateForces(Element_v2 element, Matrix[] RtN3, double[] integrationCoeffs)
+        private double[] UpdateForces(Element_v2 element, Matrix[] RtN3, double[] integrationCoeffs, double[] localTotalDisplacements)
         {
             double[] fxk1_coh = new double[24]; // Beam3D: 4 nodes, 6 dofs/node (translations + rotations)
 
@@ -210,6 +211,24 @@ namespace ISAAR.MSolve.FEM.Elements
                     fxk1_coh[l] += r_int_1[l - 3];
                     fxk1_coh[12 + l] += (-r_int_1[l - 3]);
                 }
+            }
+            Matrix R = CalculateRotationMatrix();
+            Matrix ConstaintsRotations = Matrix.CreateZero(3, 3);
+            ConstaintsRotations[0, 0] = 1.0; // 10.0; //
+            Matrix Constr_R = ConstaintsRotations * R;
+            Matrix M2 = R.Transpose() * Constr_R;
+            var r_int_2a = M2 * Vector.CreateFromArray(new double[3] {localTotalDisplacements[3]-localTotalDisplacements[15],
+                localTotalDisplacements[4] - localTotalDisplacements[16], localTotalDisplacements[5]-localTotalDisplacements[17] });
+            var r_int_2b = M2 * Vector.CreateFromArray(new double[3] {localTotalDisplacements[9]-localTotalDisplacements[21],
+                localTotalDisplacements[10] - localTotalDisplacements[22], localTotalDisplacements[11]-localTotalDisplacements[23] });
+
+            for (int i = 0; i < 3; i++)
+            {
+                fxk1_coh[i + 3] = r_int_2a[i];
+                fxk1_coh[i + 9] = r_int_2b[i];
+
+                fxk1_coh[i + 15] = -r_int_2a[i];
+                fxk1_coh[i + 21] = -r_int_2b[i];
             }
             return fxk1_coh;
         }
@@ -353,6 +372,7 @@ namespace ISAAR.MSolve.FEM.Elements
 
         public double[] CalculateForces(Element_v2 element, double[] localTotalDisplacementsSuperElement, double[] localdDisplacementsSuperelement)
         {
+            double[] localTotalDisplacements = dofEnumerator.GetTransformedDisplacementsVector(localTotalDisplacementsSuperElement);
             double[] fxk2_coh;
             Tuple<Matrix[], double[]> RtN3AndIntegrationCoeffs;
             RtN3AndIntegrationCoeffs = CalculateNecessaryMatricesForStiffnessMatrixAndForcesVectorCalculations(); // Rt * Nbeam
@@ -360,7 +380,7 @@ namespace ISAAR.MSolve.FEM.Elements
             RtN3 = RtN3AndIntegrationCoeffs.Item1;
             double[] integrationCoeffs;
             integrationCoeffs = RtN3AndIntegrationCoeffs.Item2;
-            fxk2_coh = this.UpdateForces(element, RtN3, integrationCoeffs); // sxesh 18 k 19
+            fxk2_coh = this.UpdateForces(element, RtN3, integrationCoeffs, localTotalDisplacements); // sxesh 18 k 19
             return dofEnumerator.GetTransformedForcesVector(fxk2_coh);// embedding
         }
 
