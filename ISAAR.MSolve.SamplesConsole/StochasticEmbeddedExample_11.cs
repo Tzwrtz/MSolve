@@ -872,7 +872,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.05, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -1418,7 +1418,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.05, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -1866,7 +1866,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.10, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2312,7 +2312,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.10, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2759,7 +2759,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.25, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -3202,7 +3202,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.25, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -3649,7 +3649,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.50, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -4092,7 +4092,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.50, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2

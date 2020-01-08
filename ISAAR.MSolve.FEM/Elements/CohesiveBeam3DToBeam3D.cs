@@ -211,25 +211,47 @@ namespace ISAAR.MSolve.FEM.Elements
                     fxk1_coh[l] += r_int_1[l - 3];
                     fxk1_coh[12 + l] += (-r_int_1[l - 3]);
                 }
-            }
-            Matrix R = CalculateRotationMatrix();
-            Matrix ConstaintsRotations = Matrix.CreateZero(3, 3);
-            ConstaintsRotations[0, 0] = 1.0; // 10.0; //
-            Matrix Constr_R = ConstaintsRotations * R;
-            Matrix M2 = R.Transpose() * Constr_R;
-            var r_int_2a = M2 * Vector.CreateFromArray(new double[3] {localTotalDisplacements[3]-localTotalDisplacements[15],
-                localTotalDisplacements[4] - localTotalDisplacements[16], localTotalDisplacements[5]-localTotalDisplacements[17] });
-            var r_int_2b = M2 * Vector.CreateFromArray(new double[3] {localTotalDisplacements[9]-localTotalDisplacements[21],
-                localTotalDisplacements[10] - localTotalDisplacements[22], localTotalDisplacements[11]-localTotalDisplacements[23] });
 
-            for (int i = 0; i < 3; i++)
-            {
-                fxk1_coh[i + 3] = r_int_2a[i];
-                fxk1_coh[i + 9] = r_int_2b[i];
+                Matrix R = CalculateRotationMatrix();
+                Matrix ConstaintsRotations = Matrix.CreateZero(3, 3);
+                ConstaintsRotations[0, 0] = 1.0; // 10.0; //
+                Matrix Constr_R = ConstaintsRotations * R;
+                Matrix M2 = R.Transpose() * Constr_R;
+                var r_int_2a = M2 * Vector.CreateFromArray(new double[3] {localTotalDisplacements[3]-localTotalDisplacements[15],
+                localTotalDisplacements[4] - localTotalDisplacements[16], localTotalDisplacements[5]-localTotalDisplacements[17] }) * integrationCoeffs[npoint1];
+                var r_int_2b = M2 * Vector.CreateFromArray(new double[3] {localTotalDisplacements[9]-localTotalDisplacements[21],
+                localTotalDisplacements[10] - localTotalDisplacements[22], localTotalDisplacements[11]-localTotalDisplacements[23] }) * integrationCoeffs[npoint1];
 
-                fxk1_coh[i + 15] = -r_int_2a[i];
-                fxk1_coh[i + 21] = -r_int_2b[i];
+                for (int i = 0; i < 3; i++)
+                {
+                    fxk1_coh[i + 3] += r_int_2a[i];
+                    fxk1_coh[i + 9] += r_int_2b[i];
+
+                    fxk1_coh[i + 15] += -r_int_2a[i];
+                    fxk1_coh[i + 21] += -r_int_2b[i];
+                }
             }
+
+            //Matrix R = CalculateRotationMatrix();
+            //Matrix ConstaintsRotations = Matrix.CreateZero(3, 3);
+            //ConstaintsRotations[0, 0] = 1.0; // 10.0; //
+            //Matrix Constr_R = ConstaintsRotations * R;
+            //Matrix M2 = R.Transpose() * Constr_R;
+            //var r_int_2a = M2 * Vector.CreateFromArray(new double[3] {localTotalDisplacements[3]-localTotalDisplacements[15],
+            //    localTotalDisplacements[4] - localTotalDisplacements[16], localTotalDisplacements[5]-localTotalDisplacements[17] });
+            //var r_int_2b = M2 * Vector.CreateFromArray(new double[3] {localTotalDisplacements[9]-localTotalDisplacements[21],
+            //    localTotalDisplacements[10] - localTotalDisplacements[22], localTotalDisplacements[11]-localTotalDisplacements[23] });
+
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    fxk1_coh[i + 3] = r_int_2a[i];
+            //    fxk1_coh[i + 9] = r_int_2b[i];
+
+            //    fxk1_coh[i + 15] = -r_int_2a[i];
+            //    fxk1_coh[i + 21] = -r_int_2b[i];
+            //}
+
+
             return fxk1_coh;
         }
 
@@ -291,7 +313,31 @@ namespace ISAAR.MSolve.FEM.Elements
                         k_cohesive_element_total[l + 18, m + 6] += -M[l + 3, m + 3];
                         k_cohesive_element_total[l + 18, m + 18] += M[l + 3, m + 3];
                     }
-                }                
+                }
+
+                // ***NEW***
+                Matrix R = CalculateRotationMatrix();
+                Matrix ConstaintsRotations = Matrix.CreateZero(3, 3);
+                ConstaintsRotations[0, 0] = 1.0; // 10.0; //
+                                                 //ConstaintsRotations[1, 1] = 10.0; //1.0; //
+                                                 //ConstaintsRotations[2, 2] = 10.0; //1.0; //
+                Matrix Constr_R = ConstaintsRotations * R;
+                Matrix M2 = R.Transpose() * Constr_R * integrationCoeffs[npoint1];
+
+                for (int ii = 0; ii < 3; ii++)
+                {
+                    for (int jj = 0; jj < 3; jj++)
+                    {
+                        k_cohesive_element_total[ii + 3, jj + 3] += M2[ii, jj]; //
+                        k_cohesive_element_total[ii + 3, jj + 15] += -M2[ii, jj];
+                        k_cohesive_element_total[ii + 9, jj + 9] += M2[ii, jj]; //
+                        k_cohesive_element_total[ii + 9, jj + 21] += -M2[ii, jj];
+                        k_cohesive_element_total[ii + 15, jj + 3] += -M2[ii, jj];
+                        k_cohesive_element_total[ii + 15, jj + 15] += M2[ii, jj]; //
+                        k_cohesive_element_total[ii + 21, jj + 9] += -M2[ii, jj];
+                        k_cohesive_element_total[ii + 21, jj + 21] += M2[ii, jj]; //
+                    }
+                }
             }
 
             // ***OLD***
@@ -320,28 +366,29 @@ namespace ISAAR.MSolve.FEM.Elements
             // //k_cohesive_element_total[23, 11] = -1.0; //
 
             // ***NEW***
-            Matrix R = CalculateRotationMatrix();
-            Matrix ConstaintsRotations = Matrix.CreateZero(3, 3);
-            ConstaintsRotations[0, 0] = 1.0; // 10.0; //
-            //ConstaintsRotations[1, 1] = 10.0; //1.0; //
-            //ConstaintsRotations[2, 2] = 10.0; //1.0; //
-            Matrix Constr_R = ConstaintsRotations * R;
-            Matrix M2 = R.Transpose() * Constr_R;
+            //Matrix R = CalculateRotationMatrix();
+            //Matrix ConstaintsRotations = Matrix.CreateZero(3, 3);
+            //ConstaintsRotations[0, 0] = 1.0; // 10.0; //
+            ////ConstaintsRotations[1, 1] = 10.0; //1.0; //
+            ////ConstaintsRotations[2, 2] = 10.0; //1.0; //
+            //Matrix Constr_R = ConstaintsRotations * R;
+            //Matrix M2 = R.Transpose() * Constr_R;
 
-            for (int ii = 0; ii < 3; ii++)
-            {
-                for (int jj = 0; jj < 3; jj++)
-                {
-                    k_cohesive_element_total[ii + 3, jj + 3] = M2[ii, jj]; //
-                    k_cohesive_element_total[ii + 3, jj + 15] = -M2[ii, jj];
-                    k_cohesive_element_total[ii + 9, jj + 9] = M2[ii, jj]; //
-                    k_cohesive_element_total[ii + 9, jj + 21] = -M2[ii, jj];
-                    k_cohesive_element_total[ii + 15, jj + 3] = -M2[ii, jj];
-                    k_cohesive_element_total[ii + 15, jj + 15] = M2[ii, jj]; //
-                    k_cohesive_element_total[ii + 21, jj + 9] = -M2[ii, jj];
-                    k_cohesive_element_total[ii + 21, jj + 21] = M2[ii, jj]; //
-                }
-            }
+            //for (int ii = 0; ii < 3; ii++)
+            //{
+            //    for (int jj = 0; jj < 3; jj++)
+            //    {
+            //        k_cohesive_element_total[ii + 3, jj + 3] = M2[ii, jj]; //
+            //        k_cohesive_element_total[ii + 3, jj + 15] = -M2[ii, jj];
+            //        k_cohesive_element_total[ii + 9, jj + 9] = M2[ii, jj]; //
+            //        k_cohesive_element_total[ii + 9, jj + 21] = -M2[ii, jj];
+            //        k_cohesive_element_total[ii + 15, jj + 3] = -M2[ii, jj];
+            //        k_cohesive_element_total[ii + 15, jj + 15] = M2[ii, jj]; //
+            //        k_cohesive_element_total[ii + 21, jj + 9] = -M2[ii, jj];
+            //        k_cohesive_element_total[ii + 21, jj + 21] = M2[ii, jj]; //
+            //    }
+            //}
+
             return k_cohesive_element_total; //k_cohesive_element; //   
         }
 
