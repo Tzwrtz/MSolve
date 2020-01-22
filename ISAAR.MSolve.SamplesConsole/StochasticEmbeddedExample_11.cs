@@ -91,7 +91,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -263,7 +263,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -371,10 +371,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\input files";
-            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\output files\elastic";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\output files\elastic"; 
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 11\run-2a\output files\elastic";
             private const int subdomainID = 0;
@@ -385,7 +385,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -30.0;
             private const int monitorNode = 361;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 100;
+            private const int increments = 1000;
 
             public static void SingleMatrix_DisplacementControl()
             {
@@ -443,7 +443,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -531,7 +531,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -629,7 +629,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2a-Cohesive-Elastic.txt";
+                string currentOutputFileName = "Run2a-Cohesive-Elastic-ConstRot=1000-K_coh=10.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -839,6 +839,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -871,8 +880,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.05, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -994,7 +1002,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -1082,7 +1090,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -1170,7 +1178,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -1385,6 +1393,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -1416,9 +1433,8 @@ namespace ISAAR.MSolve.SamplesConsole
                         }
                     }
 
-                    // Create Cohesive Material
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
+                    // Create Cohesive Material                    
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.05, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -1534,7 +1550,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -1619,7 +1635,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -1629,7 +1645,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2b-Cohesive-Elastic.txt";
+                string currentOutputFileName = "Run2b-Cohesive-Elastic-ConstRot=1000-K_coh=10.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -1833,6 +1849,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -1866,7 +1891,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.10, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -1982,7 +2007,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -2070,7 +2095,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -2279,6 +2304,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -2312,7 +2346,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.10, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2428,7 +2462,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -2512,7 +2546,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -2522,7 +2556,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2c-Cohesive-Elastic.txt";
+                string currentOutputFileName = "Run2c-Cohesive-Elastic-ConstRot=1000-K_coh=10.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -2726,6 +2760,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -2759,7 +2802,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.25, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2875,7 +2918,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -2959,7 +3002,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -3169,6 +3212,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -3202,7 +3254,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.25, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -3318,7 +3370,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -3402,7 +3454,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -3412,7 +3464,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2d-Cohesive-Elastic.txt";
+                string currentOutputFileName = "Run2d-Cohesive-Elastic-ConstRot=1000-K_coh=10.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -3616,6 +3668,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -3649,7 +3710,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.50, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -3765,7 +3826,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -3849,7 +3910,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 1000,
+                    MaxIterationsPerIncrement = 100,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -4059,6 +4120,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -4092,7 +4162,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                     // Create Cohesive Material
                     //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.50, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2

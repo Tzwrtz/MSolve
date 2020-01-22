@@ -214,9 +214,9 @@ namespace ISAAR.MSolve.FEM.Elements
 
                 Matrix R = CalculateRotationMatrix();
                 Matrix ConstaintsRotations = Matrix.CreateZero(3, 3);
-                ConstaintsRotations[0, 0] = 1000000.0; // 10.0; //
-                ConstaintsRotations[1, 1] = 1000000.0; // 10.0; //
-                ConstaintsRotations[2, 2] = 1000000.0; // 10.0; //
+                ConstaintsRotations[0, 0] = 1000.0;
+                ConstaintsRotations[1, 1] = 1000.0;
+                ConstaintsRotations[2, 2] = 1000.0;
                 Matrix Constr_R = ConstaintsRotations * R;
                 Matrix M2 = R.Transpose() * Constr_R;
                 var r_int_2a = M2 * Vector.CreateFromArray(new double[3] {localTotalDisplacements[3]-localTotalDisplacements[15],
@@ -320,9 +320,9 @@ namespace ISAAR.MSolve.FEM.Elements
                 // ***NEW***
                 Matrix R = CalculateRotationMatrix();
                 Matrix ConstaintsRotations = Matrix.CreateZero(3, 3);
-                ConstaintsRotations[0, 0] = 1000000.0; // 10.0; //
-                ConstaintsRotations[1, 1] = 1000000.0; // 10.0; //
-                ConstaintsRotations[2, 2] = 1000000.0; // 10.0; //
+                ConstaintsRotations[0, 0] = 1000.0;
+                ConstaintsRotations[1, 1] = 1000.0;
+                ConstaintsRotations[2, 2] = 1000.0;
                 Matrix Constr_R = ConstaintsRotations * R;
                 Matrix M2 = R.Transpose() * Constr_R * integrationCoeffs[npoint1];
 
