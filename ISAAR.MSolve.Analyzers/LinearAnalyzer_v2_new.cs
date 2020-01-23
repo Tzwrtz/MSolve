@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using ISAAR.MSolve.Discretization.Interfaces;
+using ISAAR.MSolve.FEM.Entities;
 using ISAAR.MSolve.LinearAlgebra.Vectors;
 using ISAAR.MSolve.Logging.Interfaces;
 using ISAAR.MSolve.Solvers;
@@ -9,14 +10,14 @@ using ISAAR.MSolve.Solvers.LinearSystems;
 
 namespace ISAAR.MSolve.Analyzers
 {
-    class LinearAnalyzer_v2_new : IChildAnalyzer
+    public class LinearAnalyzer_v2_new : IChildAnalyzer
     {
         private readonly IReadOnlyDictionary<int, ILinearSystem_v2> linearSystems;
-        private readonly IStructuralModel model;
+        private readonly IStructuralModel_v2 model;
         private readonly IAnalyzerProvider_v2 provider;
-        private readonly ISolver_v2 solver;
+        private readonly ISolver_v2 solver;        
 
-        public LinearAnalyzer_v2_new(IStructuralModel model, ISolver_v2 solver, IAnalyzerProvider_v2 provider)
+        public LinearAnalyzer_v2_new(IStructuralModel_v2 model, ISolver_v2 solver, IAnalyzerProvider_v2 provider)
         {
             this.model = model;
             this.solver = solver;
@@ -37,15 +38,10 @@ namespace ISAAR.MSolve.Analyzers
             //solver.Initialize();
         }
 
-        public void Initialize(bool isFirstAnalysis)
-        {
-            InitializeLogs();
-            //solver.Initialize(); //TODO: Using this needs refactoring
-        }
-
         public void Initialize()
         {
-            throw new NotImplementedException();
+            InitializeLogs();
+            solver.Initialize();
         }
 
         public void Solve()
