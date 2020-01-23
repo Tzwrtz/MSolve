@@ -637,7 +637,7 @@ namespace ISAAR.MSolve.SamplesConsole
             //// EmbeddedExample-11 //
             ////*******************//
             LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
-            int startingNumofSimulations = 1;
+            int startingNumofSimulations = 3;
             int numberOfSimulations = 10;
 
             //***RUN-1_DISPLACEMENT CONTROL***//
