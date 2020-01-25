@@ -941,10 +941,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 396;
             private const int embeddedElements = 500;
             private const int embeddedNodes = 550;
-            private const double nodalDisplacement = -30.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 361;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void SingleMatrix_DisplacementControl()
             {
@@ -1952,10 +1952,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 396;
             private const int embeddedElements = 500;
             private const int embeddedNodes = 550;
-            private const double nodalDisplacement = -30.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 361;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
@@ -2863,10 +2863,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 396;
             private const int embeddedElements = 500;
             private const int embeddedNodes = 550;
-            private const double nodalDisplacement = -30.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 361;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
@@ -3771,10 +3771,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 396;
             private const int embeddedElements = 500;
             private const int embeddedNodes = 550;
-            private const double nodalDisplacement = -30.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 361;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {

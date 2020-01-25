@@ -33,7 +33,7 @@ namespace ISAAR.MSolve.SamplesConsole
         public static class Run1_2a_Elastic
         {
             private const int subdomainID = 0;
-            private const double nodalDisplacement = -50.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
@@ -210,7 +210,7 @@ namespace ISAAR.MSolve.SamplesConsole
         public static class Run1_2a_Plastic
         {
             private const int subdomainID = 0;
-            private const double nodalDisplacement = -50.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
 
@@ -383,10 +383,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 12\run-2a\input files";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 12\run-2a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 12\run-2a\input files";
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 12\run-2a\input files";
-            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 12\run-2a\output files\elastic";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 12\run-2a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 12\run-2a\output files\elastic"; 
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 12\run-2a\output files\elastic";
             private const int subdomainID = 0;
@@ -394,7 +394,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 2500;
             private const int embeddedNodes = 3000;
-            private const double nodalDisplacement = -50.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
@@ -851,6 +851,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -883,8 +892,8 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.05, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.05, new double[2], new double[2], 1e-3);
+
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -945,10 +954,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 2500;
             private const int embeddedNodes = 3000;
-            private const double nodalDisplacement = -50.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void SingleMatrix_DisplacementControl()
             {
@@ -1397,6 +1406,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -1429,9 +1447,8 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.05, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.05, new double[2], new double[2], 1e-3);
-
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.05, new double[2], new double[2], 1e-3);
+                    
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
                     {
@@ -1491,10 +1508,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 2500;
             private const int embeddedNodes = 3000;
-            private const double nodalDisplacement = -50.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
@@ -1845,6 +1862,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -1877,9 +1903,8 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.10, new double[2], new double[2], 1e-3);
-
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.10, new double[2], new double[2], 1e-3);
+                    
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
                     {
@@ -1939,10 +1964,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 2500;
             private const int embeddedNodes = 3000;
-            private const double nodalDisplacement = -50.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
@@ -2291,6 +2316,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -2323,8 +2357,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.10, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.10, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.10, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2385,10 +2418,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 2500;
             private const int embeddedNodes = 3000;
-            private const double nodalDisplacement = -50.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
@@ -2738,6 +2771,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -2770,9 +2812,8 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.25, new double[2], new double[2], 1e-3);
-
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.25, new double[2], new double[2], 1e-3);
+                    
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
                     {
@@ -2832,10 +2873,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 2500;
             private const int embeddedNodes = 3000;
-            private const double nodalDisplacement = -50.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
@@ -3181,6 +3222,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -3213,9 +3263,8 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.25, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.25, new double[2], new double[2], 1e-3);
-
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.25, new double[2], new double[2], 1e-3);
+                    
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
                     {
@@ -3275,10 +3324,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 2500;
             private const int embeddedNodes = 3000;
-            private const double nodalDisplacement = -50.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
@@ -3628,6 +3677,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -3660,8 +3718,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.50, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.50, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -3722,10 +3779,10 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 2500;
             private const int embeddedNodes = 3000;
-            private const double nodalDisplacement = -50.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 1000;
+            private const int increments = 100;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
             {
@@ -4071,6 +4128,15 @@ namespace ISAAR.MSolve.SamplesConsole
                     double effectiveAreaY = area;
                     double effectiveAreaZ = area;
 
+                    double mi = 8.0;
+                    double ni = 8.0;
+                    double thickness_CNT = 0.34;
+                    double a = 0.241;
+                    double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
+                    double radius_CNT = diameter_CNT / 2.0;
+                    double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
+                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
 
@@ -4103,9 +4169,8 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    //var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0, 1.0, 10.0, 0.50, new double[2], new double[2], 1e-3);
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(20.0, 2.0, 20.0, 0.50, new double[2], new double[2], 1e-3);
-
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(10.0 * material_constant_value, 1.0 * material_constant_value, 100.0, 0.50, new double[2], new double[2], 1e-3);
+                    
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
                     {
