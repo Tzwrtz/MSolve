@@ -54,8 +54,7 @@ namespace ISAAR.MSolve.Tests
                 new Node_v2 { ID = 4, X = 0.0, Y = 10.0, Z = 0.0 }
             };
             for (int i = 0; i < nodes.Length; ++i) model.NodesDictionary.Add(i + 1, nodes[i]);
-
-
+            
             // Elements
             var factory = new ContinuumElement2DFactory(thickness, material, null);
 

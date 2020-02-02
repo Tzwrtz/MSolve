@@ -1,5 +1,6 @@
 ﻿using ISAAR.MSolve.Discretization.Interfaces;
 using ISAAR.MSolve.FEM.Entities;
+using ISAAR.MSolve.FEM.Interfaces;
 using ISAAR.MSolve.LinearAlgebra.Vectors;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,6 +26,7 @@ namespace ISAAR.MSolve.Logging.Utilities
 
             foreach (Element_v2 element in node.ElementsDictionary.Values)
             {
+
                 // It is possible that one of the elements at this node does not engage this dof type, in which case -1 will be returned.
                 // We will not have any contribution from them. If none of the elements engage this dof type, the total force will always be 0.
                 int monitorDofIdx = FindLocalDofIndex(element, node, dofType);
@@ -34,6 +36,21 @@ namespace ISAAR.MSolve.Logging.Utilities
                 double[] totalElementDisplacements = subdomain.CalculateElementDisplacements(element, totalDisplacements);
                 double[] elementForces = element.ElementType.CalculateForcesForLogging(element, totalElementDisplacements);
 
+                if (element.ElementType is IEmbeddedHostElement_v2)
+                {
+                    foreach (var embeddedNode in element.EmbeddedNodes)
+                    {
+                        foreach (var embeddedElement in embeddedNode.ElementsDictionary.Values)
+                        {
+                            //var embeddedDisplacements=blah blah
+                            var embeddedBeamDisplacements = subdomain.CalculateElementDisplacements(embeddedElement, totalDisplacements);
+                            var embeddedDisplacements = element.ElementType.DofEnumerator.GetTransformedDisplacementsVector(embeddedBeamDisplacements);
+                            var embeddedForces = embeddedElement.ElementType.CalculateForcesForLogging(embeddedElement, embeddedDisplacements);
+                            //transformation gia forces hexa
+                            totalForce += embeddedForces[monitorDofIdx];
+                        }
+                    }
+                }
                 totalForce += elementForces[monitorDofIdx];
             }
 
