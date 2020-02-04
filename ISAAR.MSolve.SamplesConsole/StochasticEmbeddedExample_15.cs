@@ -34,10 +34,9 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
+            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic"; 
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
             private const int subdomainID = 0;
@@ -578,8 +577,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -1112,8 +1115,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\output files\elastic";
+            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\output files\elastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -1562,8 +1569,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\output files\plastic";
+            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\output files\plastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -2010,8 +2021,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\output files\elastic";
+            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\output files\elastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -2459,8 +2474,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\output files\plastic";
+            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\output files\plastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -2906,10 +2925,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
+            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic";
+            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic"; 
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic";
             private const int subdomainID = 0;
@@ -2920,7 +2939,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = +2.5;
             private const int monitorNode = 9;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -3451,7 +3470,11 @@ namespace ISAAR.MSolve.SamplesConsole
         public static class Run3a_Plastic
         {
             private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\plastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 2;
             private const int hostNodes = 12;
@@ -3985,7 +4008,11 @@ namespace ISAAR.MSolve.SamplesConsole
         public static class Run3b_Elastic
         {
             private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3b\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3b\output files\elastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 2;
             private const int hostNodes = 12;
@@ -4435,7 +4462,11 @@ namespace ISAAR.MSolve.SamplesConsole
         public static class Run3b_Plastic
         {
             private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3b\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3b\output files\plastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 2;
             private const int hostNodes = 12;
@@ -4883,7 +4914,11 @@ namespace ISAAR.MSolve.SamplesConsole
         public static class Run3c_Elastic
         {
             private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3c\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\input files";
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3c\output files\elastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 2;
             private const int hostNodes = 12;
@@ -5332,7 +5367,11 @@ namespace ISAAR.MSolve.SamplesConsole
         public static class Run3c_Plastic
         {
             private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3c\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3c\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3c\input files";
             private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3c\output files\plastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-3c\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-3c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 2;
             private const int hostNodes = 12;

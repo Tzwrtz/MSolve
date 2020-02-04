@@ -385,10 +385,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
+            private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\elastic";
+            private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\elastic"; 
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\elastic";
             private const int subdomainID = 0;
@@ -396,7 +396,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
             private const int embeddedNodes = 1430;
-            private const double nodalDisplacement = +10.0;
+            private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
@@ -420,6 +420,14 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.SingleMatrixdBuilder(model);
 
                 //******BOUNDARY CONDITIONS******//
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 121; iNode++)
+                {
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
                 // Boundary Conditions - [Bottom-End]
                 for (int iNode = 1; iNode <= 1211; iNode += 121)
                 {
@@ -435,13 +443,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = -nodalDisplacement });
-                }               
-
-                // Loading Conditions - [Right-End] - {36 nodes}
+                // Loading Conditions - [Right-End] - {121 nodes}
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -477,7 +479,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string paraviewFileName = string.Format("{0}_{1}", fileNameOnly, "000");
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, "000", extension);
                 var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
-                    model.NodesDictionary[monitorNode], DOFType.Z, outputFile);
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
                 // Run the analysis
@@ -593,7 +595,14 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose model
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
-                //******BOUNDARY CONDITIONS******//
+                // Boundary Conditions - [Left-End]
+                for (int iNode = 1; iNode <= 121; iNode++)
+                {
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                }
+
                 // Boundary Conditions - [Bottom-End]
                 for (int iNode = 1; iNode <= 1211; iNode += 121)
                 {
@@ -609,13 +618,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = -nodalDisplacement });
-                }
-
-                // Loading Conditions - [Right-End] - {36 nodes}
+                // Loading Conditions - [Right-End] - {121 nodes}
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });

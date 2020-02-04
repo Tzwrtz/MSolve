@@ -47,7 +47,6 @@ namespace ISAAR.MSolve.FEM.Embedding
             UpdateNodesBelongingToEmbeddedElements();
         }
         
-
         private void UpdateNodesBelongingToEmbeddedElements()
         {
             IEmbeddedDOFInHostTransformationVector_v2 transformer;

@@ -46,14 +46,22 @@ namespace ISAAR.MSolve.Logging.Utilities
                             var embeddedBeamDisplacements = subdomain.CalculateElementDisplacements(embeddedElement, totalDisplacements);
                             var embeddedDisplacements = element.ElementType.DofEnumerator.GetTransformedDisplacementsVector(embeddedBeamDisplacements);
                             var embeddedForces = embeddedElement.ElementType.CalculateForcesForLogging(embeddedElement, embeddedDisplacements);
-                            //transformation gia forces hexa
-                            totalForce += embeddedForces[monitorDofIdx];
+                            //transformation gia forces hexas
+                            if (element.EmbeddedNodes.Count == 2)
+                            {
+                                if (embeddedNode == element.EmbeddedNodes[0]) totalForce += embeddedForces[monitorDofIdx];
+                                else if (embeddedNode == element.EmbeddedNodes[1]) totalForce += embeddedForces[monitorDofIdx + 24];
+                            }
+                            else if (element.EmbeddedNodes.Count == 1)
+                            {
+                                if (embeddedNode == embeddedElement.Nodes[0] || embeddedNode == embeddedElement.Nodes[2]) totalForce += embeddedForces[monitorDofIdx];
+                                else if (embeddedNode == embeddedElement.Nodes[1] || embeddedNode == embeddedElement.Nodes[3]) totalForce += embeddedForces[monitorDofIdx + 24];
+                            }
                         }
                     }
                 }
                 totalForce += elementForces[monitorDofIdx];
             }
-
             return totalForce;
         }
 
