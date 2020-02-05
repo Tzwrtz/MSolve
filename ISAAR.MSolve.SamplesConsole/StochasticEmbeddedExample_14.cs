@@ -64,7 +64,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -242,7 +242,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -437,7 +437,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -525,7 +525,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -613,7 +613,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -1001,7 +1001,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -1089,7 +1089,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -1177,7 +1177,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -1638,7 +1638,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -2101,7 +2101,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -2555,7 +2555,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -3014,7 +3014,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -3397,7 +3397,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -3485,7 +3485,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -3573,7 +3573,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -3961,7 +3961,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -4049,7 +4049,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -4137,7 +4137,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -4598,7 +4598,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -5061,7 +5061,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -5515,7 +5515,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -5974,7 +5974,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -6357,7 +6357,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -6445,7 +6445,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -6533,7 +6533,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -6921,7 +6921,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -7009,7 +7009,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -7097,7 +7097,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -7558,7 +7558,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -8021,7 +8021,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -8475,7 +8475,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
@@ -8934,7 +8934,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 11; iNode <= 1331; iNode += +11)
+                for (int iNode = 1; iNode <= 1321; iNode += +11)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
