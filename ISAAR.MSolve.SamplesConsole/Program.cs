@@ -761,8 +761,8 @@ namespace ISAAR.MSolve.SamplesConsole
             int startingNumofSimulations = 2;
             int numberOfSimulations = 10;
 
-            // Run_2-SingleMatrix
-            // Vf = 1.5% - HostElemets = 1000
+            //Run_2 - SingleMatrix
+            // Vf = 1.5 % -HostElemets = 1000
             //StochasticEmbeddedExample_13.Run2a_Elastic.SingleMatrix_DisplacementControl();
             //StochasticEmbeddedExample_13.Run2a_Plastic.SingleMatrix_DisplacementControl();
 
@@ -771,8 +771,8 @@ namespace ISAAR.MSolve.SamplesConsole
                 // ** Run_2 ** //
 
                 // Run_2a-Elastic
-                StochasticEmbeddedExample_13.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-                StochasticEmbeddedExample_13.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+                //StochasticEmbeddedExample_13.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+                //StochasticEmbeddedExample_13.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
                 // Run_2a-Plastic
                 //StochasticEmbeddedExample_13.Run2a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
                 //StochasticEmbeddedExample_13.Run2a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
@@ -801,7 +801,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 //StochasticEmbeddedExample_13.Run3b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
                 // Run_3c-Elastic
-                //StochasticEmbeddedExample_13.Run3c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+                StochasticEmbeddedExample_13.Run3c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
                 // Run_3b-Plastic
                 //StochasticEmbeddedExample_13.Run3c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
@@ -809,17 +809,17 @@ namespace ISAAR.MSolve.SamplesConsole
                 // ** Run_4 ** //
 
                 // Run_4a-Elastic
-                //StochasticEmbeddedExample_13.Run4a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+                StochasticEmbeddedExample_13.Run4a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
                 // Run_4a-Plastic
                 //StochasticEmbeddedExample_13.Run4a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
                 // Run_4b-Elastic
-                //StochasticEmbeddedExample_13.Run4b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+                StochasticEmbeddedExample_13.Run4b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
                 // Run_4b-Plastic               
                 //StochasticEmbeddedExample_13.Run4b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
                 // Run_4c-Elastic
-                //StochasticEmbeddedExample_13.Run4c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+                StochasticEmbeddedExample_13.Run4c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
                 // Run_4b-Plastic
                 //StochasticEmbeddedExample_13.Run4c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
             }
@@ -921,8 +921,8 @@ namespace ISAAR.MSolve.SamplesConsole
             //    // ** Run_2 ** //
 
             //    // Run_2a-Elastic
-            //    //StochasticEmbeddedExample_15.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-            //    //StochasticEmbeddedExample_15.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    StochasticEmbeddedExample_15.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    StochasticEmbeddedExample_15.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
             //    // Run_2a-Plastic
             //    //StochasticEmbeddedExample_15.Run2a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
             //    //StochasticEmbeddedExample_15.Run2a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
@@ -941,7 +941,7 @@ namespace ISAAR.MSolve.SamplesConsole
             //    // ** Run_3 ** //
 
             //    // Run_3a-Elastic
-            //    //StochasticEmbeddedExample_15.Run3a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    StochasticEmbeddedExample_15.Run3a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
             //    StochasticEmbeddedExample_15.Run3a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
             //    //// Run_3a-Plastic
             //    //StochasticEmbeddedExample_15.Run3a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);

@@ -101,7 +101,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
             // Request output
             string outputFile = outputDirectory + "\\EBE-CNT-Embedded-3D_Results.txt";
-            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                 model.NodesDictionary[monitorNode], monitorDof, outputFile);
             childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -181,7 +181,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
             // Request output
             string outputFile = outputDirectory + "\\EBE-CNT-Embedded-Cohesive-3D_Results.txt";
-            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                 model.NodesDictionary[monitorNode], monitorDof, outputFile);
             childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 

@@ -82,7 +82,7 @@ namespace ISAAR.MSolve.Tests
             string outputFile = outputDirectory + "\\EmbeddedElementTechniqueExample_Results.txt";
             int monitorNode = 8;
             DOFType monitorDof = DOFType.Z;
-            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                 model.NodesDictionary[monitorNode], monitorDof, outputFile);
             childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -161,7 +161,7 @@ namespace ISAAR.MSolve.Tests
             string outputFile = outputDirectory + "\\EmbeddedElementTechniqueWithCohesiveBeamExample_Results.txt";
             int monitorNode = 8;
             DOFType monitorDof = DOFType.Z;
-            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                 model.NodesDictionary[monitorNode], monitorDof, outputFile);
             childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
             

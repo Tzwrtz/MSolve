@@ -151,7 +151,7 @@ namespace ISAAR.MSolve.SamplesConsole.Logging
 
             // Request output
             string outputFile = outputDirectory + "\\load_control_beam2D_corrotational.txt";
-            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                 model.NodesDictionary[monitorNode], monitorDof, outputFile);
             childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 

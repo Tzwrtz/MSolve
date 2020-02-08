@@ -100,7 +100,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -180,7 +180,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -345,7 +345,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -422,7 +422,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -581,7 +581,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -660,7 +660,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -821,7 +821,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -900,7 +900,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -1057,7 +1057,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -1218,7 +1218,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -1388,7 +1388,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -1549,7 +1549,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -1706,7 +1706,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -1867,7 +1867,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -2032,7 +2032,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -2107,7 +2107,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -2183,7 +2183,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -2263,7 +2263,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -2624,7 +2624,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -2699,7 +2699,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -2775,7 +2775,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -2851,7 +2851,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -3205,7 +3205,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -3280,7 +3280,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -3356,7 +3356,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -3712,7 +3712,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -3787,7 +3787,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -3869,7 +3869,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -4221,7 +4221,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -4296,7 +4296,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -4378,7 +4378,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -4734,7 +4734,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -4809,7 +4809,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -4891,7 +4891,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -5243,7 +5243,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -5318,7 +5318,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -5400,7 +5400,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -5756,7 +5756,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -5831,7 +5831,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -5913,7 +5913,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -6267,7 +6267,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -6342,7 +6342,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -6712,7 +6712,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -6787,7 +6787,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -7154,7 +7154,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -7523,7 +7523,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -7888,7 +7888,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -8257,7 +8257,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -8622,7 +8622,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -8991,7 +8991,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -9357,7 +9357,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -9432,7 +9432,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -9508,7 +9508,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -9584,7 +9584,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -9942,7 +9942,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -10017,7 +10017,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -10381,7 +10381,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -10456,7 +10456,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -10824,7 +10824,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -10899,7 +10899,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -11263,7 +11263,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -11338,7 +11338,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -11706,7 +11706,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -11781,7 +11781,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -12145,7 +12145,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -12220,7 +12220,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -12588,7 +12588,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -12663,7 +12663,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -13029,7 +13029,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -13104,7 +13104,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -13474,7 +13474,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
@@ -13549,7 +13549,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
-                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                     model.NodesDictionary[monitorNode], monitorDof, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 

@@ -477,7 +477,7 @@ namespace ISAAR.MSolve.Tests
             string pathName = outputDirectory;
             string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
             string outputFile = string.Format("{0}{1}", fileNameOnly, extension);
-            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], increments,
+            var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
                 model.NodesDictionary[monitorNode], monitorDof, outputFile);
             childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 

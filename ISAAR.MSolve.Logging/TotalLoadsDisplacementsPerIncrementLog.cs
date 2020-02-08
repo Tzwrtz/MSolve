@@ -25,6 +25,7 @@ namespace ISAAR.MSolve.Logging
     public class TotalLoadsDisplacementsPerIncrementLog
     {
         private readonly Subdomain_v2 subdomain;
+        private readonly Model_v2 model;
         //private readonly Dictionary<INode, HashSet<DOFType>> monitorDofs = new Dictionary<INode, HashSet<DOFType>>();
         private readonly bool isMonitorDofFree;
         private readonly ConstrainedDofForcesCalculator forceCalculator;
@@ -41,10 +42,11 @@ namespace ISAAR.MSolve.Logging
         private double currentTotalDisplacement = 0.0;
         //TODO: It should not be stored at all. Instead we should be able to access the total prescribed displacement from the analyzer
         
-        public TotalLoadsDisplacementsPerIncrementLog(Subdomain_v2 subdomain, int maxIncrementsExpected,
+        public TotalLoadsDisplacementsPerIncrementLog(Subdomain_v2 subdomain, Model_v2 model, int maxIncrementsExpected,
             Node_v2 monitorNode, DOFType monitorDof, string outputFile)
         {
             this.subdomain = subdomain;
+            this.model = model;
             this.monitorNode = monitorNode;
             this.monitorDof = monitorDof;
 
@@ -54,7 +56,7 @@ namespace ISAAR.MSolve.Logging
                 if (constraint.DOF == monitorDof)
                 {
                     isMonitorDofFree = false;
-                    forceCalculator = new ConstrainedDofForcesCalculator(subdomain);
+                    forceCalculator = new ConstrainedDofForcesCalculator(subdomain, model);
                     break;
                 }
             }

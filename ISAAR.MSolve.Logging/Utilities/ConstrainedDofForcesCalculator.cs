@@ -14,54 +14,128 @@ namespace ISAAR.MSolve.Logging.Utilities
     internal class ConstrainedDofForcesCalculator
     {
         private readonly Subdomain_v2 subdomain;
+        private readonly Model_v2 model;
 
-        internal ConstrainedDofForcesCalculator(Subdomain_v2 subdomain)
+        internal ConstrainedDofForcesCalculator(Subdomain_v2 subdomain, Model_v2 model)
         {
             this.subdomain = subdomain;
+            this.model = model;
         }
 
         internal double CalculateForceAt(Node_v2 node, DOFType dofType, IVectorView totalDisplacements)
         {
             double totalForce = 0.0;
 
-            foreach (Element_v2 element in node.ElementsDictionary.Values)
+            //foreach (Element_v2 element in node.ElementsDictionary.Values)
+            //{
+
+            //    // It is possible that one of the elements at this node does not engage this dof type, in which case -1 will be returned.
+            //    // We will not have any contribution from them. If none of the elements engage this dof type, the total force will always be 0.
+            //    int monitorDofIdx = FindLocalDofIndex(element, node, dofType);
+            //    if (monitorDofIdx == -1) continue;
+
+            //    //TODO: if an element has embedded elements, then we must also take into account their forces.
+            //    double[] totalElementDisplacements = subdomain.CalculateElementDisplacements(element, totalDisplacements);
+            //    double[] elementForces = element.ElementType.CalculateForcesForLogging(element, totalElementDisplacements);
+
+            //    if (element.ElementType is IEmbeddedHostElement_v2)
+            //    {
+            //        foreach (var embeddedNode in element.EmbeddedNodes)
+            //        {
+            //            foreach (var embeddedElement in embeddedNode.ElementsDictionary.Values)
+            //            {
+            //                //var embeddedDisplacements=blah blah
+            //                var embeddedBeamDisplacements = subdomain.CalculateElementDisplacements(embeddedElement, totalDisplacements);
+            //                var embeddedDisplacements = element.ElementType.DofEnumerator.GetTransformedDisplacementsVector(embeddedBeamDisplacements);
+            //                var embeddedForces = embeddedElement.ElementType.CalculateForcesForLogging(embeddedElement, embeddedDisplacements);
+            //                //transformation gia forces hexas
+            //                if (element.EmbeddedNodes.Count == 2)
+            //                {
+            //                    if (embeddedNode == element.EmbeddedNodes[0]) totalForce += embeddedForces[monitorDofIdx];
+            //                    else if (embeddedNode == element.EmbeddedNodes[1]) totalForce += embeddedForces[monitorDofIdx + 24];
+            //                }
+            //                else if (element.EmbeddedNodes.Count == 1)
+            //                {
+            //                    if (embeddedNode == embeddedElement.Nodes[0] || embeddedNode == embeddedElement.Nodes[2]) totalForce += embeddedForces[monitorDofIdx];
+            //                    else if (embeddedNode == embeddedElement.Nodes[1] || embeddedNode == embeddedElement.Nodes[3]) totalForce += embeddedForces[monitorDofIdx + 24];
+            //                }
+            //            }
+            //        }
+            //    }
+            //    totalForce += elementForces[monitorDofIdx];
+            //}
+
+            // This adds all the internal forces of the constrained end
+            // Loading Conditions - Imposed Displacements at Nodes - [Right-End] - {121 nodes}
+            Node_v2[] constrainedNodes = new Node_v2[121];
+            for (int ii = 0; ii < 121; ii++)
             {
+                constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
+            }
 
-                // It is possible that one of the elements at this node does not engage this dof type, in which case -1 will be returned.
-                // We will not have any contribution from them. If none of the elements engage this dof type, the total force will always be 0.
-                int monitorDofIdx = FindLocalDofIndex(element, node, dofType);
-                if (monitorDofIdx == -1) continue;
+            //Node_v2[] constrainedNodes = new Node_v2[4];
+            //for (int ii = 0; ii < 4; ii++)
+            //{
+            //    constrainedNodes[ii] = model.NodesDictionary[5 + ii];
+            //}
 
-                //TODO: if an element has embedded elements, then we must also take into account their forces.
-                double[] totalElementDisplacements = subdomain.CalculateElementDisplacements(element, totalDisplacements);
-                double[] elementForces = element.ElementType.CalculateForcesForLogging(element, totalElementDisplacements);
-
-                if (element.ElementType is IEmbeddedHostElement_v2)
+            foreach (Node_v2 constrainedNode in constrainedNodes)
+            {
+                foreach (Element_v2 element in constrainedNode.ElementsDictionary.Values)
                 {
-                    foreach (var embeddedNode in element.EmbeddedNodes)
+                    // It is possible that one of the elements at this node does not engage this dof type, in which case -1 will be returned.
+                    // We will not have any contribution from them. If none of the elements engage this dof type, the total force will always be 0.
+                    int monitorDofIdx = FindLocalDofIndex(element, constrainedNode, dofType);
+                    if (monitorDofIdx == -1) continue;
+
+                    //TODO: if an element has embedded elements, then we must also take into account their forces.
+                    double[] totalElementDisplacements = subdomain.CalculateElementDisplacements(element, totalDisplacements);
+                    double[] elementForces = element.ElementType.CalculateForcesForLogging(element, totalElementDisplacements);
+
+                    if (element.ElementType is IEmbeddedHostElement_v2)
                     {
-                        foreach (var embeddedElement in embeddedNode.ElementsDictionary.Values)
+                        foreach (var embeddedNode in element.EmbeddedNodes)
                         {
-                            //var embeddedDisplacements=blah blah
-                            var embeddedBeamDisplacements = subdomain.CalculateElementDisplacements(embeddedElement, totalDisplacements);
-                            var embeddedDisplacements = element.ElementType.DofEnumerator.GetTransformedDisplacementsVector(embeddedBeamDisplacements);
-                            var embeddedForces = embeddedElement.ElementType.CalculateForcesForLogging(embeddedElement, embeddedDisplacements);
-                            //transformation gia forces hexas
-                            if (element.EmbeddedNodes.Count == 2)
+                            foreach (var embeddedElement in embeddedNode.ElementsDictionary.Values)
                             {
-                                if (embeddedNode == element.EmbeddedNodes[0]) totalForce += embeddedForces[monitorDofIdx];
-                                else if (embeddedNode == element.EmbeddedNodes[1]) totalForce += embeddedForces[monitorDofIdx + 24];
-                            }
-                            else if (element.EmbeddedNodes.Count == 1)
-                            {
-                                if (embeddedNode == embeddedElement.Nodes[0] || embeddedNode == embeddedElement.Nodes[2]) totalForce += embeddedForces[monitorDofIdx];
-                                else if (embeddedNode == embeddedElement.Nodes[1] || embeddedNode == embeddedElement.Nodes[3]) totalForce += embeddedForces[monitorDofIdx + 24];
+                                //var embeddedDisplacements=blah blah
+                                var embeddedBeamDisplacements = subdomain.CalculateElementDisplacements(embeddedElement, totalDisplacements);
+                                var embeddedDisplacements = element.ElementType.DofEnumerator.GetTransformedDisplacementsVector(embeddedBeamDisplacements);
+                                var embeddedForces = embeddedElement.ElementType.CalculateForcesForLogging(embeddedElement, embeddedDisplacements);
+                                //transformation gia forces hexas
+                                if (element.EmbeddedNodes.Count == 2)
+                                {
+                                    if (embeddedElement.Nodes.Count == 2)
+                                    {
+                                        if (embeddedNode == embeddedElement.Nodes[0]) totalForce += embeddedForces[monitorDofIdx];
+                                        else if (embeddedNode == embeddedElement.Nodes[1]) totalForce += embeddedForces[monitorDofIdx + 24];
+                                    }
+                                    else if (embeddedElement.Nodes.Count == 4)
+                                    {
+                                        if (embeddedNode == embeddedElement.Nodes[2]) totalForce += embeddedForces[monitorDofIdx];
+                                        else if (embeddedNode == embeddedElement.Nodes[3]) totalForce += embeddedForces[monitorDofIdx + 24];
+                                    }
+                                }
+                                else if (element.EmbeddedNodes.Count == 1)
+                                {
+                                    if (embeddedElement.Nodes.Count == 2)
+                                    {
+                                        if (embeddedNode == embeddedElement.Nodes[0]) totalForce += embeddedForces[monitorDofIdx];
+                                        else if (embeddedNode == embeddedElement.Nodes[1]) totalForce += embeddedForces[monitorDofIdx + 24];
+                                    }
+                                    else if (embeddedElement.Nodes.Count == 4)
+                                    {
+                                        if (embeddedNode == embeddedElement.Nodes[2]) totalForce += embeddedForces[monitorDofIdx];
+                                        else if (embeddedNode == embeddedElement.Nodes[3]) totalForce += embeddedForces[monitorDofIdx + 24];
+                                    }                                 
+                                }
                             }
                         }
                     }
+                    totalForce += elementForces[monitorDofIdx];
                 }
-                totalForce += elementForces[monitorDofIdx];
             }
+                                  
             return totalForce;
         }
 
