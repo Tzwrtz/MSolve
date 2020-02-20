@@ -3503,7 +3503,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2c-Cohesive-Elastic.txt";
+                string currentOutputFileName = "Run2d-Cohesive-Elastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -7377,7 +7377,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run3c-Cohesive-Elastic.txt";
+                string currentOutputFileName = "Run3d-Cohesive-Elastic.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));

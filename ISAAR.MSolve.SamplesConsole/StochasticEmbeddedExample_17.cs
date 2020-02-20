@@ -28,7 +28,7 @@ using ISAAR.MSolve.FEM.Postprocessing;
 
 namespace ISAAR.MSolve.SamplesConsole
 {
-    public static class StochasticEmbeddedExample_13
+    public static class StochasticEmbeddedExample_17
     {
         public static class Run1_2a_Elastic
         {
@@ -39,7 +39,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
             public static void PEEKMatrix_DisplacementControl(int noStochasticSimulation)
             {
-                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run1-2a\output files\elastic\DisplacementControl";
+                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run1-2a\output files\elastic\DisplacementControl";
 
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -138,7 +138,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run1-2a\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run1-2a\input files";
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
                     string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -216,7 +216,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
             public static void PEEKMatrix_DisplacementControl(int noStochasticSimulation)
             {
-                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run1-2a\output files\plastic\DisplacementControl";
+                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run1-2a\output files\plastic\DisplacementControl";
 
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -316,7 +316,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run1-2a\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run1-2a\input files";
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
                     string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -385,17 +385,17 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\elastic";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\elastic"; 
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\output files\elastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -404,7 +404,7 @@ namespace ISAAR.MSolve.SamplesConsole
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
             private const double K_coh = 10.0;
-            
+
             public static void SingleMatrix_DisplacementControl()
             {
                 VectorExtensions.AssignTotalAffinityCount();
@@ -419,7 +419,6 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose model
                 EBEEmbeddedModelBuilder.SingleMatrixdBuilder(model);
 
-                //******BOUNDARY CONDITIONS******//
                 // Boundary Conditions - [Left-End]
                 for (int iNode = 1; iNode <= 121; iNode++)
                 {
@@ -443,7 +442,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -479,7 +478,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 string paraviewFileName = string.Format("{0}_{1}", fileNameOnly, "000");
                 string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, "000", extension);
                 var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
-                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                    model.NodesDictionary[monitorNode], DOFType.Z, outputFile);
                 childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
 
                 // Run the analysis
@@ -502,6 +501,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var model = new Model_v2();
 
                 // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
                 model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
 
                 // Choose model
@@ -618,7 +618,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}                
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -953,13 +953,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -1094,7 +1094,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}                
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -1182,7 +1182,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}                
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -1511,13 +1511,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2b\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2b\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -1620,7 +1620,6 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose model
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
-                //******BOUNDARY CONDITIONS******//
                 // Boundary Conditions - [Left-End]
                 for (int iNode = 1; iNode <= 121; iNode++)
                 {
@@ -1644,7 +1643,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}                
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -1972,13 +1971,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2b\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2b\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -2107,7 +2106,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}                
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -2430,13 +2429,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2c\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2c\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -2538,7 +2537,6 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose model
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
-                //******BOUNDARY CONDITIONS******//
                 // Boundary Conditions - [Left-End]
                 for (int iNode = 1; iNode <= 121; iNode++)
                 {
@@ -2562,7 +2560,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}                
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -2890,13 +2888,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2c\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -3021,7 +3019,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}                
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -3345,13 +3343,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2d_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2d\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2d\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2d\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -3453,7 +3451,6 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose model
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
-                //******BOUNDARY CONDITIONS******//
                 // Boundary Conditions - [Left-End]
                 for (int iNode = 1; iNode <= 121; iNode++)
                 {
@@ -3477,7 +3474,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}                
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -3805,13 +3802,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2d_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2d\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2d\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-2d\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -3936,7 +3933,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}                
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -4262,17 +4259,17 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\elastic";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\elastic"; 
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\output files\elastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -4495,7 +4492,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
+                // Loading Conditions - [Right-End] - {36 nodes}
                 for (int iNode = 1211; iNode <= 1331; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
@@ -4830,13 +4827,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -5388,13 +5385,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3b\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3b\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3b\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -5848,13 +5845,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3b\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3b\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3b\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -6306,13 +6303,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3c\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3c\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3c\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -6765,13 +6762,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3c\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3c\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -7220,13 +7217,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3d_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3d\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3d\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3d\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -7679,13 +7676,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3d_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3d\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3d\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3d\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -8136,17 +8133,17 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4a\input files";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4a\output files\elastic";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\elastic"; 
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4a\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4a\output files\elastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-3a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -8704,13 +8701,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4a\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -9262,13 +9259,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4b\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4b\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4b\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -9722,13 +9719,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4b\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4b\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4b\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -10180,13 +10177,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4c\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4c\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4c\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -10639,13 +10636,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4c\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4c\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 17\run-4c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
-            private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1430;
+            private const int embeddedElements = 3350;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -11094,4 +11091,6 @@ namespace ISAAR.MSolve.SamplesConsole
 
     }
 }
+
+
 
