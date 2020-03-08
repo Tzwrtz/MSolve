@@ -22,13 +22,14 @@ using System.Linq;
 using ISAAR.MSolve.Discretization.Integration.Quadratures;
 using System.IO;
 using ISAAR.MSolve.Solvers.Direct;
+using ISAAR.MSolve.Solvers.Iterative;
 using ISAAR.MSolve.Discretization;
 using ISAAR.MSolve.Analyzers.NonLinear;
 using ISAAR.MSolve.FEM.Postprocessing;
 
 namespace ISAAR.MSolve.SamplesConsole
 {
-    public static class StochasticEmbeddedExample_13
+    public static class StochasticEmbeddedExample_20
     {
         public static class Run1_2a_Elastic
         {
@@ -39,7 +40,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
             public static void PEEKMatrix_DisplacementControl(int noStochasticSimulation)
             {
-                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run1-2a\output files\elastic\DisplacementControl";
+                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run1-2a\output files\elastic\DisplacementControl";
 
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -138,11 +139,11 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run1-2a\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run1-2a\input files";
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -167,7 +168,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -216,7 +217,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
             public static void PEEKMatrix_DisplacementControl(int noStochasticSimulation)
             {
-                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run1-2a\output files\plastic\DisplacementControl";
+                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run1-2a\output files\plastic\DisplacementControl";
 
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -316,11 +317,11 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run1-2a\input files";
+                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run1-2a\input files";
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -341,7 +342,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -385,26 +386,26 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\elastic";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\elastic"; 
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\output files\elastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 0.05;
+            private const double t_max = 0.50;
             private const double K_coh = 10.0;
-            
+
             public static void SingleMatrix_DisplacementControl()
             {
                 VectorExtensions.AssignTotalAffinityCount();
@@ -695,9 +696,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 private static void HostElements(Model_v2 model)
                 {
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -722,7 +723,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -953,13 +954,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -1258,9 +1259,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 private static void HostElements(Model_v2 model)
                 {
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -1281,7 +1282,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -1511,20 +1512,20 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2b\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2b\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 0.50;
+            private const double t_max = 1.00;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -1715,9 +1716,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 private static void HostElements(Model_v2 model)
                 {
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -1742,7 +1743,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -1972,13 +1973,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2b\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2b\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -2177,9 +2178,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 private static void HostElements(Model_v2 model)
                 {
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -2200,7 +2201,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -2430,20 +2431,20 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2c\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2c\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 1.00;
+            private const double t_max = 2.00;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -2633,9 +2634,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 private static void HostElements(Model_v2 model)
                 {
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -2660,7 +2661,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -2890,13 +2891,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2c\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -3092,9 +3093,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 private static void HostElements(Model_v2 model)
                 {
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -3115,7 +3116,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -3345,20 +3346,20 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2d_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2d\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2d\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2d\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 2.00;
+            private const double t_max = 0.05;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -3548,9 +3549,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 private static void HostElements(Model_v2 model)
                 {
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -3575,7 +3576,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -3805,13 +3806,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2d_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-2d\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2d\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-2d\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -4007,9 +4008,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 private static void HostElements(Model_v2 model)
                 {
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -4030,7 +4031,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -4262,19 +4263,19 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\elastic";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\elastic"; 
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\output files\elastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\output files\elastic";
             private const int subdomainID = 0;
-            private const int hostElements = 1000;
-            private const int hostNodes = 1331;
+            private const int hostElements = 8000;
+            private const int hostNodes = 9261;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
-            private const int monitorNode = 1211;
+            private const int monitorNode = 8821;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
 
@@ -4297,7 +4298,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.SingleMatrixdBuilder(model);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -4305,22 +4306,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -4385,7 +4386,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -4393,22 +4394,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -4473,7 +4474,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -4481,22 +4482,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -4571,10 +4572,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -4599,7 +4600,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -4830,13 +4831,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -4861,7 +4862,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.SingleMatrixdBuilder(model);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -4869,22 +4870,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -4949,7 +4950,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -4957,22 +4958,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -5037,7 +5038,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -5045,22 +5046,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -5134,10 +5135,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -5158,7 +5159,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -5388,13 +5389,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3b\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3b\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3b\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -5419,7 +5420,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -5427,16 +5428,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Boundary Conditions - [Back-End]
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -5498,7 +5505,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -5506,22 +5513,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -5590,10 +5597,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -5618,7 +5625,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -5848,13 +5855,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3b\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3b\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3b\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -5879,7 +5886,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -5887,16 +5894,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Boundary Conditions - [Back-End]
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -5961,7 +5974,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -5969,22 +5982,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -6052,10 +6065,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -6076,7 +6089,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -6306,13 +6319,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3c\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3c\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3c\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -6337,7 +6350,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -6345,16 +6358,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Boundary Conditions - [Back-End]
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -6415,7 +6434,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -6423,22 +6442,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -6507,10 +6526,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -6535,7 +6554,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -6765,13 +6784,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3c\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3c\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -6796,7 +6815,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -6804,16 +6823,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Boundary Conditions - [Back-End]
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -6874,7 +6899,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -6882,22 +6907,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -6966,10 +6991,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -6990,7 +7015,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -7220,13 +7245,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3d_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3d\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3d\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3d\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -7251,7 +7276,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -7259,16 +7284,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Boundary Conditions - [Back-End]
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -7329,7 +7360,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -7337,22 +7368,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -7421,10 +7452,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -7449,7 +7480,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -7679,13 +7710,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3d_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3d\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3d\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3d\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -7710,7 +7741,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -7718,16 +7749,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Boundary Conditions - [Back-End]
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -7788,7 +7825,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 441; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -7796,22 +7833,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 8821; iNode += 441)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 20; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 9241; iNode += +21)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 8821; iNode <= 9261; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -7880,10 +7917,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-20x20x20-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -7904,7 +7941,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -8136,19 +8173,19 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4a\input files";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4a\output files\elastic";
-            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\elastic"; 
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-3a\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4a\input files";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4a\output files\elastic";
+            //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\output files\elastic"; 
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-3a\output files\elastic";
             private const int subdomainID = 0;
-            private const int hostElements = 1000;
-            private const int hostNodes = 1331;
+            private const int hostElements = 64000;
+            private const int hostNodes = 68921;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
-            private const int monitorNode = 1211;
+            private const int monitorNode = 67241;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
 
@@ -8171,7 +8208,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.SingleMatrixdBuilder(model);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -8179,22 +8216,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
-
+                
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -8202,8 +8239,11 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose linear equation system solver
                 //var solverBuilder = new SkylineSolver.Builder();
                 //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                //var solverBuilder = new SuiteSparseSolver.Builder();
+                //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new PcgSolver.Builder();
+                PcgSolver solver = solverBuilder.BuildSolver(model);
+
 
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
@@ -8259,7 +8299,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -8267,22 +8307,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {121 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -8290,8 +8330,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose linear equation system solver
                 //var solverBuilder = new SkylineSolver.Builder();
                 //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                //var solverBuilder = new SuiteSparseSolver.Builder();
+                //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new PcgSolver.Builder();
+                PcgSolver solver = solverBuilder.BuildSolver(model);
 
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
@@ -8347,7 +8389,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -8355,22 +8397,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -8378,8 +8420,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose linear equation system solver
                 //var solverBuilder = new SkylineSolver.Builder();
                 //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                //var solverBuilder = new SuiteSparseSolver.Builder();
+                //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new PcgSolver.Builder();
+                PcgSolver solver = solverBuilder.BuildSolver(model);
 
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
@@ -8445,10 +8489,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -8473,7 +8517,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -8704,13 +8748,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4a\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -8735,7 +8779,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.SingleMatrixdBuilder(model);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -8743,22 +8787,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -8823,7 +8867,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -8831,22 +8875,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -8911,7 +8955,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -8919,22 +8963,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -9008,10 +9052,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -9032,7 +9076,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -9262,13 +9306,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4b\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4b\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4b\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -9293,7 +9337,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -9301,16 +9345,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
+                // Boundary Conditions - [Back-End]
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                }
+
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -9372,7 +9422,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -9380,22 +9430,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -9464,10 +9514,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -9492,7 +9542,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -9722,13 +9772,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4b\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4b\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4b\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -9753,7 +9803,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -9761,16 +9811,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Boundary Conditions - [Back-End]
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -9835,7 +9891,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -9843,22 +9899,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -9926,10 +9982,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -9950,7 +10006,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -10180,13 +10236,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4c\output files\elastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4c\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4c\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -10211,7 +10267,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -10219,16 +10275,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Boundary Conditions - [Back-End]
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -10289,7 +10351,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -10297,22 +10359,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -10381,10 +10443,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -10409,7 +10471,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     };
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -10639,13 +10701,13 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 13\run-4c\output files\plastic";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4c\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 20\run-4c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 1300;
-            private const int embeddedNodes = 1560;
+            private const int embeddedNodes = 1430;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -10670,7 +10732,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.FullyBondedEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -10678,16 +10740,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
-                // Loading Conditions - [Right-End] - {36 nodes}                
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                // Boundary Conditions - [Back-End]
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
+                {
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                }
+
+                // Loading Conditions - [Right-End] - {36 nodes}
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -10748,7 +10816,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
                 // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
+                for (int iNode = 1; iNode <= 1681; iNode++)
                 {
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                     //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
@@ -10756,22 +10824,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
+                for (int iNode = 1; iNode <= 67241; iNode += 1681)
                 {
-                    for (int j = 0; j <= 10; j++)
+                    for (int j = 0; j <= 40; j++)
                     {
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
 
                 // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
+                for (int iNode = 1; iNode <= 68881; iNode += +41)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
                 }
 
                 // Loading Conditions - [Right-End] - {36 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
+                for (int iNode = 67241; iNode <= 68921; iNode++)
                 {
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
                 }
@@ -10840,10 +10908,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-Geometry_MSolve.inp";
+                    string MatrixConnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-40x40x40-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
-                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
+                    int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixConnectivityFileName).Count();
 
                     // Nodes Geometry
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGeometryFileName))
@@ -10864,7 +10932,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
 
                     // Generate elements
-                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixGonnectivityFileName))
+                    using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
                     {
                         for (int i = 0; i < matrixElements; i++)
                         {
@@ -11091,7 +11159,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
             }
         }
-
     }
 }
+
 

@@ -395,14 +395,14 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 0.50;
+            private const double t_max = 0.05;
             private const double K_coh = 10.0;
 
             public static void SingleMatrix_DisplacementControl()
@@ -959,7 +959,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -1517,14 +1517,14 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 1.00;
+            private const double t_max = 0.50;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -1977,7 +1977,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -2435,14 +2435,14 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 2.00;
+            private const double t_max = 1.00;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -2894,7 +2894,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -3349,14 +3349,14 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 0.05;
+            private const double t_max = 2.00;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -3808,7 +3808,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -4269,7 +4269,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -4833,7 +4833,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -5391,7 +5391,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -5851,7 +5851,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -6309,7 +6309,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -6768,7 +6768,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -7223,7 +7223,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -7682,7 +7682,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -8143,7 +8143,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -8707,7 +8707,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -9265,7 +9265,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -9725,7 +9725,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -10183,7 +10183,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
@@ -10642,7 +10642,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
             private const int embeddedElements = 3350;
-            private const int embeddedNodes = 3685;
+            private const int embeddedNodes = 4020;
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;

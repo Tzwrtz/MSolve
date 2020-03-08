@@ -73,10 +73,24 @@ namespace ISAAR.MSolve.Logging.Utilities
                 constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
             }
 
+            //Node_v2[] constrainedNodes = new Node_v2[441];
+            //for (int ii = 0; ii < 441; ii++)
+            //{
+            //    constrainedNodes[ii] = model.NodesDictionary[8821 + ii];
+            //}
+
+            //Node_v2[] constrainedNodes = new Node_v2[1681];
+            //for (int ii = 0; ii < 1681; ii++)
+            //{
+            //    constrainedNodes[ii] = model.NodesDictionary[67241 + ii];
+            //}
+
             //Node_v2[] constrainedNodes = new Node_v2[4];
+            //int jj = 0;
             //for (int ii = 0; ii < 4; ii++)
             //{
-            //    constrainedNodes[ii] = model.NodesDictionary[5 + ii];
+            //    jj += 11;
+            //    constrainedNodes[ii] = model.NodesDictionary[jj];
             //}
 
             foreach (Node_v2 constrainedNode in constrainedNodes)
