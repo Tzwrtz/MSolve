@@ -757,82 +757,82 @@ namespace ISAAR.MSolve.SamplesConsole
             //********************//
             // EmbeddedExample-13 // Vf = 1.5%
             //*******************//
-            LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
-            int startingNumofSimulations = 1;
-            int numberOfSimulations = 10;
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //int startingNumofSimulations = 1;
+            //int numberOfSimulations = 10;
 
             //Run_2 - SingleMatrix
             // Vf = 1.5 % -HostElemets = 1000
             //StochasticEmbeddedExample_13.Run2a_Elastic.SingleMatrix_DisplacementControl();
             //StochasticEmbeddedExample_13.Run2a_Plastic.SingleMatrix_DisplacementControl();
 
-            for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
-            {
-                // ** Run_2 ** //
+            //for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
+            //{
+            //    // ** Run_2 ** //
 
-                // Run_2a-Elastic
-                StochasticEmbeddedExample_13.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-                StochasticEmbeddedExample_13.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_2a-Plastic
-                //StochasticEmbeddedExample_13.Run2a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
-                //StochasticEmbeddedExample_13.Run2a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_2a-Elastic
+            //    StochasticEmbeddedExample_13.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    StochasticEmbeddedExample_13.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_2a-Plastic
+            //    //StochasticEmbeddedExample_13.Run2a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    //StochasticEmbeddedExample_13.Run2a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                // Run_2b-Elastic
-                StochasticEmbeddedExample_13.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_2b-Plastic               
-                //StochasticEmbeddedExample_13.Run2b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_2b-Elastic
+            //    StochasticEmbeddedExample_13.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_2b-Plastic               
+            //    //StochasticEmbeddedExample_13.Run2b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                // Run_2c-Elastic
-                StochasticEmbeddedExample_13.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_2b-Plastic
-                //StochasticEmbeddedExample_13.Run2c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_2c-Elastic
+            //    StochasticEmbeddedExample_13.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_2b-Plastic
+            //    //StochasticEmbeddedExample_13.Run2c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                // Run_2d-Elastic
-                StochasticEmbeddedExample_13.Run2d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_2d-Plastic
-                //StochasticEmbeddedExample_13.Run2d_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-
-                // ** Run_3 ** //
-
-                // Run_3a-Elastic
-                //StochasticEmbeddedExample_13.Run3a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_3a-Plastic
-                //StochasticEmbeddedExample_13.Run3a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-                // Run_3b-Elastic
-                //StochasticEmbeddedExample_13.Run3b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_3b-Plastic               
-                //StochasticEmbeddedExample_13.Run3b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-                // Run_3c-Elastic
-                //StochasticEmbeddedExample_13.Run3c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_3c-Plastic
-                //StochasticEmbeddedExample_13.Run3c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-                // Run_3d-Elastic
-                //StochasticEmbeddedExample_13.Run3d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_3d-Plastic
-                //StochasticEmbeddedExample_13.Run3d_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_2d-Elastic
+            //    StochasticEmbeddedExample_13.Run2d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_2d-Plastic
+            //    //StochasticEmbeddedExample_13.Run2d_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
 
-                // ** Run_4 ** //
+            //    // ** Run_3 ** //
 
-                // Run_4a-Elastic
-                //StochasticEmbeddedExample_13.Run4a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_4a-Plastic
-                //StochasticEmbeddedExample_13.Run4a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_3a-Elastic
+            //    //StochasticEmbeddedExample_13.Run3a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_3a-Plastic
+            //    //StochasticEmbeddedExample_13.Run3a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                // Run_4b-Elastic
-                //StochasticEmbeddedExample_13.Run4b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_4b-Plastic               
-                //StochasticEmbeddedExample_13.Run4b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_3b-Elastic
+            //    //StochasticEmbeddedExample_13.Run3b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_3b-Plastic               
+            //    //StochasticEmbeddedExample_13.Run3b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                // Run_4c-Elastic
-                //StochasticEmbeddedExample_13.Run4c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                // Run_4c-Plastic
-                //StochasticEmbeddedExample_13.Run4c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            }
+            //    // Run_3c-Elastic
+            //    //StochasticEmbeddedExample_13.Run3c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_3c-Plastic
+            //    //StochasticEmbeddedExample_13.Run3c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+
+            //    // Run_3d-Elastic
+            //    //StochasticEmbeddedExample_13.Run3d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_3d-Plastic
+            //    //StochasticEmbeddedExample_13.Run3d_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+
+
+            //    // ** Run_4 ** //
+
+            //    // Run_4a-Elastic
+            //    //StochasticEmbeddedExample_13.Run4a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_4a-Plastic
+            //    //StochasticEmbeddedExample_13.Run4a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+
+            //    // Run_4b-Elastic
+            //    //StochasticEmbeddedExample_13.Run4b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_4b-Plastic               
+            //    //StochasticEmbeddedExample_13.Run4b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+
+            //    // Run_4c-Elastic
+            //    //StochasticEmbeddedExample_13.Run4c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    // Run_4c-Plastic
+            //    //StochasticEmbeddedExample_13.Run4c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //}
 
             //**************************************************************************************************************************************************************************************//
             //**************************************************************************************************************************************************************************************//
@@ -848,73 +848,73 @@ namespace ISAAR.MSolve.SamplesConsole
             //StochasticEmbeddedExample_14.Run2a_Elastic.SingleMatrix_DisplacementControl();
             ////StochasticEmbeddedExample_14.Run2a_Plastic.SingleMatrix_DisplacementControl();
 
-            for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
-            {
-                //**Run_2 * * //
+            //for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
+            //{
+            //    //**Run_2 * * //
 
-                //Run_2a - Elastic
-                StochasticEmbeddedExample_14.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-                StochasticEmbeddedExample_14.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //Run_2a - Plastic
-                //StochasticEmbeddedExample_14.Run2a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
-                //StochasticEmbeddedExample_14.Run2a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_2a - Elastic
+            //    StochasticEmbeddedExample_14.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    StochasticEmbeddedExample_14.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_2a - Plastic
+            //    //StochasticEmbeddedExample_14.Run2a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    //StochasticEmbeddedExample_14.Run2a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                //Run_2b - Elastic
-                StochasticEmbeddedExample_14.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //Run_2b - Plastic
-                //StochasticEmbeddedExample_14.Run2b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_2b - Elastic
+            //    StochasticEmbeddedExample_14.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_2b - Plastic
+            //    //StochasticEmbeddedExample_14.Run2b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                //Run_2c - Elastic
-                StochasticEmbeddedExample_14.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //Run_2b - Plastic
-                //StochasticEmbeddedExample_14.Run2c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_2c - Elastic
+            //    StochasticEmbeddedExample_14.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_2b - Plastic
+            //    //StochasticEmbeddedExample_14.Run2c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                //Run_2d - Elastic
-                StochasticEmbeddedExample_14.Run2d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //Run_2d - Plastic
-                //StochasticEmbeddedExample_14.Run2d_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-
-                //**Run_3 * * //
-
-                //Run_3a - Elastic
-                //StochasticEmbeddedExample_14.Run3a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //Run_3a - Plastic
-                //StochasticEmbeddedExample_14.Run3a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-                //Run_3b - Elastic
-                //StochasticEmbeddedExample_14.Run3b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //Run_3b - Plastic
-                //StochasticEmbeddedExample_14.Run3b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-                //Run_3c - Elastic
-                //StochasticEmbeddedExample_14.Run3c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //Run_3b - Plastic
-                //StochasticEmbeddedExample_14.Run3c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-                //Run_3d - Elastic
-                //StochasticEmbeddedExample_14.Run3d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //Run_3d - Plastic
-                //StochasticEmbeddedExample_14.Run3d_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_2d - Elastic
+            //    StochasticEmbeddedExample_14.Run2d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_2d - Plastic
+            //    //StochasticEmbeddedExample_14.Run2d_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
 
-                //**Run_4 * * //
+            //    //**Run_3 * * //
 
-                ////Run_4a - Elastic
-                //StochasticEmbeddedExample_14.Run4a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                ////Run_4a - Plastic
-                ////StochasticEmbeddedExample_14.Run4a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_3a - Elastic
+            //    //StochasticEmbeddedExample_14.Run3a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_3a - Plastic
+            //    //StochasticEmbeddedExample_14.Run3a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                ////Run_4b - Elastic
-                //StochasticEmbeddedExample_14.Run4b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                ////Run_4b - Plastic
-                ////StochasticEmbeddedExample_14.Run4b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_3b - Elastic
+            //    //StochasticEmbeddedExample_14.Run3b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_3b - Plastic
+            //    //StochasticEmbeddedExample_14.Run3b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                ////Run_4c - Elastic
-                //StochasticEmbeddedExample_14.Run4c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                ////Run_4b - Plastic
-                ////StochasticEmbeddedExample_14.Run4c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            }
+            //    //Run_3c - Elastic
+            //    //StochasticEmbeddedExample_14.Run3c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_3b - Plastic
+            //    //StochasticEmbeddedExample_14.Run3c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+
+            //    //Run_3d - Elastic
+            //    //StochasticEmbeddedExample_14.Run3d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //Run_3d - Plastic
+            //    //StochasticEmbeddedExample_14.Run3d_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+
+
+            //    //**Run_4 * * //
+
+            //    ////Run_4a - Elastic
+            //    //StochasticEmbeddedExample_14.Run4a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    ////Run_4a - Plastic
+            //    ////StochasticEmbeddedExample_14.Run4a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+
+            //    ////Run_4b - Elastic
+            //    //StochasticEmbeddedExample_14.Run4b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    ////Run_4b - Plastic
+            //    ////StochasticEmbeddedExample_14.Run4b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+
+            //    ////Run_4c - Elastic
+            //    //StochasticEmbeddedExample_14.Run4c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    ////Run_4b - Plastic
+            //    ////StochasticEmbeddedExample_14.Run4c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //}
 
             //**************************************************************************************************************************************************************************************//
             //**************************************************************************************************************************************************************************************//
@@ -1275,82 +1275,39 @@ namespace ISAAR.MSolve.SamplesConsole
             //********************//
             // EmbeddedExample-20 // Convergence Study - Vf=1.5% - Wavy CNTs of Example_13
             //*******************//
-            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
-            //int startingNumofSimulations = 1;
-            //int numberOfSimulations = 1;
+            LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            int startingNumofSimulations = 1;
+            int numberOfSimulations = 1;
 
-            //// Run_2-SingleMatrix
-            //// Vf = 6.1525 %
-            ////StochasticEmbeddedExample_20.Run2a_Elastic.SingleMatrix_DisplacementControl();
-            ////StochasticEmbeddedExample_20.Run2a_Plastic.SingleMatrix_DisplacementControl();
+            // Run_2-SingleMatrix
+            // Vf = 6.1525 %
+            //StochasticEmbeddedExample_20.Run2a_Elastic.SingleMatrix_DisplacementControl();
+            //StochasticEmbeddedExample_20.Run2a_Plastic.SingleMatrix_DisplacementControl();
 
-            //// Run_3-SingleMatrix
-            //// Vf = 6.1525 %
-            ////StochasticEmbeddedExample_20.Run3a_Elastic.SingleMatrix_DisplacementControl();
-            ////StochasticEmbeddedExample_20.Run3a_Plastic.SingleMatrix_DisplacementControl();
+            // Run_3-SingleMatrix
+            // Vf = 6.1525 %
+            //StochasticEmbeddedExample_20.Run3a_Elastic.SingleMatrix_DisplacementControl();
+            //StochasticEmbeddedExample_20.Run3a_Plastic.SingleMatrix_DisplacementControl();
 
-            //for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
-            //{
-            //    // ** Run_2 ** //
-
-            //    // Run_2a-Elastic
-            //    //StochasticEmbeddedExample_20.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-            //    //StochasticEmbeddedExample_20.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            //    // Run_2a-Plastic
-            //    //StochasticEmbeddedExample_20.Run2a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
-            //    //StochasticEmbeddedExample_20.Run2a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-            //    //// Run_2b-Elastic
-            //    //StochasticEmbeddedExample_20.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            //    //// Run_2b-Plastic               
-            //    //StochasticEmbeddedExample_20.Run2b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-            //    //// Run_2c-Elastic
-            //    //StochasticEmbeddedExample_20.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            //    //// Run_2b-Plastic
-            //    //StochasticEmbeddedExample_20.Run2c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-
-            //    // ** Run_3 ** //
-
-            //    // Run_3a-Elastic
-            //    //StochasticEmbeddedExample_20.Run3a_Elastic.SingleMatrix_DisplacementControl();
-            //    //StochasticEmbeddedExample_20.Run3a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-            //    //StochasticEmbeddedExample_20.Run3a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            //    //// Run_3a-Plastic
-            //    //StochasticEmbeddedExample_20.Run3a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
-            //    //StochasticEmbeddedExample_20.Run3a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-            //    //// Run_3b-Elastic
-            //    //StochasticEmbeddedExample_20.Run3b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            //    //// Run_3b-Plastic               
-            //    //StochasticEmbeddedExample_20.Run3b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-            //    //// Run_3c-Elastic
-            //    //StochasticEmbeddedExample_20.Run3c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            //    //// Run_3b-Plastic
-            //    //StochasticEmbeddedExample_20.Run3c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-            //    // ** Run_4 ** //
-
-            //    // Run_4a-Elastic
-            //    //StochasticEmbeddedExample_20.Run4a_Elastic.SingleMatrix_DisplacementControl();
-            //    //StochasticEmbeddedExample_20.Run4a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-            //    StochasticEmbeddedExample_20.Run4a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            //    //// Run_4a-Plastic
-            //    //StochasticEmbeddedExample_20.Run4a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
-            //    //StochasticEmbeddedExample_20.Run4a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-            //    //// Run_4b-Elastic
-            //    //StochasticEmbeddedExample_20.Run4b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            //    //// Run_3b-Plastic               
-            //    //StochasticEmbeddedExample_20.Run4b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-
-            //    //// Run_4c-Elastic
-            //    //StochasticEmbeddedExample_20.Run4c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            //    //// Run_4b-Plastic
-            //    //StochasticEmbeddedExample_20.Run4c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            //}
+            for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
+            {
+                // ** Run_2 ** //
+                // Run_2a-Elastic
+                //StochasticEmbeddedExample_20.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+                //StochasticEmbeddedExample_20.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+                
+                // ** Run_3 ** //
+                // Run_3a-Elastic
+                //StochasticEmbeddedExample_20.Run3a_Elastic.SingleMatrix_DisplacementControl();
+                StochasticEmbeddedExample_20.Run3a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+                StochasticEmbeddedExample_20.Run3a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+                
+                // ** Run_4 ** //
+                // Run_4a-Elastic
+                //StochasticEmbeddedExample_20.Run4a_Elastic.SingleMatrix_DisplacementControl();
+                //StochasticEmbeddedExample_20.Run4a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+                //StochasticEmbeddedExample_20.Run4a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);                
+            }
 
             //**************************************************************************************************************************************************************************************//
             //**************************************************************************************************************************************************************************************//
