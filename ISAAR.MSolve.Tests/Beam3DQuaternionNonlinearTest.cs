@@ -598,5 +598,11 @@ namespace ISAAR.MSolve.Tests
             DOFSLog_v2 log = (DOFSLog_v2)childAnalyzer.Logs[1][0]; //There is a list of logs for each subdomain and we want the first one
             Assert.Equal(120.1108698752, log.DOFValues[0], 2);
         }
+
+        [Fact]
+        public void DisplacementControlWithHexa8NL()
+        {
+
+        }
     }
 }
