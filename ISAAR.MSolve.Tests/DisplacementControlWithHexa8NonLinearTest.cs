@@ -87,6 +87,14 @@ namespace ISAAR.MSolve.Tests
             model.ElementsDictionary.Add(hexa8NLelement.ID, hexa8NLelement);
             model.SubdomainsDictionary[subdomainID].Elements.Add(hexa8NLelement);
 
+            // Boundary Condtitions
+            for (int iNode = 1; iNode <= 4; iNode++)
+            {
+                model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+            }
+
             // Boundary Condtitions - Prescribed DOFs          
             for (int iNode = 5; iNode <= 8; iNode++)
             {
@@ -94,10 +102,10 @@ namespace ISAAR.MSolve.Tests
             }
 
             // Choose linear equation system solver
-            //var solverBuilder = new SkylineSolver.Builder();
-            //SkylineSolver solver = solverBuilder.BuildSolver(model);
-            var solverBuilder = new SuiteSparseSolver.Builder();
-            SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+            var solverBuilder = new SkylineSolver.Builder();
+            SkylineSolver solver = solverBuilder.BuildSolver(model);
+            //var solverBuilder = new SuiteSparseSolver.Builder();
+            //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
 
             // Choose the provider of the problem -> here a structural problem
             var provider = new ProblemStructural_v2(model, solver);
@@ -124,7 +132,7 @@ namespace ISAAR.MSolve.Tests
             var solution = analyzer.uPlusdu[0];
 
             // Check output
-            Assert.Equal(1.8858693783132208, solution[0], 8);
+            Assert.Equal(-1.019828463478385, solution[0], 8);
         }
     }
 }
