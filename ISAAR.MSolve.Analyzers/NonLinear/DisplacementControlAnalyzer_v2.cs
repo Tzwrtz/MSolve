@@ -44,7 +44,7 @@ namespace ISAAR.MSolve.Analyzers.NonLinear
                     solver.Solve();
 
                     Dictionary<int, IVector> internalRhsVectors = CalculateInternalRhs(increment, iteration);
-                    errorNorm = UpdateResidualForcesAndNorm(increment, internalRhsVectors); // This also sets the rhs vectors in linear systems.
+                    errorNorm = UpdateResidualForcesAndNorm(increment, internalRhsVectors); 
                     //Console.WriteLine($"Increment {increment}, iteration {iteration}: norm2(error) = {errorNorm}");
 
                     if (iteration == 0) firstError = errorNorm;
@@ -103,7 +103,7 @@ namespace ISAAR.MSolve.Analyzers.NonLinear
                 int id = linearSystem.Subdomain.ID;
                 //int idx = FindSubdomainIdx(linearSystems, linearSystem);
 
-                double scalingFactor = 1.0/(currentIncrement+1); //((double)currentIncrement + 2) / (currentIncrement + 1); //2; //
+                double scalingFactor = 1.0 / (currentIncrement + 1); //((double)currentIncrement + 2) / (currentIncrement + 1); //2; //
                 IVector equivalentNodalLoads = provider.DirichletLoadsAssembler.GetEquivalentNodalLoads(linearSystem.Subdomain, 
                     u[id], scalingFactor);
                 linearSystem.RhsVector.SubtractIntoThis(equivalentNodalLoads);
@@ -120,9 +120,7 @@ namespace ISAAR.MSolve.Analyzers.NonLinear
 
             foreach (ILinearSystem_v2 linearSystem in linearSystems.Values)
             {
-                //int idx = FindSubdomainIdx(linearSystems, linearSystem);
-                double scalingFactor = ((double)(currentIncrement + 1)) / currentIncrement; // 1;
-                //1; // ((double)currentIncrement + 2) / (currentIncrement + 1);
+                double scalingFactor = ((double)(currentIncrement + 1)) / currentIncrement;
                 subdomainUpdaters[linearSystem.Subdomain.ID].ScaleConstraints(scalingFactor);
             }
         }

@@ -25,31 +25,19 @@ namespace ISAAR.MSolve.Problems
 
         public IVector GetEquivalentNodalLoads(ISubdomain_v2 subdomain, IVectorView solution, double constraintScalingFactor) 
         {
-            //var times = new Dictionary<string, TimeSpan>();
-            //var totalStart = DateTime.Now;
-            //times.Add("rowIndexCalculation", DateTime.Now - totalStart);
-            //times.Add("element", TimeSpan.Zero);
-            //times.Add("addition", TimeSpan.Zero);
-
             var subdomainEquivalentForces = Vector.CreateZero(subdomain.DofOrdering.NumFreeDofs);
             foreach (IElement_v2 element in subdomain.Elements)
             {
                 //var elStart = DateTime.Now;
                 IMatrix elementK = elementProvider.Matrix(element);
 
-                //double[] localSolution = subdomain.CalculateElementNodalDisplacements(element, solution);
-                //double[] localdSolution = subdomain.CalculateElementIcrementalConstraintDisplacements(element, constraintScalingFactor);
                 double[] localdSolution = 
                     subdomain.CalculateElementIncrementalConstraintDisplacements(element, constraintScalingFactor);
 
                 var elementEquivalentForces = elementK.Multiply(localdSolution);
 
                 subdomain.DofOrdering.AddVectorElementToSubdomain(element, elementEquivalentForces, subdomainEquivalentForces);
-
-                //times["addition"] += DateTime.Now - elStart;
             }
-
-            //var totalTime = DateTime.Now - totalStart;
 
             return subdomainEquivalentForces;
         }        

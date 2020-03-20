@@ -28,7 +28,6 @@ namespace ISAAR.MSolve.Logging.Utilities
 
             foreach (Element_v2 element in node.ElementsDictionary.Values)
             {
-
                 // It is possible that one of the elements at this node does not engage this dof type, in which case -1 will be returned.
                 // We will not have any contribution from them. If none of the elements engage this dof type, the total force will always be 0.
                 int monitorDofIdx = FindLocalDofIndex(element, node, dofType);
