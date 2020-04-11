@@ -97,7 +97,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -139,8 +139,8 @@ namespace ISAAR.MSolve.SamplesConsole
                 private static void HostElements(Model_v2 model)
                 {
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 22\run1-2a\input files";
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -275,7 +275,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -317,8 +317,8 @@ namespace ISAAR.MSolve.SamplesConsole
                 private static void HostElements(Model_v2 model)
                 {
                     string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 22\run1-2a\input files";
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -462,7 +462,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -549,7 +549,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -637,7 +637,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -694,8 +694,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -1025,7 +1025,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -1113,7 +1113,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -1201,7 +1201,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -1257,8 +1257,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -1583,7 +1583,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -1669,7 +1669,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -1720,8 +1720,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -2050,7 +2050,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -2138,7 +2138,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -2188,8 +2188,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -2514,7 +2514,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -2599,7 +2599,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -2650,8 +2650,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -2980,7 +2980,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -3064,7 +3064,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -3115,8 +3115,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -3441,7 +3441,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -3526,7 +3526,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -3577,8 +3577,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -3907,7 +3907,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -3991,7 +3991,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -4042,8 +4042,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -4374,7 +4374,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -4462,7 +4462,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -4550,7 +4550,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -4607,8 +4607,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -4938,7 +4938,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -5026,7 +5026,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -5114,7 +5114,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -5170,8 +5170,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -5496,7 +5496,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -5581,7 +5581,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -5632,8 +5632,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -5962,7 +5962,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -6050,7 +6050,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -6100,8 +6100,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -6426,7 +6426,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -6510,7 +6510,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -6561,8 +6561,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -6891,7 +6891,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -6975,7 +6975,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -7026,8 +7026,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -7352,7 +7352,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -7436,7 +7436,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -7487,8 +7487,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -7817,7 +7817,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -7901,7 +7901,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -7952,8 +7952,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -8284,7 +8284,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -8372,7 +8372,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -8460,7 +8460,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -8517,8 +8517,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -8848,7 +8848,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -8936,7 +8936,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -9024,7 +9024,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -9080,8 +9080,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -9406,7 +9406,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -9491,7 +9491,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -9542,8 +9542,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -9872,7 +9872,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -9960,7 +9960,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -10010,8 +10010,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -10336,7 +10336,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -10420,7 +10420,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -10471,8 +10471,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -10801,7 +10801,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -10885,7 +10885,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -10936,8 +10936,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -11262,7 +11262,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -11346,7 +11346,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -11397,8 +11397,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -11727,7 +11727,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -11811,7 +11811,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 500,
+                    MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
                     ResidualTolerance = 1E-03
                 };
@@ -11862,8 +11862,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-15x15x15-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
