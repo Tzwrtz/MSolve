@@ -94,7 +94,7 @@ namespace ISAAR.MSolve.Logging.Utilities
             //}
 
             // Loading Conditions - Imposed Displacements at Nodes - [Right-End] - {121 nodes}
-            Node_v2[] constrainedNodes = new Node_v2[121];
+            Node_v2[] constrainedNodes = new Node_v2[256];
             for (int ii = 0; ii < 256; ii++)
             {
                 constrainedNodes[ii] = model.NodesDictionary[3841 + ii];
