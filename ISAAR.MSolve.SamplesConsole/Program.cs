@@ -1320,7 +1320,7 @@ namespace ISAAR.MSolve.SamplesConsole
             //*******************//
             LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
             int startingNumofSimulations = 1;
-            int numberOfSimulations = 10;
+            int numberOfSimulations = 1;
 
             for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
             {
