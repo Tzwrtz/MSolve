@@ -66,12 +66,12 @@ namespace ISAAR.MSolve.Logging.Utilities
             //}
 
             // This adds all the internal forces of the constrained end
-            //// Loading Conditions - Imposed Displacements at Nodes - [Right-End] - {121 nodes}
-            //Node_v2[] constrainedNodes = new Node_v2[121];
-            //for (int ii = 0; ii < 121; ii++)
-            //{
-            //    constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
-            //}
+            // Loading Conditions - Imposed Displacements at Nodes - [Right-End] - {121 nodes}
+            Node_v2[] constrainedNodes = new Node_v2[121];
+            for (int ii = 0; ii < 121; ii++)
+            {
+                constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
+            }
 
             //Node_v2[] constrainedNodes = new Node_v2[441];
             //for (int ii = 0; ii < 441; ii++)
@@ -94,11 +94,11 @@ namespace ISAAR.MSolve.Logging.Utilities
             //}
 
             // Loading Conditions - Imposed Displacements at Nodes - [Right-End] - {121 nodes}
-            Node_v2[] constrainedNodes = new Node_v2[121];
-            for (int ii = 0; ii < 256; ii++)
-            {
-                constrainedNodes[ii] = model.NodesDictionary[3841 + ii];
-            }
+            //Node_v2[] constrainedNodes = new Node_v2[256];
+            //for (int ii = 0; ii < 256; ii++)
+            //{
+            //    constrainedNodes[ii] = model.NodesDictionary[3841 + ii];
+            //}
 
             foreach (Node_v2 constrainedNode in constrainedNodes)
             {
