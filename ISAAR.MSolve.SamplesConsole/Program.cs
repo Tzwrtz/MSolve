@@ -1418,32 +1418,66 @@ namespace ISAAR.MSolve.SamplesConsole
             //********************//
             // EmbeddedExample-25 // RVE with 1 wavy CNT - Vf=1.5% - Matrix(10,10,50)-L_cnt=50nm
             //*******************//
-            LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
-            int startingNumofSimulations = 1;
-            int numberOfSimulations = 1;
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //int startingNumofSimulations = 1;
+            //int numberOfSimulations = 1;
 
-            StochasticEmbeddedExample_25.Run2a_Elastic.SingleMatrix_DisplacementControl();
-            for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
-            {
-                StochasticEmbeddedExample_25.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-                StochasticEmbeddedExample_25.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            }
+            //StochasticEmbeddedExample_25.Run2a_Elastic.SingleMatrix_DisplacementControl();
+            //for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
+            //{
+            //    StochasticEmbeddedExample_25.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    StochasticEmbeddedExample_25.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //}
 
             //**************************************************************************************************************************************************************************************//
             //**************************************************************************************************************************************************************************************//
 
             //********************//
-            // EmbeddedExample-25 // RVE with 1 straight CNT - Vf=1.5% - Matrix(10,10,50)-L_cnt=50nm
+            // EmbeddedExample-26 // RVE with 1 straight CNT - Vf=1.5% - Matrix(10,10,50)-L_cnt=50nm
             //*******************//
             //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
             //int startingNumofSimulations = 1;
             //int numberOfSimulations = 1;
 
-            StochasticEmbeddedExample_26.Run2a_Elastic.SingleMatrix_DisplacementControl();
+            //StochasticEmbeddedExample_26.Run2a_Elastic.SingleMatrix_DisplacementControl();
+            //for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
+            //{
+            //    StochasticEmbeddedExample_26.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    StochasticEmbeddedExample_26.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //}
+
+            //**************************************************************************************************************************************************************************************//
+            //**************************************************************************************************************************************************************************************//
+
+            //********************//
+            // EmbeddedExample-27 // RVE: Matrix(50,50,50), L_cnt=50 - Vf=1.5%
+            //*******************//
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //int startingNumofSimulations = 1;
+            //int numberOfSimulations = 10;
+
+            //StochasticEmbeddedExample_27.Run2a_Elastic.SingleMatrix_DisplacementControl();
+            //for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
+            //{
+            //    StochasticEmbeddedExample_27.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    StochasticEmbeddedExample_27.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //}
+
+            //**************************************************************************************************************************************************************************************//
+            //**************************************************************************************************************************************************************************************//
+
+            //********************//
+            // EmbeddedExample-28 // RVE: Matrix(200,200,200), L_cnt=100
+            //*******************//
+            LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            int startingNumofSimulations = 1;
+            int numberOfSimulations = 10;
+
+            StochasticEmbeddedExample_28.Run2a_Elastic.SingleMatrix_DisplacementControl();
             for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
             {
-                StochasticEmbeddedExample_26.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-                StochasticEmbeddedExample_26.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+                StochasticEmbeddedExample_28.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+                StochasticEmbeddedExample_28.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
             }
 
         }
