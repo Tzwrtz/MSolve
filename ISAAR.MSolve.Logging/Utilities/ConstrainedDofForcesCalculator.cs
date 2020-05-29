@@ -88,6 +88,7 @@ namespace ISAAR.MSolve.Logging.Utilities
             //}
 
             // Loading Conditions - Imposed Displacements at Nodes - [Right-End] - {121 nodes}
+<<<<<<< HEAD
             //Node_v2[] constrainedNodes = new Node_v2[256];
             //for (int ii = 0; ii < 256; ii++)
             //{
@@ -132,6 +133,10 @@ namespace ISAAR.MSolve.Logging.Utilities
             // EmbeddedExample_20-Run4 - 2nd Convergence study of example #23
             Node_v2[] constrainedNodes = new Node_v2[36];
             for (int ii = 0; ii < 36; ii++)
+=======
+            Node_v2[] constrainedNodes = new Node_v2[256];
+            for (int ii = 0; ii < 256; ii++)
+>>>>>>> 17187fcc2aa31ca1c5c83c7c0b480ecb08f36b38
             {
                 constrainedNodes[ii] = model.NodesDictionary[181 + ii];
             }
