@@ -65,13 +65,7 @@ namespace ISAAR.MSolve.Logging.Utilities
             //    totalForce += elementForces[monitorDofIdx];
             //}
 
-            // This adds all the internal forces of the constrained end
-            // Loading Conditions - Imposed Displacements at Nodes - [Right-End] - {121 nodes}
-            //Node_v2[] constrainedNodes = new Node_v2[121];
-            //for (int ii = 0; ii < 121; ii++)
-            //{
-            //    constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
-            //}
+            // This adds all the internal forces of the constrained end            
 
             //Node_v2[] constrainedNodes = new Node_v2[441];
             //for (int ii = 0; ii < 441; ii++)
@@ -100,25 +94,46 @@ namespace ISAAR.MSolve.Logging.Utilities
             //    constrainedNodes[ii] = model.NodesDictionary[3841 + ii];
             //}
 
-            //// EmbeddedExample_25 & 26
+            // EmbeddedExample_25 & 26
             //Node_v2[] constrainedNodes = new Node_v2[4];
             //for (int ii = 0; ii < 4; ii++)
             //{
             //    constrainedNodes[ii] = model.NodesDictionary[21 + ii];
             //}
 
-            //// EmbeddedExample_27
+            // EmbeddedExample_27
             //Node_v2[] constrainedNodes = new Node_v2[36];
             //for (int ii = 0; ii < 36; ii++)
             //{
             //    constrainedNodes[ii] = model.NodesDictionary[181 + ii];
             //}
 
-            // EmbeddedExample_28
-            Node_v2[] constrainedNodes = new Node_v2[121];
-            for (int ii = 0; ii < 121; ii++)
+            //// EmbeddedExample_28
+            //Node_v2[] constrainedNodes = new Node_v2[121];
+            //for (int ii = 0; ii < 121; ii++)
+            //{
+            //    constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
+            //}
+
+            // EmbeddedExample_23  - {121 nodes}
+            //Node_v2[] constrainedNodes = new Node_v2[121];
+            //for (int ii = 0; ii < 121; ii++)
+            //{
+            //    constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
+            //}
+
+            // EmbeddedExample_20-Run3 - 1st Convergence study of example #23
+            //Node_v2[] constrainedNodes = new Node_v2[441];
+            //for (int ii = 0; ii < 441; ii++)
+            //{
+            //    constrainedNodes[ii] = model.NodesDictionary[8821 + ii];
+            //}
+
+            // EmbeddedExample_20-Run4 - 2nd Convergence study of example #23
+            Node_v2[] constrainedNodes = new Node_v2[36];
+            for (int ii = 0; ii < 36; ii++)
             {
-                constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
+                constrainedNodes[ii] = model.NodesDictionary[181 + ii];
             }
 
             foreach (Node_v2 constrainedNode in constrainedNodes)

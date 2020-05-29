@@ -819,7 +819,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Plastic Material
-                    var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.1);
+                    var solidMaterial = new VonMisesMaterial3D_v2(4.0, 0.4, 0.120, 0.4);
 
                     // Generate elements
                     using (TextReader reader = File.OpenText(workingDirectory + '\\' + MatrixConnectivityFileName))
