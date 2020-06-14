@@ -34,18 +34,18 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic"; 
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
             private const int embeddedElements = 1;
             private const int embeddedNodes = 2;
-            private const double nodalDisplacement = +2.5;
+            private const double nodalDisplacement = +1.0;
             private const int monitorNode = 5;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 10;
@@ -230,18 +230,11 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Boundary Conditions - [Left-End]
                 for (int iNode = 1; iNode <= 4; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = -nodalDisplacement });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
-
-                // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 5; iNode += 4)
-                {
-                    for (int j = 0; j <= 1; j++)
-                    {
-                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    }
-                }
-
+                                
                 // Loading Conditions - [Right-End] - {36 nodes}
                 for (int iNode = 5; iNode <= 8; iNode++)
                 {
@@ -251,8 +244,8 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose linear equation system solver
                 //var solverBuilder = new SkylineSolver.Builder();
                 //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new DenseMatrixSolver.Builder();
+                DenseMatrixSolver solver = solverBuilder.BuildSolver(model);
 
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
@@ -319,8 +312,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -580,10 +573,10 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
             private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -862,8 +855,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -1118,10 +1111,10 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
             private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -1312,8 +1305,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -1572,10 +1565,10 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
             private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\output files\plastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -1768,8 +1761,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -2024,10 +2017,10 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
             private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -2217,8 +2210,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 
@@ -2477,10 +2470,10 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
             private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\output files\plastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -2670,8 +2663,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-Geometry_MSolve.inp";
-                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=20-1x1x1-ConnMatr_MSolve.inp";
+                    string MatrixGeometryFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-Geometry_MSolve.inp";
+                    string MatrixGonnectivityFileName = "MATRIX_3D-L_x=10-L_y=10-L_z=10-1x1x1-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
                     int matrixElements = File.ReadLines(workingDirectory + '\\' + MatrixGonnectivityFileName).Count();
 

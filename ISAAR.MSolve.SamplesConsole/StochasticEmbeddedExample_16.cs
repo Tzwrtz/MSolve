@@ -385,10 +385,10 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\output files\elastic";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\output files\elastic"; 
             //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\output files\elastic";
             private const int subdomainID = 0;
@@ -402,7 +402,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 0.50;
+            private const double t_max = 0.05;
             private const double K_coh = 10.0;
 
             public static void SingleMatrix_DisplacementControl()
@@ -953,8 +953,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -966,7 +966,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 0.50;
+            private const double t_max = 0.05;
             private const double K_coh = 10.0;
 
             public static void SingleMatrix_DisplacementControl()
@@ -1511,8 +1511,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2b\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2b\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -1524,7 +1524,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 1.00;
+            private const double t_max = 0.50;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -1972,8 +1972,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2b\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2b\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -1985,7 +1985,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 1.00;
+            private const double t_max = 0.50;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -2430,8 +2430,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2c\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2c\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -2443,7 +2443,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 2.00;
+            private const double t_max = 1.00;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -2890,8 +2890,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2c\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -2903,7 +2903,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 2.00;
+            private const double t_max = 1.00;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -3345,8 +3345,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2d_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2d\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2d\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2d\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -3358,7 +3358,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 0.05;
+            private const double t_max = 2.00;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
@@ -3805,8 +3805,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2d_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2d\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2d\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16\run-2d\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -3818,7 +3818,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const int increments = 100;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 0.05;
+            private const double t_max = 2.00;
             private const double K_coh = 10.0;
 
             public static void EBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)

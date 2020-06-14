@@ -88,7 +88,7 @@ namespace ISAAR.MSolve.Logging.Utilities
             //}
 
             // Loading Conditions - Imposed Displacements at Nodes - [Right-End] - {121 nodes}
-<<<<<<< HEAD
+
             //Node_v2[] constrainedNodes = new Node_v2[256];
             //for (int ii = 0; ii < 256; ii++)
             //{
@@ -123,6 +123,13 @@ namespace ISAAR.MSolve.Logging.Utilities
             //    constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
             //}
 
+            // EmbeddedExample_15  - {4 nodes}
+            Node_v2[] constrainedNodes = new Node_v2[121];
+            for (int ii = 0; ii < 4; ii++)
+            {
+                constrainedNodes[ii] = model.NodesDictionary[5 + ii];
+            }
+
             // EmbeddedExample_20-Run3 - 1st Convergence study of example #23
             //Node_v2[] constrainedNodes = new Node_v2[441];
             //for (int ii = 0; ii < 441; ii++)
@@ -131,15 +138,11 @@ namespace ISAAR.MSolve.Logging.Utilities
             //}
 
             // EmbeddedExample_20-Run4 - 2nd Convergence study of example #23
-            Node_v2[] constrainedNodes = new Node_v2[36];
-            for (int ii = 0; ii < 36; ii++)
-=======
-            Node_v2[] constrainedNodes = new Node_v2[256];
-            for (int ii = 0; ii < 256; ii++)
->>>>>>> 17187fcc2aa31ca1c5c83c7c0b480ecb08f36b38
-            {
-                constrainedNodes[ii] = model.NodesDictionary[181 + ii];
-            }
+            //Node_v2[] constrainedNodes = new Node_v2[36];
+            //for (int ii = 0; ii < 36; ii++)
+            //{
+            //    constrainedNodes[ii] = model.NodesDictionary[181 + ii];
+            //}
 
             foreach (Node_v2 constrainedNode in constrainedNodes)
             {
