@@ -922,9 +922,9 @@ namespace ISAAR.MSolve.SamplesConsole
             //********************//
             // EmbeddedExample-15 // - 1 straight CNT in Matrix(10*10*10)-nelems=[1x1x1]
             //*******************//
-            LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
-            int startingNumofSimulations = 1;
-            int numberOfSimulations = 1;
+            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            //int startingNumofSimulations = 1;
+            //int numberOfSimulations = 1;
 
             //// Run_2-SingleMatrix
             //// Vf = 6.1525 %
@@ -936,47 +936,47 @@ namespace ISAAR.MSolve.SamplesConsole
             ////StochasticEmbeddedExample_15.Run3a_Elastic.SingleMatrix_DisplacementControl();
             ////StochasticEmbeddedExample_15.Run3a_Plastic.SingleMatrix_DisplacementControl();
 
-            for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
-            {
-                //    // ** Run_2 ** //
+            //for (int i = startingNumofSimulations; i <= numberOfSimulations; i++)
+            //{
+            //    //    // ** Run_2 ** //
 
-                //    // Run_2a-Elastic
-                //StochasticEmbeddedExample_15.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-                StochasticEmbeddedExample_15.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //    // Run_2a-Plastic
-                //    //StochasticEmbeddedExample_15.Run2a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
-                //    //StochasticEmbeddedExample_15.Run2a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    // Run_2a-Elastic
+            //    //StochasticEmbeddedExample_15.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    StochasticEmbeddedExample_15.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    // Run_2a-Plastic
+            //    //    //StochasticEmbeddedExample_15.Run2a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    //    //StochasticEmbeddedExample_15.Run2a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                //    //// Run_2b-Elastic
-                //    //StochasticEmbeddedExample_15.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //    //// Run_2b-Plastic               
-                //    //StochasticEmbeddedExample_15.Run2b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    //// Run_2b-Elastic
+            //    //    //StochasticEmbeddedExample_15.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    //// Run_2b-Plastic               
+            //    //    //StochasticEmbeddedExample_15.Run2b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                //    //// Run_2c-Elastic
-                //    //StochasticEmbeddedExample_15.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //    //// Run_2b-Plastic
-                //    //StochasticEmbeddedExample_15.Run2c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    //// Run_2c-Elastic
+            //    //    //StochasticEmbeddedExample_15.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    //// Run_2b-Plastic
+            //    //    //StochasticEmbeddedExample_15.Run2c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
 
-                //    // ** Run_3 ** //
+            //    //    // ** Run_3 ** //
 
-                //    // Run_3a-Elastic
-                //    StochasticEmbeddedExample_15.Run3a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
-                //    StochasticEmbeddedExample_15.Run3a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //    //// Run_3a-Plastic
-                //    //StochasticEmbeddedExample_15.Run3a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
-                //    //StochasticEmbeddedExample_15.Run3a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    // Run_3a-Elastic
+            //    //    StochasticEmbeddedExample_15.Run3a_Elastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    //    StochasticEmbeddedExample_15.Run3a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    //// Run_3a-Plastic
+            //    //    //StochasticEmbeddedExample_15.Run3a_Plastic.EBEembeddedInMatrix_DisplacementControl(i);
+            //    //    //StochasticEmbeddedExample_15.Run3a_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                //    //// Run_3b-Elastic
-                //    //StochasticEmbeddedExample_15.Run3b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //    //// Run_3b-Plastic               
-                //    //StochasticEmbeddedExample_15.Run3b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    //// Run_3b-Elastic
+            //    //    //StochasticEmbeddedExample_15.Run3b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    //// Run_3b-Plastic               
+            //    //    //StochasticEmbeddedExample_15.Run3b_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
 
-                //    //// Run_3c-Elastic
-                //    //StochasticEmbeddedExample_15.Run3c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-                //    //// Run_3b-Plastic
-                //    //StochasticEmbeddedExample_15.Run3c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
-            }
+            //    //    //// Run_3c-Elastic
+            //    //    //StochasticEmbeddedExample_15.Run3c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //    //    //// Run_3b-Plastic
+            //    //    //StochasticEmbeddedExample_15.Run3c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
+            //}
 
             //**************************************************************************************************************************************************************************************//
             //**************************************************************************************************************************************************************************************//
@@ -984,7 +984,7 @@ namespace ISAAR.MSolve.SamplesConsole
             //********************//
             // EmbeddedExample-16 // Vf = 1.5%
             //*******************//
-            //LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
+            LinearAlgebra.LibrarySettings.LinearAlgebraProviders = LinearAlgebra.LinearAlgebraProviderChoice.MKL;
             //int startingNumofSimulations = 1;
             //int numberOfSimulations = 10;
 
@@ -1061,44 +1061,44 @@ namespace ISAAR.MSolve.SamplesConsole
             //    //StochasticEmbeddedExample_16.Run4c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
             //}
 
-            //Console.WriteLine($" ");
-            //Console.WriteLine($"*** EXAMPLE 16 ***");
-            //Console.WriteLine($" ");
+            Console.WriteLine($" ");
+            Console.WriteLine($"*** EXAMPLE 16 ***");
+            Console.WriteLine($" ");
 
-            //var watch_1 = new System.Diagnostics.Stopwatch();
-            //watch_1.Start();
-            //StochasticEmbeddedExample_16.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(1);
-            //watch_1.Stop();
-            //var elapsedTime_1 = watch_1.ElapsedMilliseconds;
-            //Console.WriteLine($"Execution Time watch_1: {elapsedTime_1} ms");
+            var watch_1 = new System.Diagnostics.Stopwatch();
+            watch_1.Start();
+            StochasticEmbeddedExample_16.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(1);
+            watch_1.Stop();
+            var elapsedTime_1 = watch_1.ElapsedMilliseconds;
+            Console.WriteLine($"Execution Time watch_1: {elapsedTime_1} ms");
 
-            //var watch_2 = new System.Diagnostics.Stopwatch();
-            //watch_2.Start();
-            //StochasticEmbeddedExample_16.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
-            //watch_2.Stop();
-            //var elapsedTime_2 = watch_2.ElapsedMilliseconds;
-            //Console.WriteLine($"Execution Time watch_2: {elapsedTime_2} ms");
+            var watch_2 = new System.Diagnostics.Stopwatch();
+            watch_2.Start();
+            StochasticEmbeddedExample_16.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
+            watch_2.Stop();
+            var elapsedTime_2 = watch_2.ElapsedMilliseconds;
+            Console.WriteLine($"Execution Time watch_2: {elapsedTime_2} ms");
 
-            //var watch_3 = new System.Diagnostics.Stopwatch();
-            //watch_3.Start();
-            //StochasticEmbeddedExample_16.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
-            //watch_3.Stop();
-            //var elapsedTime_3 = watch_3.ElapsedMilliseconds;
-            ////Console.WriteLine($"Execution Time watch_3: {elapsedTime_3} ms");
+            var watch_3 = new System.Diagnostics.Stopwatch();
+            watch_3.Start();
+            StochasticEmbeddedExample_16.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
+            watch_3.Stop();
+            var elapsedTime_3 = watch_3.ElapsedMilliseconds;
+            Console.WriteLine($"Execution Time watch_3: {elapsedTime_3} ms");
 
-            //var watch_4 = new System.Diagnostics.Stopwatch();
-            //watch_4.Start();
-            //StochasticEmbeddedExample_16.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
-            //watch_4.Stop();
-            //var elapsedTime_4 = watch_4.ElapsedMilliseconds;
-            ////Console.WriteLine($"Execution Time watch_4: {elapsedTime_4} ms");
+            var watch_4 = new System.Diagnostics.Stopwatch();
+            watch_4.Start();
+            StochasticEmbeddedExample_16.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
+            watch_4.Stop();
+            var elapsedTime_4 = watch_4.ElapsedMilliseconds;
+            Console.WriteLine($"Execution Time watch_4: {elapsedTime_4} ms");
 
-            //var watch_5 = new System.Diagnostics.Stopwatch();
-            //watch_5.Start();
-            //StochasticEmbeddedExample_16.Run2d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
-            //watch_5.Stop();
-            //var elapsedTime_5 = watch_5.ElapsedMilliseconds;
-            //Console.WriteLine($"Execution Time watch_5: {elapsedTime_5} ms");
+            var watch_5 = new System.Diagnostics.Stopwatch();
+            watch_5.Start();
+            StochasticEmbeddedExample_16.Run2d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
+            watch_5.Stop();
+            var elapsedTime_5 = watch_5.ElapsedMilliseconds;
+            Console.WriteLine($"Execution Time watch_5: {elapsedTime_5} ms");
 
             //**************************************************************************************************************************************************************************************//
             //**************************************************************************************************************************************************************************************//
@@ -1182,66 +1182,70 @@ namespace ISAAR.MSolve.SamplesConsole
             //    ////StochasticEmbeddedExample_17.Run4c_Plastic.CohesiveEBEembeddedInMatrix_DisplacementControl(i);
             //}
 
-            //Console.WriteLine($" ");
-            //Console.WriteLine($"*** EXAMPLE 17 ***");
-            //Console.WriteLine($" ");
+            Console.WriteLine($" ");
+            Console.WriteLine($"*** EXAMPLE 17 ***");
+            Console.WriteLine($" ");
 
-            //var watch_6 = new System.Diagnostics.Stopwatch();
-            //watch_6.Start();
-            //StochasticEmbeddedExample_17.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(1);
-            //watch_6.Stop();
-            //var elapsedTime_6 = watch_6.ElapsedMilliseconds;
-            ////Console.WriteLine($"Execution Time watch_6: {elapsedTime_6} ms");
+            var watch_6 = new System.Diagnostics.Stopwatch();
+            watch_6.Start();
+            StochasticEmbeddedExample_17.Run2a_Elastic.EBEembeddedInMatrix_DisplacementControl(1);
+            watch_6.Stop();
+            var elapsedTime_6 = watch_6.ElapsedMilliseconds;
+            Console.WriteLine($"Execution Time watch_6: {elapsedTime_6} ms");
 
-            //var watch_7 = new System.Diagnostics.Stopwatch();
-            //watch_7.Start();
-            //StochasticEmbeddedExample_17.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
-            //watch_7.Stop();
-            //var elapsedTime_7 = watch_7.ElapsedMilliseconds;
-            ////Console.WriteLine($"Execution Time watch_7: {elapsedTime_7} ms");
+            var watch_7 = new System.Diagnostics.Stopwatch();
+            watch_7.Start();
+            StochasticEmbeddedExample_17.Run2a_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
+            watch_7.Stop();
+            var elapsedTime_7 = watch_7.ElapsedMilliseconds;
+            Console.WriteLine($"Execution Time watch_7: {elapsedTime_7} ms");
 
-            //var watch_8 = new System.Diagnostics.Stopwatch();
-            //watch_8.Start();
-            //StochasticEmbeddedExample_17.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
-            //watch_8.Stop();
-            //var elapsedTime_8 = watch_8.ElapsedMilliseconds;
-            ////Console.WriteLine($"Execution Time watch_8: {elapsedTime_8} ms");
+            var watch_8 = new System.Diagnostics.Stopwatch();
+            watch_8.Start();
+            StochasticEmbeddedExample_17.Run2b_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
+            watch_8.Stop();
+            var elapsedTime_8 = watch_8.ElapsedMilliseconds;
+            Console.WriteLine($"Execution Time watch_8: {elapsedTime_8} ms");
 
-            //var watch_9 = new System.Diagnostics.Stopwatch();
-            //watch_9.Start();
-            //StochasticEmbeddedExample_17.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
-            //watch_9.Stop();
-            //var elapsedTime_9 = watch_9.ElapsedMilliseconds;
-            ////Console.WriteLine($"Execution Time watch_9: {elapsedTime_9} ms");
+            var watch_9 = new System.Diagnostics.Stopwatch();
+            watch_9.Start();
+            StochasticEmbeddedExample_17.Run2c_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
+            watch_9.Stop();
+            var elapsedTime_9 = watch_9.ElapsedMilliseconds;
+            Console.WriteLine($"Execution Time watch_9: {elapsedTime_9} ms");
 
-            //var watch_10 = new System.Diagnostics.Stopwatch();
-            //watch_10.Start();
-            //StochasticEmbeddedExample_17.Run2d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
-            //watch_10.Stop();
-            //var elapsedTime_10 = watch_10.ElapsedMilliseconds;
-            //Console.WriteLine($"Execution Time watch_10: {elapsedTime_10} ms");
+            var watch_10 = new System.Diagnostics.Stopwatch();
+            watch_10.Start();
+            StochasticEmbeddedExample_17.Run2d_Elastic.CohesiveEBEembeddedInMatrix_DisplacementControl(1);
+            watch_10.Stop();
+            var elapsedTime_10 = watch_10.ElapsedMilliseconds;
+            Console.WriteLine($"Execution Time watch_10: {elapsedTime_10} ms");
 
 
             // Print Results for examples 16 & 17
-            //using (var fileName = new System.IO.StreamWriter(@"C:\Users\cluster\source\repos\gsoim\ElapsedTimesExamples16and17.txt", true))
-            //{
-            //    string strElapsedTime_3 = elapsedTime_3.ToString();
-            //    string strElapsedTime_4 = elapsedTime_4.ToString();
-            //    string strElapsedTime_5 = elapsedTime_5.ToString();
-            //    string strElapsedTime_6 = elapsedTime_6.ToString();
-            //    string strElapsedTime_7 = elapsedTime_7.ToString();
-            //    string strElapsedTime_8 = elapsedTime_8.ToString();
-            //    string strElapsedTime_9 = elapsedTime_9.ToString();
-            //    string strElapsedTime_10 = elapsedTime_10.ToString();
-            //    fileName.WriteLine("Execution Time watch_3: " + elapsedTime_3 + " ms");
-            //    fileName.WriteLine("Execution Time watch_4: " + elapsedTime_4 + " ms");
-            //    fileName.WriteLine("Execution Time watch_5: " + elapsedTime_5 + " ms");
-            //    fileName.WriteLine("Execution Time watch_6: " + elapsedTime_6 + " ms");
-            //    fileName.WriteLine("Execution Time watch_7: " + elapsedTime_7 + " ms");
-            //    fileName.WriteLine("Execution Time watch_8: " + elapsedTime_8 + " ms");
-            //    fileName.WriteLine("Execution Time watch_9: " + elapsedTime_9 + " ms");
-            //    fileName.WriteLine("Execution Time watch_10: " + elapsedTime_10 + " ms");
-            //}
+            using (var fileName = new System.IO.StreamWriter(@"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\ElapsedTimesExamples16and17.txt", true))
+            {
+                string strElapsedTime_1 = elapsedTime_1.ToString();
+                string strElapsedTime_2 = elapsedTime_2.ToString();
+                string strElapsedTime_3 = elapsedTime_3.ToString();
+                string strElapsedTime_4 = elapsedTime_4.ToString();
+                string strElapsedTime_5 = elapsedTime_5.ToString();
+                string strElapsedTime_6 = elapsedTime_6.ToString();
+                string strElapsedTime_7 = elapsedTime_7.ToString();
+                string strElapsedTime_8 = elapsedTime_8.ToString();
+                string strElapsedTime_9 = elapsedTime_9.ToString();
+                string strElapsedTime_10 = elapsedTime_10.ToString();
+                fileName.WriteLine("Execution Time watch_1: " + elapsedTime_1 + " ms");
+                fileName.WriteLine("Execution Time watch_2: " + elapsedTime_2 + " ms");
+                fileName.WriteLine("Execution Time watch_3: " + elapsedTime_3 + " ms");
+                fileName.WriteLine("Execution Time watch_4: " + elapsedTime_4 + " ms");
+                fileName.WriteLine("Execution Time watch_5: " + elapsedTime_5 + " ms");
+                fileName.WriteLine("Execution Time watch_6: " + elapsedTime_6 + " ms");
+                fileName.WriteLine("Execution Time watch_7: " + elapsedTime_7 + " ms");
+                fileName.WriteLine("Execution Time watch_8: " + elapsedTime_8 + " ms");
+                fileName.WriteLine("Execution Time watch_9: " + elapsedTime_9 + " ms");
+                fileName.WriteLine("Execution Time watch_10: " + elapsedTime_10 + " ms");
+            }
 
             //**************************************************************************************************************************************************************************************//
             //**************************************************************************************************************************************************************************************//

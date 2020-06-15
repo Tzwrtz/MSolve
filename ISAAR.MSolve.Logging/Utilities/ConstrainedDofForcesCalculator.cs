@@ -116,19 +116,19 @@ namespace ISAAR.MSolve.Logging.Utilities
             //    constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
             //}
 
-            // EmbeddedExample_23  - {121 nodes}
-            //Node_v2[] constrainedNodes = new Node_v2[121];
-            //for (int ii = 0; ii < 121; ii++)
-            //{
-            //    constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
-            //}
+            // EmbeddedExample_16 - EmbeddedExample_17 - EmbeddedExample_23  - {121 nodes}
+            Node_v2[] constrainedNodes = new Node_v2[121];
+            for (int ii = 0; ii < 121; ii++)
+            {
+                constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
+            }
 
             // EmbeddedExample_15  - {4 nodes}
-            Node_v2[] constrainedNodes = new Node_v2[121];
-            for (int ii = 0; ii < 4; ii++)
-            {
-                constrainedNodes[ii] = model.NodesDictionary[5 + ii];
-            }
+            //Node_v2[] constrainedNodes = new Node_v2[121];
+            //for (int ii = 0; ii < 4; ii++)
+            //{
+            //    constrainedNodes[ii] = model.NodesDictionary[5 + ii];
+            //}
 
             // EmbeddedExample_20-Run3 - 1st Convergence study of example #23
             //Node_v2[] constrainedNodes = new Node_v2[441];

@@ -399,7 +399,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 100;
+            private const int increments = 10;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -1521,7 +1521,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 100;
+            private const int increments = 10;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -2439,7 +2439,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 100;
+            private const int increments = 10;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -3353,7 +3353,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 100;
+            private const int increments = 10;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
