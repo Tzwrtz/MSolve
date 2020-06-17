@@ -34,24 +34,24 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
+            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
-            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\elastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
+            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic"; 
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\elastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
             private const int embeddedElements = 1;
             private const int embeddedNodes = 2;
             private const double nodalDisplacement = +1.0;
-            private const int monitorNode = 5;
+            private const int monitorNode = 8;
             private const DOFType monitorDof = DOFType.Z;
             private const int increments = 10;
 
             // Cohesive Zone mechanical properties
-            private const double t_max = 0.05;
+            private const double t_max = 0.10;
             private const double K_coh = 10.0;
 
             public static void SingleMatrix_DisplacementControl()
@@ -71,18 +71,23 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Boundary Conditions - [Left-End]
                 for (int iNode = 1; iNode <= 4; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = -nodalDisplacement });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
-                // Boundary Conditions - [Bottom-En
-                for (int iNode = 1; iNode <= 5; iNode += 4)
-                {
-                    for (int j = 0; j <= 1; j++)
-                    {
-                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    }
-                }
-                
+                // Boundary Conditions - [Bottom-End]
+                model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Y });
+
+                // Boundary Conditions - [Back-End]
+                model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.X });
+
                 // Loading Conditions - [Right-End] - {36 nodes}
                 for (int iNode = 5; iNode <= 8; iNode++)
                 {
@@ -90,10 +95,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SkylineSolver.Builder();
+                SkylineSolver solver = solverBuilder.BuildSolver(model);
+                //var solverBuilder = new SuiteSparseSolver.Builder();
+                //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
 
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
@@ -150,17 +155,22 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Boundary Conditions - [Left-End]
                 for (int iNode = 1; iNode <= 4; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = -nodalDisplacement });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
 
                 // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 5; iNode += 4)
-                {
-                    for (int j = 0; j <= 1; j++)
-                    {
-                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    }
-                }
+                model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Y });
+
+                // Boundary Conditions - [Back-End]
+                model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.X });
 
                 // Loading Conditions - [Right-End] - {36 nodes}
                 for (int iNode = 5; iNode <= 8; iNode++)
@@ -169,10 +179,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new SuiteSparseSolver.Builder();
-                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SkylineSolver.Builder();
+                SkylineSolver solver = solverBuilder.BuildSolver(model);
+                //var solverBuilder = new SuiteSparseSolver.Builder();
+                //SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
 
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
@@ -230,11 +240,23 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Boundary Conditions - [Left-End]
                 for (int iNode = 1; iNode <= 4; iNode++)
                 {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
                 }
-                                
+
+                // Boundary Conditions - [Bottom-End]
+                model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[2].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                model.NodesDictionary[6].Constraints.Add(new Constraint { DOF = DOFType.Y });
+
+                // Boundary Conditions - [Back-End]
+                model.NodesDictionary[1].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[3].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[5].Constraints.Add(new Constraint { DOF = DOFType.X });
+                model.NodesDictionary[7].Constraints.Add(new Constraint { DOF = DOFType.X });
+
                 // Loading Conditions - [Right-End] - {36 nodes}
                 for (int iNode = 5; iNode <= 8; iNode++)
                 {
@@ -242,10 +264,10 @@ namespace ISAAR.MSolve.SamplesConsole
                 }
 
                 // Choose linear equation system solver
-                //var solverBuilder = new SkylineSolver.Builder();
-                //SkylineSolver solver = solverBuilder.BuildSolver(model);
-                var solverBuilder = new DenseMatrixSolver.Builder();
-                DenseMatrixSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SkylineSolver.Builder();
+                SkylineSolver solver = solverBuilder.BuildSolver(model);
+                //var solverBuilder = new DenseMatrixSolver.Builder();
+                //DenseMatrixSolver solver = solverBuilder.BuildSolver(model);
 
                 // Choose the provider of the problem -> here a structural problem
                 var provider = new ProblemStructural_v2(model, solver);
@@ -482,7 +504,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -516,8 +538,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
-
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -552,7 +573,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -573,10 +594,10 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
             private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -1021,7 +1042,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -1055,7 +1076,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -1090,7 +1111,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -1111,10 +1132,10 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
             private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -1475,7 +1496,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -1509,7 +1530,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -1544,7 +1565,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -1565,10 +1586,10 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
             private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2b\output files\plastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -1927,7 +1948,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -1961,7 +1982,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -1996,7 +2017,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -2017,10 +2038,10 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
             private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -2380,7 +2401,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -2414,7 +2435,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2449,7 +2470,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -2470,10 +2491,10 @@ namespace ISAAR.MSolve.SamplesConsole
         {
             private const string workingDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\input files";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\input files";
             private const string outputDirectory = @"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2c\output files\plastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\elastic";
-            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 15\run-2a\output files\plastic";
+            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 15\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1;
             private const int hostNodes = 8;
@@ -2829,7 +2850,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -2863,7 +2884,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2898,7 +2919,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -3374,7 +3395,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -3408,8 +3429,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
-
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -3444,7 +3464,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -3913,7 +3933,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -3947,7 +3967,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -3982,7 +4002,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -4367,7 +4387,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -4401,7 +4421,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -4436,7 +4456,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -4819,7 +4839,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -4853,7 +4873,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -4888,7 +4908,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -5272,7 +5292,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -5306,7 +5326,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -5341,7 +5361,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -5721,7 +5741,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -5755,7 +5775,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -5790,7 +5810,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);

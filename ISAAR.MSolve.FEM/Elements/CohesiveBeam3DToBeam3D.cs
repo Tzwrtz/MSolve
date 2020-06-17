@@ -26,6 +26,7 @@ namespace ISAAR.MSolve.FEM.Elements
         protected IElementDofEnumerator_v2 dofEnumerator = new GenericDofEnumerator_v2();
         private SupportiveCohesiveBeam3DCorotationalQuaternion_v2 supportive_beam;
         private SupportiveCohesiveBeam3DCorotationalQuaternion_v2 supportive_clone;
+        private readonly double perimeter;
 
         /// <summary>
         /// Initial nodel coordinates of 4 node inner cohesive element
@@ -44,7 +45,7 @@ namespace ISAAR.MSolve.FEM.Elements
         //}
 
         public CohesiveBeam3DToBeam3D(ICohesiveZoneMaterial3D_v2 material, IQuadrature1D quadratureForStiffness, IList<Node_v2> nodes_beam, 
-            IList<Node_v2> nodes_clone, IIsotropicContinuumMaterial3D_v2 material_beam, double density, BeamSection3D beamSection)
+            IList<Node_v2> nodes_clone, IIsotropicContinuumMaterial3D_v2 material_beam, double density, BeamSection3D beamSection, double perimeter)
         {
             this.QuadratureForStiffness = quadratureForStiffness;
             this.nGaussPoints = quadratureForStiffness.IntegrationPoints.Count;
@@ -53,6 +54,7 @@ namespace ISAAR.MSolve.FEM.Elements
 
             this.supportive_beam = new SupportiveCohesiveBeam3DCorotationalQuaternion_v2(nodes_beam, material_beam, density, beamSection);
             this.supportive_clone = new SupportiveCohesiveBeam3DCorotationalQuaternion_v2(nodes_clone, material_beam, density, beamSection);
+            this.perimeter = perimeter;
         }
 
         public IQuadrature1D QuadratureForStiffness { get; }
@@ -193,7 +195,7 @@ namespace ISAAR.MSolve.FEM.Elements
                 double[] T_int_integration_coeffs = new double[3];
                 for (int l = 0; l < 3; l++)
                 {
-                    T_int_integration_coeffs[l] = materialsAtGaussPoints[npoint1].Tractions[l] * integrationCoeffs[npoint1];
+                    T_int_integration_coeffs[l] = materialsAtGaussPoints[npoint1].Tractions[l] * integrationCoeffs[npoint1] * perimeter;
                 }
                 double[] r_int_1 = new double[6];
                 for (int l = 0; l < 6; l++)
@@ -273,7 +275,7 @@ namespace ISAAR.MSolve.FEM.Elements
                     }
                 }
                 Matrix D_RtN3_sunt_ol = D_tan_sunt_ol * RtN3[npoint1];
-                Matrix M = RtN3[npoint1].Transpose() * D_RtN3_sunt_ol;
+                Matrix M = RtN3[npoint1].Transpose() * D_RtN3_sunt_ol * perimeter; //TODOgsoim: is perimeter wright here??
 
                 //k_cohesive_element_total - Contrains rotations, that create zero-elements in the diagonal of the total stiffness matrix.
                 for (int l = 0; l < 3; l++)
@@ -324,7 +326,7 @@ namespace ISAAR.MSolve.FEM.Elements
                 ConstaintsRotations[1, 1] = 1000.0;
                 ConstaintsRotations[2, 2] = 1000.0;
                 Matrix Constr_R = ConstaintsRotations * R;
-                Matrix M2 = R.Transpose() * Constr_R * integrationCoeffs[npoint1];
+                Matrix M2 = R.Transpose() * Constr_R * integrationCoeffs[npoint1] * perimeter; //TODOgsoim: should perimeter be here??
 
                 for (int ii = 0; ii < 3; ii++)
                 {
@@ -341,7 +343,7 @@ namespace ISAAR.MSolve.FEM.Elements
                     }
                 }
             }
-            return k_cohesive_element_total; //k_cohesive_element; //   
+            return k_cohesive_element_total ; //k_cohesive_element; //   
         }
 
         public Tuple<double[], double[]> CalculateStresses(Element_v2 element, double[] localTotalDisplacementsSuperElement, double[] localdDisplacementsSuperElement)

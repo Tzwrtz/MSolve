@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ISAAR.MSolve.LinearAlgebra.Output.Formatting;
 using ISAAR.MSolve.LinearAlgebra.Vectors;
 
 //TODO: Most of the multiplications C = A^T * B* A will need updating if the individual matrix multiplication are updated, in 
@@ -166,10 +167,23 @@ namespace ISAAR.MSolve.LinearAlgebra.Matrices
         /// <param name="dense">The matrix that will be multiplied "outside".</param>
         /// <param name="other">The matrix that will be multiplied "inside". It must be square.</param>
         public static Matrix ThisTransposeTimesOtherTimesThis(this Matrix dense, Matrix other)
-        { 
-            // The order of operations is not important if all matrices are in full storage format.
-            Matrix temp = other.MultiplyRight(dense, false, false);
+        {
+            // The order of operations is not important if all matrices are in full storage format. // Τ^Τ*Κ*Τ = dense^T*other*
+            Matrix temp = other.MultiplyRight(dense, false, false); 
             return dense.MultiplyRight(temp, true, false);
+
+            // matlab printouts
+            //var writer = new LinearAlgebra.Output.FullMatrixWriter();
+            //writer.ArrayFormat = new Array2DFormat("[", "]", "", ";");
+            //writer.NumericFormat = new ExponentialFormat() { NumDecimalDigits = 12 };
+            //var path = @"E:\GEORGE_DATA\DESKTOP\matlabArrays\";
+            //writer.WriteToFile(dense, path + "T.dat");
+            //writer.WriteToFile(other, path + "K.dat");
+            //Matrix temp = other.MultiplyRight(dense, false, false); // temp = other * dense
+            //Matrix result = dense.MultiplyRight(temp, true, false); // dense = dense^T * temp ??
+            //writer.WriteToFile(temp, path + "temp.dat");
+            //writer.WriteToFile(result, path + "result.dat");
+            //return result;
         }
 
         /// <summary>

@@ -865,7 +865,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -899,8 +899,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
-
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -935,7 +934,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -1424,7 +1423,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -1458,7 +1457,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -1493,7 +1492,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -1885,7 +1884,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -1919,7 +1918,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -1954,7 +1953,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -2343,7 +2342,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -2377,7 +2376,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2412,7 +2411,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -2803,7 +2802,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -2837,7 +2836,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -2872,7 +2871,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -3258,7 +3257,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -3292,7 +3291,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -3327,7 +3326,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -3718,7 +3717,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -3752,7 +3751,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -3787,7 +3786,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -4173,7 +4172,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -4207,7 +4206,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -4242,7 +4241,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -4742,7 +4741,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -4776,7 +4775,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
 
                     // Create Elastic 3D Material
@@ -4812,7 +4811,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -5301,7 +5300,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -5335,7 +5334,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -5370,7 +5369,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -5767,7 +5766,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -5801,7 +5800,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -5836,7 +5835,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -6231,7 +6230,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -6265,7 +6264,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -6300,7 +6299,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -6696,7 +6695,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -6730,7 +6729,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -6765,7 +6764,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -7157,7 +7156,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -7191,7 +7190,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -7226,7 +7225,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -7622,7 +7621,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -7656,7 +7655,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -7691,7 +7690,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -8083,7 +8082,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -8117,7 +8116,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -8152,7 +8151,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -8223,7 +8222,7 @@ namespace ISAAR.MSolve.SamplesConsole
                         model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
                     }
                 }
-                
+
                 // Boundary Conditions - [Back-End]
                 for (int iNode = 1; iNode <= 211; iNode += +6)
                 {
@@ -8659,7 +8658,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -8693,7 +8692,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
 
                     // Create Elastic 3D Material
@@ -8729,7 +8728,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -9218,7 +9217,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -9252,7 +9251,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -9287,7 +9286,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -9684,7 +9683,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -9718,7 +9717,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -9753,7 +9752,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -10148,7 +10147,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -10182,7 +10181,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -10217,7 +10216,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -10613,7 +10612,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -10647,7 +10646,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -10682,7 +10681,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);
@@ -11074,7 +11073,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     double diameter_CNT = (a / Math.PI) * Math.Sqrt(Math.Pow(ni, 2) + ni * mi + Math.Pow(mi, 2));
                     double radius_CNT = diameter_CNT / 2.0;
                     double radius_CNT_outer = radius_CNT + (thickness_CNT / 2);
-                    double material_constant_value = 2.0 * Math.PI * radius_CNT_outer;
+                    double CntPerimeter = 2.0 * Math.PI * radius_CNT_outer;
 
                     string CNTgeometryFileName = "nodes.txt";
                     string CNTconnectivityFileName = "connectivity.txt";
@@ -11108,7 +11107,7 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
 
                     // Create Cohesive Material
-                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh * material_constant_value, 0.1 * K_coh * material_constant_value, 10.0 * K_coh, t_max, new double[2], new double[2], 1e-3);
+                    var cohesiveMaterial = new BondSlipCohMatUniaxial(K_coh, 0.1 * K_coh, 100.0, t_max, new double[2], new double[2], 1e-3);
 
                     // Create Elastic 3D Material
                     var elasticMaterial = new ElasticMaterial3D_v2
@@ -11143,7 +11142,7 @@ namespace ISAAR.MSolve.SamplesConsole
                             {
                                 ID = elementID,
                                 ElementType = new CohesiveBeam3DToBeam3D(cohesiveMaterial, GaussLegendre1D.GetQuadrature(2), elementNodesBeam,
-                                    elementNodesClone, elasticMaterial, 1, beamSection)
+                                    elementNodesClone, elasticMaterial, 1, beamSection, CntPerimeter)
                             };
                             // Add beam element to the element and subdomains dictionary of the model
                             model.ElementsDictionary.Add(cohesiveElement.ID, cohesiveElement);

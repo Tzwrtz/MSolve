@@ -77,9 +77,9 @@ namespace ISAAR.MSolve.Materials
             eLastConverged = new double[2];// TODO: na ginetai update sto save state ennoeitai mazi me ta s_0 klp. Mporei na xrhsimopooithei h grammh apo thn arxh tou update material
             stress3D = new double[3];
             ConstitutiveMatrix3D = new double[3, 3];
-            ConstitutiveMatrix3D[0, 0] = k_elastic; ConstitutiveMatrix3D[1, 1] = k_elastic; ConstitutiveMatrix3D[2, 2] = k_elastic_normal;
+            ConstitutiveMatrix3D[0, 0] = k_elastic; ConstitutiveMatrix3D[1, 1] = k_elastic_normal; ConstitutiveMatrix3D[2, 2] = k_elastic_normal;
             ConstitutiveMatrix3Dprevious = new double[3, 3];
-            ConstitutiveMatrix3Dprevious[0, 0] = k_elastic; ConstitutiveMatrix3Dprevious[1, 1] = k_elastic; ConstitutiveMatrix3Dprevious[2, 2] = k_elastic_normal;
+            ConstitutiveMatrix3Dprevious[0, 0] = k_elastic; ConstitutiveMatrix3Dprevious[1, 1] = k_elastic_normal; ConstitutiveMatrix3Dprevious[2, 2] = k_elastic_normal;
 
             c1 = (k_elastic * k_elastic2) / (k_elastic - k_elastic2);
             matrices_not_initialized = false;
@@ -95,7 +95,7 @@ namespace ISAAR.MSolve.Materials
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    ConstitutiveMatrix3Dprevious[k, j] =ConstitutiveMatrix3D[k, j];
+                    ConstitutiveMatrix3Dprevious[k, j] = ConstitutiveMatrix3D[k, j];
                 }
             }
 
