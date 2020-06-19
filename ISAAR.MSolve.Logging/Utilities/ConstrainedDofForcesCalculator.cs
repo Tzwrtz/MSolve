@@ -115,8 +115,28 @@ namespace ISAAR.MSolve.Logging.Utilities
             //{
             //    constrainedNodes[ii] = model.NodesDictionary[1211 + ii];
             //}
+            
+            // EmbeddedExample_16 - EmbeddedExample_17 - EmbeddedExample_23  - {121 nodes}
+                // imposed_X
+            Node_v2[] constrainedNodes = new Node_v2[121];
+            for (int iNode = 11; iNode <= 1331; iNode = iNode + 11)
+            {
+                constrainedNodes[iNode] = model.NodesDictionary[iNode];
+            }
 
             // EmbeddedExample_16 - EmbeddedExample_17 - EmbeddedExample_23  - {121 nodes}
+            // imposed_Y
+            //Node_v2[] constrainedNodes = new Node_v2[121];
+            //for (int iNode = 111; iNode <= 1321; iNode += 121)
+            //{
+            //    for (int j = 0; j <= 10; j++)
+            //    {
+            //        constrainedNodes[iNode] = model.NodesDictionary[iNode + j];
+            //    }
+            //}
+
+            // EmbeddedExample_16 - EmbeddedExample_17 - EmbeddedExample_23  - {121 nodes}
+            // imposed_Z
             //Node_v2[] constrainedNodes = new Node_v2[121];
             //for (int ii = 0; ii < 121; ii++)
             //{
@@ -124,11 +144,11 @@ namespace ISAAR.MSolve.Logging.Utilities
             //}
 
             // EmbeddedExample_15  - {4 nodes}
-            Node_v2[] constrainedNodes = new Node_v2[4];
-            for (int ii = 0; ii < 4; ii++)
-            {
-                constrainedNodes[ii] = model.NodesDictionary[5 + ii];
-            }
+            //Node_v2[] constrainedNodes = new Node_v2[4];
+            //for (int ii = 0; ii < 4; ii++)
+            //{
+            //    constrainedNodes[ii] = model.NodesDictionary[5 + ii];
+            //}
 
             // EmbeddedExample_20-Run3 - 1st Convergence study of example #23
             //Node_v2[] constrainedNodes = new Node_v2[441];

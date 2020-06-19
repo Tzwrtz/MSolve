@@ -39,12 +39,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
             public static void PEEKMatrix_DisplacementControl(int noStochasticSimulation)
             {
-                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run1-2a\output files\elastic\DisplacementControl";
+                const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run1-2a\output files\elastic\DisplacementControl";
 
                 VectorExtensions.AssignTotalAffinityCount();
 
                 // No. of increments
-                int increments = 10;
+                int increments = 100;
 
                 // Model creation
                 var model = new Model_v2();
@@ -99,7 +99,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -138,7 +138,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run1-2a\input files";
+                    string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run1-2a\input files";
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
                     string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -216,12 +216,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
             public static void PEEKMatrix_DisplacementControl(int noStochasticSimulation)
             {
-                const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run1-2a\output files\plastic\DisplacementControl";
+                const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run1-2a\output files\plastic\DisplacementControl";
 
                 VectorExtensions.AssignTotalAffinityCount();
 
                 // No. of increments
-                int increments = 10;
+                int increments = 100;
 
                 // Model creation
                 var model = new Model_v2();
@@ -277,7 +277,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -316,7 +316,7 @@ namespace ISAAR.MSolve.SamplesConsole
 
                 private static void HostElements(Model_v2 model)
                 {
-                    string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run1-2a\input files";
+                    string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run1-2a\input files";
                     string MatrixGeometryFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-Geometry_MSolve.inp";
                     string MatrixGonnectivityFileName = "MATRIX_3D-L_x=100-L_y=100-L_z=100-10x10x10-ConnMatr_MSolve.inp";
                     int matrixNodes = File.ReadLines(workingDirectory + '\\' + MatrixGeometryFileName).Count();
@@ -385,12 +385,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\output files\elastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\output files\elastic"; 
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\output files\elastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -399,7 +399,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -464,7 +464,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -551,7 +551,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -581,7 +581,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 paraview.CreateParaviewFile();
             }
 
-            public static void CohesiveEBEembeddedInMatrix_DisplacementControl(int noStochasticSimulation)
+            public static void CohesiveEBEembeddedInMatrix_DisplacementControl_AlongX(int noStochasticSimulation)
             {
                 VectorExtensions.AssignTotalAffinityCount();
 
@@ -595,34 +595,8 @@ namespace ISAAR.MSolve.SamplesConsole
                 // Choose model
                 EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
 
-                // Boundary Conditions - [Left-End]
-                for (int iNode = 1; iNode <= 121; iNode++)
-                {
-                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                    //model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
-                }
-
-                // Boundary Conditions - [Bottom-End]
-                for (int iNode = 1; iNode <= 1211; iNode += 121)
-                {
-                    for (int j = 0; j <= 10; j++)
-                    {
-                        model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
-                    }
-                }
-
-                // Boundary Conditions - [Back-End]
-                for (int iNode = 1; iNode <= 1321; iNode += +11)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
-                }
-
-                // Loading Conditions - [Right-End] - {121 nodes}
-                for (int iNode = 1211; iNode <= 1331; iNode++)
-                {
-                    model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
-                }
+                // Boundary Conditions
+                DefineBoundaryConditions.ImposedDisplacementAlongX(model);
 
                 // Choose linear equation system solver
                 //var solverBuilder = new SkylineSolver.Builder();
@@ -639,7 +613,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -647,7 +621,131 @@ namespace ISAAR.MSolve.SamplesConsole
                 var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
 
                 // Request output
-                string currentOutputFileName = "Run2a-Cohesive-Elastic.txt";
+                string currentOutputFileName = "Run2a-Cohesive-Elastic-X.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string paraviewFileName = string.Format("{0}_{1}", fileNameOnly, noStochasticSimulation);
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var analyzer = (DisplacementControlAnalyzer_v2)childAnalyzer;
+                var solution = analyzer.uPlusdu[0];
+                var paraview = new ParaviewEmbedded3D(model,
+                    solution, paraviewFileName);
+                paraview.CreateParaviewFile();
+            }
+
+            public static void CohesiveEBEembeddedInMatrix_DisplacementControl_AlongY(int noStochasticSimulation)
+            {
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions
+                DefineBoundaryConditions.ImposedDisplacementAlongY(model);
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-02
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2a-Cohesive-Elastic-Y.txt";
+                string extension = Path.GetExtension(currentOutputFileName);
+                string pathName = outputDirectory;
+                string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
+                string paraviewFileName = string.Format("{0}_{1}", fileNameOnly, noStochasticSimulation);
+                string outputFile = string.Format("{0}_{1}{2}", fileNameOnly, noStochasticSimulation, extension);
+                var logger = new TotalLoadsDisplacementsPerIncrementLog(model.SubdomainsDictionary[subdomainID], model, increments,
+                    model.NodesDictionary[monitorNode], monitorDof, outputFile);
+                childAnalyzer.IncrementalLogs.Add(subdomainID, logger);
+
+                // Run the analysis
+                parentAnalyzer.Initialize();
+                parentAnalyzer.Solve();
+
+                // Create Paraview File
+                var analyzer = (DisplacementControlAnalyzer_v2)childAnalyzer;
+                var solution = analyzer.uPlusdu[0];
+                var paraview = new ParaviewEmbedded3D(model,
+                    solution, paraviewFileName);
+                paraview.CreateParaviewFile();
+            }
+
+            public static void CohesiveEBEembeddedInMatrix_DisplacementControl_AlongZ(int noStochasticSimulation)
+            {
+                VectorExtensions.AssignTotalAffinityCount();
+
+                // Model creation
+                var model = new Model_v2();
+
+                // Subdomains
+                //model.SubdomainsDictionary.Add(subdomainID, new Subdomain() { ID = 1 });
+                model.SubdomainsDictionary.Add(subdomainID, new Subdomain_v2(subdomainID));
+
+                // Choose model
+                EBEEmbeddedModelBuilder.CohesiveEmbeddedBuilder_Stochastic(model, noStochasticSimulation);
+
+                // Boundary Conditions
+                DefineBoundaryConditions.ImposedDisplacementAlongZ(model);
+
+                // Choose linear equation system solver
+                //var solverBuilder = new SkylineSolver.Builder();
+                //SkylineSolver solver = solverBuilder.BuildSolver(model);
+                var solverBuilder = new SuiteSparseSolver.Builder();
+                SuiteSparseSolver solver = solverBuilder.BuildSolver(model);
+
+                // Choose the provider of the problem -> here a structural problem
+                var provider = new ProblemStructural_v2(model, solver);
+
+                // Choose child analyzer -> Child: DisplacementControlAnalyzer 
+                var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
+                var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
+                {
+                    MaxIterationsPerIncrement = 50,
+                    NumIterationsForMatrixRebuild = 1,
+                    ResidualTolerance = 1E-02
+                };
+                var childAnalyzer = childAnalyzerBuilder.Build();
+
+                // Choose parent analyzer -> Parent: Static
+                var parentAnalyzer = new StaticAnalyzer_v2(model, solver, provider, childAnalyzer);
+
+                // Request output
+                string currentOutputFileName = "Run2a-Cohesive-Elastic-Z.txt";
                 string extension = Path.GetExtension(currentOutputFileName);
                 string pathName = outputDirectory;
                 string fileNameOnly = Path.Combine(pathName, Path.GetFileNameWithoutExtension(currentOutputFileName));
@@ -948,12 +1046,108 @@ namespace ISAAR.MSolve.SamplesConsole
                     }
                 }
             }
+
+            public static class DefineBoundaryConditions
+            {
+                public static void ImposedDisplacementAlongX(Model_v2 model)
+                {
+                    // [Left-End] => Pinned - SurfaceXequals0
+                    for (int iNode = 1; iNode <= 1321; iNode += +11)
+                    {
+                        model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    }
+
+                    // [Bottom-End] => Pinned
+                    for (int iNode = 1; iNode <= 1211; iNode += 121)
+                    {
+                        for (int j = 0; j <= 10; j++)
+                        {
+                            model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                        }
+                    }
+
+                    // [Back-End] => Pinned - SurfaceZequals0
+                    for (int iNode = 1; iNode <= 121; iNode++)
+                    {
+                        model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                    }
+
+                    // [Right-End] => Imposed displacement - SurfaceXequals100
+                    for (int iNode = 11; iNode <= 1331; iNode = iNode + 11)
+                    {
+                        model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X, Amount = nodalDisplacement });
+                    }
+                }
+
+                public static void ImposedDisplacementAlongY(Model_v2 model)
+                {
+                    // [Left-End] => Pinned - SurfaceYequals0
+                    for (int iNode = 1; iNode <= 1211; iNode += 121)
+                    {
+                        for (int j = 0; j <= 10; j++)
+                        {
+                            model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                        }
+                    }
+
+                    // [Bottom-End] => Pinned - SurfaceZequals0
+                    for (int iNode = 1; iNode <= 121; iNode++)
+                    {
+                        model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                    }
+
+                    // [Back-End] => Pinned - SurfaceXequals0
+                    for (int iNode = 1; iNode <= 1321; iNode += +11)
+                    {
+                        model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    }
+
+                    // [Right-End] => Imposed displacement - SurfaceYequals100
+                    for (int iNode = 111; iNode <= 1321; iNode += 121)
+                    {
+                        for (int j = 0; j <= 10; j++)
+                        {
+                            model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y, Amount = nodalDisplacement });
+                        }
+                    }                    
+                }
+
+                public static void ImposedDisplacementAlongZ(Model_v2 model)
+                {
+                    // [Left-End] => Pinned
+                    for (int iNode = 1; iNode <= 121; iNode++)
+                    {
+                        model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z });
+                    }
+
+                    // [Bottom-End] => Pinned
+                    for (int iNode = 1; iNode <= 1211; iNode += 121)
+                    {
+                        for (int j = 0; j <= 10; j++)
+                        {
+                            model.NodesDictionary[iNode + j].Constraints.Add(new Constraint { DOF = DOFType.Y });
+                        }
+                    }
+
+                    // [Back-End] => Pinned
+                    for (int iNode = 1; iNode <= 1321; iNode += +11)
+                    {
+                        model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.X });
+                    }
+
+                    // [Right-End] => Impodes displacement
+                    for (int iNode = 1211; iNode <= 1331; iNode++)
+                    {
+                        model.NodesDictionary[iNode].Constraints.Add(new Constraint { DOF = DOFType.Z, Amount = nodalDisplacement });
+                    }
+                }
+            }
         }
 
         public static class Run2a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -962,7 +1156,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -1026,7 +1220,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -1114,7 +1308,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -1202,7 +1396,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -1510,8 +1704,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2b\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2b\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -1520,7 +1714,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -1578,7 +1772,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -1664,7 +1858,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -1971,8 +2165,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2b\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2b\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -1981,7 +2175,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -2039,7 +2233,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2127,7 +2321,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2429,8 +2623,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2c\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2c\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -2439,7 +2633,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -2497,7 +2691,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2582,7 +2776,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2889,8 +3083,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2c\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -2899,7 +3093,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -2957,7 +3151,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3041,7 +3235,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3344,8 +3538,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2d_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2d\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2d\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2d\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -3354,7 +3548,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -3412,7 +3606,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3497,7 +3691,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3804,8 +3998,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run2d_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-2d\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2d\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-2d\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -3814,7 +4008,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -3872,7 +4066,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3956,7 +4150,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -4261,12 +4455,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\input files";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\output files\elastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\output files\elastic"; 
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\output files\elastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -4275,7 +4469,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -4339,7 +4533,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -4427,7 +4621,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -4515,7 +4709,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -4828,8 +5022,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -4838,7 +5032,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -4902,7 +5096,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -4990,7 +5184,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -5078,7 +5272,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -5386,8 +5580,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3b\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3b\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3b\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -5396,7 +5590,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -5454,7 +5648,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -5539,7 +5733,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -5846,8 +6040,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3b\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3b\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3b\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -5856,7 +6050,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -5914,7 +6108,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -6002,7 +6196,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -6304,8 +6498,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3c\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3c\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3c\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -6314,7 +6508,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -6372,7 +6566,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -6456,7 +6650,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -6763,8 +6957,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3c\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3c\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -6773,7 +6967,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -6831,7 +7025,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -6915,7 +7109,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -7218,8 +7412,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3d_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3d\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3d\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3d\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -7228,7 +7422,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -7286,7 +7480,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -7370,7 +7564,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -7677,8 +7871,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run3d_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3d\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3d\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3d\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3d\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -7687,7 +7881,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -7745,7 +7939,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -7829,7 +8023,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8134,12 +8328,12 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4a_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4a\input files";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4a\input files";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\input files";
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4a\output files\elastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4a\output files\elastic";
             //"D:\EmbeddedExamples\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\output files\elastic"; 
-            //"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-3a\output files\elastic";
+            //"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-3a\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -8148,7 +8342,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -8212,7 +8406,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8300,7 +8494,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8388,7 +8582,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8701,8 +8895,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4a_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4a\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4a\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4a\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4a\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -8711,7 +8905,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -8775,7 +8969,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8863,7 +9057,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8951,7 +9145,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -9259,8 +9453,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4b_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4b\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4b\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4b\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -9269,7 +9463,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -9327,7 +9521,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -9412,7 +9606,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -9719,8 +9913,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4b_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4b\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4b\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4b\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4b\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -9729,7 +9923,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -9787,7 +9981,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -9875,7 +10069,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -10177,8 +10371,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4c_Elastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4c\output files\elastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4c\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4c\output files\elastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -10187,7 +10381,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -10245,7 +10439,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -10329,7 +10523,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -10636,8 +10830,8 @@ namespace ISAAR.MSolve.SamplesConsole
 
         public static class Run4c_Plastic
         {
-            private const string workingDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4c\input files";
-            private const string outputDirectory = @"E:\GEORGE_DATA\DESKTOP\phd\EmbeddedExamples\Stochastic Embedded Example 16\run-4c\output files\plastic";
+            private const string workingDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4c\input files";
+            private const string outputDirectory = @"C:\Users\cluster\source\repos\gsoim\Stochastic Embedded Example 16_new\run-4c\output files\plastic";
             private const int subdomainID = 0;
             private const int hostElements = 1000;
             private const int hostNodes = 1331;
@@ -10646,7 +10840,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -10704,7 +10898,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -10788,7 +10982,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 {
                     MaxIterationsPerIncrement = 50,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 1E-02
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 

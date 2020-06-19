@@ -44,7 +44,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 VectorExtensions.AssignTotalAffinityCount();
 
                 // No. of increments
-                int increments = 10;
+                int increments = 100;
 
                 // Model creation
                 var model = new Model_v2();
@@ -97,9 +97,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -221,7 +221,7 @@ namespace ISAAR.MSolve.SamplesConsole
                 VectorExtensions.AssignTotalAffinityCount();
 
                 // No. of increments
-                int increments = 10;
+                int increments = 100;
 
                 // Model creation
                 var model = new Model_v2();
@@ -275,9 +275,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -399,7 +399,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -462,9 +462,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -549,9 +549,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -637,9 +637,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -962,7 +962,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -1024,9 +1024,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -1112,9 +1112,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -1200,9 +1200,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -1520,7 +1520,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -1576,9 +1576,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -1662,9 +1662,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -1981,7 +1981,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -2037,9 +2037,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2125,9 +2125,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2439,7 +2439,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -2495,9 +2495,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2580,9 +2580,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -2899,7 +2899,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -2955,9 +2955,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3039,9 +3039,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3354,7 +3354,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -3410,9 +3410,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3495,9 +3495,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3814,7 +3814,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -3870,9 +3870,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -3954,9 +3954,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -4275,7 +4275,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -4337,9 +4337,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -4425,9 +4425,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -4513,9 +4513,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -4839,7 +4839,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -4901,9 +4901,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -4989,9 +4989,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -5077,9 +5077,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -5397,7 +5397,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -5453,9 +5453,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -5538,9 +5538,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -5857,7 +5857,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -5913,9 +5913,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -6001,9 +6001,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -6315,7 +6315,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -6371,9 +6371,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -6455,9 +6455,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -6774,7 +6774,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -6830,9 +6830,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -6914,9 +6914,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -7229,7 +7229,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -7285,9 +7285,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -7369,9 +7369,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -7688,7 +7688,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -7744,9 +7744,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -7828,9 +7828,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8149,7 +8149,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -8211,9 +8211,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8299,9 +8299,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8387,9 +8387,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8713,7 +8713,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.05;
@@ -8775,9 +8775,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8863,9 +8863,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -8951,9 +8951,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -9271,7 +9271,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -9327,9 +9327,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -9412,9 +9412,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -9731,7 +9731,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 0.50;
@@ -9787,9 +9787,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -9875,9 +9875,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -10189,7 +10189,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -10245,9 +10245,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -10329,9 +10329,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -10648,7 +10648,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 1.00;
@@ -10704,9 +10704,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -10788,9 +10788,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -11103,7 +11103,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -11159,9 +11159,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -11243,9 +11243,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -11562,7 +11562,7 @@ namespace ISAAR.MSolve.SamplesConsole
             private const double nodalDisplacement = -10.0;
             private const int monitorNode = 1211;
             private const DOFType monitorDof = DOFType.Z;
-            private const int increments = 10;
+            private const int increments = 100;
 
             // Cohesive Zone mechanical properties
             private const double t_max = 2.00;
@@ -11618,9 +11618,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 
@@ -11702,9 +11702,9 @@ namespace ISAAR.MSolve.SamplesConsole
                 var subdomainUpdaters = new[] { new NonLinearSubdomainUpdater_v2(model.SubdomainsDictionary[subdomainID]) };
                 var childAnalyzerBuilder = new DisplacementControlAnalyzer_v2.Builder(model, solver, provider, increments)
                 {
-                    MaxIterationsPerIncrement = 100,
+                    MaxIterationsPerIncrement = 1000,
                     NumIterationsForMatrixRebuild = 1,
-                    ResidualTolerance = 1E-03
+                    ResidualTolerance = 5E-03
                 };
                 var childAnalyzer = childAnalyzerBuilder.Build();
 

@@ -195,7 +195,7 @@ namespace ISAAR.MSolve.FEM.Elements
                 double[] T_int_integration_coeffs = new double[3];
                 for (int l = 0; l < 3; l++)
                 {
-                    T_int_integration_coeffs[l] = materialsAtGaussPoints[npoint1].Tractions[l] * integrationCoeffs[npoint1] * perimeter;
+                    T_int_integration_coeffs[l] = materialsAtGaussPoints[npoint1].Tractions[l] * integrationCoeffs[npoint1]; //* perimeter;
                 }
                 double[] r_int_1 = new double[6];
                 for (int l = 0; l < 6; l++)
@@ -255,6 +255,11 @@ namespace ISAAR.MSolve.FEM.Elements
             //    fxk1_coh[i + 21] = -r_int_2b[i];
             //}
 
+            // Multiply with perimeter
+            for (int i = 0; i < 24; i++)
+            {
+                fxk1_coh[i] *= perimeter;
+            }
 
             return fxk1_coh;
         }
